@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Tuo Hub Finanziario</title>
+
+    
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        /* ----------------------------------
+        VARIABILI GLOBALI E RESET
+        ----------------------------------
+        */
+        :root {
+            --primary-color: #0a2e5c; /* Blu profondo (Fiducia) */
+            --secondary-color: #D4AF37; /* Oro (Premium) */
+            --cta-color: #1ce783; /* Verde brillante (Azione) */
+            --dark-color: #1a1a1a; /* Nero/Grigio scuro */
+            --light-color: #ffffff;
+            --background-color: #f9faff;
+            --text-color: #333;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Lato', sans-serif;
+            --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+            --transition-speed: 0.5s cubic-bezier(0.19, 1, 0.22, 1); /* Transizione fluida */
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ----------------------------------
+        HEADER HERO
+        ----------------------------------
+        */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-color);
+            overflow: hidden;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-image: url('https://image.pollinations.ai/prompt/futuristic%20financial%20digital%20interface%20background%20blue%20and%20gold%20data%20network%20secure%20elegant%20high%20resolution%204k');
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(10, 46, 92, 0.85), rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 950px;
+            padding: 2rem;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 5.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            font-weight: 800;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            color: var(--light-color);
+        }
+
+        .hero-content p {
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--cta-color);
+            color: var(--dark-color);
+            padding: 1.2rem 3.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(28, 231, 131, 0.3);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-cta:hover {
+            background: var(--light-color);
+            color: var(--primary-color);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
+        }
+        
+        .scroll-down-arrow {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+            40% { transform: translate(-50%, -15px); }
+            60% { transform: translate(-50%, -5px); }
+        }
+
+        /* ----------------------------------
+        STILI SEZIONI GENERICHE
+        ----------------------------------
+        */
+        .section {
+            padding: 7rem 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 4rem;
+            font-weight: 700;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: var(--secondary-color);
+            border-radius: 3px;
+        }
+        
+        .section-conti { background-color: var(--light-color); }
+        .section-app { background-color: var(--background-color); }
+
+        /* ----------------------------------
+        SEZIONE CONTI (Card Grid)
+        ----------------------------------
+        */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2.5rem;
+            justify-content: center;
+        }
+
+        .conto-card {
+            background-color: var(--light-color);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            border: 1px solid #eef;
+            position: relative;
+        }
+
+        .conto-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        }
+        
+        .conto-card-badge {
+            position: absolute;
+            top: 20px;
+            left: -1px;
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 5px 20px;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .conto-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .conto-content {
+            padding: 2.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .conto-content h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .conto-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .conto-cta {
+            display: block;
+            width: 100%;
+            padding: 1.1rem 1.5rem;
+            background: var(--primary-color);
+            color: var(--light-color);
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(10, 46, 92, 0.2);
+        }
+
+        .conto-cta:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* ----------------------------------
+        SEZIONE APP (Feature Layout Zig-Zag)
+        ----------------------------------
+        */
+        .app-feature-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+            align-items: center;
+        }
+        
+        .app-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1100px;
+        }
+        
+        .app-feature-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .app-image-wrapper {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .app-image {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            transition: transform var(--transition-speed);
+            display: block;
+        }
+        
+        .app-feature-item:hover .app-image {
+            transform: scale(1.03);
+        }
+
+        .app-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .app-content h3 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .app-content .description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .app-features-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+        
+        .app-features-list li {
+            position: relative;
+            padding-left: 35px;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .app-features-list li::before {
+            content: '✔';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--cta-color);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .app-cta {
+            display: inline-block;
+            background: var(--cta-color);
+            color: var(--dark-color);
+            padding: 1.1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(28, 231, 131, 0.3);
+        }
+
+        .app-cta:hover {
+            background: var(--primary-color);
+            color: var(--light-color);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(10, 46, 92, 0.3);
+        }
+
+        /* ----------------------------------
+        FOOTER e SELETTORE LINGUA
+        ----------------------------------
+        */
+        footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: 4rem 2rem 2rem 2rem; /* Più spazio in alto per selettore */
+            margin-top: 5rem;
+            position: relative;
+        }
+        
+        .lang-selector {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .lang-selector button {
+            background: none;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-selector button:hover {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+        
+        .lang-selector button.active {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        footer p:first-child {
+            font-weight: 700;
+            color: var(--light-color);
+            font-size: 1.1rem;
+        }
+
+        /* ----------------------------------
+        ANIMAZIONI D'INGRESSO (PER JS)
+        ----------------------------------
+        */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        
+        .fade-in-up {
+            transform: translateY(50px);
+        }
+        
+        .slide-in-left {
+            transform: translateX(-100px);
+        }
+        
+        .slide-in-right {
+            transform: translateX(100px);
+        }
+        
+        .zoom-in {
+            transform: scale(0.9);
+        }
+
+        .is-visible {
+            opacity: 1;
+            transform: translate(0, 0) scale(1);
+        }
+        
+        /* ----------------------------------
+        MEDIA QUERIES
+        ----------------------------------
+        */
+        @media (max-width: 1024px) {
+            .hero-content h1 { font-size: 4.5rem; }
+            .hero-content p { font-size: 1.8rem; }
+            .section-title { font-size: 3rem; margin-bottom: 3rem; }
+            .app-feature-item, .app-feature-item:nth-child(even) {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+            .app-image-wrapper { max-width: 80%; }
+            .app-content { text-align: center; }
+            .app-features-list { text-align: center; }
+            .app-features-list li { 
+                padding-left: 0; 
+                display: inline-block;
+                margin-right: 15px;
+                text-align: left;
+                font-size: 1rem;
+            }
+            .app-features-list li::before {
+                position: static;
+                margin-right: 8px;
+            }
+            .app-cta { text-align: center; }
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+            .hero { height: 90vh; }
+            .hero-content h1 { font-size: 3rem; }
+            .hero-content p { font-size: 1.4rem; }
+            .hero-cta { font-size: 1.1rem; padding: 1rem 2.5rem; }
+            .section { padding: 5rem 0; }
+            .section-title { font-size: 2.5rem; margin-bottom: 3rem; }
+            .card-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .conto-content { padding: 2rem; }
+            .conto-content h3 { font-size: 1.8rem; }
+            .app-content h3 { font-size: 2.2rem; }
+            .app-content .description { font-size: 1.1rem; }
+            .app-features-list li { 
+                font-size: 0.95rem; 
+                margin-bottom: 0.8rem;
+                display: block;
+                text-align: center;
+            }
+            .app-features-list li::before {
+                margin-right: 5px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 2.4rem; }
+            .hero-content p { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            .conto-content h3 { font-size: 1.6rem; }
+            .conto-content { padding: 1.5rem; }
+            .app-content h3 { font-size: 1.8rem; }
+            .app-cta { padding: 0.9rem 2rem; font-size: 1.1rem; }
+            
+            .lang-selector {
+                gap: 5px;
+            }
+            .lang-selector button {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInDown" data-lang-key="heroTitle"></h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s" data-lang-key="heroSubtitle"></p>
+            <a href="#conti" class="hero-cta animate__animated animate__pulse animate__delay-2s" data-lang-key="heroCta"></a>
+        </div>
+        <a href="#conti" class="scroll-down-arrow" aria-label="Scorri verso il basso">↓</a>
+    </header>
+
+    <main>
+
+        
+        <section id="conti" class="section section-conti">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="contiTitle"></h2>
+                <div id="conti-grid" class="card-grid">
+                    
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="app" class="section section-app">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="appTitle"></h2>
+                <div id="app-container" class="app-feature-container">
+                    
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="lang-selector">
+                <button data-lang="it">Italiano</button>
+                <button data-lang="en">English</button>
+                <button data-lang="es">Español</button>
+            </div>
+            <p data-lang-key="footerBrand"></p>
+            <p>&copy; 2025. <span data-lang-key="footerRights"></span></p>
+            <p data-lang-key="footerDisclaimer"></p>
+        </div>
+    </footer>
+
+    <script>
+        // ----------------------------------
+        // DIZIONARIO TRADUZIONI
+        // ----------------------------------
+        
+        const translations = {
+            "it": {
+                "pageTitle": "🚀 Il Tuo Hub Finanziario: Conti e App Selezionati 🚀",
+                "heroTitle": "Il Futuro delle Tue Finanze Inizia Qui",
+                "heroSubtitle": "Sponsorizzo solo i conti e le app che offrono valore reale. Scoprili ora.",
+                "heroCta": "Esplora le Soluzioni",
+                "contiTitle": "Conti Selezionati",
+                "appTitle": "App Finanziarie Sponsorizzate",
+                "footerBrand": "Il Tuo Brand Publisher",
+                "footerRights": "Tutti i diritti riservati.",
+                "footerDisclaimer": "Disclaimer: Le informazioni su questa pagina non costituiscono consulenza finanziaria. I link sono di affiliazione.",
+                "contoGoldType": "Conto Premium",
+                "contoGoldTitle": "Conto Corrente Gold",
+                "contoGoldDesc": "Zero spese di gestione, prelievi gratuiti in tutto il mondo e carta di credito Oro inclusa. Il top per chi viaggia.",
+                "contoGoldCta": "Scopri di Più",
+                "contoGreenType": "Conto Sostenibile",
+                "contoGreenTitle": "Conto Investimento Green",
+                "contoGreenDesc": "Investi in fondi ESG selezionati e fai crescere i tuoi risparmi sostenendo l'ambiente. Canone azzerato con investimenti attivi.",
+                "contoGreenCta": "Inizia a Investire",
+                "contoBizType": "Conto Business",
+                "contoBizTitle": "Conto Business Pro",
+                "contoBizDesc": "La soluzione all-in-one per PMI e liberi professionisti. Fatturazione elettronica, POS e gestione team integrati.",
+                "contoBizCta": "Apri Conto Aziendale",
+                "appTradingTitle": "App Trading Veloce",
+                "appTradingDesc": "La piattaforma di trading n.1 per accedere ai mercati globali con commissioni zero su azioni ed ETF. Intuitiva e potente.",
+                "appTradingFeat1": "Commissioni Zero su Azioni",
+                "appTradingFeat2": "Accesso a Criptovalute",
+                "appTradingFeat3": "Conto Demo Gratuito",
+                "appTradingFeat4": "Esecuzione Istantanea",
+                "appTradingCta": "Inizia a Fare Trading",
+                "appSavingsTitle": "App Gestione Risparmi",
+                "appSavingsDesc": "Accantona automaticamente i tuoi risparmi e raggiungi i tuoi obiettivi. Piani di accumulo intelligenti e cashback.",
+                "appSavingsFeat1": "Arrotondamento automatico",
+                "appSavingsFeat2": "Obiettivi di risparmio",
+                "appSavingsFeat3": "Cashback istantaneo",
+                "appSavingsFeat4": "Analisi Spese AI",
+                "appSavingsCta": "Scarica l'App"
+            },
+            "en": {
+                "pageTitle": "🚀 Your Financial Hub: Selected Accounts & Apps 🚀",
+                "heroTitle": "The Future of Your Finances Starts Here",
+                "heroSubtitle": "I only sponsor accounts and apps that offer real value. Discover them now.",
+                "heroCta": "Explore Solutions",
+                "contiTitle": "Selected Accounts",
+                "appTitle": "Sponsored Financial Apps",
+                "footerBrand": "Your Publisher Brand",
+                "footerRights": "All rights reserved.",
+                "footerDisclaimer": "Disclaimer: The information on this page does not constitute financial advice. Links are affiliate links.",
+                "contoGoldType": "Premium Account",
+                "contoGoldTitle": "Gold Current Account",
+                "contoGoldDesc": "Zero management fees, free worldwide withdrawals, and Gold credit card included. The best for travelers.",
+                "contoGoldCta": "Discover More",
+                "contoGreenType": "Sustainable Account",
+                "contoGreenTitle": "Green Investment Account",
+                "contoGreenDesc": "Invest in selected ESG funds and grow your savings while supporting the environment. No fees with active investments.",
+                "contoGreenCta": "Start Investing",
+                "contoBizType": "Business Account",
+                "contoBizTitle": "Business Pro Account",
+                "contoBizDesc": "The all-in-one solution for SMEs and freelancers. Electronic invoicing, POS, and team management integrated.",
+                "contoBizCta": "Open Business Account",
+                "appTradingTitle": "Fast Trading App",
+                "appTradingDesc": "The #1 trading platform to access global markets with zero commissions on stocks and ETFs. Intuitive and powerful.",
+                "appTradingFeat1": "Zero Commissions on Stocks",
+                "appTradingFeat2": "Access to Cryptocurrencies",
+                "appTradingFeat3": "Free Demo Account",
+                "appTradingFeat4": "Instant Execution",
+                "appTradingCta": "Start Trading",
+                "appSavingsTitle": "Savings Management App",
+                "appSavingsDesc": "Automatically set aside your savings and reach your goals. Smart savings plans and cashback.",
+                "appSavingsFeat1": "Automatic Round-ups",
+                "appSavingsFeat2": "Personalized Savings Goals",
+                "appSavingsFeat3": "Instant Cashback",
+                "appSavingsFeat4": "AI-Powered Expense Analysis",
+                "appSavingsCta": "Download the App"
+            },
+            "es": {
+                "pageTitle": "🚀 Tu Centro Financiero: Cuentas y Apps Seleccionadas 🚀",
+                "heroTitle": "El Futuro de Tus Finanzas Comienza Aquí",
+                "heroSubtitle": "Solo recomiendo cuentas y aplicaciones que ofrecen valor real. Descúbrelas ahora.",
+                "heroCta": "Explora Soluciones",
+                "contiTitle": "Cuentas Seleccionadas",
+                "appTitle": "Apps Financieras Patrocinadas",
+                "footerBrand": "Tu Marca de Publisher",
+                "footerRights": "Todos los derechos reservados.",
+                "footerDisclaimer": "Aviso: La información en esta página no constituye asesoramiento financiero. Los enlaces son de afiliado.",
+                "contoGoldType": "Cuenta Premium",
+                "contoGoldTitle": "Cuenta Corriente Gold",
+                "contoGoldDesc": "Cero comisiones de gestión, retiros gratuitos en todo el mundo y tarjeta de crédito Oro incluida. Ideal para viajeros.",
+                "contoGoldCta": "Descubre Más",
+                "contoGreenType": "Cuenta Sostenible",
+                "contoGreenTitle": "Cuenta de Inversión Verde",
+                "contoGreenDesc": "Invierte en fondos ESG seleccionados y haz crecer tus ahorros apoyando el medio ambiente. Sin comisiones con inversiones activas.",
+                "contoGreenCta": "Empieza a Invertir",
+                "contoBizType": "Cuenta Business",
+                "contoBizTitle": "Cuenta Business Pro",
+                "contoBizDesc": "La solución todo en uno para pymes y autónomos. Facturación electrónica, TPV y gestión de equipos integrados.",
+                "contoBizCta": "Abrir Cuenta de Empresa",
+                "appTradingTitle": "App de Trading Rápido",
+                "appTradingDesc": "La plataforma de trading nº1 para acceder a mercados globales con cero comisiones en acciones y ETFs. Intuitiva y potente.",
+                "appTradingFeat1": "Cero Comisiones en Acciones",
+                "appTradingFeat2": "Acceso a Criptomonedas",
+                "appTradingFeat3": "Cuenta Demo Gratuita",
+                "appTradingFeat4": "Ejecución Instantánea",
+                "appTradingCta": "Empieza a Operar",
+                "appSavingsTitle": "App de Gestión de Ahorros",
+                "appSavingsDesc": "Aparta automáticamente tus ahorros y alcanza tus metas. Planes de ahorro inteligentes y cashback.",
+                "appSavingsFeat1": "Redondeo automático",
+                "appSavingsFeat2": "Metas de ahorro personalizadas",
+                "appSavingsFeat3": "Cashback instantáneo",
+                "appSavingsFeat4": "Análisis de Gastos con IA",
+                "appSavingsCta": "Descarga la App"
+            }
+        };
+
+        // ----------------------------------
+        // DATI DELLE OFFERTE (ora usano chiavi)
+        // ----------------------------------
+        
+        const contiData = [
+            {
+                id: "conto-gold",
+                typeKey: "contoGoldType",
+                titleKey: "contoGoldTitle",
+                descriptionKey: "contoGoldDesc",
+                imageUrl: "https://image.pollinations.ai/prompt/modern%20premium%20bank%20credit%20card%20dark%20blue%20gold%20chip%20secure%20on%20marble%20background",
+                affiliateLink: "https://tuo-link-publisher.com/conto-gold",
+                ctaKey: "contoGoldCta"
+            },
+            {
+                id: "conto-green",
+                typeKey: "contoGreenType",
+                titleKey: "contoGreenTitle",
+                descriptionKey: "contoGreenDesc",
+                imageUrl: "https://image.pollinations.ai/prompt/sustainable%20finance%20green%20investment%20digital%20bank%20card%20with%20leaf%20motif%20eco%20friendly",
+                affiliateLink: "https://tuo-link-publisher.com/conto-green",
+                ctaKey: "contoGreenCta"
+            },
+            {
+                id: "conto-business",
+                typeKey: "contoBizType",
+                titleKey: "contoBizTitle",
+                descriptionKey: "contoBizDesc",
+                imageUrl: "https://image.pollinations.ai/prompt/professional%20business%20bank%20account%20platinum%20card%20corporate%20finance%20sleek%20design",
+                affiliateLink: "https://tuo-link-publisher.com/conto-business",
+                ctaKey: "contoBizCta"
+            }
+        ];
+
+        const appData = [
+            {
+                id: "app-trading",
+                titleKey: "appTradingTitle",
+                descriptionKey: "appTradingDesc",
+                featureKeys: ["appTradingFeat1", "appTradingFeat2", "appTradingFeat3", "appTradingFeat4"],
+                imageUrl: "https://image.pollinations.ai/prompt/finance%20app%20on%20smartphone%20screen%20dashboard%20charts%20crypto%20stocks%20trading%20interface%20dark%20mode",
+                affiliateLink: "https://tuo-link-publisher.com/app-trading",
+                ctaKey: "appTradingCta"
+            },
+            {
+                id: "app-risparmio",
+                titleKey: "appSavingsTitle",
+                descriptionKey: "appSavingsDesc",
+                featureKeys: ["appSavingsFeat1", "appSavingsFeat2", "appSavingsFeat3", "appSavingsFeat4"],
+                imageUrl: "https://image.pollinations.ai/prompt/savings%20app%20on%20smartphone%20screen%20showing%20piggy%20bank%20and%20financial%20goals%20clean%20light%20interface",
+                affiliateLink: "https://tuo-link-publisher.com/app-risparmio",
+                ctaKey: "appSavingsCta"
+            }
+        ];
+
+        // ----------------------------------
+        // LOGICA DI TRADUZIONE
+        // ----------------------------------
+        
+        let currentLang = 'it'; // Default
+        const langButtons = document.querySelectorAll('.lang-selector button');
+        const contiGrid = document.getElementById('conti-grid');
+        const appContainer = document.getElementById('app-container');
+        
+        // --- Funzione per popolare i Conti ---
+        function populateConti(lang) {
+            contiGrid.innerHTML = ''; // Svuota la griglia
+            contiData.forEach((conto, index) => {
+                const card = document.createElement('div');
+                card.className = 'conto-card animate-on-scroll fade-in-up';
+                card.style.transitionDelay = `${index * 150}ms`;
+                
+                const tr = translations[lang]; // Shortcut alle traduzioni correnti
+                
+                card.innerHTML = `
+                    <div class="conto-card-badge">${tr[conto.typeKey]}</div>
+                    <img src="${conto.imageUrl}" alt="${tr[conto.titleKey]}" class="conto-image">
+                    <div class="conto-content">
+                        <h3>${tr[conto.titleKey]}</h3>
+                        <p>${tr[conto.descriptionKey]}</p>
+                        <a href="${conto.affiliateLink}" target="_blank" rel="noopener noreferrer nofollow" class="conto-cta">
+                            ${tr[conto.ctaKey]}
+                        </a>
+                    </div>
+                `;
+                contiGrid.appendChild(card);
+            });
+        }
+        
+        // --- Funzione per popolare le App ---
+        function populateApp(lang) {
+            appContainer.innerHTML = ''; // Svuota il container
+            appData.forEach((app, index) => {
+                const item = document.createElement('div');
+                item.className = 'app-feature-item';
+                
+                const tr = translations[lang]; // Shortcut
+                
+                // Converte le chiavi delle feature in stringa HTML tradotta
+                const featuresHtml = app.featureKeys.map(key => `<li>${tr[key]}</li>`).join('');
+                
+                const imageAnim = (index % 2 === 0) ? 'slide-in-left' : 'slide-in-right';
+                const contentAnim = (index % 2 === 0) ? 'slide-in-right' : 'slide-in-left';
+
+                item.innerHTML = `
+                    <div class="app-image-wrapper animate-on-scroll ${imageAnim}">
+                        <img src="${app.imageUrl}" alt="${tr[app.titleKey]}" class="app-image">
+                    </div>
+                    <div class="app-content animate-on-scroll ${contentAnim}">
+                        <h3>${tr[app.titleKey]}</h3>
+                        <p class="description">${tr[app.descriptionKey]}</p>
+                        <ul class="app-features-list">
+                            ${featuresHtml}
+                        </ul>
+                        <a href="${app.affiliateLink}" target="_blank" rel="noopener noreferrer nofollow" class="app-cta">
+                            ${tr[app.ctaKey]}
+                        </a>
+                    </div>
+                `;
+                appContainer.appendChild(item);
+            });
+        }
+
+        // --- Funzione principale per cambiare lingua ---
+        function changeLanguage(lang) {
+            if (!translations[lang]) lang = 'it'; // Fallback
+            currentLang = lang;
+            localStorage.setItem('preferredLang', lang); // Salva la preferenza
+            
+            const tr = translations[lang];
+            
+            // 1. Aggiorna lingua HTML e Titolo pagina
+            document.documentElement.lang = lang;
+            document.title = tr.pageTitle;
+            
+            // 2. Aggiorna tutto il testo statico (con data-lang-key)
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.dataset.langKey;
+                if (tr[key]) {
+                    el.innerHTML = tr[key];
+                }
+            });
+            
+            // 3. Ripopola le sezioni dinamiche
+            populateConti(lang);
+            populateApp(lang);
+            
+            // 4. Aggiorna stato attivo bottoni lingua
+            langButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            // 5. Riavvia le animazioni
+            setupScrollAnimations();
+        }
+
+        // --- Inizializzazione al caricamento ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Aggiungi listener ai bottoni lingua
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    changeLanguage(button.dataset.lang);
+                });
+            });
+
+            // Determina la lingua iniziale
+            let preferredLang = localStorage.getItem('preferredLang');
+            if (preferredLang && translations[preferredLang]) {
+                changeLanguage(preferredLang);
+            } else {
+                let browserLang = navigator.language.split('-')[0];
+                changeLanguage(translations[browserLang] ? browserLang : 'it');
+            }
+        });
+
+        // ----------------------------------
+        // LOGICA ANIMAZIONI ALLO SCROLL
+        // (Spostata in una funzione per essere richiamata)
+        // ----------------------------------
+        function setupScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+            if ("IntersectionObserver" in window) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+
+                animatedElements.forEach(el => {
+                    // Resetta animazione se già avvenuta
+                    el.classList.remove('is-visible'); 
+                    observer.observe(el);
+                });
+            } else {
+                animatedElements.forEach(el => {
+                    el.classList.add('is-visible');
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
