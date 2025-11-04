@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Tuo Hub Finanziario</title>
+    <title>cryptostarstudio - Piattaforme Selezionate</title>
 
     
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,22 +14,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
-        /* ----------------------------------
-        VARIABILI GLOBALI E RESET
-        ----------------------------------
-        */
         :root {
-            --primary-color: #0a2e5c; /* Blu profondo (Fiducia) */
-            --secondary-color: #D4AF37; /* Oro (Premium) */
-            --cta-color: #1ce783; /* Verde brillante (Azione) */
-            --dark-color: #1a1a1a; /* Nero/Grigio scuro */
+            --primary-color: #0a2e5c;
+            --secondary-color: #D4AF37;
+            --cta-color: #1ce783;
+            --dark-color: #1a1a1a;
             --light-color: #ffffff;
             --background-color: #f9faff;
             --text-color: #333;
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Lato', sans-serif;
             --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
-            --transition-speed: 0.5s cubic-bezier(0.19, 1, 0.22, 1); /* Transizione fluida */
+            --transition-speed: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         *, *::before, *::after {
@@ -48,6 +44,8 @@
             color: var(--text-color);
             background-color: var(--background-color);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
         .container {
@@ -56,10 +54,6 @@
             padding: 0 2rem;
         }
 
-        /* ----------------------------------
-        HEADER HERO
-        ----------------------------------
-        */
         .hero {
             position: relative;
             height: 100vh;
@@ -96,7 +90,7 @@
 
         .hero-content h1 {
             font-family: var(--font-heading);
-            font-size: 5.5rem;
+            font-size: 5rem; 
             margin-bottom: 1rem;
             line-height: 1.1;
             font-weight: 800;
@@ -105,7 +99,7 @@
         }
 
         .hero-content p {
-            font-size: 2.2rem;
+            font-size: 2rem; 
             margin-bottom: 2.5rem;
             font-weight: 300;
             text-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -158,12 +152,8 @@
             60% { transform: translate(-50%, -5px); }
         }
 
-        /* ----------------------------------
-        STILI SEZIONI GENERICHE
-        ----------------------------------
-        */
         .section {
-            padding: 7rem 0;
+            padding: 5.5rem 0; 
             position: relative;
         }
         
@@ -171,7 +161,7 @@
             font-family: var(--font-heading);
             font-size: 3.5rem;
             color: var(--primary-color);
-            margin-bottom: 4rem;
+            margin-bottom: 3.5rem; 
             font-weight: 700;
             text-align: center;
             position: relative;
@@ -192,14 +182,13 @@
         .section-conti { background-color: var(--light-color); }
         .section-app { background-color: var(--background-color); }
 
-        /* ----------------------------------
-        SEZIONE CONTI (Card Grid)
-        ----------------------------------
-        */
+        /* MODIFICA PER CARD SINGOLA: Centro la griglia e imposto una larghezza massima per le colonne */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            /* Definisce le colonne con un min di 340px e un max di 380px. */
+            grid-template-columns: repeat(auto-fit, minmax(340px, 380px));
             gap: 2.5rem;
+            /* Centra le colonne all'interno del contenitore */
             justify-content: center;
         }
 
@@ -213,6 +202,7 @@
             transition: transform var(--transition-speed), box-shadow var(--transition-speed);
             border: 1px solid #eef;
             position: relative;
+            /* Rimossa altezza fissa per permettere al contenuto di fluire */
         }
 
         .conto-card:hover {
@@ -259,7 +249,7 @@
         .conto-content p {
             font-size: 1.1rem;
             margin-bottom: 1.5rem;
-            flex-grow: 1;
+            flex-grow: 1; /* Questa riga spinge il pulsante in fondo */
         }
 
         .conto-cta {
@@ -283,14 +273,10 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
         
-        /* ----------------------------------
-        SEZIONE APP (Feature Layout Zig-Zag)
-        ----------------------------------
-        */
         .app-feature-container {
             display: flex;
             flex-direction: column;
-            gap: 6rem;
+            gap: 4.5rem; 
             align-items: center;
         }
         
@@ -331,7 +317,7 @@
 
         .app-content h3 {
             font-family: var(--font-heading);
-            font-size: 2.8rem;
+            font-size: 2.6rem; 
             color: var(--primary-color);
             margin-bottom: 1.5rem;
             font-weight: 700;
@@ -386,15 +372,66 @@
             box-shadow: 0 12px 35px rgba(10, 46, 92, 0.3);
         }
 
-        /* ----------------------------------
-        FOOTER e SELETTORE LINGUA
-        ----------------------------------
-        */
+        .card-disclaimers {
+            margin: 1.5rem 0;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        .risk-warning {
+            font-size: 0.9rem;
+            color: #555;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .geo-warning {
+            font-size: 0.85rem;
+            color: #777;
+        }
+        .app-content .card-disclaimers {
+             margin-top: 0;
+             padding-top: 0;
+             border-top: none;
+             margin-bottom: 1.5rem;
+        }
+
+        .section-disclosure {
+            background-color: var(--background-color);
+            padding-bottom: 0;
+            margin-top: -3rem;
+            padding-top: 5rem;
+        }
+
+        .disclosure-box {
+            background-color: var(--light-color);
+            border: 1px solid #eef;
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+        }
+        
+        .disclosure-box h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .disclosure-box p {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
         footer {
             background-color: var(--primary-color);
             color: rgba(255, 255, 255, 0.7);
             text-align: center;
-            padding: 4rem 2rem 2rem 2rem; /* Più spazio in alto per selettore */
+            padding: 4rem 2rem 2rem 2rem; 
             margin-top: 5rem;
             position: relative;
         }
@@ -434,16 +471,25 @@
             font-size: 0.95rem;
         }
         
-        footer p:first-child {
+        footer p:first-of-type { 
             font-weight: 700;
             color: var(--light-color);
             font-size: 1.1rem;
         }
+        
+        .footer-links {
+            margin: 1rem 0;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-links a:hover {
+            color: var(--light-color);
+            text-decoration: underline;
+        }
 
-        /* ----------------------------------
-        ANIMAZIONI D'INGRESSO (PER JS)
-        ----------------------------------
-        */
         .animate-on-scroll {
             opacity: 0;
             transition: opacity 1s ease-out, transform 1s ease-out;
@@ -470,14 +516,84 @@
             transform: translate(0, 0) scale(1);
         }
         
-        /* ----------------------------------
-        MEDIA QUERIES
-        ----------------------------------
-        */
+        .crypto-assistant {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .crypto-assistant.is-visible {
+            transform: translateX(0);
+        }
+        .assistant-mascot {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--light-color);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            border: 3px solid var(--light-color);
+            object-fit: cover;
+        }
+        .assistant-bubble {
+            background: var(--light-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            width: 320px;
+            position: relative;
+        }
+        .assistant-question {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .assistant-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .assistant-btn {
+            display: block;
+            text-decoration: none;
+            background: var(--background-color);
+            color: var(--primary-color);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        .assistant-btn:hover {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+        .assistant-close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #aaa;
+            cursor: pointer;
+            z-index: 2;
+            line-height: 1;
+        }
+        .assistant-close:hover { color: #333; }
+
         @media (max-width: 1024px) {
-            .hero-content h1 { font-size: 4.5rem; }
-            .hero-content p { font-size: 1.8rem; }
-            .section-title { font-size: 3rem; margin-bottom: 3rem; }
+            .hero-content h1 { font-size: 4rem; }
+            .hero-content p { font-size: 1.7rem; }
+            .section { padding: 4.5rem 0; }
+            .section-title { font-size: 2.8rem; }
+            .app-content h3 { font-size: 2.4rem; }
             .app-feature-item, .app-feature-item:nth-child(even) {
                 flex-direction: column;
                 gap: 2rem;
@@ -501,13 +617,13 @@
         }
         
         @media (max-width: 768px) {
-            .container { padding: 0 1.5rem; }
+            .container { padding: 0 1rem; }
             .hero { height: 90vh; }
-            .hero-content h1 { font-size: 3rem; }
+            .hero-content h1 { font-size: 2.8rem; }
             .hero-content p { font-size: 1.4rem; }
             .hero-cta { font-size: 1.1rem; padding: 1rem 2.5rem; }
-            .section { padding: 5rem 0; }
-            .section-title { font-size: 2.5rem; margin-bottom: 3rem; }
+            .section { padding: 4rem 0; }
+            .section-title { font-size: 2.5rem; }
             .card-grid { grid-template-columns: 1fr; gap: 2rem; }
             .conto-content { padding: 2rem; }
             .conto-content h3 { font-size: 1.8rem; }
@@ -541,6 +657,15 @@
                 padding: 6px 12px;
                 font-size: 0.9rem;
             }
+
+            .assistant-mascot { display: none; }
+            .crypto-assistant {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                width: auto;
+            }
+            .assistant-bubble { width: 100%; }
         }
 
     </style>
@@ -577,6 +702,15 @@
                 </div>
             </div>
         </section>
+        
+        <section id="disclosure" class="section section-disclosure">
+            <div class="container">
+                <div class="disclosure-box animate-on-scroll fade-in-up">
+                    <h3 data-lang-key="disclosureTitle"></h3>
+                    <p data-lang-key="disclosureText"></p>
+                </div>
+            </div>
+        </section>
 
     </main>
 
@@ -589,202 +723,205 @@
             </div>
             <p data-lang-key="footerBrand"></p>
             <p>&copy; 2025. <span data-lang-key="footerRights"></span></p>
+            
+            <p class="footer-links">
+                <a href="privacy.html" data-lang-key="privacyLink"></a> &middot; 
+                <a href="termini.html" data-lang-key="termsLink"></a> &middot; 
+                <a href="#disclosure" data-lang-key="disclosureLink"></a>
+            </p>
+            <p data-lang-key="notAffiliated"></p>
             <p data-lang-key="footerDisclaimer"></p>
         </div>
     </footer>
 
+    <div id="crypto-assistant" class="crypto-assistant">
+        <button id="assistant-close" class="assistant-close" aria-label="Chiudi">&times;</button>
+        <img src="https://image.pollinations.ai/prompt/cute%20cartoon%20robot%20financial%20assistant%20vector%20logo%20clean%20white%20background" alt="Crypto Mascot" class="assistant-mascot">
+        <div class="assistant-bubble">
+            <p class="assistant-question" data-lang-key="assistantQuestion"></p>
+            <div class="assistant-options">
+                <a href="#app-bitpanda" class="assistant-btn" data-lang-key="assistantOpt1"></a>
+                <a href="#app-youhodler" class="assistant-btn" data-lang-key="assistantOpt2"></a>
+                <a href="#conto-iuvo" class="assistant-btn" data-lang-key="assistantOpt3"></a>
+            </div>
+        </div>
+    </div>
+
+
     <script>
-        // ----------------------------------
-        // DIZIONARIO TRADUZIONI
-        // ----------------------------------
-        
         const translations = {
             "it": {
-                "pageTitle": "🚀 Il Tuo Hub Finanziario: Conti e App Selezionati 🚀",
+                "pageTitle": "🚀 cryptostarstudio: Piattaforme Selezionate 🚀",
                 "heroTitle": "Il Futuro delle Tue Finanze Inizia Qui",
-                "heroSubtitle": "Sponsorizzo solo i conti e le app che offrono valore reale. Scoprili ora.",
+                "heroSubtitle": "Una selezione di piattaforme e app finanziarie che ho analizzato per te.",
                 "heroCta": "Esplora le Soluzioni",
-                "contiTitle": "Conti Selezionati",
-                "appTitle": "App Finanziarie Sponsorizzate",
-                "footerBrand": "Il Tuo Brand Publisher",
+                "contiTitle": "Piattaforme Selezionate",
+                "appTitle": "App Finanziarie in Evidenza",
+                "footerBrand": "cryptostarstudio",
                 "footerRights": "Tutti i diritti riservati.",
-                "footerDisclaimer": "Disclaimer: Le informazioni su questa pagina non costituiscono consulenza finanziaria. I link sono di affiliazione.",
-                "contoGoldType": "Conto Premium",
-                "contoGoldTitle": "Conto Corrente Gold",
-                "contoGoldDesc": "Zero spese di gestione, prelievi gratuiti in tutto il mondo e carta di credito Oro inclusa. Il top per chi viaggia.",
-                "contoGoldCta": "Scopri di Più",
-                "contoGreenType": "Conto Sostenibile",
-                "contoGreenTitle": "Conto Investimento Green",
-                "contoGreenDesc": "Investi in fondi ESG selezionati e fai crescere i tuoi risparmi sostenendo l'ambiente. Canone azzerato con investimenti attivi.",
-                "contoGreenCta": "Inizia a Investire",
-                "contoBizType": "Conto Business",
-                "contoBizTitle": "Conto Business Pro",
-                "contoBizDesc": "La soluzione all-in-one per PMI e liberi professionisti. Fatturazione elettronica, POS e gestione team integrati.",
-                "contoBizCta": "Apri Conto Aziendale",
-                "appTradingTitle": "App Trading Veloce",
-                "appTradingDesc": "La piattaforma di trading n.1 per accedere ai mercati globali con commissioni zero su azioni ed ETF. Intuitiva e potente.",
-                "appTradingFeat1": "Commissioni Zero su Azioni",
-                "appTradingFeat2": "Accesso a Criptovalute",
-                "appTradingFeat3": "Conto Demo Gratuito",
-                "appTradingFeat4": "Esecuzione Istantanea",
-                "appTradingCta": "Inizia a Fare Trading",
-                "appSavingsTitle": "App Gestione Risparmi",
-                "appSavingsDesc": "Accantona automaticamente i tuoi risparmi e raggiungi i tuoi obiettivi. Piani di accumulo intelligenti e cashback.",
-                "appSavingsFeat1": "Arrotondamento automatico",
-                "appSavingsFeat2": "Obiettivi di risparmio",
-                "appSavingsFeat3": "Cashback istantaneo",
-                "appSavingsFeat4": "Analisi Spese AI",
-                "appSavingsCta": "Scarica l'App"
+                "footerDisclaimer": "Disclaimer: Le informazioni su questa pagina non costituiscono consulenza finanziaria. Investire comporta dei rischi.",
+                "disclosureTitle": "Nota sulla Trasparenza",
+                "disclosureText": "Questa pagina è supportata dai lettori. Alcuni link sono affiliati/sponsored: se apri un conto o completi un’azione tramite i miei link, potrei ricevere una commissione senza costi aggiuntivi per te.\n\nSeleziono piattaforme che ritengo utili, ma i contenuti sono informativi e non costituiscono consulenza finanziaria. Verifica sempre termini, costi e requisiti sul sito ufficiale del partner.\n\nProdotti finanziari e crypto comportano rischi (anche perdita del capitale). Offerte e disponibilità possono variare per Paese. Accesso riservato a maggiorenni (18+).",
+                "privacyLink": "Privacy Policy",
+                "termsLink": "Termini di Servizio",
+                "disclosureLink": "Trasparenza",
+                "notAffiliated": "cryptostarstudio non è affiliato né sponsorizzato ufficialmente dai brand menzionati. I marchi appartengono ai rispettivi proprietari.",
+                "riskWarning": "⚠️ Servizi per 18+. Investimenti e crypto comportano rischi di perdita del capitale.",
+                "geoWarning": "Disponibilità e condizioni possono variare per Paese. Verifica sempre sul sito ufficiale.",
+                "contoIuvoType": "P2P Lending",
+                "contoIuvoTitle": "IUVO P2P",
+                "contoIuvoDesc": "Piattaforma di P2P lending che connette investitori con prestiti al consumo originati da società finanziarie. Offre funzionalità come la 'Garanzia di Riacquisto' (Buyback) su prestiti selezionati.",
+                "contoIuvoCta": "Vedi Dettagli IUVO",
+                "appBitpandaTitle": "Bitpanda",
+                "appBitpandaDesc": "Piattaforma d'investimento che permette di accedere a diversi asset. Un broker europeo con registrazioni di settore, pensato per diversificare da un unico hub.",
+                "appBitpandaFeat1": "Accesso a Cripto, Azioni, ETF e Metalli",
+                "appBitpandaFeat2": "Piani di Risparmio (PAC)",
+                "appBitpandaFeat3": "Interfaccia utente intuitiva",
+                "appBitpandaFeat4": "Broker europeo (verifica licenze/registrazioni sul sito ufficiale)",
+                "appBitpandaCta": "Visita Bitpanda",
+                "appYouhodlerTitle": "YouHodler",
+                "appYouhodlerDesc": "Piattaforma FinTech che consente di ottenere interessi sulle crypto supportate e di accedere a soluzioni di liquidità utilizzando gli asset digitali come collaterale.",
+                "appYouhodlerFeat1": "Interessi su asset supportati (variabili, non garantiti)",
+                "appYouhodlerFeat2": "Accesso a linee di credito crypto",
+                "appYouhodlerFeat3": "Strumenti di trading e conversione",
+                "appYouhodlerFeat4": "Piattaforma con sede in Svizzera",
+                "appYouhodlerCta": "Visita YouHodler",
+                "assistantQuestion": "Non sai da dove iniziare?",
+                "assistantOpt1": "Cerco una piattaforma All-in-One (Crypto/Azioni)",
+                "assistantOpt2": "Voglio far fruttare le mie crypto",
+                "assistantOpt3": "Cerco un'alternativa (P2P Lending)"
             },
             "en": {
-                "pageTitle": "🚀 Your Financial Hub: Selected Accounts & Apps 🚀",
+                "pageTitle": "🚀 cryptostarstudio: Selected Platforms 🚀",
                 "heroTitle": "The Future of Your Finances Starts Here",
-                "heroSubtitle": "I only sponsor accounts and apps that offer real value. Discover them now.",
+                "heroSubtitle": "A selection of financial platforms and apps I've analyzed for you.",
                 "heroCta": "Explore Solutions",
-                "contiTitle": "Selected Accounts",
-                "appTitle": "Sponsored Financial Apps",
-                "footerBrand": "Your Publisher Brand",
+                "contiTitle": "Selected Platforms",
+                "appTitle": "Featured Financial Apps",
+                "footerBrand": "cryptostarstudio",
                 "footerRights": "All rights reserved.",
-                "footerDisclaimer": "Disclaimer: The information on this page does not constitute financial advice. Links are affiliate links.",
-                "contoGoldType": "Premium Account",
-                "contoGoldTitle": "Gold Current Account",
-                "contoGoldDesc": "Zero management fees, free worldwide withdrawals, and Gold credit card included. The best for travelers.",
-                "contoGoldCta": "Discover More",
-                "contoGreenType": "Sustainable Account",
-                "contoGreenTitle": "Green Investment Account",
-                "contoGreenDesc": "Invest in selected ESG funds and grow your savings while supporting the environment. No fees with active investments.",
-                "contoGreenCta": "Start Investing",
-                "contoBizType": "Business Account",
-                "contoBizTitle": "Business Pro Account",
-                "contoBizDesc": "The all-in-one solution for SMEs and freelancers. Electronic invoicing, POS, and team management integrated.",
-                "contoBizCta": "Open Business Account",
-                "appTradingTitle": "Fast Trading App",
-                "appTradingDesc": "The #1 trading platform to access global markets with zero commissions on stocks and ETFs. Intuitive and powerful.",
-                "appTradingFeat1": "Zero Commissions on Stocks",
-                "appTradingFeat2": "Access to Cryptocurrencies",
-                "appTradingFeat3": "Free Demo Account",
-                "appTradingFeat4": "Instant Execution",
-                "appTradingCta": "Start Trading",
-                "appSavingsTitle": "Savings Management App",
-                "appSavingsDesc": "Automatically set aside your savings and reach your goals. Smart savings plans and cashback.",
-                "appSavingsFeat1": "Automatic Round-ups",
-                "appSavingsFeat2": "Personalized Savings Goals",
-                "appSavingsFeat3": "Instant Cashback",
-                "appSavingsFeat4": "AI-Powered Expense Analysis",
-                "appSavingsCta": "Download the App"
+                "footerDisclaimer": "Disclaimer: The information on this page does not constitute financial advice. Investing involves risks.",
+                "disclosureTitle": "Transparency Note",
+                "disclosureText": "This page is reader-supported. Some links are affiliated/sponsored: if you open an account or complete an action through my links, I may receive a commission at no extra cost to you.\n\nI select platforms I find useful, but the content is informational and does not constitute financial advice. Always verify terms, costs, and requirements on the partner's official website.\n\nFinancial products and crypto involve risks (including capital loss). Offers and availability may vary by country. Access restricted to adults (18+).",
+                "privacyLink": "Privacy Policy",
+                "termsLink": "Terms of Service",
+                "disclosureLink": "Transparency",
+                "notAffiliated": "cryptostarstudio is not officially affiliated with or sponsored by the mentioned brands. Trademarks belong to their respective owners.",
+                "riskWarning": "⚠️ Services for 18+. Investments and crypto involve risks of capital loss.",
+                "geoWarning": "Availability and terms may vary by country. Always verify on the official website.",
+                "contoIuvoType": "P2P Lending",
+                "contoIuvoTitle": "IUVO P2P",
+                "contoIuvoDesc": "P2P lending platform connecting investors with consumer loans from financial companies. It offers features like a 'Buyback Guarantee' on selected loans.",
+                "contoIuvoCta": "See IUVO Details",
+                "appBitpandaTitle": "Bitpanda",
+                "appBitpandaDesc": "Investment platform providing access to various assets. A European broker with industry registrations, designed for diversification from a single hub.",
+                "appBitpandaFeat1": "Access to Crypto, Stocks, ETFs, and Metals",
+                "appBitpandaFeat2": "Savings Plans",
+                "appBitpandaFeat3": "Intuitive user interface",
+                "appBitpandaFeat4": "European broker (verify licenses/registrations on the official site)",
+                "appBitpandaCta": "Visit Bitpanda",
+                "appYouhodlerTitle": "YouHodler",
+                "appYouhodlerDesc": "FinTech platform that allows earning interest on supported crypto and accessing liquidity solutions using digital assets as collateral.",
+                "appYouhodlerFeat1": "Interest on supported assets (variable, not guaranteed)",
+                "appYouhodlerFeat2": "Access to crypto credit lines",
+                "appYouhodFodlerFeat3": "Trading and conversion tools",
+                "appYouhodlerFeat4": "Platform based in Switzerland",
+                "appYouhodlerCta": "Visit YouHodler",
+                "assistantQuestion": "Not sure where to start?",
+                "assistantOpt1": "I want an All-in-One platform (Crypto/Stocks)",
+                "assistantOpt2": "I want to earn interest on my crypto",
+                "assistantOpt3": "I want an alternative (P2P Lending)"
             },
             "es": {
-                "pageTitle": "🚀 Tu Centro Financiero: Cuentas y Apps Seleccionadas 🚀",
+                "pageTitle": "🚀 cryptostarstudio: Plataformas Seleccionadas 🚀",
                 "heroTitle": "El Futuro de Tus Finanzas Comienza Aquí",
-                "heroSubtitle": "Solo recomiendo cuentas y aplicaciones que ofrecen valor real. Descúbrelas ahora.",
+                "heroSubtitle": "Una selección de plataformas y apps financieras que he analizado para ti.",
                 "heroCta": "Explora Soluciones",
-                "contiTitle": "Cuentas Seleccionadas",
-                "appTitle": "Apps Financieras Patrocinadas",
-                "footerBrand": "Tu Marca de Publisher",
+                "contiTitle": "Plataformas Seleccionadas",
+                "appTitle": "Apps Financieras Destacadas",
+                "footerBrand": "cryptostarstudio",
                 "footerRights": "Todos los derechos reservados.",
-                "footerDisclaimer": "Aviso: La información en esta página no constituye asesoramiento financiero. Los enlaces son de afiliado.",
-                "contoGoldType": "Cuenta Premium",
-                "contoGoldTitle": "Cuenta Corriente Gold",
-                "contoGoldDesc": "Cero comisiones de gestión, retiros gratuitos en todo el mundo y tarjeta de crédito Oro incluida. Ideal para viajeros.",
-                "contoGoldCta": "Descubre Más",
-                "contoGreenType": "Cuenta Sostenible",
-                "contoGreenTitle": "Cuenta de Inversión Verde",
-                "contoGreenDesc": "Invierte en fondos ESG seleccionados y haz crecer tus ahorros apoyando el medio ambiente. Sin comisiones con inversiones activas.",
-                "contoGreenCta": "Empieza a Invertir",
-                "contoBizType": "Cuenta Business",
-                "contoBizTitle": "Cuenta Business Pro",
-                "contoBizDesc": "La solución todo en uno para pymes y autónomos. Facturación electrónica, TPV y gestión de equipos integrados.",
-                "contoBizCta": "Abrir Cuenta de Empresa",
-                "appTradingTitle": "App de Trading Rápido",
-                "appTradingDesc": "La plataforma de trading nº1 para acceder a mercados globales con cero comisiones en acciones y ETFs. Intuitiva y potente.",
-                "appTradingFeat1": "Cero Comisiones en Acciones",
-                "appTradingFeat2": "Acceso a Criptomonedas",
-                "appTradingFeat3": "Cuenta Demo Gratuita",
-                "appTradingFeat4": "Ejecución Instantánea",
-                "appTradingCta": "Empieza a Operar",
-                "appSavingsTitle": "App de Gestión de Ahorros",
-                "appSavingsDesc": "Aparta automáticamente tus ahorros y alcanza tus metas. Planes de ahorro inteligentes y cashback.",
-                "appSavingsFeat1": "Redondeo automático",
-                "appSavingsFeat2": "Metas de ahorro personalizadas",
-                "appSavingsFeat3": "Cashback instantáneo",
-                "appSavingsFeat4": "Análisis de Gastos con IA",
-                "appSavingsCta": "Descarga la App"
+                "footerDisclaimer": "Aviso: La información en esta página no constituye asesoramiento financiero. Invertir conlleva riesgos.",
+                "disclosureTitle": "Nota de Transparencia",
+                "disclosureText": "Esta página es financiada por sus lectores. Algunos enlaces son de afiliados/patrocinados: si abres una cuenta o completas una acción a través de mis enlaces, podría recibir una comisión sin coste adicional para ti.\n\nSelecciono plataformas que considero útiles, pero el contenido es informativo y no constituye asesoramiento financiero. Verifica siempre los términos, costes y requisitos en el sitio web oficial del socio.\n\nLos productos financieros y las criptomonedas conllevan riesgos (incluida la pérdida de capital). Las ofertas y la disponibilidad pueden variar según el país. Acceso reservado a mayores de edad (18+).",
+                "privacyLink": "Política de Privacidad",
+                "termsLink": "Términos de Servicio",
+                "disclosureLink": "Transparencia",
+                "notAffiliated": "cryptostarstudio no está afiliado ni patrocinado oficialmente por las marcas mencionadas. Las marcas pertenecen a sus respectivos propietarios.",
+                "riskWarning": "⚠️ Servicios para 18+. Las inversiones y criptomonedas implican riesgos de pérdida de capital.",
+                "geoWarning": "La disponibilidad y los términos pueden variar según el país. Verifica siempre en el sitio web oficial.",
+                "contoIuvoType": "P2P Lending",
+                "contoIuvoTitle": "IUVO P2P",
+                "contoIuvoDesc": "Plataforma de préstamos P2P que conecta a inversores con préstamos al consumo. Ofrece funciones como 'Garantía de Recompra' (Buyback) en préstamos seleccionados.",
+                "contoIuvoCta": "Ver Detalles de IUVO",
+                "appBitpandaTitle": "Bitpanda",
+                "appBitpandaDesc": "Plataforma de inversión que da acceso a diversos activos. Un bróker europeo con registros del sector, diseñado para diversificar desde un solo lugar.",
+                "appBitpandaFeat1": "Acceso a Cripto, Acciones, ETFs y Metales",
+                "appBitpandaFeat2": "Planes de Ahorro",
+                "appBitpandaFeat3": "Interfaz de usuario intuitiva",
+                "appBitpandaFeat4": "Bróker europeo (verifica licencias/registros en el sitio oficial)",
+                "appBitpandaCta": "Visitar Bitpanda",
+                "appYouhodlerTitle": "YouHodler",
+                "appYouhodlerDesc": "Plataforma FinTech que permite obtener intereses sobre criptomonedas compatibles y acceder a soluciones de liquidez utilizando activos digitales como garantía.",
+                "appYouhodlerFeat1": "Intereses sobre activos compatibles (variables, no garantizados)",
+                "appYouhodlerFeat2": "Acceso a líneas de crédito cripto",
+                "appYouhodlerFeat3": "Herramientas de trading y conversión",
+                "appYouhodlerFeat4": "Plataforma con sede en Suiza",
+                "appYouhodlerCta": "Visitar YouHodler",
+                "assistantQuestion": "¿No sabes por dónde empezar?",
+                "assistantOpt1": "Quiero una plataforma Todo-en-Uno (Cripto/Acciones)",
+                "assistantOpt2": "Quiero ganar intereses con mis cripto",
+                "assistantOpt3": "Busco una alternativa (P2P Lending)"
             }
         };
 
-        // ----------------------------------
-        // DATI DELLE OFFERTE (ora usano chiavi)
-        // ----------------------------------
-        
         const contiData = [
-            {
-                id: "conto-gold",
-                typeKey: "contoGoldType",
-                titleKey: "contoGoldTitle",
-                descriptionKey: "contoGoldDesc",
-                imageUrl: "https://image.pollinations.ai/prompt/modern%20premium%20bank%20credit%20card%20dark%20blue%20gold%20chip%20secure%20on%20marble%20background",
-                affiliateLink: "https://tuo-link-publisher.com/conto-gold",
-                ctaKey: "contoGoldCta"
-            },
-            {
-                id: "conto-green",
-                typeKey: "contoGreenType",
-                titleKey: "contoGreenTitle",
-                descriptionKey: "contoGreenDesc",
-                imageUrl: "https://image.pollinations.ai/prompt/sustainable%20finance%20green%20investment%20digital%20bank%20card%20with%20leaf%20motif%20eco%20friendly",
-                affiliateLink: "https://tuo-link-publisher.com/conto-green",
-                ctaKey: "contoGreenCta"
-            },
-            {
-                id: "conto-business",
-                typeKey: "contoBizType",
-                titleKey: "contoBizTitle",
-                descriptionKey: "contoBizDesc",
-                imageUrl: "https://image.pollinations.ai/prompt/professional%20business%20bank%20account%20platinum%20card%20corporate%20finance%20sleek%20design",
-                affiliateLink: "https://tuo-link-publisher.com/conto-business",
-                ctaKey: "contoBizCta"
+             {
+                id: "conto-iuvo",
+                typeKey: "contoIuvoType",
+                titleKey: "contoIuvoTitle",
+                descriptionKey: "contoIuvoDesc",
+                imageUrl: "https://image.pollinations.ai/prompt/peer%20to%20peer%20investment%20network%20digital%20connections%20data%20graph%20blue%20and%20gold",
+                affiliateLink: "https://www.financeads.net/tc.php?t=78725C226841413T",
+                ctaKey: "contoIuvoCta"
             }
         ];
 
         const appData = [
             {
-                id: "app-trading",
-                titleKey: "appTradingTitle",
-                descriptionKey: "appTradingDesc",
-                featureKeys: ["appTradingFeat1", "appTradingFeat2", "appTradingFeat3", "appTradingFeat4"],
-                imageUrl: "https://image.pollinations.ai/prompt/finance%20app%20on%20smartphone%20screen%20dashboard%20charts%20crypto%20stocks%20trading%20interface%20dark%20mode",
-                affiliateLink: "https://tuo-link-publisher.com/app-trading",
-                ctaKey: "appTradingCta"
+                id: "app-bitpanda",
+                titleKey: "appBitpandaTitle",
+                descriptionKey: "appBitpandaDesc",
+                featureKeys: ["appBitpandaFeat1", "appBitpandaFeat2", "appBitpandaFeat3", "appBitpandaFeat4"],
+                imageUrl: "https://image.pollinations.ai/prompt/crypto%20investment%20app%20on%20smartphone%20bitpanda%20style%20interface%20dark%20mode%20with%20green%20and%20gold%20accents",
+                affiliateLink: "https://www.financeads.net/tc.php?t=78725C290656312B",
+                ctaKey: "appBitpandaCta"
             },
             {
-                id: "app-risparmio",
-                titleKey: "appSavingsTitle",
-                descriptionKey: "appSavingsDesc",
-                featureKeys: ["appSavingsFeat1", "appSavingsFeat2", "appSavingsFeat3", "appSavingsFeat4"],
-                imageUrl: "https://image.pollinations.ai/prompt/savings%20app%20on%20smartphone%20screen%20showing%20piggy%20bank%20and%20financial%20goals%20clean%20light%20interface",
-                affiliateLink: "https://tuo-link-publisher.com/app-risparmio",
-                ctaKey: "appSavingsCta"
+                id: "app-youhodler",
+                titleKey: "appYouhodlerTitle",
+                descriptionKey: "appYouhodlerDesc",
+                featureKeys: ["appYouhodlerFeat1", "appYouhodlerFeat2", "appYouhodlerFeat3", "appYouhodlerFeat4"],
+                imageUrl: "https://image.pollinations.ai/prompt/financial%20savings%20app%20interface%20youhodler%20style%20showing%20high%20interest%20rates%20blue%20and%20white%20secure",
+                affiliateLink: "https://www.financeads.net/tc.php?t=78725C324061192B",
+                ctaKey: "appYouhodlerCta"
             }
         ];
-
-        // ----------------------------------
-        // LOGICA DI TRADUZIONE
-        // ----------------------------------
         
-        let currentLang = 'it'; // Default
+        let currentLang = 'it';
         const langButtons = document.querySelectorAll('.lang-selector button');
         const contiGrid = document.getElementById('conti-grid');
         const appContainer = document.getElementById('app-container');
         
-        // --- Funzione per popolare i Conti ---
         function populateConti(lang) {
-            contiGrid.innerHTML = ''; // Svuota la griglia
+            contiGrid.innerHTML = '';
             contiData.forEach((conto, index) => {
                 const card = document.createElement('div');
                 card.className = 'conto-card animate-on-scroll fade-in-up';
                 card.style.transitionDelay = `${index * 150}ms`;
+                card.id = conto.id;
                 
-                const tr = translations[lang]; // Shortcut alle traduzioni correnti
+                const tr = translations[lang]; 
                 
                 card.innerHTML = `
                     <div class="conto-card-badge">${tr[conto.typeKey]}</div>
@@ -792,7 +929,13 @@
                     <div class="conto-content">
                         <h3>${tr[conto.titleKey]}</h3>
                         <p>${tr[conto.descriptionKey]}</p>
-                        <a href="${conto.affiliateLink}" target="_blank" rel="noopener noreferrer nofollow" class="conto-cta">
+                        
+                        <div class="card-disclaimers">
+                            <p class="risk-warning">${tr.riskWarning}</p>
+                            <p class="geo-warning">${tr.geoWarning}</p>
+                        </div>
+                        
+                        <a href="${conto.affiliateLink}" target="_blank" rel="sponsored nofollow noopener noreferrer" class="conto-cta">
                             ${tr[conto.ctaKey]}
                         </a>
                     </div>
@@ -801,17 +944,16 @@
             });
         }
         
-        // --- Funzione per popolare le App ---
         function populateApp(lang) {
-            appContainer.innerHTML = ''; // Svuota il container
+            appContainer.innerHTML = '';
             appData.forEach((app, index) => {
                 const item = document.createElement('div');
                 item.className = 'app-feature-item';
+                item.id = app.id;
                 
-                const tr = translations[lang]; // Shortcut
+                const tr = translations[lang]; 
                 
-                // Converte le chiavi delle feature in stringa HTML tradotta
-                const featuresHtml = app.featureKeys.map(key => `<li>${tr[key]}</li>`).join('');
+                const featuresHtml = app.featureKeys.map(key => `<li>${tr[key] || key}</li>`).join('');
                 
                 const imageAnim = (index % 2 === 0) ? 'slide-in-left' : 'slide-in-right';
                 const contentAnim = (index % 2 === 0) ? 'slide-in-right' : 'slide-in-left';
@@ -826,7 +968,13 @@
                         <ul class="app-features-list">
                             ${featuresHtml}
                         </ul>
-                        <a href="${app.affiliateLink}" target="_blank" rel="noopener noreferrer nofollow" class="app-cta">
+                        
+                        <div class="card-disclaimers">
+                            <p class="risk-warning">${tr.riskWarning}</p>
+                            <p class="geo-warning">${tr.geoWarning}</p>
+                        </div>
+
+                        <a href="${app.affiliateLink}" target="_blank" rel="sponsored nofollow noopener noreferrer" class="app-cta">
                             ${tr[app.ctaKey]}
                         </a>
                     </div>
@@ -835,19 +983,16 @@
             });
         }
 
-        // --- Funzione principale per cambiare lingua ---
         function changeLanguage(lang) {
-            if (!translations[lang]) lang = 'it'; // Fallback
+            if (!translations[lang]) lang = 'it';
             currentLang = lang;
-            localStorage.setItem('preferredLang', lang); // Salva la preferenza
+            localStorage.setItem('preferredLang', lang); 
             
             const tr = translations[lang];
             
-            // 1. Aggiorna lingua HTML e Titolo pagina
             document.documentElement.lang = lang;
             document.title = tr.pageTitle;
             
-            // 2. Aggiorna tutto il testo statico (con data-lang-key)
             document.querySelectorAll('[data-lang-key]').forEach(el => {
                 const key = el.dataset.langKey;
                 if (tr[key]) {
@@ -855,29 +1000,23 @@
                 }
             });
             
-            // 3. Ripopola le sezioni dinamiche
             populateConti(lang);
             populateApp(lang);
             
-            // 4. Aggiorna stato attivo bottoni lingua
             langButtons.forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
             
-            // 5. Riavvia le animazioni
             setupScrollAnimations();
         }
 
-        // --- Inizializzazione al caricamento ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Aggiungi listener ai bottoni lingua
             langButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     changeLanguage(button.dataset.lang);
                 });
             });
 
-            // Determina la lingua iniziale
             let preferredLang = localStorage.getItem('preferredLang');
             if (preferredLang && translations[preferredLang]) {
                 changeLanguage(preferredLang);
@@ -885,12 +1024,32 @@
                 let browserLang = navigator.language.split('-')[0];
                 changeLanguage(translations[browserLang] ? browserLang : 'it');
             }
+
+            const assistant = document.getElementById('crypto-assistant');
+            const closeBtn = document.getElementById('assistant-close');
+
+            if (assistant && closeBtn) {
+                if (!localStorage.getItem('assistant_closed')) {
+                    setTimeout(() => {
+                        assistant.classList.add('is-visible');
+                    }, 7000);
+                }
+
+                const closeAssistant = () => {
+                    assistant.classList.remove('is-visible');
+                    localStorage.setItem('assistant_closed', 'true');
+                };
+
+                closeBtn.addEventListener('click', closeAssistant);
+
+                document.querySelectorAll('.assistant-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        setTimeout(closeAssistant, 300);
+                    });
+                });
+            }
         });
 
-        // ----------------------------------
-        // LOGICA ANIMAZIONI ALLO SCROLL
-        // (Spostata in una funzione per essere richiamata)
-        // ----------------------------------
         function setupScrollAnimations() {
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
 
@@ -907,7 +1066,6 @@
                 });
 
                 animatedElements.forEach(el => {
-                    // Resetta animazione se già avvenuta
                     el.classList.remove('is-visible'); 
                     observer.observe(el);
                 });
@@ -916,6 +1074,14 @@
                     el.classList.add('is-visible');
                 });
             }
+        }
+        
+        if(!localStorage.getItem('cookie_ack')){
+            const b=document.createElement('div');
+            b.style.cssText='position:fixed;bottom:0;left:0;right:0;background:#0a2e5c;color:#fff;padding:12px 16px;font-size:14px;z-index:9999;';
+            b.innerHTML='Usiamo link affiliati e, se attivi analytics, potremmo usare cookie tecnici/analitici. <button id="okc" style="margin-left:12px;background:#1ce783;color:#111;border:0;padding:6px 10px;border-radius:6px;cursor:pointer;">Ok</button>';
+            document.body.appendChild(b);
+            document.getElementById('okc').onclick=()=>{ localStorage.setItem('cookie_ack','1'); b.remove(); };
         }
     </script>
 
