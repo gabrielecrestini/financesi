@@ -181,6 +181,62 @@
         
         .section-conti { background-color: var(--light-color); }
         .section-app { background-color: var(--background-color); }
+        
+        /* === STILI PER LA NUOVA SEZIONE GUIDA === */
+        .section-guida-banner {
+            background-color: var(--background-color);
+            padding-top: 3rem; /* Meno padding sopra */
+            padding-bottom: 3rem; /* Meno padding sotto */
+        }
+        
+        .guida-banner-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(45deg, var(--primary-color), #0a2549);
+            color: var(--light-color);
+            padding: 3.5rem 4rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(10, 46, 92, 0.2);
+            gap: 2rem;
+        }
+
+        .guida-banner-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        
+        .guida-banner-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        .guida-banner-link {
+            display: inline-block;
+            background: var(--cta-color);
+            color: var(--dark-color);
+            padding: 1.1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(28, 231, 131, 0.3);
+            text-transform: uppercase;
+            white-space: nowrap; /* Evita che il testo vada a capo */
+        }
+        
+        .guida-banner-link:hover {
+            background: var(--light-color);
+            color: var(--primary-color);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.3);
+        }
+        /* ======================================= */
 
         .card-grid {
             display: grid;
@@ -612,6 +668,21 @@
             .app-cta { text-align: center; }
         }
         
+        @media (max-width: 900px) { /* Responsive per il nuovo banner */
+            .guida-banner-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 3rem 2.5rem;
+                gap: 2.5rem;
+            }
+            .guida-banner-content h2 {
+                font-size: 2.2rem;
+            }
+            .guida-banner-content p {
+                 font-size: 1.1rem;
+            }
+        }
+        
         @media (max-width: 768px) {
             .container { padding: 0 1rem; }
             .hero { height: 90vh; }
@@ -662,6 +733,10 @@
                 width: auto;
             }
             .assistant-bubble { width: 100%; }
+            
+            .guida-banner-content h2 { /* Responsive per il nuovo banner */
+                font-size: 1.8rem;
+            }
         }
 
     </style>
@@ -689,7 +764,19 @@
             </div>
         </section>
 
-        
+        <section id="guida-banner" class="section section-guida-banner">
+            <div class="container">
+                <div class="guida-banner-box animate-on-scroll fade-in-up">
+                    <div class="guida-banner-content">
+                        <h2 data-lang-key="guidaBannerTitle"></h2>
+                        <p data-lang-key="guidaBannerDesc"></p>
+                    </div>
+                    <div class="guida-banner-cta">
+                        <a href="risorse.html" class="guida-banner-link" data-lang-key="guidaBannerCta"></a>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section id="app" class="section section-app">
             <div class="container">
                 <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="appTitle"></h2>
@@ -723,6 +810,7 @@
             <p class="footer-links">
                 <a href="privacy.html" data-lang-key="privacyLink"></a> &middot; 
                 <a href="termini.html" data-lang-key="termsLink"></a> &middot; 
+                <a href="risorse.html" data-lang-key="guideLink"></a> &middot; 
                 <a href="#disclosure" data-lang-key="disclosureLink"></a>
             </p>
             <p data-lang-key="notAffiliated"></p>
@@ -761,6 +849,7 @@
                 "disclosureText": "Questa pagina è supportata dai lettori. Alcuni link sono affiliati/sponsored: se apri un conto o completi un’azione tramite i miei link, potrei ricevere una commissione senza costi aggiuntivi per te.\n\nSeleziono piattaforme che ritengo utili, ma i contenuti sono informativi e non costituiscono consulenza finanziaria. Verifica sempre termini, costi e requisiti sul sito ufficiale del partner.\n\nProdotti finanziari e crypto comportano rischi (anche perdita del capitale). Offerte e disponibilità possono variare per Paese. Accesso riservato a maggiorenni (18+).",
                 "privacyLink": "Privacy Policy",
                 "termsLink": "Termini di Servizio",
+                "guideLink": "Guida per Principianti", // Link nel footer
                 "disclosureLink": "Trasparenza",
                 "notAffiliated": "cryptostarstudio non è affiliato né sponsorizzato ufficialmente dai brand menzionati. I marchi appartengono ai rispettivi proprietari.",
                 "riskWarning": "⚠️ Servizi per 18+. Investimenti e crypto comportano rischi di perdita del capitale.",
@@ -776,6 +865,10 @@
                 "contoFinomDesc": "La soluzione completa per liberi professionisti con IBAN italiano, carte, fatturazione integrata e categorizzazione spese. Partner di Solarisbank.",
                 "contoFinomCta": "Prova 6 Mesi Gratis (Start)",
                 
+                "guidaBannerTitle": "Sei nuovo nel mondo Crypto?", // <-- NUOVO BANNER
+                "guidaBannerDesc": "Parti con il piede giusto. Consulta la nostra guida gratuita per capire le basi della blockchain prima di iniziare.", // <-- NUOVO BANNER
+                "guidaBannerCta": "Inizia da Qui", // <-- NUOVO BANNER
+
                 "appBitpandaTitle": "Bitpanda",
                 "appBitpandaDesc": "Piattaforma d'investimento che permette di accedere a diversi asset. Un broker europeo con registrazioni di settore, pensato per diversificare da un unico hub.",
                 "appBitpandaFeat1": "Accesso a Cripto, Azioni, ETF e Metalli",
@@ -828,6 +921,7 @@
                 "disclosureText": "This page is reader-supported. Some links are affiliated/sponsored: if you open an account or complete an action through my links, I may receive a commission at no extra cost to you.\n\nI select platforms I find useful, but the content is informational and does not constitute financial advice. Always verify terms, costs, and requirements on the partner's official website.\n\nFinancial products and crypto involve risks (including capital loss). Offers and availability may vary by country. Access restricted to adults (18+).",
                 "privacyLink": "Privacy Policy",
                 "termsLink": "Terms of Service",
+                "guideLink": "Beginner's Guide", // Link nel footer
                 "disclosureLink": "Transparency",
                 "notAffiliated": "cryptostarstudio is not officially affiliated with or sponsored by the mentioned brands. Trademarks belong to their respective owners.",
                 "riskWarning": "⚠️ Services for 18+. Investments and crypto involve risks of capital loss.",
@@ -842,6 +936,10 @@
                 "contoFinomTitle": "FINOM Pro Account",
                 "contoFinomDesc": "The all-in-one solution for freelancers with an Italian IBAN, cards, integrated invoicing, and expense categorization. Partnered with Solarisbank.",
                 "contoFinomCta": "Try 6 Months Free (Start)",
+                
+                "guidaBannerTitle": "New to Crypto?", // <-- NUOVO BANNER
+                "guidaBannerDesc": "Start on the right foot. Check out our free guide to understand the basics of blockchain before you begin.", // <-- NUOVO BANNER
+                "guidaBannerCta": "Start Here", // <-- NUOVO BANNER
                 
                 "appBitpandaTitle": "Bitpanda",
                 "appBitpandaDesc": "Investment platform providing access to various assets. A European broker with industry registrations, designed for diversification from a single hub.",
@@ -895,6 +993,7 @@
                 "disclosureText": "Esta página es financiada por sus lectores. Algunos enlaces son de afiliados/patrocinados: si abres una cuenta o completas una acción a través de mis enlaces, podría recibir una comisión sin coste adicional para ti.\n\nSelecciono plataformas que considero útiles, pero el contenido es informativo y no constituye asesoramiento financiero. Verifica siempre los términos, costes y requisitos en el sitio web oficial del socio.\n\nLos productos financieros y las criptomonedas conllevan riesgos (incluida la pérdida de capital). Las ofertas y la disponibilidad pueden variar según el país. Acceso reservado a mayores de edad (18+).",
                 "privacyLink": "Política de Privacidad",
                 "termsLink": "Términos de Servicio",
+                "guideLink": "Guía de Principiante", // Link nel footer
                 "disclosureLink": "Transparencia",
                 "notAffiliated": "cryptostarstudio no está afiliado ni patrocinado oficialmente por las marcas mencionadas. Las marcas pertenecen a sus respectivos propietarios.",
                 "riskWarning": "⚠️ Servicios para 18+. Las inversiones y criptomonedas implican riesgos de pérdida de capital.",
@@ -907,8 +1006,12 @@
 
                 "contoFinomType": "Cuenta Business",
                 "contoFinomTitle": "Cuenta FINOM Pro",
-                "contoFinomDesc": "La solución completa para autónomos con IBAN italiano, tarjetas, facturación integrada y categorización de gastos. Socio de Solarisbank.",
+                "contoFinomDesc": "La solución completa para autónomos con IBAN italiano, tarjetas, facturación integrada y categorizzazione de gastos. Socio de Solarisbank.",
                 "contoFinomCta": "Prueba 6 Meses Gratis (Start)",
+
+                "guidaBannerTitle": "¿Nuevo en el mundo Cripto?", // <-- NUOVO BANNER
+                "guidaBannerDesc": "Empieza con buen pie. Consulta nuestra guía gratuita para entender las bases de la blockchain antes de comenzar.", // <-- NUOVO BANNER
+                "guidaBannerCta": "Empieza Aquí", // <-- NUOVO BANNER
 
                 "appBitpandaTitle": "Bitpanda",
                 "appBitpandaDesc": "Plataforma de inversión que da acceso a diversos activos. Un bróker europeo con registros del sector, diseñado para diversificar desde un solo lugar.",
