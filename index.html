@@ -182,13 +182,10 @@
         .section-conti { background-color: var(--light-color); }
         .section-app { background-color: var(--background-color); }
 
-        /* MODIFICA PER CARD SINGOLA: Centro la griglia e imposto una larghezza massima per le colonne */
         .card-grid {
             display: grid;
-            /* Definisce le colonne con un min di 340px e un max di 380px. */
             grid-template-columns: repeat(auto-fit, minmax(340px, 380px));
             gap: 2.5rem;
-            /* Centra le colonne all'interno del contenitore */
             justify-content: center;
         }
 
@@ -202,7 +199,6 @@
             transition: transform var(--transition-speed), box-shadow var(--transition-speed);
             border: 1px solid #eef;
             position: relative;
-            /* Rimossa altezza fissa per permettere al contenuto di fluire */
         }
 
         .conto-card:hover {
@@ -249,7 +245,7 @@
         .conto-content p {
             font-size: 1.1rem;
             margin-bottom: 1.5rem;
-            flex-grow: 1; /* Questa riga spinge il pulsante in fondo */
+            flex-grow: 1; 
         }
 
         .conto-cta {
@@ -742,7 +738,8 @@
             <div class="assistant-options">
                 <a href="#app-bitpanda" class="assistant-btn" data-lang-key="assistantOpt1"></a>
                 <a href="#app-youhodler" class="assistant-btn" data-lang-key="assistantOpt2"></a>
-                <a href="#conto-iuvo" class="assistant-btn" data-lang-key="assistantOpt3"></a>
+                <a href="#conto-finom" class="assistant-btn" data-lang-key="assistantOpt3"></a>
+                <a href="#conto-iuvo" class="assistant-btn" data-lang-key="assistantOpt4"></a>
             </div>
         </div>
     </div>
@@ -768,10 +765,17 @@
                 "notAffiliated": "cryptostarstudio non è affiliato né sponsorizzato ufficialmente dai brand menzionati. I marchi appartengono ai rispettivi proprietari.",
                 "riskWarning": "⚠️ Servizi per 18+. Investimenti e crypto comportano rischi di perdita del capitale.",
                 "geoWarning": "Disponibilità e condizioni possono variare per Paese. Verifica sempre sul sito ufficiale.",
+                
                 "contoIuvoType": "P2P Lending",
                 "contoIuvoTitle": "IUVO P2P",
                 "contoIuvoDesc": "Piattaforma di P2P lending che connette investitori con prestiti al consumo originati da società finanziarie. Offre funzionalità come la 'Garanzia di Riacquisto' (Buyback) su prestiti selezionati.",
                 "contoIuvoCta": "Vedi Dettagli IUVO",
+                
+                "contoFinomType": "Conto Business",
+                "contoFinomTitle": "FINOM Conto Pro",
+                "contoFinomDesc": "La soluzione completa per liberi professionisti con IBAN italiano, carte, fatturazione integrata e categorizzazione spese. Partner di Solarisbank.",
+                "contoFinomCta": "Prova 6 Mesi Gratis (Start)",
+                
                 "appBitpandaTitle": "Bitpanda",
                 "appBitpandaDesc": "Piattaforma d'investimento che permette di accedere a diversi asset. Un broker europeo con registrazioni di settore, pensato per diversificare da un unico hub.",
                 "appBitpandaFeat1": "Accesso a Cripto, Azioni, ETF e Metalli",
@@ -779,6 +783,7 @@
                 "appBitpandaFeat3": "Interfaccia utente intuitiva",
                 "appBitpandaFeat4": "Broker europeo (verifica licenze/registrazioni sul sito ufficiale)",
                 "appBitpandaCta": "Visita Bitpanda",
+                
                 "appYouhodlerTitle": "YouHodler",
                 "appYouhodlerDesc": "Piattaforma FinTech che consente di ottenere interessi sulle crypto supportate e di accedere a soluzioni di liquidità utilizzando gli asset digitali come collaterale.",
                 "appYouhodlerFeat1": "Interessi su asset supportati (variabili, non garantiti)",
@@ -786,10 +791,20 @@
                 "appYouhodlerFeat3": "Strumenti di trading e conversione",
                 "appYouhodlerFeat4": "Piattaforma con sede in Svizzera",
                 "appYouhodlerCta": "Visita YouHodler",
+
+                "appMoonpayTitle": "MoonPay",
+                "appMoonpayDesc": "MoonPay è un'infrastruttura di pagamento per criptovalute. Permette di acquistare e vendere oltre 170 crypto con carte, bonifici, Apple Pay e altro. È una soluzione non-custodial (mantieni il controllo), facile per i principianti.",
+                "appMoonpayFeat1": "Acquisti facili (Carte, Apple Pay, Bonifico)",
+                "appMoonpayFeat2": "Supporta oltre 170 criptovalute",
+                "appMoonpayFeat3": "Servizio non-custodial (tu controlli i fondi)",
+                "appMoonpayFeat4": "Supporto clienti 24/7",
+                "appMoonpayCta": "Visita MoonPay",
+                
                 "assistantQuestion": "Non sai da dove iniziare?",
-                "assistantOpt1": "Cerco una piattaforma All-in-One (Crypto/Azioni)",
-                "assistantOpt2": "Voglio far fruttare le mie crypto",
-                "assistantOpt3": "Cerco un'alternativa (P2P Lending)"
+                "assistantOpt1": "Cerco una piattaforma All-in-One (Bitpanda)",
+                "assistantOpt2": "Voglio far fruttare le mie crypto (YouHodler)",
+                "assistantOpt3": "Cerco un conto per Partita IVA (FINOM)",
+                "assistantOpt4": "Cerco un'alternativa P2P (IUVO)"
             },
             "en": {
                 "pageTitle": "🚀 cryptostarstudio: Selected Platforms 🚀",
@@ -809,10 +824,17 @@
                 "notAffiliated": "cryptostarstudio is not officially affiliated with or sponsored by the mentioned brands. Trademarks belong to their respective owners.",
                 "riskWarning": "⚠️ Services for 18+. Investments and crypto involve risks of capital loss.",
                 "geoWarning": "Availability and terms may vary by country. Always verify on the official website.",
+                
                 "contoIuvoType": "P2P Lending",
                 "contoIuvoTitle": "IUVO P2P",
                 "contoIuvoDesc": "P2P lending platform connecting investors with consumer loans from financial companies. It offers features like a 'Buyback Guarantee' on selected loans.",
                 "contoIuvoCta": "See IUVO Details",
+
+                "contoFinomType": "Business Account",
+                "contoFinomTitle": "FINOM Pro Account",
+                "contoFinomDesc": "The all-in-one solution for freelancers with an Italian IBAN, cards, integrated invoicing, and expense categorization. Partnered with Solarisbank.",
+                "contoFinomCta": "Try 6 Months Free (Start)",
+                
                 "appBitpandaTitle": "Bitpanda",
                 "appBitpandaDesc": "Investment platform providing access to various assets. A European broker with industry registrations, designed for diversification from a single hub.",
                 "appBitpandaFeat1": "Access to Crypto, Stocks, ETFs, and Metals",
@@ -820,17 +842,28 @@
                 "appBitpandaFeat3": "Intuitive user interface",
                 "appBitpandaFeat4": "European broker (verify licenses/registrations on the official site)",
                 "appBitpandaCta": "Visit Bitpanda",
+                
                 "appYouhodlerTitle": "YouHodler",
                 "appYouhodlerDesc": "FinTech platform that allows earning interest on supported crypto and accessing liquidity solutions using digital assets as collateral.",
                 "appYouhodlerFeat1": "Interest on supported assets (variable, not guaranteed)",
                 "appYouhodlerFeat2": "Access to crypto credit lines",
-                "appYouhodFodlerFeat3": "Trading and conversion tools",
+                "appYouhodlerFeat3": "Trading and conversion tools",
                 "appYouhodlerFeat4": "Platform based in Switzerland",
                 "appYouhodlerCta": "Visit YouHodler",
+
+                "appMoonpayTitle": "MoonPay",
+                "appMoonpayDesc": "MoonPay is a global cryptocurrency payments provider. It enables buying and selling of 170+ cryptos with cards, bank transfers, Apple Pay, and more. It's a non-custodial, beginner-friendly solution.",
+                "appMoonpayFeat1": "Easy Buys (Cards, Apple Pay, Transfer)",
+                "appMoonpayFeat2": "Supports 170+ cryptocurrencies",
+                "appMoonpayFeat3": "Non-custodial service (you control your funds)",
+                "appMoonpayFeat4": "24/7 Customer Support",
+                "appMoonpayCta": "Visit MoonPay",
+                
                 "assistantQuestion": "Not sure where to start?",
-                "assistantOpt1": "I want an All-in-One platform (Crypto/Stocks)",
-                "assistantOpt2": "I want to earn interest on my crypto",
-                "assistantOpt3": "I want an alternative (P2P Lending)"
+                "assistantOpt1": "I want an All-in-One platform (Bitpanda)",
+                "assistantOpt2": "I want to earn interest on my crypto (YouHodler)",
+                "assistantOpt3": "I need a freelance account (FINOM)",
+                "assistantOpt4": "I want an alternative P2P (IUVO)"
             },
             "es": {
                 "pageTitle": "🚀 cryptostarstudio: Plataformas Seleccionadas 🚀",
@@ -850,10 +883,17 @@
                 "notAffiliated": "cryptostarstudio no está afiliado ni patrocinado oficialmente por las marcas mencionadas. Las marcas pertenecen a sus respectivos propietarios.",
                 "riskWarning": "⚠️ Servicios para 18+. Las inversiones y criptomonedas implican riesgos de pérdida de capital.",
                 "geoWarning": "La disponibilidad y los términos pueden variar según el país. Verifica siempre en el sitio web oficial.",
+                
                 "contoIuvoType": "P2P Lending",
                 "contoIuvoTitle": "IUVO P2P",
                 "contoIuvoDesc": "Plataforma de préstamos P2P que conecta a inversores con préstamos al consumo. Ofrece funciones como 'Garantía de Recompra' (Buyback) en préstamos seleccionados.",
                 "contoIuvoCta": "Ver Detalles de IUVO",
+
+                "contoFinomType": "Cuenta Business",
+                "contoFinomTitle": "Cuenta FINOM Pro",
+                "contoFinomDesc": "La solución completa para autónomos con IBAN italiano, tarjetas, facturación integrada y categorización de gastos. Socio de Solarisbank.",
+                "contoFinomCta": "Prueba 6 Meses Gratis (Start)",
+
                 "appBitpandaTitle": "Bitpanda",
                 "appBitpandaDesc": "Plataforma de inversión que da acceso a diversos activos. Un bróker europeo con registros del sector, diseñado para diversificar desde un solo lugar.",
                 "appBitpandaFeat1": "Acceso a Cripto, Acciones, ETFs y Metales",
@@ -861,6 +901,7 @@
                 "appBitpandaFeat3": "Interfaz de usuario intuitiva",
                 "appBitpandaFeat4": "Bróker europeo (verifica licencias/registros en el sitio oficial)",
                 "appBitpandaCta": "Visitar Bitpanda",
+                
                 "appYouhodlerTitle": "YouHodler",
                 "appYouhodlerDesc": "Plataforma FinTech que permite obtener intereses sobre criptomonedas compatibles y acceder a soluciones de liquidez utilizando activos digitales como garantía.",
                 "appYouhodlerFeat1": "Intereses sobre activos compatibles (variables, no garantizados)",
@@ -868,43 +909,72 @@
                 "appYouhodlerFeat3": "Herramientas de trading y conversión",
                 "appYouhodlerFeat4": "Plataforma con sede en Suiza",
                 "appYouhodlerCta": "Visitar YouHodler",
+                
+                "appMoonpayTitle": "MoonPay",
+                "appMoonpayDesc": "MoonPay es una infraestructura de pago de criptomonedas. Permite comprar y vender más de 170 criptos con tarjetas, transferencias, Apple Pay y más. Es una solución sin custodia (mantienes el control), fácil para principiantes.",
+                "appMoonpayFeat1": "Compras fáciles (Tarjetas, Apple Pay, Transferencia)",
+                "appMoonpayFeat2": "Soporta más de 170 criptomonedas",
+                "appMoonpayFeat3": "Servicio sin custodia (tú controlas los fondos)",
+                "appMoonpayFeat4": "Soporte al cliente 24/7",
+                "appMoonpayCta": "Visitar MoonPay",
+
                 "assistantQuestion": "¿No sabes por dónde empezar?",
-                "assistantOpt1": "Quiero una plataforma Todo-en-Uno (Cripto/Acciones)",
-                "assistantOpt2": "Quiero ganar intereses con mis cripto",
-                "assistantOpt3": "Busco una alternativa (P2P Lending)"
+                "assistantOpt1": "Busco una plataforma Todo-en-Uno (Bitpanda)",
+                "assistantOpt2": "Quiero ganar intereses con mis cripto (YouHodler)",
+                "assistantOpt3": "Necesito una cuenta freelance (FINOM)",
+                "assistantOpt4": "Busco una alternativa P2P (IUVO)"
             }
         };
 
         const contiData = [
              {
-                id: "conto-iuvo",
-                typeKey: "contoIuvoType",
-                titleKey: "contoIuvoTitle",
-                descriptionKey: "contoIuvoDesc",
-                imageUrl: "https://image.pollinations.ai/prompt/peer%20to%20peer%20investment%20network%20digital%20connections%20data%20graph%20blue%20and%20gold",
-                affiliateLink: "https://www.financeads.net/tc.php?t=78725C226841413T",
-                ctaKey: "contoIuvoCta"
-            }
+                 id: "conto-iuvo",
+                 typeKey: "contoIuvoType",
+                 titleKey: "contoIuvoTitle",
+                 descriptionKey: "contoIuvoDesc",
+                 imageUrl: "https://image.pollinations.ai/prompt/peer%20to%20peer%20investment%20network%20digital%20connections%20data%20graph%20blue%20and%20gold",
+                 affiliateLink: "https://www.financeads.net/tc.php?t=78725C226841413T",
+                 ctaKey: "contoIuvoCta"
+             },
+             {
+                 id: "conto-finom",
+                 typeKey: "contoFinomType",
+                 titleKey: "contoFinomTitle",
+                 descriptionKey: "contoFinomDesc",
+                 // *** IMMAGINE CORRETTA QUI ***
+                 imageUrl: "https://image.pollinations.ai/prompt/modern%20business%20bank%20card%20FINOM%20style%20blue%20and%20yellow",
+                 affiliateLink: "https://www.financeads.net/tc.php?t=78817C292854904T",
+                 ctaKey: "contoFinomCta"
+             }
         ];
 
         const appData = [
             {
-                id: "app-bitpanda",
-                titleKey: "appBitpandaTitle",
-                descriptionKey: "appBitpandaDesc",
-                featureKeys: ["appBitpandaFeat1", "appBitpandaFeat2", "appBitpandaFeat3", "appBitpandaFeat4"],
-                imageUrl: "https://image.pollinations.ai/prompt/crypto%20investment%20app%20on%20smartphone%20bitpanda%20style%20interface%20dark%20mode%20with%20green%20and%20gold%20accents",
-                affiliateLink: "https://www.financeads.net/tc.php?t=78725C290656312B",
-                ctaKey: "appBitpandaCta"
+                 id: "app-bitpanda",
+                 titleKey: "appBitpandaTitle",
+                 descriptionKey: "appBitpandaDesc",
+                 featureKeys: ["appBitpandaFeat1", "appBitpandaFeat2", "appBitpandaFeat3", "appBitpandaFeat4"],
+                 imageUrl: "https://image.pollinations.ai/prompt/crypto%20investment%20app%20on%20smartphone%20bitpanda%20style%20interface%20dark%20mode%20with%20green%20and%20gold%20accents",
+                 affiliateLink: "https://www.financeads.net/tc.php?t=78725C290656312B",
+                 ctaKey: "appBitpandaCta"
             },
             {
-                id: "app-youhodler",
-                titleKey: "appYouhodlerTitle",
-                descriptionKey: "appYouhodlerDesc",
-                featureKeys: ["appYouhodlerFeat1", "appYouhodlerFeat2", "appYouhodlerFeat3", "appYouhodlerFeat4"],
-                imageUrl: "https://image.pollinations.ai/prompt/financial%20savings%20app%20interface%20youhodler%20style%20showing%20high%20interest%20rates%20blue%20and%20white%20secure",
-                affiliateLink: "https://www.financeads.net/tc.php?t=78725C324061192B",
-                ctaKey: "appYouhodlerCta"
+                 id: "app-youhodler",
+                 titleKey: "appYouhodlerTitle",
+                 descriptionKey: "appYouhodlerDesc",
+                 featureKeys: ["appYouhodlerFeat1", "appYouhodlerFeat2", "appYouhodlerFeat3", "appYouhodlerFeat4"],
+                 imageUrl: "https://image.pollinations.ai/prompt/financial%20savings%20app%20interface%20youhodler%20style%20showing%20high%20interest%20rates%20blue%20and%20white%20secure",
+                 affiliateLink: "https://www.financeads.net/tc.php?t=78725C324061192B",
+                 ctaKey: "appYouhodlerCta"
+            },
+            {
+                 id: "app-moonpay",
+                 titleKey: "appMoonpayTitle",
+                 descriptionKey: "appMoonpayDesc",
+                 featureKeys: ["appMoonpayFeat1", "appMoonpayFeat2", "appMoonpayFeat3", "appMoonpayFeat4"],
+                 imageUrl: "https://image.pollinations.ai/prompt/crypto%20payment%20app%20moonpay%20style%20interface%20on%20smartphone%20showing%20buy%20crypto%20screen%20light%20mode",
+                 affiliateLink: "https://www.financeads.net/tc.php?t=78725C5508129482T",
+                 ctaKey: "appMoonpayCta"
             }
         ];
         
