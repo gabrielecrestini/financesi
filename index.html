@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/4.1.1/animate.min.css"/>
 
     <style>
         :root {
@@ -53,6 +53,96 @@
             margin: 0 auto;
             padding: 0 2rem;
         }
+        
+        /* === Stili per il Nuovo Menu di Navigazione === */
+        .main-nav {
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--light-color);
+            text-decoration: none;
+        }
+        .nav-logo span {
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-menu li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        .nav-menu li a:hover,
+        .nav-menu li a.current {
+            color: var(--light-color);
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        .nav-toggle { display: none; }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+                padding: 0 1rem;
+            }
+            .nav-menu {
+                display: none; 
+                flex-direction: column;
+                width: 100%;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+            .nav-menu.is-active {
+                display: flex; 
+            }
+            .nav-menu li {
+                text-align: center;
+                width: 100%;
+            }
+            .nav-menu li a {
+                display: block;
+                padding: 0.75rem 0;
+            }
+            .nav-menu li a:hover,
+            .nav-menu li a.current {
+                border-bottom: none; 
+                background-color: rgba(255,255,255,0.1);
+            }
+            .nav-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 2rem;
+                cursor: pointer;
+            }
+        }
+        /* ============================================= */
 
         .hero {
             position: relative;
@@ -179,12 +269,12 @@
             border-radius: 3px;
         }
         
-        .section-conti { background-color: var(--light-color); }
+        /* .section-conti { background-color: var(--light-color); } -- SEZIONE RIMOSSA */
         .section-app { background-color: var(--background-color); }
         
         /* === STILI PER LA NUOVA SEZIONE GUIDA === */
         .section-guida-banner {
-            background-color: var(--background-color);
+            background-color: var(--light-color); /* Cambiato per alternare con le app */
             padding-top: 3rem; /* Meno padding sopra */
             padding-bottom: 3rem; /* Meno padding sotto */
         }
@@ -238,93 +328,8 @@
         }
         /* ======================================= */
 
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 380px));
-            gap: 2.5rem;
-            justify-content: center;
-        }
+        /* === Stili Card-Grid rimossi perché non più usati === */
 
-        .conto-card {
-            background-color: var(--light-color);
-            border-radius: 16px;
-            box-shadow: var(--card-shadow);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            border: 1px solid #eef;
-            position: relative;
-        }
-
-        .conto-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-        }
-        
-        .conto-card-badge {
-            position: absolute;
-            top: 20px;
-            left: -1px;
-            background-color: var(--secondary-color);
-            color: var(--dark-color);
-            padding: 5px 20px;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            font-size: 0.9rem;
-            border-radius: 0 4px 4px 0;
-            box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
-        }
-
-        .conto-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .conto-content {
-            padding: 2.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .conto-content h3 {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .conto-content p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            flex-grow: 1; 
-        }
-
-        .conto-cta {
-            display: block;
-            width: 100%;
-            padding: 1.1rem 1.5rem;
-            background: var(--primary-color);
-            color: var(--light-color);
-            text-align: center;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(10, 46, 92, 0.2);
-        }
-
-        .conto-cta:hover {
-            background-color: var(--dark-color);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-        
         .app-feature-container {
             display: flex;
             flex-direction: column;
@@ -691,9 +696,7 @@
             .hero-cta { font-size: 1.1rem; padding: 1rem 2.5rem; }
             .section { padding: 4rem 0; }
             .section-title { font-size: 2.5rem; }
-            .card-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .conto-content { padding: 2rem; }
-            .conto-content h3 { font-size: 1.8rem; }
+            /* .card-grid { grid-template-columns: 1fr; gap: 2rem; } -- Rimosso */
             .app-content h3 { font-size: 2.2rem; }
             .app-content .description { font-size: 1.1rem; }
             .app-features-list li { 
@@ -712,8 +715,6 @@
             .hero-content h1 { font-size: 2.4rem; }
             .hero-content p { font-size: 1.2rem; }
             .section-title { font-size: 2rem; }
-            .conto-content h3 { font-size: 1.6rem; }
-            .conto-content { padding: 1.5rem; }
             .app-content h3 { font-size: 1.8rem; }
             .app-cta { padding: 0.9rem 2rem; font-size: 1.1rem; }
             
@@ -743,27 +744,33 @@
 </head>
 <body>
 
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo" data-lang-key="footerBrand">cryptostar<span>studio</span></a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="current" data-lang-key="navHome"></a></li>
+                <li><a href="teoria.html" data-lang-key="navTeoria"></a></li>
+                <li><a href="dispense.html" data-lang-key="navDispense"></a></li>
+                <li><a href="pratica.html" data-lang-key="navPratica"></a></li>
+            </ul>
+            
+            <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+        </div>
+    </nav>
+
     <header class="hero">
         <div class="hero-content">
             <h1 class="animate__animated animate__fadeInDown" data-lang-key="heroTitle"></h1>
             <p class="animate__animated animate__fadeInUp animate__delay-1s" data-lang-key="heroSubtitle"></p>
-            <a href="#conti" class="hero-cta animate__animated animate__pulse animate__delay-2s" data-lang-key="heroCta"></a>
+            <a href="#app" class="hero-cta animate__animated animate__pulse animate__delay-2s" data-lang-key="heroCta"></a>
         </div>
-        <a href="#conti" class="scroll-down-arrow" aria-label="Scorri verso il basso">↓</a>
+        <a href="#app" class="scroll-down-arrow" aria-label="Scorri verso il basso">↓</a>
     </header>
 
     <main>
 
         
-        <section id="conti" class="section section-conti">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="contiTitle"></h2>
-                <div id="conti-grid" class="card-grid">
-                    
-                </div>
-            </div>
-        </section>
-
         <section id="guida-banner" class="section section-guida-banner">
             <div class="container">
                 <div class="guida-banner-box animate-on-scroll fade-in-up">
@@ -772,11 +779,12 @@
                         <p data-lang-key="guidaBannerDesc"></p>
                     </div>
                     <div class="guida-banner-cta">
-                        <a href="risorse.html" class="guida-banner-link" data-lang-key="guidaBannerCta"></a>
+                        <a href="teoria.html" class="guida-banner-link" data-lang-key="guidaBannerCta"></a>
                     </div>
                 </div>
             </div>
         </section>
+        
         <section id="app" class="section section-app">
             <div class="container">
                 <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="appTitle"></h2>
@@ -810,7 +818,7 @@
             <p class="footer-links">
                 <a href="privacy.html" data-lang-key="privacyLink"></a> &middot; 
                 <a href="termini.html" data-lang-key="termsLink"></a> &middot; 
-                <a href="risorse.html" data-lang-key="guideLink"></a> &middot; 
+                <a href="teoria.html" data-lang-key="guideLink"></a> &middot; 
                 <a href="#disclosure" data-lang-key="disclosureLink"></a>
             </p>
             <p data-lang-key="notAffiliated"></p>
@@ -826,8 +834,8 @@
             <div class="assistant-options">
                 <a href="#app-bitpanda" class="assistant-btn" data-lang-key="assistantOpt1"></a>
                 <a href="#app-youhodler" class="assistant-btn" data-lang-key="assistantOpt2"></a>
-                <a href="#conto-finom" class="assistant-btn" data-lang-key="assistantOpt3"></a>
-                <a href="#conto-iuvo" class="assistant-btn" data-lang-key="assistantOpt4"></a>
+                <a href="#app-moonpay" class="assistant-btn" data-lang-key="assistantOpt3_new"></a>
+                <a href="#app-kraken" class="assistant-btn" data-lang-key="assistantOpt4_new"></a>
             </div>
         </div>
     </div>
@@ -836,12 +844,12 @@
     <script>
         const translations = {
             "it": {
-                "pageTitle": "🚀 cryptostarstudio: Piattaforme Selezionate 🚀",
+                "pageTitle": "🚀 cryptostarstudio: App Crypto Selezionate 🚀",
                 "heroTitle": "Il Futuro delle Tue Finanze Inizia Qui",
-                "heroSubtitle": "Una selezione di piattaforme e app finanziarie che ho analizzato per te.",
-                "heroCta": "Esplora le Soluzioni",
-                "contiTitle": "Piattaforme Selezionate",
-                "appTitle": "App Finanziarie in Evidenza",
+                "heroSubtitle": "Una selezione di app crypto e piattaforme che ho analizzato per te.",
+                "heroCta": "Esplora le App",
+                "contiTitle": "Piattaforme Selezionate", // Chiave ancora presente ma sezione rimossa
+                "appTitle": "App Crypto in Evidenza",
                 "footerBrand": "cryptostarstudio",
                 "footerRights": "Tutti i diritti riservati.",
                 "footerDisclaimer": "Disclaimer: Le informazioni su questa pagina non costituiscono consulenza finanziaria. Investire comporta dei rischi.",
@@ -849,25 +857,22 @@
                 "disclosureText": "Questa pagina è supportata dai lettori. Alcuni link sono affiliati/sponsored: se apri un conto o completi un’azione tramite i miei link, potrei ricevere una commissione senza costi aggiuntivi per te.\n\nSeleziono piattaforme che ritengo utili, ma i contenuti sono informativi e non costituiscono consulenza finanziaria. Verifica sempre termini, costi e requisiti sul sito ufficiale del partner.\n\nProdotti finanziari e crypto comportano rischi (anche perdita del capitale). Offerte e disponibilità possono variare per Paese. Accesso riservato a maggiorenni (18+).",
                 "privacyLink": "Privacy Policy",
                 "termsLink": "Termini di Servizio",
-                "guideLink": "Guida per Principianti", // Link nel footer
+                "guideLink": "Guida per Principianti", 
                 "disclosureLink": "Trasparenza",
                 "notAffiliated": "cryptostarstudio non è affiliato né sponsorizzato ufficialmente dai brand menzionati. I marchi appartengono ai rispettivi proprietari.",
                 "riskWarning": "⚠️ Servizi per 18+. Investimenti e crypto comportano rischi di perdita del capitale.",
                 "geoWarning": "Disponibilità e condizioni possono variare per Paese. Verifica sempre sul sito ufficiale.",
                 
-                "contoIuvoType": "P2P Lending",
-                "contoIuvoTitle": "IUVO P2P",
-                "contoIuvoDesc": "Piattaforma di P2P lending che connette investitori con prestiti al consumo originati da società finanziarie. Offre funzionalità come la 'Garanzia di Riacquisto' (Buyback) su prestiti selezionati.",
-                "contoIuvoCta": "Vedi Dettagli IUVO",
-                
-                "contoFinomType": "Conto Business",
-                "contoFinomTitle": "FINOM Conto Pro",
-                "contoFinomDesc": "La soluzione completa per liberi professionisti con IBAN italiano, carte, fatturazione integrata e categorizzazione spese. Partner di Solarisbank.",
-                "contoFinomCta": "Prova 6 Mesi Gratis (Start)",
-                
-                "guidaBannerTitle": "Sei nuovo nel mondo Crypto?", // <-- NUOVO BANNER
-                "guidaBannerDesc": "Parti con il piede giusto. Consulta la nostra guida gratuita per capire le basi della blockchain prima di iniziare.", // <-- NUOVO BANNER
-                "guidaBannerCta": "Inizia da Qui", // <-- NUOVO BANNER
+                // --- NUOVE CHIAVI MENU ---
+                "navHome": "Home",
+                "navTeoria": "Teoria",
+                "navDispense": "Dispense",
+                "navPratica": "Pratica",
+                // -------------------------
+
+                "guidaBannerTitle": "Sei nuovo nel mondo Crypto?", 
+                "guidaBannerDesc": "Parti con il piede giusto. Consulta la nostra guida gratuita per capire le basi della blockchain prima di iniziare.", 
+                "guidaBannerCta": "Inizia da Qui", 
 
                 "appBitpandaTitle": "Bitpanda",
                 "appBitpandaDesc": "Piattaforma d'investimento che permette di accedere a diversi asset. Un broker europeo con registrazioni di settore, pensato per diversificare da un unico hub.",
@@ -904,16 +909,16 @@
                 "assistantQuestion": "Non sai da dove iniziare?",
                 "assistantOpt1": "Cerco una piattaforma All-in-One (Bitpanda)",
                 "assistantOpt2": "Voglio far fruttare le mie crypto (YouHodler)",
-                "assistantOpt3": "Cerco un conto per Partita IVA (FINOM)",
-                "assistantOpt4": "Cerco un'alternativa P2P (IUVO)"
+                "assistantOpt3_new": "Voglio comprare crypto facilmente (MoonPay)", // Chiave aggiornata
+                "assistantOpt4_new": "Cerco un exchange Pro (Kraken)" // Chiave aggiornata
             },
             "en": {
-                "pageTitle": "🚀 cryptostarstudio: Selected Platforms 🚀",
+                "pageTitle": "🚀 cryptostarstudio: Selected Crypto Apps 🚀",
                 "heroTitle": "The Future of Your Finances Starts Here",
                 "heroSubtitle": "A selection of financial platforms and apps I've analyzed for you.",
-                "heroCta": "Explore Solutions",
+                "heroCta": "Explore Apps",
                 "contiTitle": "Selected Platforms",
-                "appTitle": "Featured Financial Apps",
+                "appTitle": "Featured Crypto Apps",
                 "footerBrand": "cryptostarstudio",
                 "footerRights": "All rights reserved.",
                 "footerDisclaimer": "Disclaimer: The information on this page does not constitute financial advice. Investing involves risks.",
@@ -921,25 +926,22 @@
                 "disclosureText": "This page is reader-supported. Some links are affiliated/sponsored: if you open an account or complete an action through my links, I may receive a commission at no extra cost to you.\n\nI select platforms I find useful, but the content is informational and does not constitute financial advice. Always verify terms, costs, and requirements on the partner's official website.\n\nFinancial products and crypto involve risks (including capital loss). Offers and availability may vary by country. Access restricted to adults (18+).",
                 "privacyLink": "Privacy Policy",
                 "termsLink": "Terms of Service",
-                "guideLink": "Beginner's Guide", // Link nel footer
+                "guideLink": "Beginner's Guide",
                 "disclosureLink": "Transparency",
                 "notAffiliated": "cryptostarstudio is not officially affiliated with or sponsored by the mentioned brands. Trademarks belong to their respective owners.",
                 "riskWarning": "⚠️ Services for 18+. Investments and crypto involve risks of capital loss.",
                 "geoWarning": "Availability and terms may vary by country. Always verify on the official website.",
                 
-                "contoIuvoType": "P2P Lending",
-                "contoIuvoTitle": "IUVO P2P",
-                "contoIuvoDesc": "P2P lending platform connecting investors with consumer loans from financial companies. It offers features like a 'Buyback Guarantee' on selected loans.",
-                "contoIuvoCta": "See IUVO Details",
+                // --- NUOVE CHIAVI MENU ---
+                "navHome": "Home",
+                "navTeoria": "Theory",
+                "navDispense": "Resources",
+                "navPratica": "Practice",
+                // -------------------------
 
-                "contoFinomType": "Business Account",
-                "contoFinomTitle": "FINOM Pro Account",
-                "contoFinomDesc": "The all-in-one solution for freelancers with an Italian IBAN, cards, integrated invoicing, and expense categorization. Partnered with Solarisbank.",
-                "contoFinomCta": "Try 6 Months Free (Start)",
-                
-                "guidaBannerTitle": "New to Crypto?", // <-- NUOVO BANNER
-                "guidaBannerDesc": "Start on the right foot. Check out our free guide to understand the basics of blockchain before you begin.", // <-- NUOVO BANNER
-                "guidaBannerCta": "Start Here", // <-- NUOVO BANNER
+                "guidaBannerTitle": "New to Crypto?", 
+                "guidaBannerDesc": "Start on the right foot. Check out our free guide to understand the basics of blockchain before you begin.", 
+                "guidaBannerCta": "Start Here", 
                 
                 "appBitpandaTitle": "Bitpanda",
                 "appBitpandaDesc": "Investment platform providing access to various assets. A European broker with industry registrations, designed for diversification from a single hub.",
@@ -976,14 +978,14 @@
                 "assistantQuestion": "Not sure where to start?",
                 "assistantOpt1": "I want an All-in-One platform (Bitpanda)",
                 "assistantOpt2": "I want to earn interest on my crypto (YouHodler)",
-                "assistantOpt3": "I need a freelance account (FINOM)",
-                "assistantOpt4": "I want an alternative P2P (IUVO)"
+                "assistantOpt3_new": "I want to buy crypto easily (MoonPay)",
+                "assistantOpt4_new": "I'm looking for a Pro exchange (Kraken)"
             },
             "es": {
-                "pageTitle": "🚀 cryptostarstudio: Plataformas Seleccionadas 🚀",
+                "pageTitle": "🚀 cryptostarstudio: Apps Crypto Seleccionadas 🚀",
                 "heroTitle": "El Futuro de Tus Finanzas Comienza Aquí",
                 "heroSubtitle": "Una selección de plataformas y apps financieras que he analizado para ti.",
-                "heroCta": "Explora Soluciones",
+                "heroCta": "Explora Apps",
                 "contiTitle": "Plataformas Seleccionadas",
                 "appTitle": "Apps Financieras Destacadas",
                 "footerBrand": "cryptostarstudio",
@@ -993,25 +995,22 @@
                 "disclosureText": "Esta página es financiada por sus lectores. Algunos enlaces son de afiliados/patrocinados: si abres una cuenta o completas una acción a través de mis enlaces, podría recibir una comisión sin coste adicional para ti.\n\nSelecciono plataformas que considero útiles, pero el contenido es informativo y no constituye asesoramiento financiero. Verifica siempre los términos, costes y requisitos en el sitio web oficial del socio.\n\nLos productos financieros y las criptomonedas conllevan riesgos (incluida la pérdida de capital). Las ofertas y la disponibilidad pueden variar según el país. Acceso reservado a mayores de edad (18+).",
                 "privacyLink": "Política de Privacidad",
                 "termsLink": "Términos de Servicio",
-                "guideLink": "Guía de Principiante", // Link nel footer
+                "guideLink": "Guía de Principiante",
                 "disclosureLink": "Transparencia",
                 "notAffiliated": "cryptostarstudio no está afiliado ni patrocinado oficialmente por las marcas mencionadas. Las marcas pertenecen a sus respectivos propietarios.",
                 "riskWarning": "⚠️ Servicios para 18+. Las inversiones y criptomonedas implican riesgos de pérdida de capital.",
                 "geoWarning": "La disponibilidad y los términos pueden variar según el país. Verifica siempre en el sitio web oficial.",
                 
-                "contoIuvoType": "P2P Lending",
-                "contoIuvoTitle": "IUVO P2P",
-                "contoIuvoDesc": "Plataforma de préstamos P2P que conecta a inversores con préstamos al consumo. Ofrece funciones como 'Garantía de Recompra' (Buyback) en préstamos seleccionados.",
-                "contoIuvoCta": "Ver Detalles de IUVO",
+                // --- NUOVE CHIAVI MENU ---
+                "navHome": "Inicio",
+                "navTeoria": "Teoría",
+                "navDispense": "Recursos",
+                "navPratica": "Práctica",
+                // -------------------------
 
-                "contoFinomType": "Cuenta Business",
-                "contoFinomTitle": "Cuenta FINOM Pro",
-                "contoFinomDesc": "La solución completa para autónomos con IBAN italiano, tarjetas, facturación integrada y categorizzazione de gastos. Socio de Solarisbank.",
-                "contoFinomCta": "Prueba 6 Meses Gratis (Start)",
-
-                "guidaBannerTitle": "¿Nuevo en el mundo Cripto?", // <-- NUOVO BANNER
-                "guidaBannerDesc": "Empieza con buen pie. Consulta nuestra guía gratuita para entender las bases de la blockchain antes de comenzar.", // <-- NUOVO BANNER
-                "guidaBannerCta": "Empieza Aquí", // <-- NUOVO BANNER
+                "guidaBannerTitle": "¿Nuevo en el mundo Cripto?", 
+                "guidaBannerDesc": "Empieza con buen pie. Consulta nuestra guía gratuita para entender las bases de la blockchain antes de comenzar.", 
+                "guidaBannerCta": "Empieza Aquí", 
 
                 "appBitpandaTitle": "Bitpanda",
                 "appBitpandaDesc": "Plataforma de inversión que da acceso a diversos activos. Un bróker europeo con registros del sector, diseñado para diversificar desde un solo lugar.",
@@ -1030,7 +1029,7 @@
                 "appYouhodlerCta": "Visitar YouHodler",
                 
                 "appMoonpayTitle": "MoonPay",
-                "appMoonpayDesc": "MoonPay es una infraestructura de pago de criptomonedas. Permite comprar y vender más de 170 criptos con tarjetas, transferencias, Apple Pay y más. Es una solución sin custodia (mantienes el control), fácil para principiantes.",
+                "appMoonpayDesc": "MoonPay es una infraestructura de pago de criptomonedas. Permette di acquistare e vendere más de 170 criptos con tarjetas, transferencias, Apple Pay y más. Es una solución sin custodia (mantienes el control), fácil para principiantes.",
                 "appMoonpayFeat1": "Compras fáciles (Tarjetas, Apple Pay, Transferencia)",
                 "appMoonpayFeat2": "Soporta más de 170 criptomonedas",
                 "appMoonpayFeat3": "Servicio sin custodia (tú controlas los fondos)",
@@ -1048,31 +1047,13 @@
                 "assistantQuestion": "¿No sabes por dónde empezar?",
                 "assistantOpt1": "Busco una plataforma Todo-en-Uno (Bitpanda)",
                 "assistantOpt2": "Quiero ganar intereses con mis cripto (YouHodler)",
-                "assistantOpt3": "Necesito una cuenta freelance (FINOM)",
-                "assistantOpt4": "Busco una alternativa P2P (IUVO)"
+                "assistantOpt3_new": "Quiero comprar cripto fácilmente (MoonPay)",
+                "assistantOpt4_new": "Busco un exchange Pro (Kraken)"
             }
         };
 
-        const contiData = [
-             {
-                 id: "conto-iuvo",
-                 typeKey: "contoIuvoType",
-                 titleKey: "contoIuvoTitle",
-                 descriptionKey: "contoIuvoDesc",
-                 imageUrl: "https://image.pollinations.ai/prompt/peer%20to%20peer%20investment%20network%20digital%20connections%20data%20graph%20blue%20and%20gold",
-                 affiliateLink: "https://www.financeads.net/tc.php?t=78725C226841413T",
-                 ctaKey: "contoIuvoCta"
-             },
-             {
-                 id: "conto-finom",
-                 typeKey: "contoFinomType",
-                 titleKey: "contoFinomTitle",
-                 descriptionKey: "contoFinomDesc",
-                 imageUrl: "https://image.pollinations.ai/prompt/modern%20business%20bank%20card%20FINOM%20style%20blue%20and%20yellow",
-                 affiliateLink: "https://www.financeads.net/tc.php?t=78817C292854904T",
-                 ctaKey: "contoFinomCta"
-             }
-        ];
+        // DATI RIMOSSI
+        // const contiData = [ ... ];
 
         const appData = [
             {
@@ -1115,39 +1096,11 @@
         
         let currentLang = 'it';
         const langButtons = document.querySelectorAll('.lang-selector button');
-        const contiGrid = document.getElementById('conti-grid');
+        // const contiGrid = document.getElementById('conti-grid'); // Rimosso
         const appContainer = document.getElementById('app-container');
         
-        function populateConti(lang) {
-            contiGrid.innerHTML = '';
-            contiData.forEach((conto, index) => {
-                const card = document.createElement('div');
-                card.className = 'conto-card animate-on-scroll fade-in-up';
-                card.style.transitionDelay = `${index * 150}ms`;
-                card.id = conto.id;
-                
-                const tr = translations[lang]; 
-                
-                card.innerHTML = `
-                    <div class="conto-card-badge">${tr[conto.typeKey]}</div>
-                    <img src="${conto.imageUrl}" alt="${tr[conto.titleKey]}" class="conto-image">
-                    <div class="conto-content">
-                        <h3>${tr[conto.titleKey]}</h3>
-                        <p>${tr[conto.descriptionKey]}</p>
-                        
-                        <div class="card-disclaimers">
-                            <p class="risk-warning">${tr.riskWarning}</p>
-                            <p class="geo-warning">${tr.geoWarning}</p>
-                        </div>
-                        
-                        <a href="${conto.affiliateLink}" target="_blank" rel="sponsored nofollow noopener noreferrer" class="conto-cta">
-                            ${tr[conto.ctaKey]}
-                        </a>
-                    </div>
-                `;
-                contiGrid.appendChild(card);
-            });
-        }
+        // FUNZIONE RIMOSSA
+        // function populateConti(lang) { ... }
         
         function populateApp(lang) {
             appContainer.innerHTML = '';
@@ -1205,7 +1158,7 @@
                 }
             });
             
-            populateConti(lang);
+            // populateConti(lang); // Rimosso
             populateApp(lang);
             
             langButtons.forEach(btn => {
@@ -1216,6 +1169,18 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- LOGICA PER IL MENU NAV ---
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('is-active');
+                });
+            }
+            // ------------------------------
+
             langButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     changeLanguage(button.dataset.lang);

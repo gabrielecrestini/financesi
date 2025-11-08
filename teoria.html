@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="pageTitleTeoria">cryptostarstudio - Teoria</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        /* === STILI CSS UNIFICATI === */
+        :root {
+            --primary-color: #0a2e5c;
+            --secondary-color: #D4AF37;
+            --cta-color: #1ce783;
+            --dark-color: #1a1a1a;
+            --light-color: #ffffff;
+            --background-color: #f9faff;
+            --text-color: #333;
+            --danger-color: #e71c1c;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Lato', sans-serif;
+            --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            overflow-x: hidden;
+        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        
+        /* === Menu Navigazione === */
+        .main-nav {
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--light-color);
+            text-decoration: none;
+        }
+        .nav-logo span { color: var(--secondary-color); font-weight: 700; }
+        .nav-menu { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; }
+        .nav-menu li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        .nav-menu li a:hover,
+        .nav-menu li a.current {
+            color: var(--light-color);
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        .nav-toggle { display: none; }
+        @media (max-width: 768px) {
+            .nav-container { flex-wrap: wrap; padding: 0 1rem; }
+            .nav-menu { display: none; flex-direction: column; width: 100%; gap: 0.5rem; margin-top: 1rem; }
+            .nav-menu.is-active { display: flex; }
+            .nav-menu li { text-align: center; width: 100%; }
+            .nav-menu li a { display: block; padding: 0.75rem 0; }
+            .nav-menu li a:hover, .nav-menu li a.current { border-bottom: none; background-color: rgba(255,255,255,0.1); }
+            .nav-toggle { display: block; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; }
+        }
+        
+        /* === Header Semplice === */
+        .hero-simple {
+            padding: 6rem 2rem;
+            background: linear-gradient(45deg, var(--primary-color), #0a2549);
+            color: var(--light-color);
+            text-align: center;
+        }
+        .hero-simple h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 700;
+        }
+        .hero-simple p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 1rem auto 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* === Sezioni === */
+        .section { padding: 5.5rem 0; position: relative; }
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3.5rem; 
+            font-weight: 700;
+            text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: var(--secondary-color);
+            border-radius: 3px;
+        }
+        
+        /* === Contenuto Pagina === */
+        .content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .section-concetti { background-color: var(--light-color); }
+        /* La sezione .section-grafico è stata rimossa */
+        .section-rischi { background-color: var(--background-color); } /* Colore cambiato per alternanza */
+        .section-dispense-cta { background-color: var(--light-color); }
+
+        /* === Accordion === */
+        .accordion-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .accordion-btn {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 1.5rem 2rem;
+            width: 100%;
+            border: 1px solid #eef;
+            text-align: left;
+            outline: none;
+            font-size: 1.5rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            padding-left: 4.5rem; 
+        }
+        .accordion-btn::before {
+            content: attr(data-lesson-number);
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--secondary-color);
+            color: var(--dark-color);
+            font-weight: 700;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-btn:hover, .accordion-btn.active {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            box-shadow: 0 8px 25px rgba(10, 46, 92, 0.15);
+            transform: translateY(-3px);
+        }
+        .accordion-btn.active::before {
+            background: var(--light-color);
+            color: var(--primary-color);
+        }
+        
+        .accordion-btn::after {
+            content: '+';
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--secondary-color);
+        }
+        .accordion-btn.active::after {
+            content: '−';
+        }
+        .accordion-panel {
+            padding: 1.5rem 2rem 2rem 2rem;
+            background-color: var(--light-color);
+            border: 1px solid #eef;
+            border-top: none;
+            display: none;
+            overflow: hidden;
+            border-radius: 0 0 12px 12px;
+            margin-top: -10px;
+        }
+        .accordion-panel p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        /* Stile per la nuova spiegazione testuale del grafico */
+        .accordion-panel .spiegazione-grafico strong {
+            display: block;
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            margin-top: 1.2rem;
+            font-size: 1.1rem;
+        }
+        .accordion-panel .spiegazione-grafico strong:first-child {
+            margin-top: 0;
+        }
+        .accordion-panel.is-open {
+            display: block;
+        }
+        
+        /* CTA Box Lezione */
+        .lesson-cta-box {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--background-color);
+            border-radius: 8px;
+            border: 1px dashed var(--secondary-color);
+            text-align: center;
+        }
+        .lesson-cta-box p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .lesson-cta-btn {
+            display: inline-block;
+            background: var(--cta-color);
+            color: var(--dark-color);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .lesson-cta-btn:hover {
+            background: var(--primary-color);
+            color: var(--light-color);
+            transform: scale(1.05);
+        }
+        
+        /* Hotspot Testo */
+        .hotspot {
+            color: var(--secondary-color);
+            font-weight: 700;
+            cursor: pointer;
+            border-bottom: 2px dotted var(--secondary-color);
+        }
+        .hotspot:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* === Stili Grafico Rimossi === */
+        /* Tutti gli stili per .grafico-interattivo-container, .hotspot-pulsante, @keyframes pulse-hotspot sono stati rimossi */
+
+        /* === Griglia Rischi === */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .risk-card {
+            background: var(--light-color);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eef;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .risk-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.1);
+        }
+        .risk-card h4 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .risk-card p {
+            font-size: 1rem;
+        }
+
+        /* === CTA Box === */
+        .cta-box {
+            background: var(--light-color);
+            padding: 3rem;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: var(--card-shadow);
+        }
+        .cta-box.cta-dispense {
+             background: linear-gradient(45deg, var(--primary-color), #0a2549);
+             color: var(--light-color);
+        }
+        .cta-box.cta-dispense h3 {
+            color: var(--light-color);
+        }
+        .cta-box.cta-dispense p {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .cta-box h3 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+        }
+        .cta-box p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .cta-box-link {
+            display: inline-block;
+            background: var(--cta-color);
+            color: var(--dark-color);
+            padding: 1.1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        .cta-box-link:hover {
+            background: var(--light-color);
+            color: var(--primary-color);
+            transform: scale(1.05);
+        }
+        .cta-box.cta-dispense .cta-box-link:hover {
+            background: var(--secondary-color);
+            color: var(--dark-color);
+        }
+        
+        /* === Modal === */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-content {
+            background-color: var(--light-color);
+            margin: 15% auto;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: slideIn 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .modal-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .modal-content p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        .modal-bottoni {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+        .modal-bottoni button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        #modal-hotspot-chiudi {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* === Animazioni Scroll === */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in-up {
+            transform: translateY(50px);
+        }
+        .is-visible {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        /* === Footer === */
+        footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: 4rem 2rem 2rem 2rem; 
+            margin-top: 5rem;
+            position: relative;
+        }
+        .lang-selector { margin-bottom: 2rem; display: flex; justify-content: center; gap: 10px; }
+        .lang-selector button {
+            background: none;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .lang-selector button:hover { background-color: var(--secondary-color); color: var(--dark-color); }
+        .lang-selector button.active { background-color: var(--secondary-color); color: var(--dark-color); }
+        footer p { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        footer p:first-of-type { font-weight: 700; color: var(--light-color); font-size: 1.1rem; }
+        .footer-links { margin: 1rem 0; }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600; }
+        .footer-links a:hover { color: var(--light-color); text-decoration: underline; }
+        
+        @media (max-width: 768px) {
+            .hero-simple { padding: 4rem 1rem; }
+            .hero-simple h1 { font-size: 2.5rem; }
+            .hero-simple p { font-size: 1.2rem; }
+            .section { padding: 4rem 0; }
+            .section-title { font-size: 2.5rem; }
+            .container { padding: 0 1rem; }
+            .accordion-btn { padding: 1rem 1.5rem 1rem 4rem; font-size: 1.2rem; }
+            .accordion-btn::before { left: 1rem; width: 30px; height: 30px; font-size: 1rem; }
+            .cta-box { padding: 2rem; }
+            .cta-box h3 { font-size: 1.8rem; }
+            .modal-content { margin: 20% auto; padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo" data-lang-key="footerBrand">cryptostar<span>studio</span></a>
+            
+            <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" data-lang-key="navHome"></a></li>
+                <li><a href="teoria.html" class="current" data-lang-key="navTeoria"></a></li>
+                <li><a href="dispense.html" data-lang-key="navDispense"></a></li>
+                <li><a href="pratica.html" data-lang-key="navPratica"></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero-simple">
+        <div class="hero-simple-content">
+            <h1 class="animate-on-scroll fade-in-up" data-lang-key="teoriaHeroTitle"></h1>
+            <p class="animate-on-scroll fade-in-up" style="transition-delay: 150ms;" data-lang-key="teoriaHeroSubtitle"></p>
+        </div>
+    </header>
+
+    <main>
+        
+        <section class="section section-concetti">
+            <div class="container content-wrapper">
+                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="teoriaAccordionTitle"></h2>
+                
+                <div class="accordion-container animate-on-scroll fade-in-up" style="transition-delay: 200ms;">
+                    
+                    <button class="accordion-btn" id="acc-btn-1" data-lesson-number="1" data-lang-key="acc1Title" aria-expanded="false" aria-controls="acc-panel-1"></button>
+                    <div class="accordion-panel" id="acc-panel-1" role="region" aria-labelledby="acc-btn-1">
+                        <p>
+                            <span data-lang-key="acc1Desc"></span>
+                            <span class="hotspot" data-key="hotspotDecentralizzato" data-lang-key="hotspotDecentralizzatoTerm"></span>
+                        </p>
+                        <div class="lesson-cta-box">
+                            <p data-lang-key="cta1Text"></p>
+                            <a href="index.html#app-bitpanda" class="lesson-cta-btn" data-lang-key="cta1Btn"></a>
+                        </div>
+                    </div>
+
+                    <button class="accordion-btn" id="acc-btn-2" data-lesson-number="2" data-lang-key="acc2Title" aria-expanded="false" aria-controls="acc-panel-2"></button>
+                    <div class="accordion-panel" id="acc-panel-2" role="region" aria-labelledby="acc-btn-2">
+                        <p data-lang-key="acc2Desc"></p>
+                        <div class="lesson-cta-box">
+                            <p data-lang-key="cta2Text"></p>
+                            <a href="index.html#app-bitpanda" class="lesson-cta-btn" data-lang-key="cta2Btn"></a>
+                        </div>
+                    </div>
+
+                    <button class="accordion-btn" id="acc-btn-3" data-lesson-number="3" data-lang-key="acc3Title" aria-expanded="false" aria-controls="acc-panel-3"></button>
+                    <div class="accordion-panel" id="acc-panel-3" role="region" aria-labelledby="acc-btn-3">
+                        <p>
+                            <span data-lang-key="acc3Desc"></span>
+                            <span class="hotspot" data-key="hotspotEthereum" data-lang-key="hotspotEthereumTerm"></span>
+                        </p>
+                        <div class="lesson-cta-box">
+                            <p data-lang-key="cta3Text"></p>
+                            <a href="index.html#app-kraken" class="lesson-cta-btn" data-lang-key="cta3Btn"></a>
+                        </div>
+                    </div>
+
+                    <button class="accordion-btn" id="acc-btn-4" data-lesson-number="4" data-lang-key="acc4Title" aria-expanded="false" aria-controls="acc-panel-4"></button>
+                    <div class="accordion-panel" id="acc-panel-4" role="region" aria-labelledby="acc-btn-4">
+                        <p data-lang-key="acc4Desc"></p>
+                        <div class="lesson-cta-box">
+                            <p data-lang-key="cta4Text"></p>
+                            <a href="index.html#app-moonpay" class="lesson-cta-btn" data-lang-key="cta4Btn"></a>
+                        </div>
+                    </div>
+
+                    <button class="accordion-btn" id="acc-btn-5" data-lesson-number="5" data-lang-key="acc5Title" aria-expanded="false" aria-controls="acc-panel-5"></button>
+                    <div class="accordion-panel" id="acc-panel-5" role="region" aria-labelledby="acc-btn-5">
+                        <p class="spiegazione-grafico" data-lang-key="acc5Desc"></p>
+                        <div class="lesson-cta-box">
+                            <p data-lang-key="cta5Text"></p>
+                            <a href="pratica.html" class="lesson-cta-btn" data-lang-key="cta5Btn"></a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-rischi">
+            <div class="container content-wrapper">
+                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="teoriaRiskTitle"></h2>
+                <div class="risk-grid animate-on-scroll fade-in-up" style="transition-delay: 200ms;">
+                    <div class="risk-card">
+                        <h4 data-lang-key="risk1Title"></h4>
+                        <p data-lang-key="risk1Desc"></p>
+                    </div>
+                    <div class="risk-card">
+                        <h4 data-lang-key="risk2Title"></h4>
+                        <p data-lang-key="risk2Desc"></p>
+                    </div>
+                    <div class="risk-card">
+                        <h4 data-lang-key="risk3Title"></h4>
+                        <p data-lang-key="risk3Desc"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-dispense-cta">
+             <div class="container">
+                 <div class="cta-box cta-dispense animate-on-scroll fade-in-up" style="transition-delay: 200ms;">
+                    <h3 data-lang-key="dispenseCtaTitle"></h3>
+                    <p data-lang-key="dispenseCtaDesc"></p>
+                    <a href="dispense.html" class="cta-box-link" data-lang-key="dispenseCtaBtn"></a>
+                </div>
+            </div>
+        </section>
+
+        </main>
+
+    <footer>
+        <div class="container">
+            <div class="lang-selector">
+                <button data-lang="it">Italiano</button>
+                <button data-lang="en">English</button>
+                <button data-lang="es">Español</button>
+            </div>
+            <p data-lang-key="footerBrand"></p>
+            <p>&copy; 2025. <span data-lang-key="footerRights"></span></p>
+            
+            <p class="footer-links">
+                <a href="privacy.html" data-lang-key="privacyLink"></a> &middot; 
+                <a href="termini.html" data-lang-key="termsLink"></a> &middot; 
+                <a href="teoria.html" data-lang-key="guideLink"></a>
+            </p>
+            <p data-lang-key="notAffiliated"></p>
+            <p data-lang-key="footerDisclaimer"></p>
+        </div>
+    </footer>
+
+    <div id="hotspot-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-hotspot-title">
+        <div class="modal-content">
+            <h3 id="modal-hotspot-title"></h3>
+            <p id="modal-hotspot-desc"></p>
+            <div class="modal-bottoni">
+                <button id="modal-hotspot-chiudi" data-lang-key="hotspotChiudi"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // === OGGETTO TRADUZIONI (AGGIORNATO) ===
+        const translations = {
+            "it": {
+                "pageTitleTeoria": "cryptostarstudio - Teoria: Le Basi",
+                "navHome": "Home",
+                "navTeoria": "Teoria",
+                "navDispense": "Dispense",
+                "navPratica": "Pratica",
+                "teoriaHeroTitle": "Teoria: Le Basi",
+                "teoriaHeroSubtitle": "Comprendi i concetti fondamentali prima di iniziare.",
+                "teoriaAccordionTitle": "Lezioni Fondamentali",
+                
+                "acc1Title": "Cos'è la Blockchain?",
+                "acc1Desc": "Pensa alla blockchain come a un grande quaderno digitale. Immagina una catena di blocchi: ogni blocco contiene un elenco di transazioni (es. 'Paolo ha inviato 1€ a Maria'). Ogni nuovo blocco è legato crittograficamente al precedente. Questo lo rende immutabile: per modificare un blocco, dovresti modificare anche tutti i blocchi successivi su migliaia di computer contemporaneamente. È la tecnologia che permette l'esistenza di un sistema sicuro e...",
+                "hotspotDecentralizzatoTerm": "...decentralizzato.",
+                "hotspotDecentralizzatoTitle": "Decentralizzato",
+                "hotspotDecentralizzatoDesc": "Significa che non è controllato da una singola entità (come una banca o un governo). Il controllo è distribuito tra tutti i partecipanti della rete.",
+                "cta1Text": "Interessante, vero? Il modo più semplice per iniziare è usare una piattaforma all-in-one.",
+                "cta1Btn": "Vedi l'offerta su Bitpanda",
+                
+                "acc2Title": "Cos'è Bitcoin (BTC)?",
+                "acc2Desc": "Bitcoin è la prima e più famosa criptovaluta. È stato creato come 'oro digitale' - una riserva di valore che non è controllata da nessuna banca centrale. La sua rete è protetta dal 'Proof-of-Work': computer (miner) competono per risolvere complessi problemi matematici per validare i blocchi, ricevendo nuovi Bitcoin come ricompensa. Questo processo (mining) richiede molta energia ma rende la rete incredibilmente sicura. Esisteranno mai solo 21 milioni di Bitcoin, rendendolo un bene scarso.",
+                "cta2Text": "Bitcoin è la base di tutto. Puoi iniziare a investire in BTC tramite un piano di risparmio.",
+                "cta2Btn": "Esplora Bitpanda",
+                
+                "acc3Title": "Cosa sono le Altcoin?",
+                "acc3Desc": "Altcoin sta per 'alternative coin', ovvero qualsiasi criptovaluta che non sia Bitcoin. Molte sono nate per migliorare Bitcoin (es. più veloci, più efficienti), mentre altre hanno scopi completamente diversi. L'esempio più famoso è...",
+                "hotspotEthereumTerm": "...Ethereum (ETH).",
+                "hotspotEthereumTitle": "Ethereum (ETH)",
+                "hotspotEthereumDesc": "Ethereum non è solo una moneta. È una piattaforma 'programmabile', un computer decentralizzato globale. Permette agli sviluppatori di creare 'Smart Contract' (contratti digitali automatici) e 'DApps' (applicazioni decentralizzate) che funzionano sulla sua blockchain.",
+                "cta3Text": "Le Altcoin offrono molte opportunità, come lo 'staking'. Scopri un exchange avanzato.",
+                "cta3Btn": "Vedi l'offerta su Kraken",
+                
+                "acc4Title": "Cos'è un Wallet (Portafoglio)?",
+                "acc4Desc": "È il tuo 'conto corrente' crypto. Non contiene fisicamente le tue monete (che sono sempre sulla blockchain), ma contiene la 'chiave privata': una password segretissima che prova che tu sei il proprietario di quelle monete e ti permette di spenderle. Chiunque conosca la tua chiave privata, possiede le tue crypto. Si dividono in 'Hot Wallet' (app su telefono/PC, connessi a internet, comodi ma più vulnerabili) e 'Cold Wallet' (dispositivi fisici USB, offline, molto sicuri).",
+                "cta4Text": "Vuoi comprare crypto e inviarle subito al tuo wallet personale (non-custodial)?",
+                "cta4Btn": "Prova il servizio MoonPay",
+
+                // NUOVA LEZIONE 5 (testo)
+                "acc5Title": "Come Leggere un Grafico (Le Basi)",
+                "acc5Desc": "<strong>Candela Verde (Rialzo):</strong> Il prezzo è SALITO. Il fondo del 'corpo' (la parte spessa) è il prezzo di APERTURA. La cima del 'corpo' è il prezzo di CHIUSURA.<br><strong>Candela Rossa (Ribasso):</strong> Il prezzo è SCESO. La cima del 'corpo' è il prezzo di APERTURA. Il fondo del 'corpo' è il prezzo di CHIUSURA.<br><strong>Stoppini (Linee sottili):</strong> Mostrano il prezzo massimo e minimo raggiunto in quel periodo.<br><strong>Volume (Barre in basso):</strong> Mostra QUANTE monete sono state scambiate. Un volume alto (barre alte) significa che c'è molto interesse e che il trend (la direzione del prezzo) è 'forte'.<br><strong>Timeframe (Intervallo):</strong> Indica quanto tempo rappresenta una singola candela (es. 1G = 1 Giorno, 1H = 1 Ora).",
+                "cta5Text": "Ora che sai cosa cercare, è il momento di vederlo in azione su un grafico reale.",
+                "cta5Btn": "Vai al Simulatore Pratico",
+
+                // Chiavi del vecchio grafico (non più usate, ma innocue)
+                "teoriaGraficoTitle": "Come Leggere un Grafico",
+
+                "teoriaRiskTitle": "I 3 Rischi Principali da Capire",
+                "risk1Title": "1. Volatilità",
+                "risk1Desc": "I prezzi delle crypto possono salire o scendere molto velocemente (anche del 20% o più in un solo giorno). Non investire mai più di quanto sei disposto a perdere.",
+                "risk2Title": "2. Sicurezza (Self-Custody)",
+                "risk2Desc": "Se gestisci tu il tuo wallet ('self-custody'), sei l'unico responsabile. Se perdi le tue chiavi private o la tua 'frase di recupero', perdi l'accesso ai tuoi fondi per SEMPRE.",
+                "risk3Title": "3. Truffe e Phishing",
+                "risk3Desc": "Stai attento a email false, siti clone e promesse di guadagni facili e garantiti. Nessuno ti regalerà mai crypto. Verifica sempre due volte i link prima di cliccare.",
+
+                "dispenseCtaTitle": "Vuoi Saperne di Più?",
+                "dispenseCtaDesc": "La teoria è la base, ma gli strumenti giusti fanno la differenza. Visita le nostre dispense per un elenco di risorse esterne, calcolatori e glossari.",
+                "dispenseCtaBtn": "Vai alle Dispense",
+                
+                // Vecchio CTA finale (non più usato)
+                "teoriaCtaTitle": "Hai capito le basi?",
+                "teoriaCtaDesc": "Ottimo lavoro. Ora che conosci i concetti fondamentali, puoi passare al livello successivo: osservare i mercati e provare a simulare.",
+                "teoriaCtaBtn": "Vai alla Pratica",
+
+                "hotspotChiudi": "Chiudi",
+                "footerBrand": "cryptostarstudio",
+                "footerRights": "Tutti i diritti riservati.",
+                "footerDisclaimer": "Disclaimer: Le informazioni su questa pagina non costituiscono consulenza finanziaria. Investire comporta dei rischi.",
+                "privacyLink": "Privacy Policy",
+                "termsLink": "Termini di Servizio",
+                "guideLink": "Guida per Principianti",
+                "notAffiliated": "cryptostarstudio non è affiliato né sponsorizzato ufficialmente dai brand menzionati. I marchi appartengono ai rispettivi proprietari."
+            },
+            "en": {
+                // ... (Traduci tutte le nuove chiavi in Inglese)
+                "pageTitleTeoria": "cryptostarstudio - Theory: The Basics",
+                "navHome": "Home",
+                "navTeoria": "Theory",
+                "navDispense": "Resources",
+                "navPratica": "Practice",
+                "acc5Title": "How to Read a Chart (The Basics)",
+                "acc5Desc": "<strong>Green Candle (Bullish):</strong> The price WENT UP. The bottom of the 'body' (thick part) is the OPEN price. The top is the CLOSE price.<br><strong>Red Candle (Bearish):</strong> The price WENT DOWN. The top of the 'body' is the OPEN price. The bottom is the CLOSE price.<br><strong>Wicks (Thin lines):</strong> Show the highest and lowest price reached in that period.<br><strong>Volume (Bars below):</strong> Shows HOW MANY coins were traded. High volume (tall bars) means high interest and a 'strong' trend.<br><strong>Timeframe:</strong> Indicates how much time one candle represents (e.g., 1D = 1 Day, 1H = 1 Hour).",
+                "cta5Text": "Now that you know what to look for, it's time to see it in action on a real chart.",
+                "cta5Btn": "Go to the Practice Simulator",
+                "dispenseCtaTitle": "Want to Learn More?",
+                "dispenseCtaDesc": "Theory is the foundation, but the right tools make the difference. Visit our resources for a list of external guides, calculators, and glossaries.",
+                "dispenseCtaBtn": "Go to Resources"
+                // ... etc ...
+            },
+            "es": {
+                // ... (Traduci tutte le nuove chiavi in Spagnolo)
+                "pageTitleTeoria": "cryptostarstudio - Teoría: Las Bases",
+                "navHome": "Inicio",
+                "navTeoria": "Teoría",
+                "navDispense": "Recursos",
+                "navPratica": "Práctica",
+                "acc5Title": "Cómo Leer un Gráfico (Lo Básico)",
+                "acc5Desc": "<strong>Vela Verde (Alcista):</strong> El precio SUBIÓ. La base del 'cuerpo' (parte gruesa) es el precio de APERTURA. La cima es el precio de CIERRE.<br><strong>Vela Roja (Bajista):</strong> El precio BAJÓ. La cima del 'cuerpo' es el precio de APERTURA. La base es el precio de CIERRE.<br><strong>Mechas (Líneas finas):</strong> Muestran el precio máximo y mínimo alcanzado en ese período.<br><strong>Volumen (Barras inferiores):</strong> Muestra CUÁNTAS monedas se intercambiaron. Un volumen alto (barras altas) significa que hay mucho interés y que la tendencia es 'fuerte'.<br><strong>Timeframe (Intervalo):</strong> Indica cuánto tiempo representa una sola vela (ej. 1D = 1 Día, 1H = 1 Hora).",
+                "cta5Text": "Ahora que sabes qué buscar, es hora de verlo en acción en un gráfico real.",
+                "cta5Btn": "Ir al Simulador Práctico",
+                "dispenseCtaTitle": "¿Quieres Saber Más?",
+                "dispenseCtaDesc": "La teoría es la base, pero las herramientas adecuadas marcan la diferencia. Visita nuestros recursos para ver una lista de guías externas, calculadoras y glosarios.",
+                "dispenseCtaBtn": "Ir a Recursos"
+                // ... etc ...
+            }
+        };
+
+        // === SCRIPT GLOBALE ===
+        let currentLang = 'it';
+
+        // === FUNZIONE CAMBIO LINGUA ===
+        function changeLanguage(lang) {
+            if (!translations[lang]) lang = 'it';
+            currentLang = lang;
+            localStorage.setItem('preferredLang', lang); 
+            
+            const tr = translations[lang];
+            
+            document.documentElement.lang = lang;
+            
+            if (tr.pageTitleTeoria) {
+                document.title = tr.pageTitleTeoria;
+            }
+            
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.dataset.langKey;
+                if (tr[key]) {
+                    el.innerHTML = tr[key];
+                }
+            });
+            
+            document.querySelectorAll('.lang-selector button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        }
+
+        // === FUNZIONE PER ANIMAZIONI SCROLL ===
+        function setupScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            if ("IntersectionObserver" in window) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1 
+                });
+
+                animatedElements.forEach(el => {
+                    el.classList.remove('is-visible'); 
+                    observer.observe(el);
+                });
+            } else {
+                animatedElements.forEach(el => el.classList.add('is-visible'));
+            }
+        }
+         
+        // === SCRIPT PER INTERATTIVITÀ ===
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Logica per il Menu Mobile (con A11y) ---
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    const isActive = navMenu.classList.toggle('is-active');
+                    navToggle.setAttribute('aria-expanded', isActive);
+                });
+            }
+
+            // --- Logica per il Selettore Lingua ---
+            const langButtons = document.querySelectorAll('.lang-selector button');
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const newLang = button.dataset.lang;
+                    changeLanguage(newLang);
+                    setupScrollAnimations(); // Riesegui animazioni
+                });
+            });
+
+            // Determina la lingua iniziale
+            let preferredLang = localStorage.getItem('preferredLang');
+            let initialLang = 'it';
+            if (preferredLang && translations[preferredLang]) {
+                initialLang = preferredLang;
+            } else {
+                let browserLang = navigator.language.split('-')[0];
+                initialLang = translations[browserLang] ? browserLang : 'it';
+            }
+            
+            // Applica lingua e avvia animazioni
+            changeLanguage(initialLang);
+            setupScrollAnimations();
+            
+            // --- Logica Accordion (con A11y) ---
+            const accordionBtns = document.querySelectorAll('.accordion-btn');
+            accordionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const isExpanded = this.classList.contains('active');
+                    
+                    // Chiudi tutti gli altri pannelli
+                    accordionBtns.forEach(otherBtn => {
+                        if (otherBtn !== this) {
+                            otherBtn.classList.remove('active');
+                            otherBtn.setAttribute('aria-expanded', 'false');
+                            otherBtn.nextElementSibling.classList.remove('is-open');
+                        }
+                    });
+                    
+                    // Apri/Chiudi questo pannello
+                    this.classList.toggle('active');
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    this.nextElementSibling.classList.toggle('is-open');
+                });
+            });
+
+            // --- Logica Hotspot (Modal) ---
+            const modal = document.getElementById('hotspot-modal');
+            const modalTitle = document.getElementById('modal-hotspot-title');
+            const modalDesc = document.getElementById('modal-hotspot-desc');
+            const closeBtn = document.getElementById('modal-hotspot-chiudi');
+            
+            // Gestore per gli hotspot nel TESTO
+            document.querySelectorAll('.hotspot').forEach(spot => {
+                spot.addEventListener('click', function() {
+                    const key = this.dataset.key; 
+                    const tr = translations[currentLang];
+                    
+                    if (tr[key + 'Title'] && tr[key + 'Desc']) {
+                        modalTitle.innerHTML = tr[key + 'Title'];
+                        modalDesc.innerHTML = tr[key + 'Desc'];
+                        modal.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Gestore per gli hotspot sul GRAFICO è stato RIMOSSO (non più necessario)
+
+            // Gestori per chiudere il modal
+            const closeModal = () => { modal.style.display = 'none'; };
+            closeBtn.addEventListener('click', closeModal);
+            window.addEventListener('click', (event) => {
+                if (event.target == modal) {
+                    closeModal();
+                }
+            });
+
+            // --- Cookie Banner ---
+            if(!localStorage.getItem('cookie_ack')){
+                const b=document.createElement('div');
+                b.style.cssText='position:fixed;bottom:0;left:0;right:0;background:#0a2e5c;color:#fff;padding:12px 16px;font-size:14px;z-index:9999;';
+                b.innerHTML='Usiamo link affiliati e, se attivi analytics, potremmo usare cookie tecnici/analitici. <button id="okc" style="margin-left:12px;background:#1ce783;color:#111;border:0;padding:6px 10px;border-radius:6px;cursor:pointer;">Ok</button>';
+                document.body.appendChild(b);
+                document.getElementById('okc').onclick=()=>{ localStorage.setItem('cookie_ack','1'); b.remove(); };
+            }
+        });
+    </script>
+
+</body>
+</html>
