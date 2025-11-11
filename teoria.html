@@ -25,6 +25,8 @@
             --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
             --transition-speed: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
             --hero-image-url: url('https://images.unsplash.com/photo-1547849495-2579f1025537?q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1600&h=800&fit=crop');
+            --success-color: #28a745;
+            --danger-color: #dc3545;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,7 +46,7 @@
             font-weight: 700; 
             font-family: var(--font-heading); 
             font-size: 1rem; /* CORREZIONE: Allineato a index.html */
-            transition: color 0.3s ease; 
+            transition: color 0.3s ease, border-bottom 0.3s ease; 
             padding: 0.5rem 0; /* CORREZIONE: Allineato a index.html */
             border-bottom: 2px solid transparent; 
         }
@@ -112,38 +114,116 @@
         /* Stili Quiz (Migliorati) */
         #crypto-quiz { background-color: var(--background-color); }
         
-        /* NUOVO: Stile per la selezione (non più un box) */
         .quiz-selection-buttons {
             max-width: 700px;
-            margin: 0 auto;
+            margin: 0 auto 3rem auto; /* Aggiunto spazio sotto */
             text-align: center;
+            display: flex; /* NUOVO: Pulsanti affiancati */
+            gap: 1rem;
+            justify-content: center;
         }
-        .quiz-selection-buttons h3 {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 2rem;
-        }
+        .quiz-selection-buttons h3 { display: none; } /* Nascosto per un look più pulito */
         
-        .quiz-start-btn { display: block; background: var(--primary-color); color: var(--light-color); padding: 1.2rem 2rem; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1.3rem; transition: all 0.3s ease; border: 2px solid var(--primary-color); cursor: pointer; margin: 15px 0; width: 100%; }
-        .quiz-start-btn:hover { background: var(--light-color); color: var(--primary-color); transform: translateY(-5px); }
+        .quiz-start-btn { 
+            background: var(--light-color); 
+            color: var(--primary-color); 
+            padding: 1rem 1.5rem; 
+            border-radius: 10px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 1.1rem; /* Ridotto */
+            transition: all 0.3s ease; 
+            border: 2px solid var(--primary-color); 
+            cursor: pointer; 
+            width: 100%; 
+            max-width: 300px; /* Limite larghezza */
+        }
+        .quiz-start-btn:hover, .quiz-start-btn.active { 
+            background: var(--primary-color); 
+            color: var(--light-color); 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px rgba(10, 46, 92, 0.15);
+        }
         .quiz-start-btn span { font-size: 0.9rem; font-weight: 400; color: var(--secondary-color); display: block; margin-top: 5px; }
-        .quiz-start-btn:hover span { color: var(--primary-color); }
-        .quiz-box { max-width: 700px; margin: 0 auto; background-color: var(--light-color); padding: 2rem; border-radius: 15px; box-shadow: var(--card-shadow); border: 2px solid #eee; display: none; }
-        .question-item { margin-bottom: 20px; padding: 20px; background-color: #f0f3f6; border-radius: 10px; text-align: left; border-left: 5px solid var(--primary-color); }
-        .question-item h4 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .quiz-start-btn:hover span, .quiz-start-btn.active span { color: var(--light-color); }
         
-        .quiz-option { display: block; margin: 10px 0; padding: 12px 15px; background-color: var(--light-color); border: 2px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-size: 1rem; font-weight: 600; width: 100%; text-align: left; }
-        .quiz-option:hover { background-color: #e9eef2; border-color: var(--secondary-color); }
-        .quiz-option.selected {
-            background-color: #e6f0ff; color: var(--primary-color);
-            border: 3px solid var(--primary-color);
-            box-shadow: 0 0 10px rgba(10, 46, 92, 0.2);
+        .quiz-box { max-width: 700px; margin: 0 auto; background-color: var(--light-color); padding: 2.5rem; border-radius: 15px; box-shadow: var(--card-shadow); border: 1px solid #eef; display: none; }
+        .question-item { margin-bottom: 20px; padding: 0; background: none; border-radius: 0; text-align: left; border-left: none; }
+        .question-item h4 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1.5rem; }
+        
+        /* NUOVO: Design Opzioni Quiz */
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 10px 0;
+            padding: 1rem 1.25rem;
+            background-color: var(--light-color);
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 700;
+            width: 100%;
+            text-align: left;
+            color: var(--text-color);
         }
-        .quiz-option.correct { background-color: #1ce783 !important; color: var(--dark-color) !important; border-color: #1ce783 !important; font-weight: 700; }
-        .quiz-option.incorrect { background-color: #ff6b6b !important; color: var(--light-color) !important; border-color: #ff6b6b !important; font-weight: 700; }
+        .quiz-option::before { /* Icona finto radio button */
+            content: '';
+            display: block;
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            background-color: var(--light-color);
+            transition: all 0.3s ease;
+        }
+        .quiz-option:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(10, 46, 92, 0.1);
+        }
+        .quiz-option.selected {
+            border-color: var(--primary-color);
+            background-color: #f0f5ff;
+            box-shadow: 0 5px 15px rgba(10, 46, 92, 0.1);
+        }
+        .quiz-option.selected::before {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            box-shadow: inset 0 0 0 3px var(--light-color);
+        }
+        
+        .quiz-option.correct {
+            border-color: var(--success-color);
+            background-color: #f0fff4;
+            color: #218838;
+        }
+        .quiz-option.correct::before {
+            border-color: var(--success-color);
+            background-color: var(--success-color);
+            box-shadow: inset 0 0 0 3px var(--light-color);
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--danger-color);
+            background-color: #fff0f0;
+            color: #dc3545;
+        }
+        .quiz-option.incorrect::before {
+            border-color: var(--danger-color);
+            background-color: var(--danger-color);
+            box-shadow: inset 0 0 0 3px var(--light-color);
+        }
+        
         .quiz-option:disabled { cursor: not-allowed; }
-        .quiz-option:disabled:not(.correct):not(.incorrect) { background-color: #f9f9f9; color: #aaa; border-color: #ddd; box-shadow: none; }
+        .quiz-option:disabled:not(.correct):not(.incorrect) { 
+            background-color: #f9f9f9; color: #aaa; border-color: #ddd; box-shadow: none; 
+        }
+        .quiz-option:disabled:not(.correct):not(.incorrect)::before {
+            background-color: #f9f9f9; border-color: #ddd;
+        }
         
         .quiz-feedback-wrong { font-size: 0.95rem; font-weight: 700; color: #d90429; margin-top: 10px; padding: 8px; background-color: #fff0f0; border-radius: 5px; border: 1px solid #d90429; }
         .quiz-feedback-wrong a { color: #d90429; font-weight: 900; text-decoration: underline; cursor: pointer; }
@@ -152,7 +232,15 @@
         .quiz-submit { display: inline-block; background: var(--cta-color); color: var(--dark-color); padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.2rem; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(28, 231, 131, 0.3); border: none; cursor: pointer; margin-top: 20px; }
         .quiz-submit:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(28, 231, 131, 0.5); }
         
-        #quiz-result-box { margin-top: 40px; padding: 2rem; border-radius: 10px; background-color: var(--background-color); border: 3px dashed var(--secondary-color); text-align: center; }
+        #quiz-result-box { 
+            margin-top: 40px; 
+            padding: 2.5rem; 
+            border-radius: 15px; 
+            background-color: var(--light-color); 
+            border: 2px solid var(--primary-color);
+            text-align: center; 
+            box-shadow: var(--card-shadow);
+        }
         #quiz-result-box h3 { font-family: var(--font-heading); font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem; }
         #quiz-result-box p { font-size: 1.1rem; margin-bottom: 2rem; }
         .quiz-result-actions { display: flex; flex-direction: column; gap: 10px; align-items: center; }
@@ -163,14 +251,11 @@
         
         /* Footer (Mantenuto) */
         footer { background-color: var(--primary-color); color: rgba(255, 255, 255, 0.7); text-align: center; padding: 4rem 2rem 2rem 2rem; margin-top: 5rem; position: relative; }
-        .lang-selector { margin-bottom: 2rem; display: flex; justify-content: center; gap: 10px; }
-        .lang-selector button { background: none; border: 2px solid var(--secondary-color); color: var(--secondary-color); padding: 8px 15px; font-weight: 700; font-family: var(--font-heading); border-radius: 20px; cursor: pointer; transition: all 0.3s ease; }
-        .lang-selector button:hover, .lang-selector button.active { background-color: var(--secondary-color); color: var(--dark-color); box-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
         footer p { margin-bottom: 0.5rem; font-size: 0.95rem; }
         footer p:first-of-type { font-weight: 700; color: var(--light-color); font-size: 1.1rem; }
-        .footer-links { margin: 1rem 0; }
-        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600; }
-        .footer-links a:hover { color: var(--light-color); text-decoration: underline; }
+        footer .footer-links { margin: 1rem 0; }
+        footer .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600; }
+        footer .footer-links a:hover { color: var(--light-color); text-decoration: underline; }
         
         /* Modale (Migliorato) */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(10, 46, 92, 0.8); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); animation: fadeIn 0.3s ease-out; }
@@ -183,7 +268,7 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideIn { from { transform: translateY(-50px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
 
-        /* Media Query (Mantenuti) */
+        /* Media Query (Corretti) */
         @media (max-width: 768px) {
             .nav-container { flex-wrap: wrap; padding: 0 1rem; }
             .nav-menu { display: none; flex-direction: column; width: 100%; gap: 0.5rem; margin-top: 1rem; }
@@ -197,26 +282,36 @@
              .hero-content h1 { font-size: 2.8rem; }
              .hero-content p { font-size: 1.4rem; }
              .section-title { font-size: 2.5rem; }
+             
+             /* CORREZIONE: Timeline Mobile */
              .timeline-container::after { left: 31px; }
              .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
              .timeline-item::before { left: 60px; border-width: 10px 10px 10px 0; border-color: transparent var(--primary-color) transparent transparent; }
              .left::after, .right::after { left: 15px; }
              .right { left: 0%; }
+             
              .accordion-header { font-size: 1.2rem; }
              .accordion-content p { font-size: 1rem; }
-             .cta-section-links { padding: 2rem 1.5rem; flex-direction: column; }
-             .cta-section-links h3 { font-size: 1.8rem; }
-             .cta-link-box { width: 100%; font-size: 1.3rem; }
-             .quiz-box, .quiz-selection-buttons { padding: 2rem 1.5rem; }
-             .quiz-option { font-size: 0.9rem; }
+             
+             .quiz-selection-buttons { flex-direction: column; }
              .quiz-start-btn { font-size: 1.1rem; }
+             .quiz-box { padding: 2rem 1.5rem; }
+             .quiz-option { font-size: 0.9rem; padding: 0.8rem 1rem; }
+             
              .modal-content { margin: 20% auto; padding: 2rem; }
              .modal-content h3 { font-size: 1.8rem; }
         }
-        
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 2.4rem; }
+            .hero-content p { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            .accordion-header { font-size: 1.1rem; padding: 1rem 1.5rem;}
+            .quiz-box { padding: 1.5rem; }
+            .question-item h4 { font-size: 1.3rem; }
+        }
     </style>
 </head>
-<body>
+<body id="page-teoria">
 
     <nav class="main-nav">
         <div class="nav-container">
@@ -228,7 +323,7 @@
                 <li><a href="dispense.html" data-lang-key="navDispense"></a></li>
                 <li><a href="pratica.html" data-lang-key="navPratica"></a></li>
             </ul>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
         </div>
     </nav>
 
@@ -399,7 +494,6 @@
                 <h2 class="section-title animate-on-view" data-lang-key="quizTitle"></h2>
                 
                 <div id="quiz-selection-buttons" class="quiz-selection-buttons animate-on-view">
-                    <h3 data-lang-key="quizSelectTitle"></h3>
                     <button id="start-quiz-basi" class="quiz-start-btn">
                         <span data-lang-key="quizStartBasi"></span>
                         <span data-lang-key="quizStartBasiDesc"></span>
@@ -453,11 +547,11 @@
     </div>
 
     <script>
-        // --- OGGETTO TRANSLATIONS ESTESO (Testi professionali) ---
+        // --- OGGETTO TRANSLATIONS ESTESO (Testi professionali, senza asterischi) ---
         const translations = {
             "it": {
                 "pageTitle": "🚀 cryptostarstudio: Teoria e Concetti Fondamentali",
-                "navLogo": "cryptostarstudio", // CORREZIONE: Chiave per logo senza span
+                "navLogo": "cryptostarstudio",
                 "navHome": "Home", "navTeoria": "Teoria", "navDispense": "Dispense", "navPratica": "Pratica",
                 "footerBrand": "cryptostarstudio", "footerRights": "Tutti i diritti riservati.", "footerDisclaimer": "Disclaimer: Le informazioni su questa pagina non costituiscono consulenza finanziaria. L'investimento in asset digitali comporta un rischio elevato.",
                 "privacyLink": "Privacy Policy", "termsLink": "Termini di Servizio", "guideLink": "Guida alla Teoria",
@@ -490,33 +584,33 @@
                 "terminologyTitle": "I 6 Concetti Chiave",
                 
                 "termBitcoinTitle": "1. Bitcoin (L'Oro Digitale)",
-                "termBitcoinDesc": "Bitcoin (BTC) è la prima criptovaluta decentralizzata, un asset digitale nativo di Internet. Funziona senza un'autorità centrale (come una banca o un governo) grazie alla sua rete peer-to-peer. La sua caratteristica principale è la **scarsità programmata**: esisteranno al massimo 21 milioni di monete. Utilizza il meccanismo di consenso **Proof-of-Work (PoW)**, dove i 'minatori' competono usando potenza di calcolo per validare le transazioni e proteggere la rete. Questa sicurezza e scarsità lo rendono simile all'oro, una 'riserva di valore' digitale.",
+                "termBitcoinDesc": "Bitcoin (BTC) è la prima criptovaluta decentralizzata, un asset digitale nativo di Internet. Funziona senza un'autorità centrale (come una banca o un governo) grazie alla sua rete peer-to-peer. La sua caratteristica principale è la scarsità programmata: esisteranno al massimo 21 milioni di monete. Utilizza il meccanismo di consenso Proof-of-Work (PoW), dove i 'minatori' competono usando potenza di calcolo per validare le transazioni e proteggere la rete. Questa sicurezza e scarsità lo rendono simile all'oro, una 'riserva di valore' digitale.",
                 "cpaBitcoin": "Interessato ad acquisire Bitcoin? Exchange regolamentati e sicuri sono il punto di partenza ideale:",
                 
                 "term1Title": "2. Blockchain (Il Registro Distribuito)",
                 "term1Desc": "Una blockchain è un tipo specifico di database, un registro digitale (ledger) che è immutabile e decentralizzato. Le transazioni vengono raggruppate in 'blocchi', che vengono poi collegati crittograficamente in una 'catena'. Poiché questo registro è copiato su migliaia di computer (nodi) in tutto il mondo, è quasi impossibile da alterare, censurare o spegnere. È la tecnologia fondamentale che permette l'esistenza di Bitcoin e di altre crypto.",
                 "term1SubTitle": "Come si ottiene il consenso? (PoW vs. PoS)",
-                "term1DescPoW": "**Proof-of-Work (PoW):** Usato da Bitcoin. I 'Minatori' usano hardware specializzato (e molta energia) per risolvere complessi puzzle matematici. Il primo che trova la soluzione valida un blocco e viene ricompensato. È estremamente sicuro ma lento e dispendioso.",
-                "term1DescPoS": "**Proof-of-Stake (PoS):** Usato da Ethereum. I 'Validatori' bloccano le proprie monete ('staking') come garanzia. Se agiscono onestamente, vengono ricompensati; se tentano di imbrogliare, perdono le monete bloccate. È molto più efficiente dal punto di vista energetico.",
+                "term1DescPoW": "Proof-of-Work (PoW): Usato da Bitcoin. I 'Minatori' usano hardware specializzato (e molta energia) per risolvere complessi puzzle matematici. Il primo che trova la soluzione valida un blocco e viene ricompensato. È estremamente sicuro ma lento e dispendioso.",
+                "term1DescPoS": "Proof-of-Stake (PoS): Usato da Ethereum. I 'Validatori' bloccano le proprie monete ('staking') come garanzia. Se agiscono onestamente, vengono ricompensati; se tentano di imbrogliare, perdono le monete bloccate. È molto più efficiente dal punto di vista energetico.",
 
                 "term3Title": "3. Portafoglio (Wallet)",
-                "term3Desc": "Un wallet non contiene fisicamente le tue criptovalute (che vivono sulla blockchain). Esso custodisce la tua **Chiave Privata**: una password crittografica segreta che ti dà la proprietà e il controllo dei tuoi fondi. Chiunque conosca la tua chiave privata può rubare le tue monete. Ricorda: *'Not your keys, not your coins'*. La **Chiave Pubblica** (o indirizzo) è come il tuo IBAN: puoi condividerla per ricevere fondi.",
+                "term3Desc": "Un wallet non contiene fisicamente le tue criptovalute (che vivono sulla blockchain). Esso custodisce la tua Chiave Privata: una password crittografica segreta che ti dà la proprietà e il controllo dei tuoi fondi. Chiunque conosca la tua chiave privata può rubare le tue monete. Ricorda: 'Not your keys, not your coins'. La Chiave Pubblica (o indirizzo) è come il tuo IBAN: puoi condividerla per ricevere fondi.",
                 "term3SubTitle": "Hot Wallet vs. Cold Wallet",
-                "term3DescHot": "**Hot Wallet:** Un software (app su telefono o estensione browser) connesso a Internet. È comodo per le transazioni quotidiane ma più vulnerabile ad attacchi hacker.",
-                "term3DescCold": "**Cold Wallet:** Un dispositivo hardware (come una chiavetta USB) che mantiene la tua chiave privata sempre offline. È il metodo più sicuro per conservare grandi quantità di crypto a lungo termine.",
+                "term3DescHot": "Hot Wallet: Un software (app su telefono o estensione browser) connesso a Internet. È comodo per le transazioni quotidiane ma più vulnerabile ad attacchi hacker.",
+                "term3DescCold": "Cold Wallet: Un dispositivo hardware (come una chiavetta USB) che mantiene la tua chiave privata sempre offline. È il metodo più sicuro per conservare grandi quantità di crypto a lungo termine.",
                 "cpaWallet": "Per acquistare le tue prime crypto e inviarle a un wallet, i servizi 'on-ramp' (ponte tra valuta tradizionale e crypto) come MoonPay sono una soluzione rapida:",
                 
                 "term5Title": "4. Smart Contract (Contratto Intelligente)",
-                "term5Desc": "Uno Smart Contract è un programma software che viene eseguito automaticamente sulla blockchain (come Ethereum). È 'intelligente' perché esegue i termini di un accordo in modo automatico e deterministico, senza bisogno di fiducia o di un intermediario. La logica è semplice: **'SE accade questo, ALLORA fai quello'**. Sono la base di tutte le applicazioni decentralizzate (DApp), della DeFi, degli NFT e delle DAO.",
-                "term5DescGas": "Per eseguire uno smart contract, è necessario pagare una commissione alla rete, nota come **'Gas Fee'**. Questa commissione compensa i validatori per il lavoro computazionale richiesto.",
+                "term5Desc": "Uno Smart Contract è un programma software che viene eseguito automaticamente sulla blockchain (come Ethereum). È 'intelligente' perché esegue i termini di un accordo in modo automatico e deterministico, senza bisogno di fiducia o di un intermediario. La logica è semplice: 'SE accade questo, ALLORA fai quello'. Sono la base di tutte le applicazioni decentralizzate (DApp), della DeFi, degli NFT e delle DAO.",
+                "term5DescGas": "Per eseguire uno smart contract, è necessario pagare una commissione alla rete, nota come 'Gas Fee'. Questa commissione compensa i validatori per il lavoro computazionale richiesto.",
 
                 "term4Title": "5. DeFi (Finanza Decentralizzata)",
                 "term4Desc": "La DeFi è un ecosistema di applicazioni finanziarie costruite su blockchain pubbliche tramite Smart Contract. Mira a ricreare i servizi finanziari tradizionali (come prestiti, scambi, guadagno di interessi, derivati) in modo aperto, globale e trasparente, senza intermediari centralizzati come le banche.",
-                "term4DescCeFi": "Esistono anche piattaforme **CeFi** (Finanza Centralizzata), come YouHodler, che offrono servizi simili (es. conti 'earn' per guadagnare interessi) ma in un ambiente controllato e regolamentato, più facile da usare per i principianti.",
+                "term4DescCeFi": "Esistono anche piattaforme CeFi (Finanza Centralizzata), come YouHodler, che offrono servizi simili (es. conti 'earn' per guadagnare interessi) ma in un ambiente controllato e regolamentato, più facile da usare per i principianti.",
                 "cpaDeFi": "Piattaforme CeFi come YouHodler offrono servizi ispirati alla DeFi in un ambiente regolamentato e di facile accesso:",
                 
                 "termL2Title": "6. Layer 2 (Soluzioni di Scalabilità)",
-                "termL2Desc": "Le blockchain principali come Ethereum (definite 'Layer 1' o L1) possono essere lente e costose quando la rete è congestionata (le 'Gas Fee' aumentano). Un **'Layer 2' (L2)** è una rete secondaria costruita *sopra* il Layer 1 per risolvere questo problema. Gli L2 (come i 'Rollups') elaborano migliaia di transazioni in modo rapido ed economico 'fuori catena' (off-chain) e poi registrano un riepilogo sicuro sul Layer 1, ereditandone la sicurezza ma offrendo prestazioni superiori.",
+                "termL2Desc": "Le blockchain principali come Ethereum (definite 'Layer 1' o L1) possono essere lente e costose quando la rete è congestionata (le 'Gas Fee' aumentano). Un 'Layer 2' (L2) è una rete secondaria costruita *sopra* il Layer 1 per risolvere questo problema. Gli L2 (come i 'Rollups') elaborano migliaia di transazioni in modo rapido ed economico 'fuori catena' (off-chain) e poi registrano un riepilogo sicuro sul Layer 1, ereditandone la sicurezza ma offrendo prestazioni superiori.",
                 
                 "quizTitle": "Metti alla Prova le Tue Conoscenze",
                 "quizSelectTitle": "Scegli il tuo argomento",
@@ -572,33 +666,33 @@
                 "terminologyTitle": "The 6 Key Concepts",
                 
                 "termBitcoinTitle": "1. Bitcoin (Digital Gold)",
-                "termBitcoinDesc": "Bitcoin (BTC) is the first and most prominent cryptocurrency. It's a decentralized digital asset that operates on a global peer-to-peer network, without the need for intermediaries like banks or governments. Its main feature is **programmed scarcity**: a maximum of 21 million coins will ever exist. It uses the **Proof-of-Work (PoW)** consensus mechanism, where 'miners' compete using computational power to validate transactions and secure the network. This security and scarcity make it akin to 'digital gold,' a store of value.",
+                "termBitcoinDesc": "Bitcoin (BTC) is the first and most prominent cryptocurrency. It's a decentralized digital asset that operates on a global peer-to-peer network, without the need for intermediaries like banks or governments. Its main feature is programmed scarcity: a maximum of 21 million coins will ever exist. It uses the Proof-of-Work (PoW) consensus mechanism, where 'miners' compete using computational power to validate transactions and secure the network. This security and scarcity make it akin to 'digital gold,' a store of value.",
                 "cpaBitcoin": "Interested in acquiring Bitcoin? Regulated and secure exchanges are the ideal starting point:",
                 
                 "term1Title": "2. Blockchain (The Distributed Ledger)",
                 "term1Desc": "A blockchain is a specific type of database, a digital ledger that is immutable and distributed. Transactions are grouped into 'blocks,' which are then cryptographically linked in a 'chain.' Because this ledger is copied across thousands of computers (nodes) worldwide, it is nearly impossible to alter, censor, or shut down. It is the foundational technology that enables Bitcoin and other cryptos.",
                 "term1SubTitle": "How is consensus reached? (PoW vs. PoS)",
-                "term1DescPoW": "**Proof-of-Work (PoW):** Used by Bitcoin. 'Miners' use specialized hardware (and a lot of energy) to solve complex mathematical puzzles. The first to find the solution validates a block and is rewarded. It is extremely secure but slow and energy-intensive.",
-                "term1DescPoS": "**Proof-of-Stake (PoS):** Used by Ethereum. 'Validators' lock up their own coins ('staking') as collateral. If they act honestly, they are rewarded; if they try to cheat, they lose their locked coins. It is far more energy-efficient.",
+                "term1DescPoW": "Proof-of-Work (PoW): Used by Bitcoin. 'Miners' use specialized hardware (and a lot of energy) to solve complex mathematical puzzles. The first to find the solution validates a block and is rewarded. It is extremely secure but slow and energy-intensive.",
+                "term1DescPoS": "Proof-of-Stake (PoS): Used by Ethereum. 'Validators' lock up their own coins ('staking') as collateral. If they act honestly, they are rewarded; if they try to cheat, they lose their locked coins. It is far more energy-efficient.",
 
                 "term3Title": "3. Wallet",
-                "term3Desc": "A wallet does not physically contain your cryptocurrencies (which live on the blockchain). It holds your **Private Key**: a secret cryptographic password that proves your ownership and gives you control over your funds. Anyone who knows your private key can steal your coins. Remember: *'Not your keys, not your coins'*. The **Public Key** (or address) is like your bank account number: you can share it to receive funds.",
+                "term3Desc": "A wallet does not physically contain your cryptocurrencies (which live on the blockchain). It holds your Private Key: a secret cryptographic password that proves your ownership and gives you control over your funds. Anyone who knows your private key can steal your coins. Remember: 'Not your keys, not your coins'. The Public Key (or address) is like your bank account number: you can share it to receive funds.",
                 "term3SubTitle": "Hot Wallet vs. Cold Wallet",
-                "term3DescHot": "**Hot Wallet:** A software (phone app or browser extension) connected to the internet. It's convenient for daily transactions but more vulnerable to hacking.",
-                "term3DescCold": "**Cold Wallet:** A hardware device (like a USB stick) that keeps your private key completely offline. It is the most secure method for storing large amounts of crypto long-term.",
+                "term3DescHot": "Hot Wallet: A software (phone app or browser extension) connected to the internet. It's convenient for daily transactions but more vulnerable to hacking.",
+                "term3DescCold": "Cold Wallet: A hardware device (like a USB stick) that keeps your private key completely offline. It is the most secure method for storing large amounts of crypto long-term.",
                 "cpaWallet": "To buy your first crypto and send it to a wallet, 'on-ramp' services (bridging traditional currency and crypto) like MoonPay are a quick solution:",
                 
                 "term5Title": "4. Smart Contract",
-                "term5Desc": "A Smart Contract is a software program that runs automatically on the blockchain (like Ethereum). It's 'smart' because it executes the terms of an agreement automatically and deterministically as soon as predefined conditions are met. The logic is simple: **'IF this happens, THEN do that'**. They are the foundation of all Decentralized Applications (DApps), DeFi, NFTs, and DAOs.",
-                "term5DescGas": "To execute a smart contract, you must pay a fee to the network, known as a **'Gas Fee'**. This fee compensates validators for the computational work required.",
+                "term5Desc": "A Smart Contract is a software program that runs automatically on the blockchain (like Ethereum). It's 'smart' because it executes the terms of an agreement automatically and deterministically as soon as predefined conditions are met. The logic is simple: 'IF this happens, THEN do that'. They are the foundation of all Decentralized Applications (DApps), DeFi, NFTs, and DAOs.",
+                "term5DescGas": "To execute a smart contract, you must pay a fee to the network, known as a 'Gas Fee'. This fee compensates validators for the computational work required.",
 
                 "term4Title": "5. DeFi (Decentralized Finance)",
                 "term4Desc": "DeFi is an ecosystem of financial applications built on public blockchains using Smart Contracts. It aims to recreate traditional financial systems (like lending, trading, earning interest, derivatives) in an open, global, and transparent way, without relying on centralized intermediaries like banks.",
-                "term4DescCeFi": "**CeFi** (Centralized Finance) platforms, like YouHodler, also exist. They offer DeFi-inspired services (e.g., 'earn' accounts to earn interest) but in a controlled, regulated environment that is easier for beginners to use.",
+                "term4DescCeFi": "CeFi (Centralized Finance) platforms, like YouHodler, also exist. They offer DeFi-inspired services (e.g., 'earn' accounts to earn interest) but in a controlled, regulated environment that is easier for beginners to use.",
                 "cpaDeFi": "CeFi platforms like YouHodler offer DeFi-inspired services in a regulated and user-friendly environment:",
                 
                 "termL2Title": "6. Layer 2 (Scaling Solutions)",
-                "termL2Desc": "Main blockchains like Ethereum (called 'Layer 1' or L1) can become slow and expensive when the network is congested (high 'Gas Fees'). A **'Layer 2' (L2)** is a secondary network or protocol built *on top* of a Layer 1 to solve this problem. L2s (like 'Rollups') process thousands of transactions quickly and cheaply 'off-chain' and then post a secure summary back to the Layer 1, inheriting its security while offering superior performance.",
+                "termL2Desc": "Main blockchains like Ethereum (called 'Layer 1' or L1) can become slow and expensive when the network is congested (high 'Gas Fees'). A 'Layer 2' (L2) is a secondary network or protocol built *on top* of a Layer 1 to solve this problem. L2s (like 'Rollups') process thousands of transactions quickly and cheaply 'off-chain' and then post a secure summary back to the Layer 1, inheriting its security while offering superior performance.",
                 
                 "quizTitle": "Test Your Knowledge",
                 "quizSelectTitle": "Choose your topic",
@@ -654,33 +748,33 @@
                 "terminologyTitle": "Los 6 Conceptos Clave",
                 
                 "termBitcoinTitle": "1. Bitcoin (El Oro Digital)",
-                "termBitcoinDesc": "Bitcoin (BTC) es la primera y más importante criptomoneda. Es un activo digital descentralizado que funciona en una red global peer-to-peer, sin necesidad de intermediarios como bancos o gobiernos. Su característica principal es la **escasez programada**: solo existirán 21 millones de monedas. Utiliza el mecanismo de consenso **Proof-of-Work (PoW)**, donde los 'mineros' compiten usando poder computacional para validar transacciones y asegurar la red. Esta seguridad y escasez lo asemejan al 'oro digital', una reserva de valor.",
+                "termBitcoinDesc": "Bitcoin (BTC) es la primera y más importante criptomoneda. Es un activo digital descentralizado que funciona en una red global peer-to-peer, sin necesidad de intermediarios como bancos o gobiernos. Su característica principal es la escasez programada: solo existirán 21 millones de monedas. Utiliza el mecanismo de consenso Proof-of-Work (PoW), donde los 'mineros' compiten usando poder computacional para validar transacciones y asegurar la red. Esta seguridad y escasez lo asemejan al 'oro digital', una reserva de valor.",
                 "cpaBitcoin": "¿Interesado en adquirir Bitcoin? Los exchanges regulados y seguros son el punto de partida ideal:",
                 
                 "term1Title": "2. Blockchain (El Libro Contable Distribuido)",
                 "term1Desc": "Una blockchain es un tipo específico de base de datos, un libro contable digital (ledger) que es inmutable y descentralizado. Las transacciones se agrupan en 'bloques', que luego se enlazan criptográficamente en una 'cadena'. Dado que este registro se copia en miles de computadoras (nodos) en todo el mundo, es casi imposible de alterar, censurar o apagar.",
                 "term1SubTitle": "¿Cómo se alcanza el consenso? (PoW vs. PoS)",
-                "term1DescPoW": "**Proof-of-Work (PoW):** Usado por Bitcoin. Los 'Mineros' usan hardware especializado (y mucha energía) para resolver complejos rompecabezas matemáticos. El primero que encuentra la solución valida un bloque y es recompensado. Es extremadamente seguro pero lento y costoso.",
-                "term1DescPoS": "**Proof-of-Stake (PoS):** Usado por Ethereum. Los 'Validadores' bloquean sus propias monedas ('staking') como garantía. Si actúan con honestidad, son recompensados; si intentan hacer trampa, pierden sus monedas bloqueadas. Es mucho más eficiente energéticamente.",
+                "term1DescPoW": "Proof-of-Work (PoW): Usado por Bitcoin. Los 'Mineros' usan hardware especializado (y mucha energía) para resolver complejos rompecabezas matemáticos. El primero que encuentra la solución valida un bloque y es recompensado. Es extremadamente seguro pero lento y costoso.",
+                "term1DescPoS": "Proof-of-Stake (PoS): Usado por Ethereum. Los 'Validadores' bloquean sus propias monedas ('staking') como garantía. Si actúan con honestidad, son recompensados; si intentan hacer trampa, pierden sus monedas bloqueadas. Es mucho más eficiente energéticamente.",
 
                 "term3Title": "3. Billetera (Wallet)",
-                "term3Desc": "Una wallet no contiene físicamente tus criptomonedas (que viven en la blockchain). Almacena tu **Clave Privada**: una contraseña criptográfica secreta que te da la propiedad y el control de tus fondos. Cualquiera que conozca tu clave privada puede robar tus monedas. Recuerda: *'Not your keys, not your coins'*. La **Clave Pública** (o dirección) es como tu número de cuenta bancaria: puedes compartirla para recibir fondos.",
+                "term3Desc": "Una wallet no contiene físicamente tus criptomonedas (que viven en la blockchain). Almacena tu Clave Privada: una contraseña criptográfica secreta que te da la propiedad y el control de tus fondos. Cualquiera que conozca tu clave privada puede robar tus monedas. Recuerda: 'Not your keys, not your coins'. La Clave Pública (o dirección) es como tu número de cuenta bancaria: puedes compartirla para recibir fondos.",
                 "term3SubTitle": "Hot Wallet vs. Cold Wallet",
-                "term3DescHot": "**Hot Wallet:** Un software (app en el móvil o extensión de navegador) conectado a Internet. Es conveniente para transacciones diarias pero más vulnerable a hackeos.",
-                "term3DescCold": "**Cold Wallet:** Un dispositivo de hardware (como un USB) que mantiene tu clave privada siempre desconectada. Es el método más seguro para almacenar grandes cantidades de cripto a largo plazo.",
+                "term3DescHot": "Hot Wallet: Un software (app en el móvil o extensión de navegador) conectado a Internet. Es conveniente para transacciones diarias pero más vulnerable a hackeos.",
+                "term3DescCold": "Cold Wallet: Un dispositivo de hardware (como un USB) que mantiene tu clave privada siempre desconectada. Es el método más seguro para almacenar grandes cantidades de cripto a largo plazo.",
                 "cpaWallet": "Para comprar tus primeras cripto y enviarlas a una wallet, los servicios 'on-ramp' (puente entre moneda fiduciaria y cripto) como MoonPay son una solución rápida:",
                 
                 "term5Title": "4. Smart Contract (Contrato Inteligente)",
-                "term5Desc": "Un Smart Contract es un programa de software que se ejecuta automáticamente en la blockchain (como Ethereum). Es 'inteligente' porque ejecuta los términos de un acuerdo de forma automática y determinista en cuanto se cumplen las condiciones predefinidas. La lógica es simple: **'SI ocurre esto, ENTONCES haz aquello'**. Son la base de todas las DApps, DeFi, NFTs y DAOs.",
-                "term5DescGas": "Para ejecutar un smart contract, debes pagar una comisión a la red, conocida como **'Gas Fee'**. Esta comisión compensa a los validadores por el trabajo computacional requerido.",
+                "term5Desc": "Un Smart Contract es un programa de software que se ejecuta automáticamente en la blockchain (como Ethereum). Es 'intelligente' porque ejecuta los términos de un acuerdo de forma automática y determinista en cuanto se cumplen las condiciones predefinidas. La lógica es simple: 'SI ocurre esto, ENTONCES haz aquello'. Son la base de todas las DApps, DeFi, NFTs y DAOs.",
+                "term5DescGas": "Para ejecutar un smart contract, debes pagar una comisión a la red, conocida como 'Gas Fee'. Esta comisión compensa a los validadores por el trabajo computacional requerido.",
 
                 "term4Title": "5. DeFi (Finanzas Descentralizadas)",
                 "term4Desc": "DeFi es un ecosistema de aplicaciones financieras construido sobre blockchains públicas mediante Smart Contracts. Su objetivo es recrear los servicios financieros tradicionales (préstamos, intercambios, generación de intereses) de forma abierta, global y transparente, sin intermediarios centralizados.",
-                "term4DescCeFi": "También existen plataformas **CeFi** (Finanzas Centralizadas), como YouHodler, que ofrecen servicios similares (ej. cuentas 'earn' para ganar intereses) pero en un entorno controlado y regulado, más fácil de usar para principiantes.",
+                "term4DescCeFi": "También existen plataformas CeFi (Finanzas Centralizadas), como YouHodler, que ofrecen servicios similares (ej. cuentas 'earn' para ganar intereses) pero en un entorno controlado y regulado, más fácil de usar para principiantes.",
                 "cpaDeFi": "Las plataformas CeFi como YouHodler ofrecen servicios inspirados en DeFi en un entorno regulado y fácil de usar:",
                 
                 "termL2Title": "6. Capa 2 (Soluciones de Escalabilidad)",
-                "termL2Desc": "Las blockchains principales como Ethereum (llamadas 'Capa 1' o L1) pueden volverse lentas y caras cuando la red está congestionada (altas 'Gas Fees'). Una **'Capa 2' (L2)** es una red secundaria construida *sobre* la Capa 1 para resolver este problema. Las L2 (como los 'Rollups') procesan miles de transacciones de forma rápida y económica 'fuera de cadena' (off-chain) y luego registran un resumen seguro en la Capa 1, heredando su seguridad pero ofreciendo un rendimiento superior.",
+                "termL2Desc": "Las blockchains principales como Ethereum (llamadas 'Capa 1' o L1) pueden volverse lentas y caras cuando la red está congestionada (altas 'Gas Fees'). Una 'Capa 2' (L2)' es una red secundaria construida *sobre* la Capa 1 para resolver este problema. Las L2 (como los 'Rollups') procesan miles de transacciones de forma rápida y económica 'fuera de cadena' (off-chain) y luego registran un resumen seguro en la Capa 1, heredando su seguridad pero ofreciendo un rendimiento superior.",
                 
                 "quizTitle": "Pon a Prueba Tus Conocimientos",
                 "quizSelectTitle": "Elige tu tema",
@@ -764,6 +858,10 @@
             
             if (!bank || bank.length === 0) { return; }
 
+            // Attiva il pulsante della categoria
+            document.querySelectorAll('.quiz-start-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(category === 'basi' ? 'start-quiz-basi' : 'start-quiz-avanzato').classList.add('active');
+
             const shuffledBank = shuffleArray([...bank]);
             currentQuizQuestions = shuffledBank.slice(0, numQuestions);
 
@@ -796,7 +894,6 @@
                 <button type="button" id="quiz-submit" class="quiz-submit">${tr.quizSubmit}</button>
             `;
 
-            document.getElementById('quiz-selection-buttons').style.display = 'none';
             document.getElementById('quiz-result-box').style.display = 'none';
             document.getElementById('quiz-box').style.display = 'block';
             document.getElementById('quiz-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -853,7 +950,9 @@
                         const feedbackBox = selectedOption.parentElement.nextElementSibling;
                         if (feedbackBox) {
                             const langBank = questionBank[currentLang] || questionBank['it'];
-                            const hintText = langBank[qData.hint.startsWith('l') || qData.hint.startsWith('d') || qData.hint.startsWith('s') ? 'avanzato' : 'basi'].find(q => q.hint === qData.hint).hintText;
+                            // Trova il testo del suggerimento corretto in base alla lingua
+                            const categoryBank = langBank[qData.hint === 'l2' || qData.hint === 'defi' || qData.hint === 'smartcontract' ? 'avanzato' : 'basi'];
+                            const hintText = categoryBank.find(q => q.hint === qData.hint).hintText;
                             feedbackBox.innerHTML = `⚠️ <a onclick="scrollToTerm('${qData.hint}')">${hintText}</a>`;
                             feedbackBox.style.display = 'block';
                         }
@@ -883,13 +982,13 @@
                     <a href="pratica.html" class="quiz-result-btn">${tr.quizActionPractice}</a>
                     <button type="button" id="quiz-retry-btn" class="quiz-result-btn secondary">${tr.quizActionRetry}</button>
                 `;
-            } else if (correctCount === 2) {
+            } else if (correctCount >= 1) { // 1 o 2
                 document.getElementById('quiz-result-title').textContent = tr.quizResultGood;
                 actionsContainer.innerHTML = `
                     <a href="dispense.html" class="quiz-result-btn">${tr.quizActionDispense}</a>
                     <button type="button" id="quiz-retry-btn" class="quiz-result-btn secondary">${tr.quizActionRetry}</button>
                 `;
-            } else {
+            } else { // 0
                 document.getElementById('quiz-result-title').textContent = tr.quizResultBad;
                 actionsContainer.innerHTML = `
                     <a onclick="scrollToTerm()" class="quiz-result-btn">${tr.quizActionReview}</a>
@@ -928,7 +1027,8 @@
         function retryQuiz() {
             document.getElementById('quiz-box').style.display = 'none';
             document.getElementById('quiz-result-box').style.display = 'none';
-            document.getElementById('quiz-selection-buttons').style.display = 'block';
+            document.getElementById('quiz-selection-buttons').style.display = 'flex';
+            document.querySelectorAll('.quiz-start-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('quiz-form').innerHTML = ''; 
         }
 

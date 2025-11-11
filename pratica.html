@@ -26,20 +26,13 @@
             --transition-speed: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             --success-color: #28a745;
             --danger-color: #dc3545;
-            /* Colori Brand per CTA */
             --kraken-color: #5741D9;
             --youhodler-color: #2080D0;
             --bitpanda-color: #12b372;
         }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-
         body {
             font-family: var(--font-body);
             line-height: 1.7;
@@ -49,18 +42,8 @@
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
         }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section {
-            padding: 5.5rem 0; 
-            position: relative;
-        }
-
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        .section { padding: 5.5rem 0; position: relative; }
         .section-title {
             font-family: var(--font-heading);
             font-size: 3.5rem;
@@ -70,7 +53,6 @@
             text-align: center;
             position: relative;
         }
-
         .section-title::after {
             content: '';
             position: absolute;
@@ -83,16 +65,7 @@
             border-radius: 3px;
         }
 
-        .link-inline {
-            color: var(--primary-color);
-            font-weight: 700;
-            text-decoration: underline;
-        }
-        .link-inline:hover {
-            color: var(--secondary-color);
-        }
-
-        /* === NAVIGAZIONE (MENU) - Stile Blu === */
+        /* === NAVIGAZIONE (MENU) - Allineato === */
         .main-nav {
             background-color: var(--primary-color);
             padding: 1rem 0;
@@ -110,54 +83,27 @@
             align-items: center;
             height: 100%;
         }
-        .nav-logo {
-            font-family: var(--font-heading);
-            font-weight: 800;
-            font-size: 1.8rem;
-            color: var(--light-color); 
-            text-decoration: none;
-        }
-        .nav-logo span {
-            color: var(--secondary-color);
-        }
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-            margin: 0;
-            padding: 0;
-        }
+        .nav-logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.8rem; color: var(--light-color); text-decoration: none; }
+        .nav-logo span { color: var(--light-color); } 
+        .nav-menu { display: flex; list-style: none; gap: 1.5rem; margin: 0; padding: 0; }
         .nav-menu a {
             text-decoration: none;
             font-family: var(--font-heading);
             font-weight: 700;
             color: rgba(255, 255, 255, 0.8); 
-            font-size: 1.1rem;
-            padding: 0.5rem 0.2rem;
+            font-size: 1rem; 
+            padding: 0.5rem 0; 
             position: relative;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
             border-bottom: 2px solid transparent; 
         }
-        .nav-menu li a { 
-            padding: 0.5rem 0.2rem;
-        }
-        .nav-menu a::after {
-            display: none; 
-        }
+        .nav-menu li a { padding: 0.5rem 0; }
         .nav-menu a:hover,
         .nav-menu a.current {
             color: var(--light-color); 
             border-bottom: 2px solid var(--secondary-color); 
         }
-
-        .nav-toggle {
-            display: none; 
-            font-size: 2rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--light-color); 
-        }
+        .nav-toggle { display: none; font-size: 2rem; background: none; border: none; cursor: pointer; color: var(--light-color); }
 
         /* === HERO (Pagine Interne) === */
         .hero-simple {
@@ -167,17 +113,8 @@
             color: var(--light-color);
             background: linear-gradient(45deg, var(--primary-color), #0a2549);
         }
-        .hero-simple-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .hero-simple-content h1 {
-            font-family: var(--font-heading);
-            font-size: 3.5rem;
-            font-weight: 800;
-        }
+        .hero-simple-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+        .hero-simple-content h1 { font-family: var(--font-heading); font-size: 3.5rem; font-weight: 800; }
         .hero-simple-content p {
             font-size: 1.5rem;
             font-weight: 300;
@@ -195,71 +132,45 @@
             margin-top: 5rem;
             position: relative;
         }
-        .lang-selector {
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
+        .lang-selector { margin-bottom: 2rem; display: flex; justify-content: center; gap: 10px; }
         .lang-selector button {
-            background: none;
-            border: 2px solid var(--secondary-color);
-            color: var(--secondary-color);
-            padding: 8px 15px;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            background: none; border: 2px solid var(--secondary-color); color: var(--secondary-color);
+            padding: 8px 15px; font-weight: 700; font-family: var(--font-heading);
+            border-radius: 20px; cursor: pointer; transition: all 0.3s ease;
         }
-        .lang-selector button:hover {
-            background-color: var(--secondary-color);
-            color: var(--dark-color);
-        }
-        .lang-selector button.active {
+        .lang-selector button:hover, .lang-selector button.active {
             background-color: var(--secondary-color);
             color: var(--dark-color);
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
-        footer p {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-        footer p:first-of-type { 
-            font-weight: 700;
-            color: var(--light-color);
-            font-size: 1.1rem;
-        }
-        .footer-links {
-            margin: 1rem 0;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0 0.5rem;
-        }
-        .footer-links a:hover {
-            color: var(--light-color);
-            text-decoration: underline;
-        }
+        footer p { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        footer p:first-of-type { font-weight: 700; color: var(--light-color); font-size: 1.1rem; }
+        .footer-links { margin: 1rem 0; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600; margin: 0 0.5rem; }
+        .footer-links a:hover { color: var(--light-color); text-decoration: underline; }
 
         /* === SEZIONI PAGINE INTERNE === */
         .section-osservazione { background-color: var(--background-color); }
         .section-simulatore { background-color: var(--primary-color); }
+        .section-cta-reale { background-color: var(--light-color); }
+
+        /* === ANIMAZIONI === */
+        .animate-on-view {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .animate-on-view.is-visible {
+            opacity: 1;
+            transform: translate(0, 0) scale(1);
+        }
 
         /* === STILI OSSERVAZIONE (Pagina Pratica) === */
-        .osservazione-container {
-            display: grid;
-            grid-template-columns: 2fr 1fr; 
-            gap: 2.5rem;
-        }
+        .osservazione-container { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; }
         .osservazione-grafico-box {
             background: var(--light-color);
             border-radius: 16px;
-            padding: 1.5rem; 
+            padding: 1rem; /* Ridotto per dare spazio al widget */
             box-shadow: var(--card-shadow);
             height: 500px; 
             border: 1px solid #eef;
@@ -273,7 +184,6 @@
             box-shadow: var(--card-shadow);
             border: 1px solid #eef;
         }
-        /* Titolo secondario generico */
         .subsection-title {
             font-family: var(--font-heading);
             font-size: 1.8rem; 
@@ -283,9 +193,7 @@
             padding-bottom: 1rem;
             border-bottom: 2px solid #eef;
         }
-        .guida-passo {
-            margin-bottom: 1.25rem; 
-        }
+        .guida-passo { margin-bottom: 1.25rem; }
         .guida-passo h4 {
             font-family: var(--font-heading);
             font-size: 1.15rem; 
@@ -293,11 +201,7 @@
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
-        .guida-passo p {
-            font-size: 0.95rem; 
-            line-height: 1.6;
-            color: var(--text-color);
-        }
+        .guida-passo p { font-size: 0.95rem; line-height: 1.6; color: var(--text-color); }
         .guida-cta {
             display: inline-block;
             background: var(--kraken-color);
@@ -310,39 +214,28 @@
             transition: all 0.3s ease;
             margin-top: 0.5rem;
         }
-        .guida-cta:hover {
-            background: #4130A0; 
-            transform: scale(1.05);
-        }
-        .tradingview-widget-container {
-            width: 100%;
-            height: 100%; /* Occupa il 100% del box genitore */
-        }
+        .guida-cta:hover { background: #4130A0; transform: scale(1.05); }
+        .tradingview-widget-container { width: 100%; height: 100%; }
 
-        /* === STILI SIMULATORE (Pagina Pratica) === */
+        /* === STILI SIMULATORE (Nuovo Design) === */
         .simulatore-container {
             display: grid;
-            grid-template-columns: 2fr 1fr; 
+            grid-template-columns: 1fr 1fr; 
             gap: 2.5rem;
             max-width: 1200px; 
             margin: 0 auto;
         }
-        #mercato-container {
+        .portfolio-box, .trading-box {
             background: var(--light-color);
             border-radius: 16px;
             padding: 2.5rem;
             box-shadow: var(--card-shadow);
-            margin-top: 0; 
             min-width: 0; 
         }
-        #portafoglio-container {
-            background: var(--light-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            box-shadow: var(--card-shadow);
-            position: sticky; 
-            top: 20px; 
-            height: fit-content; 
+        .trading-box {
+             position: sticky; 
+             top: 20px;
+             height: fit-content;
         }
         .simulatore-sub-title {
             font-family: var(--font-heading);
@@ -355,16 +248,8 @@
             flex-shrink: 0;
         }
         
-        .sim-search-input { display: none; } 
-        #mercato-list h3 { display: none; }
-
         .portafoglio-valori { margin-bottom: 2rem; }
-        .portafoglio-valori p {
-            font-size: 1.1rem;
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
+        .portafoglio-valori p { font-size: 1.1rem; color: var(--text-color); margin-bottom: 0.5rem; font-weight: 600; }
         .portafoglio-valori strong {
             font-family: var(--font-heading);
             font-size: 2.5rem;
@@ -374,147 +259,70 @@
             line-height: 1.1;
             margin-bottom: 0.5rem;
         }
-        #portfolio-valore-totale {
-            color: var(--cta-color);
-        }
-        #portfolio-pl {
-            font-size: 1.8rem; 
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
+        #portfolio-valore-totale { color: var(--cta-color); }
+        #portfolio-pl { font-size: 1.8rem; margin-bottom: 1rem; font-weight: 700; }
         .profitto-positivo { color: var(--success-color); }
         .profitto-negativo { color: var(--danger-color); }
         .profitto-neutro { color: var(--text-color); }
         
-        #portfolio-liquidi {
-            font-size: 1.8rem;
-            color: var(--text-color);
-        }
-        #portfolio-assets .asset-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #eef;
-            font-size: 1rem;
-        }
-        #portfolio-assets .asset-item:last-child { border-bottom: none; }
-        .asset-nome { font-weight: 700; }
-        .asset-valore { text-align: right; }
-        .asset-valore span { display: block; font-size: 0.9rem; color: #777; }
-
-        .mercato-item {
+        #portfolio-liquidi { font-size: 1.8rem; color: var(--text-color); }
+        #portfolio-assets-list .asset-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 0;
             border-bottom: 1px solid #eef;
+            font-size: 1rem;
         }
-        .mercato-item:last-child { border-bottom: none; }
-        .mercato-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            min-width: 0; 
-            flex-shrink: 1; 
-        }
-        .mercato-icon { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
-        .mercato-nome {
-            font-family: var(--font-heading);
-            font-size: 1.1rem;
+        #portfolio-assets-list .asset-item:last-child { border-bottom: none; }
+        .asset-info { display: flex; align-items: center; gap: 1rem; }
+        .asset-icon { width: 32px; height: 32px; border-radius: 50%; }
+        .asset-nome { font-weight: 700; }
+        .asset-nome span { display: block; font-size: 0.8rem; color: #777; text-transform: uppercase; }
+        .asset-valore { text-align: right; font-weight: 700; }
+        .asset-valore span { display: block; font-size: 0.9rem; color: #777; font-weight: 400; }
+
+        /* Stili Trading Box */
+        .trade-form-group { margin-bottom: 1.5rem; }
+        .trade-form-group label {
+            display: block;
             font-weight: 700;
+            font-size: 1rem;
             color: var(--text-color);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .mercato-nome span {
-            font-size: 0.8rem;
-            color: #777;
-            font-weight: 600;
-            text-transform: uppercase;
-            display: block;
-        }
-        .mercato-prezzo {
-            text-align: right;
-            font-size: 1rem;
-            font-weight: 700;
-            min-width: 100px; 
-            flex-shrink: 0;
-        }
-        .mercato-prezzo span {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-        .prezzo-positivo { color: var(--success-color); }
-        .prezzo-negativo { color: var(--danger-color); }
-        .mercato-bottoni { display: flex; gap: 0.5rem; margin-left: 0.5rem; flex-shrink: 0; }
-        .btn-sim {
-            border: none;
-            padding: 0.6rem 0.8rem;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .btn-compra { background: var(--success-color); color: white; }
-        .btn-compra:hover { background: #218838; }
-        .btn-vendi { background: var(--danger-color); color: white; }
-        .btn-vendi:hover { background: #c82333; }
-        
-        /* Box CTA nel portafoglio */
-        .portfolio-cta-box {
-            background: var(--background-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            border: 1px solid #eef;
-        }
-        .portfolio-cta-box h4 {
-            font-family: var(--font-heading);
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        /* --- CORREZIONE BOTTONI CTA --- */
-        .portfolio-cta-box .btn-cta { 
-            display: block;
-            width: 100%;
-            text-align: center;
-            font-size: 1rem;
-            padding: 0.8rem 1rem;
             margin-bottom: 0.5rem;
-            text-decoration: none;
+        }
+        .trade-select, .trade-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            background: var(--light-color);
+        }
+        .trade-select:focus, .trade-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(10, 46, 92, 0.1);
+        }
+        .trade-buttons { display: flex; gap: 1rem; }
+        .btn-trade {
+            flex-grow: 1;
             border: none;
+            padding: 1rem;
             border-radius: 8px;
             font-weight: 700;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            color: white; /* Assicura testo bianco */
+            color: white;
         }
-        .btn-cta-kraken {
-            background: var(--kraken-color); 
-        }
-        .btn-cta-kraken:hover {
-            background: #4130A0;
-        }
-        .btn-cta-youhodler {
-            background: var(--youhodler-color); 
-        }
-        .btn-cta-youhodler:hover {
-            background: #18609C;
-        }
-        .btn-cta-bitpanda { 
-            background: var(--bitpanda-color); 
-        }
-        .btn-cta-bitpanda:hover { 
-            background: #0e8c5a;
-        }
-        /* --- FINE CORREZIONE --- */
+        #btn-buy { background: var(--success-color); }
+        #btn-buy:hover { background: #218838; }
+        #btn-sell { background: var(--danger-color); }
+        #btn-sell:hover { background: #c82333; }
+        
+        #trade-error { color: var(--danger-color); display: none; margin-top: 1rem; font-weight: 700; text-align: center; }
 
         #reset-sim-btn {
             background: none;
@@ -531,16 +339,56 @@
         }
         #reset-sim-btn:hover { background: var(--primary-color); color: var(--light-color); }
 
+        /* === STILI CTA REALE === */
+        .cta-reale-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .cta-reale-box {
+            background: var(--light-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eef;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cta-reale-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(10, 46, 92, 0.12);
+        }
+        .cta-reale-box h4 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .cta-reale-box p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            min-height: 50px;
+        }
+        .btn-cta { 
+            display: block; width: 100%; text-align: center; font-size: 1rem;
+            padding: 0.8rem 1rem; text-decoration: none; border: none;
+            border-radius: 8px; font-weight: 700; cursor: pointer;
+            transition: all 0.3s ease; color: white;
+        }
+        .btn-cta-kraken { background: var(--kraken-color); }
+        .btn-cta-kraken:hover { background: #4130A0; }
+        .btn-cta-youhodler { background: var(--youhodler-color); }
+        .btn-cta-youhodler:hover { background: #18609C; }
+        .btn-cta-bitpanda { background: var(--bitpanda-color); }
+        .btn-cta-bitpanda:hover { background: #0e8c5a; }
+
         /* === STILI MODAL (Generico) === */
         .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 2000; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; overflow: auto; 
             background-color: rgba(0,0,0,0.6);
             animation: fadeIn 0.3s ease;
         }
@@ -555,145 +403,30 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             animation: slideIn 0.4s ease-out;
         }
-        .modal-content h3 {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-        }
-        .modal-content p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
+        .modal-content h3 { font-family: var(--font-heading); font-size: 2rem; color: var(--primary-color); margin-bottom: 1.5rem; }
+        .modal-content p { font-size: 1.1rem; margin-bottom: 1.5rem; }
         .modal-input {
-            width: 100%;
-            padding: 1rem;
-            font-size: 1.1rem;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            font-family: var(--font-body);
+            width: 100%; padding: 1rem; font-size: 1.1rem;
+            border: 2px solid #ccc; border-radius: 8px;
+            margin-bottom: 1.5rem; font-family: var(--font-body);
         }
-        .modal-bottoni {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
+        .modal-bottoni { display: flex; gap: 1rem; justify-content: flex-end; }
+        #modal-conferma, #modal-annulla {
+            padding: 0.8rem 1.5rem; font-size: 1rem; font-weight: 700;
+            border: none; border-radius: 8px; cursor: pointer;
         }
-        #modal-conferma, #modal-annulla, #modal-hotspot-chiudi {
-            padding: 0.8rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        #modal-conferma {
-            background: var(--primary-color);
-            color: var(--light-color);
-        }
-        #modal-annulla, #modal-hotspot-chiudi {
-            background: #eee;
-            color: #333;
-        }
+        #modal-conferma { background: var(--primary-color); color: var(--light-color); }
+        #modal-annulla { background: #eee; color: #333; }
         @keyframes slideIn { from {transform: translateY(-50px); opacity: 0} to {transform: translateY(0); opacity: 1} }
         @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
 
-
-        /* === STILI CTA BOX === */
-        .cta-box {
-            background: var(--primary-color);
-            color: var(--light-color);
-            padding: 3rem;
-            border-radius: 16px;
-            text-align: center;
-            max-width: 900px;
-            margin: 4rem auto 0 auto;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-        }
-        .section-simulatore + .container .cta-box {
-             background: var(--light-color);
-             color: var(--text-color);
-             border: 1px solid #eef;
-        }
-        .section-simulatore + .container .cta-box h3 {
-            color: var(--primary-color);
-        }
-         .section-simulatore + .container .cta-box p {
-            color: var(--text-color);
-        }
-
-        .cta-box h3 {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        .cta-box p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .cta-box-link {
-            display: inline-block;
-            background: var(--cta-color);
-            color: var(--dark-color);
-            padding: 1.1rem 3rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(28, 231, 131, 0.3);
-            text-transform: uppercase;
-        }
-        .cta-box-link:hover {
-            background: var(--light-color);
-            color: var(--primary-color);
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.3);
-        }
-         .section-simulatore + .container .cta-box-link:hover {
-             background: var(--primary-color);
-             color: var(--light-color);
-             box-shadow: 0 12px 35px rgba(10, 46, 92, 0.3);
-         }
-
-
-        /* === ANIMAZIONI === */
-        .animate-on-scroll {
-            opacity: 0;
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        .fade-in-up {
-            transform: translateY(50px);
-        }
-        .is-visible {
-            opacity: 1;
-            transform: translate(0, 0) scale(1);
-        }
-
-        /* === RESPONSIVE === */
+        /* === RESPONSIVE (Migliorato) === */
         @media (max-width: 1024px) {
-            .simulatore-container {
-                grid-template-columns: 1fr; 
-            }
-            #portafoglio-container {
-                position: static; 
-                top: 0;
-            }
-            .osservazione-container {
-                grid-template-columns: 1fr; 
-            }
-            .osservazione-grafico-box {
-                height: 500px; 
-            }
-            #mercato-container {
-                height: auto; 
-                max-height: none; 
-            }
+            .simulatore-container { grid-template-columns: 1fr; }
+            .trading-box { position: static; top: 0; }
+            .osservazione-container { grid-template-columns: 1fr; }
+            .osservazione-grafico-box { height: 500px; }
+            .cta-reale-container { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -704,44 +437,20 @@
             .hero-simple-content h1 { font-size: 2.8rem; }
             .hero-simple-content p { font-size: 1.4rem; }
             
-            .main-nav { 
-                position: static; 
-                height: auto;
-            }
+            .main-nav { position: static; height: auto; }
             .nav-container { padding: 0 1rem; flex-wrap: wrap; }
-            .nav-menu {
-                display: none; 
-                flex-direction: column;
-                width: 100%;
-                gap: 0.5rem;
-                margin-top: 1rem;
-            }
-            .nav-menu.is-active { 
-                display: flex;
-            }
+            .nav-menu { display: none; flex-direction: column; width: 100%; gap: 0.5rem; margin-top: 1rem; }
+            .nav-menu.is-active { display: flex; }
             .nav-menu a { font-size: 1.1rem; }
             .nav-menu li { text-align: center; width: 100%; }
-            .nav-menu li a { 
-                display: block; 
-                padding: 0.75rem 0; 
-                color: var(--light-color); 
-            }
-            .nav-menu li a:hover, 
-            .nav-menu li a.current { 
-                border-bottom: none; 
-                background-color: rgba(255,255,255,0.1); 
-            }
+            .nav-menu li a { display: block; padding: 0.75rem 0; color: var(--light-color); }
+            .nav-menu li a:hover, .nav-menu li a.current { border-bottom: none; background-color: rgba(255,255,255,0.1); }
             .nav-toggle { display: block; }
 
             .cta-box { padding: 2.5rem 1.5rem; }
             .cta-box h3 { font-size: 2rem; }
             
-            .mercato-item { flex-wrap: wrap; gap: 0.5rem; }
-            .mercato-info { flex-basis: 50%; flex-grow: 1; }
-            .mercato-prezzo { text-align: left; flex-basis: 40%; }
-            .mercato-bottoni { margin-left: auto; flex-basis: 100%; justify-content: flex-end; }
-            
-            #mercato-container, #portafoglio-container { padding: 2rem 1.5rem; }
+            .portfolio-box, .trading-box { padding: 2rem 1.5rem; }
             .modal-content { margin: 20% auto; }
         }
 
@@ -751,21 +460,16 @@
             .hero-simple-content h1 { font-size: 2.4rem; }
             .hero-simple-content p { font-size: 1.2rem; }
             
-            .mercato-item { flex-wrap: wrap; gap: 1rem; }
-            .mercato-info { width: 100%; flex-basis: 100%; }
-            .mercato-prezzo { text-align: left; width: auto; flex-basis: auto; }
-            .mercato-bottoni { margin-left: auto; flex-basis: auto; }
-
-            .btn-sim { padding: 0.75rem; }
             .portafoglio-valori strong { font-size: 2.2rem; }
             #portfolio-pl { font-size: 1.6rem; } 
             .portafoglio-valori #portfolio-liquidi { font-size: 1.3rem; }
             .modal-content { padding: 2rem 1.5rem; }
             .modal-content h3 { font-size: 1.6rem; }
             
+            /* CORREZIONE: Stili Mobile Grafico e Guida */
             .osservazione-grafico-box { 
-                padding: 1rem 0.5rem; 
-                height: 350px; 
+                padding: 0; /* Rimuovi padding per grafico pulito */
+                height: 400px; /* Più altezza per leggibilità */
             }
             .subsection-title { font-size: 1.6rem; } 
             .guida-passo h4 { font-size: 1.1rem; }
@@ -777,7 +481,7 @@
 
     <nav class="main-nav">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo" data-lang-key="footerBrand">cryptostar<span>studio</span></a>
+            <a href="index.html" class="nav-logo" data-lang-key="navLogo">cryptostarstudio</a>
             
             <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
             
@@ -792,8 +496,8 @@
     
     <header class="hero-simple">
         <div class="hero-simple-content">
-            <h1 data-lang-key="risorseHeroTitle"></h1>
-            <p data-lang-key="risorseHeroSubtitle"></p>
+            <h1 data-lang-key="risorseHeroTitle" class="animate__animated animate__fadeInDown"></h1>
+            <p data-lang-key="risorseHeroSubtitle" class="animate__animated animate__fadeInUp animate__delay-1s"></p>
         </div>
     </header>
 
@@ -801,16 +505,16 @@
         
         <section class="section section-osservazione">
             <div class="container">
-                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="osservazioneTitle"></h2>
+                <h2 class="section-title animate-on-view" data-lang-key="osservazioneTitle"></h2>
                 <div class="osservazione-container">
-                    <div class="animate-on-scroll fade-in-up">
+                    <div class="animate-on-view">
                         <h3 class="subsection-title" data-lang-key="osservazioneGraficoTitle"></h3>
                         <div class="osservazione-grafico-box">
                             <div class="tradingview-widget-container" id="tradingview_widget_container_inner">
                                 </div>
                         </div>
                     </div>
-                    <div class="animate-on-scroll fade-in-up" style="transition-delay: 200ms;">
+                    <div class="animate-on-view">
                          <h3 class="subsection-title" data-lang-key="guidaBoxTitle"></h3>
                         <div class="osservazione-guida-box">
                             <div class="guida-passo">
@@ -842,16 +546,10 @@
         
         <section class="section section-simulatore">
             <div class="container">
-                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="simTitle" style="color: var(--light-color);"></h2>
+                <h2 class="section-title animate-on-view" data-lang-key="simTitle" style="color: var(--light-color);"></h2>
                 <div class="simulatore-container">
-                    <div id="mercato-container" class="animate-on-scroll fade-in-up">
-                        <h3 class="simulatore-sub-title" data-lang-key="simMercatoTitle"></h3>
-                        
-                        <div id="mercato-list">
-                            <p data-lang-key="simLoading"></p>
-                        </div>
-                    </div>
-                    <div id="portafoglio-container" class="animate-on-scroll fade-in-up" style="transition-delay: 200ms;">
+                    
+                    <div id="portfolio-box" class="portfolio-box animate-on-view">
                         <h3 class="simulatore-sub-title" data-lang-key="simPortfolioTitle"></h3>
                         <div class="portafoglio-valori">
                             <p data-lang-key="simTotalValue"></p>
@@ -864,26 +562,69 @@
                             <strong id="portfolio-liquidi">€10,000.00</strong>
                         </div>
                         <h4 class="simulatore-sub-title" data-lang-key="simMyAssets" style="font-size: 1.5rem; border: none; margin-bottom: 0.5rem;"></h4>
-                        <div id="portfolio-assets">
+                        <div id="portfolio-assets-list">
                             <p data-lang-key="simNoAssets"></p>
-                        </div>
-                        
-                        <div class="portfolio-cta-box">
-                            <h4 data-lang-key="simCtaTitle"></h4>
-                            <a href="index.html#app-kraken" target="_blank" rel="noopener noreferrer sponsored" class="btn-cta btn-cta-kraken" data-lang-key="simCtaKraken"></a>
-                            <a href="index.html#app-bitpanda" target="_blank" rel="noopener noreferrer sponsored" class="btn-cta btn-cta-bitpanda" data-lang-key="simCtaBitpanda"></a>
-                            <a href="index.html#app-youhodler" target="_blank" rel="noopener noreferrer sponsored" class="btn-cta btn-cta-youhodler" data-lang-key="simCtaYouHodler"></a>
                         </div>
                         <button id="reset-sim-btn" data-lang-key="simReset"></button>
                     </div>
+                    
+                    <div id="trading-box" class="trading-box animate-on-view">
+                        <h3 class="simulatore-sub-title" data-lang-key="simTradeTitle"></h3>
+                        
+                        <div class="trade-form-group">
+                            <label for="coin-select" data-lang-key="simSelectCoin"></label>
+                            <select id="coin-select" class="trade-select">
+                                </select>
+                        </div>
+                        
+                        <div class="trade-form-group">
+                            <label for="trade-amount" data-lang-key="simModalAmount"></label>
+                            <input type="number" id="trade-amount" class="trade-input" placeholder="0.00" min="0" step="10">
+                        </div>
+                        
+                        <div class="trade-buttons">
+                            <button id="btn-buy" class="btn-trade" data-lang-key="simBuy"></button>
+                            <button id="btn-sell" class="btn-trade" data-lang-key="simSell"></button>
+                        </div>
+                        
+                        <p id="trade-error" style="display: none;"></p>
+                    </div>
                 </div>
             </div>
-            
+        </section>
+        
+        <section class="section section-cta-reale">
             <div class="container">
-                <div class="cta-box animate-on-scroll fade-in-up">
-                    <h3 data-lang-key="tappa5Title"></h3>
-                    <p data-lang-key="tappa5Subtitle"></p>
-                    <a href="index.html" class="cta-box-link" data-lang-key="ctaBoxCta"></a>
+                <h2 class="section-title animate-on-view" data-lang-key="simCtaTitle"></h2>
+                <div class="cta-reale-container">
+                    
+                    <div class="cta-reale-box animate-on-view">
+                        <h4 data-lang-key="simCtaBitpandaTitle"></h4>
+                        <p data-lang-key="simCtaBitpandaDesc"></p>
+                        <div class="affiliate-cta-container">
+                            <a href="https://www.financeads.net/tc.php?t=78725C290656288T" target="_blank" rel="sponsored nofollow noopener noreferrer" class="btn-cta btn-cta-bitpanda" data-lang-key="simCtaBitpanda"></a>
+                            <img src="https://www.financeads.net/tb.php?t=78725V290656288T" alt="" border="0" width="0" height="0">
+                        </div>
+                    </div>
+                    
+                    <div class="cta-reale-box animate-on-view">
+                        <h4 data-lang-key="simCtaKrakenTitle"></h4>
+                        <p data-lang-key="simCtaKrakenDesc"></p>
+                        <div class="affiliate-cta-container">
+                            <a href="https://www.financeads.net/tc.php?t=78725C4746108270T" target="_blank" rel="sponsored nofollow noopener noreferrer" class="btn-cta btn-cta-kraken" data-lang-key="simCtaKraken"></a>
+                            <img src="https://www.financeads.net/tb.php?t=78725V4746108270T" alt="" border="0" width="0" height="0">
+                        </div>
+                    </div>
+                    
+                    <div class="cta-reale-box animate-on-view">
+                        <h4 data-lang-key="simCtaYouHodlerTitle"></h4>
+                        <p data-lang-key="simCtaYouHodlerDesc"></p>
+                        <div class="affiliate-cta-container">
+                            <a href="https://www.financeads.net/tc.php?t=78725C324060796T" target="_blank" rel="sponsored nofollow noopener noreferrer" class="btn-cta btn-cta-youhodler" data-lang-key="simCtaYouHodler"></a>
+                            <img src="https://www.financeads.net/tb.php?t=78725V324060796T" alt="" border="0" width="0" height="0">
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </section>
@@ -893,20 +634,10 @@
     <div id="sim-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-content">
             <h3 id="modal-title">Titolo Modal</h3>
-            
-            <div class="modal-hotspot-content" style="display: none;">
-                <p id="modal-hotspot-desc"></p>
-            </div>
-            
-            <div class="modal-sim-content" style="display: none;">
-                <p id="modal-info"></p>
-                <p><strong data-lang-key="simCashAvailable"></strong> <span id="modal-liquidi"></span></p>
-                <input type="number" id="modal-input" class="modal-input" placeholder="Importo in EUR" min="0" step="10">
-                <p id="modal-error" style="color: var(--danger-color); display: none; margin-top: -1rem; margin-bottom: 1rem; font-weight: 700;"></p>
-            </div>
-            
+            <p id="modal-info"></p>
+            <p><strong data-lang-key="simCashAvailable"></strong> <span id="modal-liquidi"></span></p>
+            <p id="modal-error" style="color: var(--danger-color); display: none; font-weight: 700;"></p>
             <div class="modal-bottoni">
-                <button id="modal-hotspot-chiudi" data-lang-key="hotspotChiudi" style="display: none;"></button>
                 <button id="modal-annulla" data-lang-key="simCancel"></button>
                 <button id="modal-conferma" data-lang-key="simConfirm"></button>
             </div>
@@ -945,21 +676,13 @@
 
         const translations = {
             "it": {
-                "pageTitleIndex": "🚀 cryptostarstudio - Piattaforme Selezionate",
-                "pageTitleTeoria": "🚀 cryptostarstudio - Teoria Crypto",
-                "pageTitleDispense": "🚀 cryptostarstudio - Dispense e Risorse",
+                "navLogo": "cryptostarstudio",
                 "pageTitlePratica": "🚀 cryptostarstudio - Pratica e Simula",
-
-                "navHome": "Home",
-                "navTeoria": "Teoria",
-                "navDispense": "Dispense",
-                "navPratica": "Pratica",
+                "navHome": "Home", "navTeoria": "Teoria", "navDispense": "Dispense", "navPratica": "Pratica",
 
                 "risorseHeroTitle": "Centro di Addestramento Crypto",
-                "risorseHeroSubtitle": "Impara la teoria, osserva i mercati live e fai pratica nel nostro simulatore.",
+                "risorseHeroSubtitle": "Osserva i mercati live e fai pratica nel nostro simulatore.",
                 
-                "hotspotChiudi": "Ho Capito",
-
                 "osservazioneTitle": "1. Laboratorio di Analisi",
                 "osservazioneGraficoTitle": "Grafico Live Interattivo", 
                 "guidaBoxTitle": "Cosa Stai Guardando?",
@@ -975,27 +698,36 @@
                 "guida5Desc": "Questo widget è ottimo per iniziare. Quando sei pronto per strumenti più potenti, puoi usare piattaforme professionali.",
                 "guida5Cta": "Scopri i grafici di Kraken Pro",
 
-                "simTitle": "2. Campo di Addestramento",
-                "simMercatoTitle": "Mercato Selezionato",
+                "simTitle": "2. Simulatore di Paper Trading",
+                "simTradeTitle": "Esegui Operazione",
+                "simSelectCoin": "Seleziona Asset:",
                 "simPortfolioTitle": "Il Mio Portafoglio Virtuale",
-                "simLoading": "Caricamento prezzi...", // Più corto
-                "simApiError": "Errore API. Riprovo a breve...", // Più corto
+                "simLoading": "Caricamento prezzi...",
+                "simApiError": "Errore API. Riprovo a breve...",
                 "simTotalValue": "Valore Totale Portafoglio:",
                 "simPL": "Profitto/Perdita (P/L):", 
                 "simCash": "Liquidità Virtuale:",
                 "simMyAssets": "I Miei Asset",
                 "simNoAssets": "Non possiedi ancora asset.",
-                "simCtaTitle": "Pronto per il Reale?",
-                "simCtaKraken": "Apri un conto Kraken",
-                "simCtaBitpanda": "Prova Bitpanda",
-                "simCtaYouHodler": "Guadagna interessi (YouHodler)",
+                "simCtaTitle": "Pronto per il Trading Reale?",
+                "simCtaKrakenTitle": "Per Trading Avanzato",
+                "simCtaKrakenDesc": "Kraken offre strumenti professionali, basse commissioni e alta sicurezza.",
+                "simCtaKraken": "Visita Kraken",
+                "simCtaBitpandaTitle": "Ideale per Iniziare",
+                "simCtaBitpandaDesc": "Bitpanda rende facile investire in crypto, azioni e altro, tutto in un'unica app.",
+                "simCtaBitpanda": "Visita Bitpanda",
+                "simCtaYouHodlerTitle": "Per Guadagnare Interessi",
+                "simCtaYouHodlerDesc": "YouHodler ti permette di guadagnare interessi sui tuoi depositi crypto.",
+                "simCtaYouHodler": "Visita YouHodler",
                 "simReset": "Resetta Portafoglio",
                 "simBuy": "Compra",
                 "simSell": "Vendi",
-                "simModalBuyTitle": "Compra {coin}",
-                "simModalSellTitle": "Vendi {coin}",
-                "simModalInfo": "Prezzo attuale: {price} €",
-                "simModalAmount": "Inserisci importo in EURO (€)",
+                "simModalBuyTitle": "Conferma Acquisto",
+                "simModalSellTitle": "Conferma Vendita",
+                "simModalInfo": "Stai per {action} {amount} di {symbol} per circa **{eur}**.",
+                "simModalBuy": "acquistare",
+                "simModalSell": "vendere",
+                "simModalAmount": "Importo in EURO (€)",
                 "simCashAvailable": "Liquidità disponibile:",
                 "simAssetAvailable": "Asset disponibili: {amount} {symbol}",
                 "simCancel": "Annulla",
@@ -1005,10 +737,6 @@
                 "simErrorAsset": "Non hai abbastanza {symbol} da vendere.",
                 "simResetConfirm": "Sei sicuro di voler resettare il portafoglio? Perderai tutti i progressi.",
                 
-                "tappa5Title": "Sei Pronto per il Prossimo Passo!", 
-                "tappa5Subtitle": "Ti sei allenato con soldi virtuali e ora capisci le basi del mercato. Se ti senti pronto, puoi esplorare le piattaforme reali. Ricorda di iniziare sempre con piccole cifre.",
-                "ctaBoxCta": "Scopri le Piattaforme Reali",
-
                 "privacyLink": "Privacy Policy",
                 "termsLink": "Termini di Servizio",
                 "disclosureLink": "Trasparenza",
@@ -1019,50 +747,55 @@
                 "notAffiliated": "cryptostarstudio non è affiliato né sponsorizzato ufficialmente dai brand menzionati. I marchi appartengono ai rispettivi proprietari."
             },
             "en": {
-                // ... (TRADUZIONI EN)
+                "navLogo": "cryptostarstudio",
                 "pageTitlePratica": "🚀 cryptostarstudio - Practice & Simulate",
-                "navHome": "Home",
-                "navTeoria": "Theory",
-                "navDispense": "Handouts",
-                "navPratica": "Practice",
+                "navHome": "Home", "navTeoria": "Theory", "navDispense": "Handouts", "navPratica": "Practice",
                 "risorseHeroTitle": "Crypto Training Center",
-                "risorseHeroSubtitle": "Learn the theory, observe live markets, and practice in our simulator.",
-                "hotspotChiudi": "Got It",
+                "risorseHeroSubtitle": "Observe live markets and practice in our simulator.",
                 "osservazioneTitle": "1. Analysis Lab",
                 "osservazioneGraficoTitle": "Interactive Live Chart",
                 "guidaBoxTitle": "What Are You Looking At?",
                 "guida1Title": "1. Watch the Candles",
                 "guida1Desc": "Look at the last few candles. Are they red or green? Do they have a large body (strong conviction) or a small one (indecision)?",
                 "guida2Title": "2. Identify the Trend",
-                "guida2Desc": "Is the price making higher highs and higher lows (uptrend)? Try changing the timeframe (e.g., from '1D' to '4H').",
+                "guida2Desc": "Is the price making higher highs and higher lows (uptrend) or lower ones (downtrend)?",
                 "guida3Title": "3. Check the Volume",
                 "guida3Desc": "Look at the volume bars. Is a sudden price move (up or down) backed by high volume? If yes, the move is much more credible.",
                 "guida4Title": "4. Find the Levels",
-                "guida4Desc": "Are there 'floors' (support) or 'ceilings' (resistance) where the price seems to bounce often? These are key points to watch.",
+                "guida4Desc": "Are there 'floors' (support) or 'ceilings' (resistance) where the price seems to bounce often?",
                 "guida5Title": "5. Try a Pro Chart",
-                "guida5Desc": "This widget is great for starting. When you're ready for more powerful tools (indicators, live orders), you can use professional platforms.",
+                "guida5Desc": "This widget is great for starting. When you're ready for more powerful tools, you can use professional platforms.",
                 "guida5Cta": "Explore Kraken Pro charts",
-                "simTitle": "2. Virtual Training Ground",
-                "simMercatoTitle": "Selected Market",
+                "simTitle": "2. Paper Trading Simulator",
+                "simTradeTitle": "Place Order",
+                "simSelectCoin": "Select Asset:",
                 "simPortfolioTitle": "My Virtual Portfolio",
                 "simLoading": "Loading prices...",
-                "simApiError": "Error loading live prices. Retrying shortly...",
+                "simApiError": "API Error. Retrying shortly...",
                 "simTotalValue": "Total Portfolio Value:",
                 "simPL": "Profit/Loss (P/L):",
                 "simCash": "Virtual Cash:",
                 "simMyAssets": "My Assets",
                 "simNoAssets": "You don't own any assets yet.",
-                "simCtaTitle": "Ready for Real?",
-                "simCtaKraken": "Open a Kraken account",
-                "simCtaBitpanda": "Try Bitpanda",
-                "simCtaYouHodler": "Earn interest (YouHodler)",
+                "simCtaTitle": "Ready for Real Trading?",
+                "simCtaKrakenTitle": "For Advanced Trading",
+                "simCtaKrakenDesc": "Kraken offers professional tools, low fees, and high security.",
+                "simCtaKraken": "Visit Kraken",
+                "simCtaBitpandaTitle": "Ideal for Beginners",
+                "simCtaBitpandaDesc": "Bitpanda makes it easy to invest in crypto, stocks, and more, all in one app.",
+                "simCtaBitpanda": "Visit Bitpanda",
+                "simCtaYouHodlerTitle": "For Earning Interest",
+                "simCtaYouHodlerDesc": "YouHodler allows you to earn interest on your crypto deposits.",
+                "simCtaYouHodler": "Visit YouHodler",
                 "simReset": "Reset Portfolio",
                 "simBuy": "Buy",
                 "simSell": "Sell",
-                "simModalBuyTitle": "Buy {coin}",
-                "simModalSellTitle": "Sell {coin}",
-                "simModalInfo": "Current Price: {price} €",
-                "simModalAmount": "Enter amount in EURO (€)",
+                "simModalBuyTitle": "Confirm Purchase",
+                "simModalSellTitle": "Confirm Sale",
+                "simModalInfo": "You are about to {action} {amount} of {symbol} for approx. **{eur}**.",
+                "simModalBuy": "buy",
+                "simModalSell": "sell",
+                "simModalAmount": "Amount in EURO (€)",
                 "simCashAvailable": "Cash available:",
                 "simAssetAvailable": "Assets available: {amount} {symbol}",
                 "simCancel": "Cancel",
@@ -1071,9 +804,6 @@
                 "simErrorCash": "Insufficient cash.",
                 "simErrorAsset": "You don't have enough {symbol} to sell.",
                 "simResetConfirm": "Are you sure you want to reset your portfolio? All progress will be lost.",
-                "tappa5Title": "You're Ready for the Next Step!",
-                "tappa5Subtitle": "You've trained with virtual money and now understand the market basics. If you feel ready, you can explore real platforms. Remember to always start small.",
-                "ctaBoxCta": "Discover Real Platforms",
                 "privacyLink": "Privacy Policy",
                 "termsLink": "Terms of Service",
                 "disclosureLink": "Transparency",
@@ -1083,50 +813,55 @@
                 "notAffiliated": "cryptostarstudio is not officially affiliated with or sponsored by the mentioned brands. Trademarks belong to their respective owners."
             },
             "es": {
-                // ... (TRADUZIONI ES)
+                "navLogo": "cryptostarstudio",
                 "pageTitlePratica": "🚀 cryptostarstudio - Práctica y Simula",
-                "navHome": "Inicio",
-                "navTeoria": "Teoría",
-                "navDispense": "Recursos",
-                "navPratica": "Práctica",
+                "navHome": "Inicio", "navTeoria": "Teoría", "navDispense": "Recursos", "navPratica": "Práctica",
                 "risorseHeroTitle": "Centro de Entrenamiento Cripto",
-                "risorseHeroSubtitle": "Aprende la teoría, observa los mercados en vivo y practica en nostro simulador.",
-                "hotspotChiudi": "Entendido",
+                "risorseHeroSubtitle": "Observa los mercados en vivo y practica en nuestro simulador.",
                 "osservazioneTitle": "1. Laboratorio de Análisis",
                 "osservazioneGraficoTitle": "Gráfico Interactivo en Vivo",
                 "guidaBoxTitle": "¿Qué Estás Mirando?",
                 "guida1Title": "1. Observa las Velas",
                 "guida1Desc": "¿Mira las últimas velas. Son rojas o verdes? ¿Tienen un cuerpo grande (fuerte convicción) o pequeño (indecisión)?",
                 "guida2Title": "2. Identifica la Tendencia",
-                "guida2Desc": "¿El precio está creando mínimos y máximos más altos (tendencia alcista)? Intenta cambiar el marco temporal (ej. de '1D' a '4H').",
+                "guida2Desc": "¿El precio está creando mínimos y máximos más altos (tendencia alcista) o más bajos (tendencia bajista)?",
                 "guida3Title": "3. Comprueba el Volumen",
                 "guida3Desc": "Mira las barras de volumen. ¿Un movimiento repentino del precio (hacia arriba o hacia abajo) está respaldado por un alto volumen? Si es así, es más creíble.",
                 "guida4Title": "4. Encuentra los Niveles",
-                "guida4Desc": "¿Hay 'suelos' (soportes) o 'techos' (resistencias) donde el precio parece rebotar a menudo? Estos son los puntos clave a vigilar.",
+                "guida4Desc": "¿Hay 'suelos' (soportes) o 'techos' (resistencias) donde el precio parece rebotar a menudo?",
                 "guida5Title": "5. Prueba un Gráfico Pro",
-                "guida5Desc": "Este widget es genial para empezar. Cuando estés listo para herramientas más potentes (indicadores, órdenes en vivo), puedes usar plataformas profesionales.",
+                "guida5Desc": "Este widget es genial para empezar. Cuando estés listo para herramientas más potentes, puedes usar plataformas profesionales.",
                 "guida5Cta": "Explora los gráficos de Kraken Pro",
-                "simTitle": "2. Campo de Entrenamiento",
-                "simMercatoTitle": "Mercado Seleccionado",
+                "simTitle": "2. Simulador de Paper Trading",
+                "simTradeTitle": "Ejecutar Orden",
+                "simSelectCoin": "Seleccionar Activo:",
                 "simPortfolioTitle": "Mi Cartera Virtual",
                 "simLoading": "Cargando precios...",
-                "simApiError": "Error al cargar los precios en vivo. Reintentando en breve...",
+                "simApiError": "Error de API. Reintentando en breve...",
                 "simTotalValue": "Valor Total de la Cartera:",
                 "simPL": "Ganancias/Pérdidas (P/L):",
                 "simCash": "Efectivo Virtual:",
                 "simMyAssets": "Mis Activos",
                 "simNoAssets": "Aún no posees activos.",
-                "simCtaTitle": "¿Listo para lo Real?",
-                "simCtaKraken": "Abre una cuenta en Kraken",
-                "simCtaBitpanda": "Prueba Bitpanda",
-                "simCtaYouHodler": "Gana intereses (YouHodler)",
+                "simCtaTitle": "¿Listo para la Acción Real?",
+                "simCtaKrakenTitle": "Para Trading Avanzado",
+                "simCtaKrakenDesc": "Kraken ofrece herramientas profesionales, comisiones bajas y alta seguridad.",
+                "simCtaKraken": "Visita Kraken",
+                "simCtaBitpandaTitle": "Ideal para Empezar",
+                "simCtaBitpandaDesc": "Bitpanda facilita la inversión en cripto, acciones y más, todo en una sola app.",
+                "simCtaBitpanda": "Visita Bitpanda",
+                "simCtaYouHodlerTitle": "Para Ganar Intereses",
+                "simCtaYouHodlerDesc": "YouHodler te permite ganar intereses sobre tus depósitos cripto.",
+                "simCtaYouHodler": "Visita YouHodler",
                 "simReset": "Reiniciar Cartera",
                 "simBuy": "Comprar",
                 "simSell": "Vender",
-                "simModalBuyTitle": "Comprar {coin}",
-                "simModalSellTitle": "Vender {coin}",
-                "simModalInfo": "Precio Actual: {price} €",
-                "simModalAmount": "Introduce la cantidad en EURO (€)",
+                "simModalBuyTitle": "Confirmar Compra",
+                "simModalSellTitle": "Confirmar Venta",
+                "simModalInfo": "Estás a punto de {action} {amount} de {symbol} por aprox. **{eur}**.",
+                "simModalBuy": "comprar",
+                "simModalSell": "vender",
+                "simModalAmount": "Cantidad en EURO (€)",
                 "simCashAvailable": "Efectivo disponible:",
                 "simAssetAvailable": "Activos disponibles: {amount} {symbol}",
                 "simCancel": "Cancelar",
@@ -1135,9 +870,6 @@
                 "simErrorCash": "Efectivo insuficiente.",
                 "simErrorAsset": "No tienes suficientes {symbol} para vender.",
                 "simResetConfirm": "¿Estás seguro de que quieres reiniciar la cartera? Perderás todo el progreso.",
-                "tappa5Title": "¡Estás Listo para el Siguiente Paso!",
-                "tappa5Subtitle": "Has entrenado con dinero virtual y ahora entiendes las bases del mercado. Si te sientes listo, puedes explorar las plataformas reales. Recuerda empezar siempre con poco.",
-                "ctaBoxCta": "Descubre Plataformas Reales",
                 "privacyLink": "Política de Privacidad",
                 "termsLink": "Términos de Servicio",
                 "disclosureLink": "Transparencia",
@@ -1152,37 +884,30 @@
         const coinDetails = {
             'bitcoin': { name: 'Bitcoin', symbol: 'BTC', icon: 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png' },
             'ethereum': { name: 'Ethereum', symbol: 'ETH', icon: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png' },
-            'tether': { name: 'Tether', symbol: 'USDT', icon: 'https://assets.coingecko.com/coins/images/325/small/Tether.png' },
             'solana': { name: 'Solana', symbol: 'SOL', icon: 'https://assets.coingecko.com/coins/images/4128/small/solana.png' },
             'binancecoin': { name: 'BNB', symbol: 'BNB', icon: 'https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png' },
             'ripple': { name: 'XRP', symbol: 'XRP', icon: 'https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png' },
-            'usd-coin': { name: 'USDC', symbol: 'USDC', icon: 'https://assets.coingecko.com/coins/images/6319/small/usdc.png' },
             'cardano': { name: 'Cardano', symbol: 'ADA', icon: 'https://assets.coingecko.com/coins/images/975/small/cardano.png' },
             'dogecoin': { name: 'Dogecoin', symbol: 'DOGE', icon: 'https://assets.coingecko.com/coins/images/5/small/dogecoin.png' },
             'avalanche-2': { name: 'Avalanche', symbol: 'AVAX', icon: 'https://assets.coingecko.com/coins/images/12559/small/avalanche-avax-logo.png' },
             'chainlink': { name: 'Chainlink', symbol: 'LINK', icon: 'https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png' },
             'polkadot': { name: 'Polkadot', symbol: 'DOT', icon: 'https://assets.coingecko.com/coins/images/12171/small/polkadot.png' },
-            'shiba-inu': { name: 'Shiba Inu', symbol: 'SHIB', icon: 'https://assets.coingecko.com/coins/images/11939/small/shiba.png' },
             'litecoin': { name: 'Litecoin', symbol: 'LTC', icon: 'https://assets.coingecko.com/coins/images/2/small/litecoin.png' },
             'dash': { name: 'Dash', symbol: 'DASH', icon: 'https://assets.coingecko.com/coins/images/19/small/dash-logo.png' }
-            // 'tron' e 'lido-staked-ether' rimossi per brevità
         };
 
         // --- DATI PRE-CARICATI (per caricamento istantaneo) ---
         const staticPrices = {
             'bitcoin': { eur: 65000, eur_24h_change: 1.5 },
             'ethereum': { eur: 3500, eur_24h_change: -0.5 },
-            'tether': { eur: 0.92, eur_24h_change: 0.01 },
             'solana': { eur: 150, eur_24h_change: 3.2 },
             'binancecoin': { eur: 580, eur_24h_change: 0.2 },
             'ripple': { eur: 0.50, eur_24h_change: -1.1 },
-            'usd-coin': { eur: 0.92, eur_24h_change: 0.02 },
             'cardano': { eur: 0.45, eur_24h_change: 2.5 },
             'dogecoin': { eur: 0.15, eur_24h_change: 1.0 },
             'avalanche-2': { eur: 35, eur_24h_change: 4.1 },
             'chainlink': { eur: 14.5, eur_24h_change: -2.0 },
             'polkadot': { eur: 7.2, eur_24h_change: 1.2 },
-            'shiba-inu': { eur: 0.000022, eur_24h_change: 0.8 },
             'litecoin': { eur: 80, eur_24h_change: 0.5 },
             'dash': { eur: 30, eur_24h_change: 1.8 }
         };
@@ -1190,23 +915,30 @@
         // === LOGICA GLOBALE ===
 
         let currentLang = 'it';
-        const langButtons = document.querySelectorAll('.lang-selector button');
+        let animationObserver = null; 
 
+        // --- Funzione Animazioni (Nuova) ---
         function setupScrollAnimations() {
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            if (animationObserver) animationObserver.disconnect();
+            
+            const animatedElements = document.querySelectorAll('.section-title, .osservazione-container > div, .simulatore-container > div, .cta-reale-box');
+            animatedElements.forEach(el => el.classList.add('animate-on-view'));
+            
+            const observerOptions = { threshold: 0.1 };
+
             if ("IntersectionObserver" in window) {
-                const observer = new IntersectionObserver((entries, observer) => {
+                animationObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
                             observer.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.1 });
+                }, observerOptions);
+
                 animatedElements.forEach(el => {
-                    if (!el.classList.contains('is-visible')) {
-                         observer.observe(el);
-                    }
+                    el.classList.remove('is-visible'); 
+                    animationObserver.observe(el);
                 });
             } else {
                 animatedElements.forEach(el => el.classList.add('is-visible'));
@@ -1246,17 +978,15 @@
 
         function setupPraticaPage() {
             loadPortafoglio();
-            loadStaticPrices(); // Carica dati finti IMMEDIATAMENTE
-            fetchPrezzi(); // Avvia il primo fetch live in background
+            populateCoinSelect();
+            loadStaticPrices(); 
+            fetchPrezzi(); 
             
-            const resetBtn = document.getElementById('reset-sim-btn');
-            if(resetBtn) resetBtn.addEventListener('click', resetPortafoglio);
-            
-            const modalConfermaBtn = document.getElementById('modal-conferma');
-            if(modalConfermaBtn) modalConfermaBtn.addEventListener('click', eseguiTransazione);
-            
-            const modalAnnullaBtn = document.getElementById('modal-annulla');
-            if(modalAnnullaBtn) modalAnnullaBtn.addEventListener('click', chiudiModal);
+            document.getElementById('reset-sim-btn').addEventListener('click', resetPortafoglio);
+            document.getElementById('btn-buy').addEventListener('click', () => _apriModalSim('compra'));
+            document.getElementById('btn-sell').addEventListener('click', () => _apriModalSim('vendi'));
+            document.getElementById('modal-conferma').addEventListener('click', eseguiTransazione);
+            document.getElementById('modal-annulla').addEventListener('click', chiudiModal);
 
             const modal = document.getElementById('sim-modal');
             window.onclick = function(event) {
@@ -1266,7 +996,8 @@
             }
             
             if (fetchInterval) clearInterval(fetchInterval);
-            fetchInterval = setInterval(fetchPrezzi, 60000); // 60 secondi
+            // *** AGGIORNAMENTO LIVE OGNI 30 SECONDI ***
+            fetchInterval = setInterval(fetchPrezzi, 30000); // 30 secondi
         }
 
         function loadPortafoglio() {
@@ -1274,6 +1005,8 @@
                 const salvato = localStorage.getItem('cryptoSimPortafoglio');
                 if (salvato) {
                     portafoglio = JSON.parse(salvato);
+                } else {
+                    portafoglio = { liquidi: STARTING_CASH, crypto: {} };
                 }
             } catch(e) { 
                 console.warn("Impossibile caricare portafoglio, reset in corso.");
@@ -1289,12 +1022,25 @@
         }
 
         function resetPortafoglio() {
-            const tr = translations[currentLang];
+            const tr = translations[currentLang] || translations['it'];
             if (confirm(tr.simResetConfirm)) {
                 portafoglio = { liquidi: STARTING_CASH, crypto: {} };
                 savePortafoglio(); 
                 loadStaticPrices();
                 fetchPrezzi(); 
+            }
+        }
+
+        function populateCoinSelect() {
+            const select = document.getElementById('coin-select');
+            if (!select) return;
+            select.innerHTML = '';
+            for (const id in coinDetails) {
+                const coin = coinDetails[id];
+                const option = document.createElement('option');
+                option.value = id;
+                option.textContent = `${coin.name} (${coin.symbol.toUpperCase()})`;
+                select.appendChild(option);
             }
         }
 
@@ -1312,14 +1058,11 @@
                 }
             }
             prezziAttuali = newPrezziAttuali;
-            renderMercato();
             renderPortafoglio();
         }
 
         async function fetchPrezzi() {
-            const mercatoList = document.getElementById('mercato-list');
-            if (!mercatoList) return; 
-            
+            const tr = translations[currentLang] || translations['it'];
             try {
                 const response = await fetch(API_URL);
                 if (!response.ok) throw new Error(`API Error: ${response.status}`);
@@ -1341,75 +1084,18 @@
                 }
                 
                 prezziAttuali = newPrezziAttuali;
-                
-                renderMercato();
                 renderPortafoglio();
             } catch (error) {
                 console.error("Errore API Coingecko:", error);
-                const tr = translations[currentLang] || translations['it']; 
-                if (mercatoList.innerHTML.includes(tr.simLoading)) {
-                    mercatoList.innerHTML = `<p style="color: var(--danger-color); font-weight: 600;">${tr.simApiError}</p>`;
-                }
+                // Se c'è un errore API, mostralo nel box del portafoglio
+                const portfolioAssetsEl = document.getElementById('portfolio-assets-list');
+                if(portfolioAssetsEl) portfolioAssetsEl.innerHTML = `<p style="color: var(--danger-color);">${tr.simApiError}</p>`;
             }
         }
-
-        function renderMercato() {
-            const tr = translations[currentLang] || translations['it'];
-            const mercatoList = document.getElementById('mercato-list');
-            if (!mercatoList) return;
-            
-            if (Object.keys(prezziAttuali).length === 0) {
-                if(!mercatoList.innerHTML.includes("simApiError")) {
-                    mercatoList.innerHTML = `<p data-lang-key="simLoading">${tr.simLoading}</p>`;
-                }
-                return;
-            }
-
-            mercatoList.innerHTML = ''; 
-            const orderedIds = Object.keys(coinDetails);
-            
-            for (const id of orderedIds) {
-                if (prezziAttuali[id]) { 
-                    const coin = prezziAttuali[id];
-                    mercatoList.appendChild(creaElementoMercato(id, coin, tr));
-                }
-            }
-            
-            document.querySelectorAll('.btn-compra').forEach(btn => btn.addEventListener('click', () => _apriModalSim('compra', btn.dataset)));
-            document.querySelectorAll('.btn-vendi').forEach(btn => btn.addEventListener('click', () => _apriModalSim('vendi', btn.dataset)));
-        }
-
-        function creaElementoMercato(id, coin, tr) {
-            const item = document.createElement('div');
-            item.className = 'mercato-item';
-            
-            const change24h = coin.eur_24h_change || 0; 
-            const changeClass = change24h >= 0 ? 'prezzo-positivo' : 'prezzo-negativo';
-            const changeIcon = change24h >= 0 ? '▲' : '▼';
-
-            item.innerHTML = `
-                <div class="mercato-info">
-                    <img src="${coin.icon}" alt="${coin.name}" class="mercato-icon" loading="lazy">
-                    <div><div class="mercato-nome" title="${coin.name}">${coin.name} <span>${coin.symbol.toUpperCase()}</span></div></div>
-                </div>
-                <div class="mercato-prezzo">
-                    ${formatCurrency(coin.eur)}
-                    <span class="${changeClass}">
-                        ${changeIcon} ${formatPercent(change24h)} (24h)
-                    </span>
-                </div>
-                <div class="mercato-bottoni">
-                    <button class="btn-sim btn-compra" data-id="${id}" data-nome="${coin.name}" data-prezzo="${coin.eur}" data-simbolo="${coin.symbol}">${tr.simBuy}</button>
-                    <button class="btn-sim btn-vendi" data-id="${id}" data-nome="${coin.name}" data-prezzo="${coin.eur}" data-simbolo="${coin.symbol}">${tr.simSell}</button>
-                </div>
-            `;
-            return item;
-        }
-
 
         function renderPortafoglio() {
             const tr = translations[currentLang] || translations['it'];
-            const portfolioAssetsEl = document.getElementById('portfolio-assets');
+            const portfolioAssetsEl = document.getElementById('portfolio-assets-list');
             const portfolioValoreTotaleEl = document.getElementById('portfolio-valore-totale');
             const portfolioPlEl = document.getElementById('portfolio-pl'); 
             const portfolioLiquidiEl = document.getElementById('portfolio-liquidi');
@@ -1431,10 +1117,16 @@
                     const item = document.createElement('div');
                     item.className = 'asset-item';
                     item.innerHTML = `
-                        <div class="asset-nome">${prezziAttuali[id].name}</div>
+                        <div class="asset-info">
+                            <img src="${prezziAttuali[id].icon}" alt="${prezziAttuali[id].name}" class="asset-icon">
+                            <div class="asset-nome">
+                                ${prezziAttuali[id].name}
+                                <span>${prezziAttuali[id].symbol.toUpperCase()}</span>
+                            </div>
+                        </div>
                         <div class="asset-valore">
                             ${formatCurrency(valoreAttuale)}
-                            <span>${formatCrypto(quantita)} ${prezziAttuali[id].symbol.toUpperCase()}</span>
+                            <span>${formatCrypto(quantita)}</span>
                         </div>
                     `;
                     portfolioAssetsEl.appendChild(item);
@@ -1463,80 +1155,83 @@
             }
         }
 
-        function _apriModalSim(tipo, data) {
-            const tr = translations[currentLang];
+        function _apriModalSim(tipo) {
+            const tr = translations[currentLang] || translations['it'];
             const modal = document.getElementById('sim-modal');
             const modalTitle = document.getElementById('modal-title');
             const modalInfo = document.getElementById('modal-info');
             const modalLiquidi = document.getElementById('modal-liquidi');
-            const modalInput = document.getElementById('modal-input');
             const modalError = document.getElementById('modal-error');
             
-            modalData = { tipo, ...data }; 
+            const coinId = document.getElementById('coin-select').value;
+            const importoEuro = parseFloat(document.getElementById('trade-amount').value);
+            const coinData = prezziAttuali[coinId];
+            
+            const tradeErrorEl = document.getElementById('trade-error');
+            tradeErrorEl.style.display = 'none'; 
             modalError.style.display = 'none';
-            modalInput.value = '';
-            
-            modal.querySelector('.modal-sim-content').style.display = 'block';
-            modal.querySelector('.modal-hotspot-content').style.display = 'none';
-            modal.querySelector('#modal-conferma').style.display = 'inline-block';
-            modal.querySelector('#modal-annulla').style.display = 'inline-block';
-            modal.querySelector('#modal-hotspot-chiudi').style.display = 'none';
-            
-            if (tipo === 'compra') {
-                modalTitle.innerText = tr.simModalBuyTitle.replace('{coin}', data.nome);
-                modalInfo.innerText = tr.simModalInfo.replace('{price}', formatCurrency(parseFloat(data.prezzo)));
-                modalLiquidi.innerText = formatCurrency(portafoglio.liquidi);
-                modalLiquidi.parentElement.style.display = 'block';
-                modalInput.placeholder = tr.simModalAmount;
-            } else {
-                const quantita = portafoglio.crypto[data.id] || 0;
-                modalTitle.innerText = tr.simModalSellTitle.replace('{coin}', data.nome);
-                modalInfo.innerText = tr.simModalInfo.replace('{price}', formatCurrency(parseFloat(data.prezzo)));
-                modalLiquidi.innerText = tr.simAssetAvailable
-                    .replace('{amount}', formatCrypto(quantita))
-                    .replace('{symbol}', data.simbolo.toUpperCase());
-                modalLiquidi.parentElement.style.display = 'block';
-                modalInput.placeholder = tr.simModalAmount;
+
+            if (isNaN(importoEuro) || importoEuro <= 0) {
+                tradeErrorEl.innerText = tr.simErrorAmount;
+                tradeErrorEl.style.display = 'block';
+                return;
             }
+
+            if (!coinData || !coinData.eur) {
+                tradeErrorEl.innerText = tr.simApiError;
+                tradeErrorEl.style.display = 'block';
+                return;
+            }
+
+            const quantitaCrypto = importoEuro / coinData.eur;
+            
+            modalData = { tipo, coinId, importoEuro, quantitaCrypto, symbol: coinData.symbol };
+
+            if (tipo === 'compra') {
+                if (importoEuro > portafoglio.liquidi) {
+                    tradeErrorEl.innerText = tr.simErrorCash;
+                    tradeErrorEl.style.display = 'block';
+                    return;
+                }
+                modalTitle.innerText = tr.simModalBuyTitle;
+                modalInfo.innerHTML = tr.simModalInfo
+                    .replace('{action}', tr.simModalBuy)
+                    .replace('{amount}', formatCrypto(quantitaCrypto))
+                    .replace('{symbol}', coinData.symbol.toUpperCase())
+                    .replace('{eur}', formatCurrency(importoEuro));
+                modalLiquidi.innerText = formatCurrency(portafoglio.liquidi - importoEuro);
+                modalLiquidi.parentElement.style.display = 'block';
+            } else { // Vendi
+                const quantitaPosseduta = portafoglio.crypto[coinId] || 0;
+                if (quantitaCrypto > (quantitaPosseduta + 1e-9)) {
+                    tradeErrorEl.innerText = tr.simErrorAsset.replace('{symbol}', coinData.symbol.toUpperCase());
+                    tradeErrorEl.style.display = 'block';
+                    return;
+                }
+                modalTitle.innerText = tr.simModalSellTitle;
+                modalInfo.innerHTML = tr.simModalInfo
+                    .replace('{action}', tr.simModalSell)
+                    .replace('{amount}', formatCrypto(quantitaCrypto))
+                    .replace('{symbol}', coinData.symbol.toUpperCase())
+                    .replace('{eur}', formatCurrency(importoEuro));
+                modalLiquidi.parentElement.style.display = 'none';
+            }
+            
             modal.style.display = "block";
-            modalInput.focus();
         }
 
         function eseguiTransazione() {
-            const tr = translations[currentLang];
-            const modalInput = document.getElementById('modal-input');
-            const modalError = document.getElementById('modal-error');
-            const importoEuro = parseFloat(modalInput.value);
-            const prezzo = parseFloat(modalData.prezzo);
-            const id = modalData.id;
+            const { tipo, coinId, importoEuro, quantitaCrypto } = modalData;
             
-            if (isNaN(importoEuro) || importoEuro <= 0) {
-                modalError.innerText = tr.simErrorAmount;
-                modalError.style.display = 'block';
-                return;
-            }
-            
-            if (modalData.tipo === 'compra') {
-                if (importoEuro > portafoglio.liquidi) {
-                    modalError.innerText = tr.simErrorCash;
-                    modalError.style.display = 'block';
-                    return;
-                }
-                const quantitaCrypto = importoEuro / prezzo;
+            if (tipo === 'compra') {
                 portafoglio.liquidi -= importoEuro;
-                portafoglio.crypto[id] = (portafoglio.crypto[id] || 0) + quantitaCrypto;
-            } else if (modalData.tipo === 'vendi') {
-                const quantitaCryptoDaVendere = importoEuro / prezzo;
-                const quantitaPosseduta = portafoglio.crypto[id] || 0;
-                
-                if (quantitaCryptoDaVendere > (quantitaPosseduta + 1e-9)) { 
-                    modalError.innerText = tr.simErrorAsset.replace('{symbol}', modalData.simbolo.toUpperCase());
-                    modalError.style.display = 'block';
-                    return;
-                }
+                portafoglio.crypto[coinId] = (portafoglio.crypto[coinId] || 0) + quantitaCrypto;
+            } else if (tipo === 'vendi') {
                 portafoglio.liquidi += importoEuro;
-                portafoglio.crypto[id] -= quantitaCryptoDaVendere;
+                portafoglio.crypto[coinId] -= quantitaCrypto;
             }
+            
+            document.getElementById('trade-amount').value = '';
             savePortafoglio();
             chiudiModal();
         }
@@ -1546,10 +1241,9 @@
             if (modal) modal.style.display = "none";
         }
 
-        // --- LOGICA GRAFICO TRADINGVIEW ---
+        // --- LOGICA GRAFICO TRADINGVIEW (ADATTIVO) ---
         function loadTradingViewWidget(lang) {
             if (typeof TradingView === 'undefined') {
-                console.warn("Libreria TradingView non ancora caricata, riprovo...");
                 setTimeout(() => loadTradingViewWidget(lang), 200);
                 return; 
             }
@@ -1559,6 +1253,9 @@
 
             container.innerHTML = '';
             
+            // *** NUOVA LOGICA GRAFICO ADATTIVO ***
+            const isMobile = window.innerWidth <= 768;
+
             new TradingView.widget({
                 "width": "100%",
                 "height": "100%",
@@ -1571,7 +1268,10 @@
                 "toolbar_bg": "#f9faff", 
                 "enable_publishing": false,
                 "allow_symbol_change": true,
-                "container_id": "tradingview_widget_container_inner"
+                "container_id": "tradingview_widget_container_inner",
+                // Nascondi le barre degli strumenti su mobile
+                "hide_side_toolbar": isMobile,
+                "hide_top_toolbar": isMobile
             });
         }
                 
@@ -1595,14 +1295,14 @@
                 }
             });
             
-            langButtons.forEach(btn => {
+            document.querySelectorAll('.lang-selector button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
             
             setupScrollAnimations();
             
             if (document.body.id === 'page-pratica') {
-                renderMercato(); 
+                renderPortafoglio(); 
                 loadTradingViewWidget(lang); 
             }
         }
