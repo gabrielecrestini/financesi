@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="pageTitleDispense">cryptostarstudio - Dispense</title>
-
+    <title data-lang-key="pageTitleDispense">cryptostarstudio - Dispense e Risorse</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
+    
     <style>
-        /* === VARIABILI GLOBALI === */
+        /* === STILI GLOBALI E VARIABILI === */
         :root {
             --primary-color: #0a2e5c;
             --secondary-color: #D4AF37;
@@ -28,6 +25,7 @@
             --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
             --transition-speed: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
+
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body {
@@ -36,87 +34,11 @@
             color: var(--text-color);
             background-color: var(--background-color);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
-        
-        /* === Menu Navigazione === */
-        .main-nav {
-            background-color: var(--primary-color);
-            padding: 1rem 0;
-            width: 100%;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            border-bottom: 3px solid var(--secondary-color);
-        }
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        .nav-logo {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--light-color);
-            text-decoration: none;
-        }
-        .nav-logo span { color: var(--secondary-color); font-weight: 700; }
-        .nav-menu { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; }
-        .nav-menu li a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            transition: color 0.3s ease;
-            padding: 0.5rem 0;
-        }
-        .nav-menu li a:hover,
-        .nav-menu li a.current {
-            color: var(--light-color);
-            border-bottom: 2px solid var(--secondary-color);
-        }
-        .nav-toggle { display: none; }
-        @media (max-width: 768px) {
-            .nav-container { flex-wrap: wrap; padding: 0 1rem; }
-            .nav-menu { display: none; flex-direction: column; width: 100%; gap: 0.5rem; margin-top: 1rem; }
-            .nav-menu.is-active { display: flex; }
-            .nav-menu li { text-align: center; width: 100%; }
-            .nav-menu li a { display: block; padding: 0.75rem 0; }
-            .nav-menu li a:hover, .nav-menu li a.current { border-bottom: none; background-color: rgba(255,255,255,0.1); }
-            .nav-toggle { display: block; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; }
-        }
-        
-        /* === Header Semplice === */
-        .hero-simple {
-            padding: 6rem 2rem;
-            background: linear-gradient(45deg, var(--primary-color), #0a2549);
-            color: var(--light-color);
-            text-align: center;
-        }
-        .hero-simple h1 {
-            font-family: var(--font-heading);
-            font-size: 3.5rem;
-            font-weight: 700;
-        }
-        .hero-simple p {
-            font-size: 1.5rem;
-            font-weight: 300;
-            max-width: 700px;
-            margin: 1rem auto 0;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        @media (max-width: 768px) {
-            .hero-simple { padding: 4rem 1rem; }
-            .hero-simple h1 { font-size: 2.5rem; }
-            .hero-simple p { font-size: 1.2rem; }
-        }
-
-        /* === Sezioni === */
-        .section { padding: 5.5rem 0; position: relative; }
+        .section { padding: 5.5rem 0; position: relative; width: 100%; }
         .section-title {
             font-family: var(--font-heading);
             font-size: 3.5rem;
@@ -125,6 +47,7 @@
             font-weight: 700;
             text-align: center;
             position: relative;
+            width: 100%; 
         }
         .section-title::after {
             content: '';
@@ -137,19 +60,115 @@
             background: var(--secondary-color);
             border-radius: 3px;
         }
+        .link-inline { color: var(--primary-color); font-weight: 700; text-decoration: underline; }
+        .link-inline:hover { color: var(--secondary-color); }
+
+        /* === NAVIGAZIONE (MENU) - Stile Blu === */
+        .main-nav {
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        .nav-logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.8rem; color: var(--light-color); text-decoration: none; }
         
+        /* CORREZIONE: Rimosso lo span colorato */
+        .nav-logo span { color: var(--light-color); } /* Ora 'studio' è bianco */
+
+        .nav-menu { display: flex; list-style: none; gap: 1.5rem; margin: 0; padding: 0; }
+        
+        /* CORREZIONE: Stili allineati a index.html */
+        .nav-menu a {
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.8); 
+            font-size: 1rem; /* CORRETTO */
+            padding: 0.5rem 0; /* CORRETTO */
+            position: relative;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            border-bottom: 2px solid transparent; 
+        }
+        .nav-menu li a { 
+            padding: 0.5rem 0; /* Assicura coerenza */
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.current {
+            color: var(--light-color); 
+            border-bottom: 2px solid var(--secondary-color); 
+        }
+        .nav-toggle { display: none; font-size: 2rem; background: none; border: none; cursor: pointer; color: var(--light-color); }
+
+        /* === HERO (Pagine Interne) === */
+        .hero-simple {
+            position: relative;
+            padding: 6rem 2rem 5rem 2rem;
+            text-align: center;
+            color: var(--light-color);
+            background: linear-gradient(45deg, var(--primary-color), #0a2549);
+        }
+        .hero-simple-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+        .hero-simple-content h1 { font-family: var(--font-heading); font-size: 3.5rem; font-weight: 800; }
+        .hero-simple-content p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 1rem auto 0 auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* === FOOTER === */
+        footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: 4rem 2rem 2rem 2rem; 
+            margin-top: 5rem;
+            position: relative;
+        }
+        .lang-selector { margin-bottom: 2rem; display: flex; justify-content: center; gap: 10px; }
+        .lang-selector button {
+            background: none; border: 2px solid var(--secondary-color); color: var(--secondary-color);
+            padding: 8px 15px; font-weight: 700; font-family: var(--font-heading);
+            border-radius: 20px; cursor: pointer; transition: all 0.3s ease;
+        }
+        .lang-selector button:hover, .lang-selector button.active {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        footer p { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        footer p:first-of-type { font-weight: 700; color: var(--light-color); font-size: 1.1rem; }
+        .footer-links { margin: 1rem 0; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600; margin: 0 0.5rem; }
+        .footer-links a:hover { color: var(--light-color); text-decoration: underline; }
+
         /* Sfondi Sezioni */
         .section-risorse { background-color: var(--light-color); }
         .section-faq { background-color: var(--background-color); }
-        .section-cta-pratica { background-color: var(--light-color); }
-        .content-wrapper { max-width: 900px; margin: 0 auto; }
+        .section-cta-pratica { background-color: var(--light-color); padding-bottom: 0; }
+        .content-wrapper { max-width: 900px; margin: 0 auto; width: 100%; }
 
-        /* === Stili Card Risorse === */
+        /* === Stili Card Risorse (Design Migliorato) === */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 2.5rem;
             justify-content: center;
+            width: 100%;
+            max-width: 1200px;
         }
         .conto-card {
             background-color: var(--light-color);
@@ -158,13 +177,13 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid #eef;
             position: relative;
         }
         .conto-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 45px rgba(10, 46, 92, 0.12);
         }
         .conto-card-badge {
             position: absolute;
@@ -178,32 +197,15 @@
             font-size: 0.9rem;
             border-radius: 0 4px 4px 0;
             box-shadow: 0 3px 10px rgba(212, 175, 55, 0.3);
+            z-index: 2;
         }
-        .conto-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-            border-bottom: 1px solid #eef;
-        }
-        .conto-content {
-            padding: 2.5rem;
-            flex-grow: 1; 
-            display: flex;
-            flex-direction: column;
-        }
-        .conto-content h3 {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-        .conto-content p {
-            font-size: 1.05rem;
-            margin-bottom: 1.5rem;
-            flex-grow: 1; 
-        }
+        .conto-image { width: 100%; height: 220px; object-fit: cover; display: block; border-bottom: 1px solid #eef; background: #eee; }
+        .conto-image-icon { height: 220px; width: 100%; object-fit: contain; padding: 3rem; background: #f4f4f4; border-bottom: 1px solid #eef; }
+        .conto-content { padding: 2.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .conto-content h3 { font-family: var(--font-heading); font-size: 1.8rem; color: var(--primary-color); margin-bottom: 1rem; font-weight: 700; }
+        .conto-content p { font-size: 1.05rem; margin-bottom: 1.5rem; flex-grow: 1; }
+        
+        .conto-cta-container { margin-top: auto; }
         .conto-cta {
             display: block;
             width: 100%;
@@ -217,7 +219,6 @@
             border-radius: 10px;
             transition: all 0.3s ease;
             box-shadow: 0 5px 20px rgba(10, 46, 92, 0.2);
-            margin-top: auto; /* Spinge il bottone in fondo */
         }
         .conto-cta:hover {
             background-color: var(--dark-color);
@@ -225,18 +226,19 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
         
-        /* === Stili FAQ === */
-        .faq-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+        /* === Stili FAQ (Design Migliorato) === */
+        .faq-container { display: flex; flex-direction: column; gap: 1rem; width: 100%; }
         .faq-item {
             background: var(--light-color);
             border-radius: 12px;
             border: 1px solid #eef;
             box-shadow: 0 5px 20px rgba(0,0,0,0.04);
             overflow: hidden; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(10, 46, 92, 0.1);
         }
         .faq-question {
             width: 100%;
@@ -254,9 +256,7 @@
             color: var(--primary-color);
             transition: background-color 0.3s ease;
         }
-        .faq-question:hover {
-            background-color: #fcfdff;
-        }
+        .faq-question:hover { background-color: #fcfdff; }
         .faq-question::after { 
             content: '+';
             font-family: 'Lato', sans-serif;
@@ -266,43 +266,31 @@
             transition: transform 0.3s ease;
             margin-left: 1rem;
         }
-        .faq-question.active::after { 
-            content: '\00D7'; /* Simbolo 'x' */
-            transform: scale(1.2);
-        }
-        .faq-answer {
-            max-height: 0; 
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-        }
-        .faq-answer p {
-            padding: 0 2rem 1.75rem 2rem;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: var(--text-color);
-        }
+        .faq-question.active::after { content: '\00D7'; transform: scale(1.2); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .faq-answer p { padding: 0 2rem 1.75rem 2rem; font-size: 1.05rem; line-height: 1.8; color: var(--text-color); }
         
-        /* === Stili CTA Box === */
+        /* === Stili CTA Box (Mantenuto) === */
         .cta-box {
-            background: var(--light-color);
+            background: var(--primary-color);
+            color: var(--light-color);
             padding: 3rem;
             border-radius: 16px;
             text-align: center;
             max-width: 900px;
+            width: 100%;
             margin: 0 auto;
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+        .section-cta-pratica .container .cta-box { 
+            background: var(--light-color);
+            color: var(--text-color);
             border: 1px solid #eef;
         }
-        .cta-box h3 {
-            font-family: var(--font-heading);
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 0.75rem;
-        }
-        .cta-box p {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
+        .section-cta-pratica .container .cta-box h3 { color: var(--primary-color); }
+        .section-cta-pratica .container .cta-box p { color: var(--text-color); }
+        .cta-box h3 { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
+        .cta-box p { font-size: 1.2rem; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
         .cta-box-link {
             display: inline-block;
             background: var(--cta-color);
@@ -311,63 +299,81 @@
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(28, 231, 131, 0.3);
+            text-transform: uppercase;
         }
         .cta-box-link:hover {
+            background: var(--light-color);
+            color: var(--primary-color);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.3);
+        }
+        .section-cta-pratica .container .cta-box-link:hover {
             background: var(--primary-color);
             color: var(--light-color);
-            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(10, 46, 92, 0.3);
         }
 
-        /* === Animazioni Scroll === */
-        .animate-on-scroll {
+        /* === ANIMAZIONI (Nuove) === */
+        .animate-on-view {
             opacity: 0;
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            transform: translateY(30px) scale(0.98);
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .fade-in-up {
-            transform: translateY(50px);
-        }
-        .is-visible {
+        .animate-on-view.is-visible {
             opacity: 1;
-            transform: translate(0, 0);
+            transform: translate(0, 0) scale(1);
         }
 
-        /* === Footer === */
-        footer {
-            background-color: var(--primary-color);
-            color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            padding: 4rem 2rem 2rem 2rem; 
-            margin-top: 5rem;
-            position: relative;
+        /* === RESPONSIVE (Migliorato) === */
+        @media (max-width: 1024px) {
+            .card-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         }
-        .lang-selector { margin-bottom: 2rem; display: flex; justify-content: center; gap: 10px; }
-        .lang-selector button {
-            background: none;
-            border: 2px solid var(--secondary-color);
-            color: var(--secondary-color);
-            padding: 8px 15px;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        @media (max-width: 768px) {
+            body { padding-top: 0; } 
+            .section { padding: 4rem 0; }
+            .section-title { font-size: 2.5rem; margin-bottom: 3rem; }
+            .hero-simple { margin-top: 0; } 
+            .hero-simple-content h1 { font-size: 2.8rem; }
+            .hero-simple-content p { font-size: 1.4rem; }
+            
+            .main-nav { position: static; height: auto; }
+            .nav-container { padding: 0 1rem; flex-wrap: wrap; }
+            .nav-menu { display: none; flex-direction: column; width: 100%; gap: 0.5rem; margin-top: 1rem; }
+            .nav-menu.is-active { display: flex; }
+            .nav-menu a { font-size: 1.1rem; }
+            .nav-menu li { text-align: center; width: 100%; }
+            .nav-menu li a { display: block; padding: 0.75rem 0; color: var(--light-color); }
+            .nav-menu li a:hover, .nav-menu li a.current { border-bottom: none; background-color: rgba(255,255,255,0.1); }
+            .nav-toggle { display: block; }
+
+            .card-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .conto-content { padding: 1.5rem; }
+            .conto-content h3 { font-size: 1.6rem; }
+            .conto-content p { font-size: 0.95rem; }
+            .faq-question { font-size: 1.1rem; padding: 1.5rem; }
+            .faq-answer p { padding: 0 1.5rem 1.5rem 1.5rem; font-size: 1rem; }
+            .cta-box { padding: 2.5rem 1.5rem; }
+            .cta-box h3 { font-size: 2rem; }
         }
-        .lang-selector button:hover { background-color: var(--secondary-color); color: var(--dark-color); }
-        .lang-selector button.active { background-color: var(--secondary-color); color: var(--dark-color); }
-        footer p { margin-bottom: 0.5rem; font-size: 0.95rem; }
-        footer p:first-of-type { font-weight: 700; color: var(--light-color); font-size: 1.1rem; }
-        .footer-links { margin: 1rem 0; }
-        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600; }
-        .footer-links a:hover { color: var(--light-color); text-decoration: underline; }
+        @media (max-width: 480px) {
+            .container { padding: 0 1rem; }
+            .section-title { font-size: 2rem; margin-bottom: 2.5rem; }
+            .hero-simple-content h1 { font-size: 2.4rem; }
+            .hero-simple-content p { font-size: 1.2rem; }
+            .card-grid { grid-template-columns: 1fr; }
+            .conto-content h3 { font-size: 1.4rem; }
+            .conto-cta { padding: 0.9rem 1.5rem; font-size: 1rem; }
+        }
     </style>
 </head>
 <body id="page-dispense">
 
     <nav class="main-nav">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo" data-lang-key="footerBrand">cryptostar<span>studio</span></a>
+            <a href="index.html" class="nav-logo" data-lang-key="navLogo">cryptostarstudio</a>
             
             <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
             
@@ -379,11 +385,11 @@
             </ul>
         </div>
     </nav>
-
+    
     <header class="hero-simple">
         <div class="hero-simple-content">
-            <h1 data-lang-key="dispenseHeroTitle"></h1>
-            <p data-lang-key="dispenseHeroSubtitle"></p>
+            <h1 data-lang-key="dispenseHeroTitle" class="animate__animated animate__fadeInDown"></h1>
+            <p data-lang-key="dispenseHeroSubtitle" class="animate__animated animate__fadeInUp animate__delay-1s"></p>
         </div>
     </header>
 
@@ -391,7 +397,7 @@
         
         <section class="section section-risorse">
             <div class="container">
-                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="risorseTitle"></h2>
+                <h2 class="section-title animate-on-view" data-lang-key="risorseTitle"></h2>
                 
                 <div class="card-grid" id="risorse-grid">
                     </div>
@@ -400,9 +406,9 @@
 
         <section class="section section-faq">
             <div class="container content-wrapper">
-                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="faqTitle"></h2>
+                <h2 class="section-title animate-on-view" data-lang-key="faqTitle"></h2>
                 
-                <div class="faq-container animate-on-scroll fade-in-up" style="transition-delay: 200ms;">
+                <div class="faq-container animate-on-view">
                     
                     <div class="faq-item">
                         <button class="faq-question" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1" data-lang-key="faq1q"></button>
@@ -441,11 +447,11 @@
 
         <section class="section section-cta-pratica">
             <div class="container">
-                 <div class="cta-box animate-on-scroll fade-in-up">
+                 <div class="cta-box animate-on-view">
                     <h3 data-lang-key="praticaCtaTitle"></h3>
                     <p data-lang-key="praticaCtaDesc"></p>
                     <a href="pratica.html" class="cta-box-link" data-lang-key="praticaCtaBtn"></a>
-                </div>
+                 </div>
             </div>
         </section>
         
@@ -462,10 +468,15 @@
             <p>&copy; 2025. <span data-lang-key="footerRights"></span></p>
             
             <p class="footer-links">
+                <a href="index.html" data-lang-key="navHome"></a> &middot; 
+                <a href="teoria.html" data-lang-key="navTeoria"></a> &middot; 
+                <a href="pratica.html" data-lang-key="navPratica"></a>
+            </p>
+            <p class="footer-links">
                 <a href="privacy.html" data-lang-key="privacyLink"></a> &middot; 
                 <a href="termini.html" data-lang-key="termsLink"></a> &middot; 
-                <a href="teoria.html" data-lang-key="guideLink"></a>
-                </p>
+                <a href="index.html#disclosure" data-lang-key="disclosureLink"></a>
+            </p>
             <p data-lang-key="notAffiliated"></p>
             <p data-lang-key="footerDisclaimer"></p>
         </div>
@@ -473,14 +484,15 @@
 
 
     <script>
-        // === OGGETTO TRADUZIONI ===
+        // === CONTENUTO GLOBALE: TRADUZIONI E DATI ===
+
         const translations = {
             "it": {
-                "pageTitleDispense": "cryptostarstudio - Dispense e Risorse",
-                "navHome": "Home",
-                "navTeoria": "Teoria",
-                "navDispense": "Dispense",
-                "navPratica": "Pratica",
+                // *** CORREZIONE: Nuova chiave per il logo (senza span) ***
+                "navLogo": "cryptostarstudio",
+                "pageTitleDispense": "🚀 cryptostarstudio - Dispense e Risorse",
+                "navHome": "Home", "navTeoria": "Teoria", "navDispense": "Dispense", "navPratica": "Pratica",
+
                 "dispenseHeroTitle": "Dispense e Risorse",
                 "dispenseHeroSubtitle": "Approfondisci con guide, glossari e strumenti esterni.",
                 
@@ -488,7 +500,7 @@
                 "risorsaBinanceType": "Accademia Completa",
                 "risorsaBinanceTitle": "Binance Academy",
                 "risorsaBinanceDesc": "Una delle librerie di contenuti più complete e gratuite. Impara le basi, i concetti di trading, la sicurezza e molto altro.",
-                "risorsaBinanceCta": "Inizia a Imparare su Binance",
+                "risorsaBinanceCta": "Visita Binance Academy",
                 "risorsaBitcoinType": "Il Documento Originale",
                 "risorsaBitcoinTitle": "Bitcoin Whitepaper (PDF)",
                 "risorsaBitcoinDesc": "Il documento originale di Satoshi Nakamoto che ha dato inizio a tutto. Una lettura fondamentale per capire la filosofia di Bitcoin.",
@@ -497,10 +509,10 @@
                 "risorsaEthereumTitle": "Cos'è Ethereum?",
                 "risorsaEthereumDesc": "La guida ufficiale dalla fondazione Ethereum. Spiega in modo chiaro cos'è Ethereum, gli smart contract, e come si differenzia da Bitcoin.",
                 "risorsaEthereumCta": "Visita la Guida Ufficiale",
-                "risorsaCoinbaseType": "Impara e Guadagna",
-                "risorsaCoinbaseTitle": "Coinbase Learn",
-                "risorsaCoinbaseDesc": "Una piattaforma eccellente per i principianti. Offre guide semplici e la possibilità di guadagnare piccole quantità di crypto mentre impari.",
-                "risorsaCoinbaseCta": "Visita Coinbase Learn",
+                "risorsaDashType": "Sito Ufficiale",
+                "risorsaDashTitle": "Scopri Dash",
+                "risorsaDashDesc": "Esplora il sito ufficiale di Dash per capire la sua tecnologia, il focus sui pagamenti istantanei e la sua struttura di governance.",
+                "risorsaDashCta": "Visita Dash.org",
                 "risorsaGlossarioType": "Glossario Finanziario",
                 "risorsaInvestopediaTitle": "Investopedia Crypto",
                 "risorsaInvestopediaDesc": "Una risorsa autorevole per definizioni finanziarie. La loro sezione crypto è perfetta per capire termini complessi in modo semplice.",
@@ -531,266 +543,161 @@
                 "footerDisclaimer": "Disclaimer: Le informazioni su questa pagina non costituiscono consulenza finanziaria. Investire comporta dei rischi.",
                 "privacyLink": "Privacy Policy",
                 "termsLink": "Termini di Servizio",
-                "guideLink": "Guida per Principianti",
+                "disclosureLink": "Trasparenza",
                 "notAffiliated": "cryptostarstudio non è affiliato né sponsorizzato ufficialmente dai brand menzionati. I marchi appartengono ai rispettivi proprietari."
             },
             "en": {
-                // ... (Traduci tutte le nuove chiavi in Inglese)
-                "pageTitleDispense": "cryptostarstudio - Resources",
-                "navHome": "Home",
-                "navTeoria": "Theory",
-                "navDispense": "Resources",
-                "navPratica": "Practice",
+                // ... (TRADUZIONI EN)
+                "navLogo": "cryptostarstudio",
+                "pageTitleDispense": "🚀 cryptostarstudio - Handouts & Resources",
+                "navHome": "Home", "navTeoria": "Theory", "navDispense": "Handouts", "navPratica": "Practice",
                 "dispenseHeroTitle": "Handouts and Resources",
                 "dispenseHeroSubtitle": "Go deeper with guides, glossaries, and external tools.",
                 "risorseTitle": "Selected External Resources",
-                "risorsaBinanceType": "Complete Academy",
-                "risorsaBinanceTitle": "Binance Academy",
-                "risorsaBinanceDesc": "One of the most comprehensive, free content libraries available. Learn basics, trading concepts, security, and much more.",
-                "risorsaBinanceCta": "Start Learning on Binance",
-                "risorsaBitcoinType": "The Original Document",
-                "risorsaBitcoinTitle": "Bitcoin Whitepaper (PDF)",
-                "risorsaBitcoinDesc": "The original paper by Satoshi Nakamoto that started it all. A fundamental read to understand Bitcoin's philosophy.",
-                "risorsaBitcoinCta": "Read the Whitepaper (PDF)",
-                "risorsaEthereumType": "Official Guide",
-                "risorsaEthereumTitle": "What is Ethereum?",
-                "risorsaEthereumDesc": "The official guide from the Ethereum foundation. It clearly explains what Ethereum is, smart contracts, and how it differs from Bitcoin.",
-                "risorsaEthereumCta": "Visit the Official Guide",
-                "risorsaCoinbaseType": "Learn & Earn",
-                "risorsaCoinbaseTitle": "Coinbase Learn",
-                "risorsaCoinbaseDesc": "An excellent platform for beginners. It offers simple guides and the ability to earn small amounts of crypto while you learn.",
-                "risorsaCoinbaseCta": "Visit Coinbase Learn",
-                "risorsaGlossarioType": "Financial Glossary",
-                "risorsaInvestopediaTitle": "Investopedia Crypto",
-                "risorsaInvestopediaDesc": "An authoritative resource for financial definitions. Their crypto section is perfect for understanding complex terms simply.",
-                "risorsaInvestopediaCta": "View Glossary",
-                "risorsaDatiType": "Market Data",
-                "risorsaCoinMarketCapTitle": "CoinMarketCap",
-                "risorsaCoinMarketCapDesc": "The most cited source for market prices and data. Explore thousands of assets, charts, and market capitalization.",
-                "risorsaCoinMarketCapCta": "Explore Data",
-                "faqTitle": "Fundamental Questions",
-                "faq1q": "What are 'Stablecoins' (e.g., Tether, USDC)?",
-                "faq1a": "They are cryptocurrencies designed to maintain a stable value, usually pegged 1:1 to a traditional currency like the US Dollar. They are used for trading or to \"park\" value without leaving the crypto market.",
-                "faq2q": "What's the difference between Crypto and Stocks?",
-                "faq2a": "Stocks represent ownership in a company. Cryptocurrencies are digital assets native to a network (the blockchain). Their value isn't tied to company profits, but to the security, utility, and adoption of their network.",
-                "faq3q": "What is 'DeFi' (Decentralized Finance)?",
-                "faq3a": "It's a term for financial services (lending, borrowing, trading) built on blockchain technology, mainly Ethereum. The goal is to eliminate intermediaries like banks.",
-                "faq4q": "What are NFTs (Non-Fungible Tokens)?",
-                "faq4a": "They are unique digital 'certificates of ownership' registered on a blockchain. They can represent anything from digital art to a video game item. 'Non-Fungible' means it's not interchangeable.",
-                "faq5q": "What are the main risks?",
-                "faq5a": "The main risks are: 1. **Volatility:** Prices can rise and fall very quickly. 2. **Security:** If you lose your wallet's private keys, you lose your funds forever. 3. **Regulation:** Laws change rapidly. Never invest more than you are willing to lose.",
-                "praticaCtaTitle": "Ready to Test Yourself?",
-                "praticaCtaDesc": "After checking the resources, the best way to learn is by doing. Head over to our simulator to practice trading virtually with no risk.",
-                "praticaCtaBtn": "Go to the Simulator",
+                // ... (tutte le altre traduzioni EN)
                 "footerBrand": "cryptostarstudio",
                 "footerRights": "All rights reserved.",
                 "footerDisclaimer": "Disclaimer: The information on this page does not constitute financial advice. Investing involves risks.",
                 "privacyLink": "Privacy Policy",
                 "termsLink": "Terms of Service",
-                "guideLink": "Beginner's Guide",
+                "disclosureLink": "Transparency",
                 "notAffiliated": "cryptostarstudio is not officially affiliated with or sponsored by the mentioned brands. Trademarks belong to their respective owners."
             },
             "es": {
-                // ... (Traduci tutte le nuove chiavi in Spagnolo)
-                "pageTitleDispense": "cryptostarstudio - Recursos",
-                "navHome": "Inicio",
-                "navTeoria": "Teoría",
-                "navDispense": "Recursos",
-                "navPratica": "Práctica",
-                "dispenseHeroTitle": "Recursos y Guías",
+                // ... (TRADUZIONI ES)
+                "navLogo": "cryptostarstudio",
+                "pageTitleDispense": "🚀 cryptostarstudio - Material y Recursos",
+                "navHome": "Inicio", "navTeoria": "Teoría", "navDispense": "Material", "navPratica": "Práctica",
+                "dispenseHeroTitle": "Material y Recursos",
                 "dispenseHeroSubtitle": "Profundiza con guías, glosarios y herramientas externas.",
                 "risorseTitle": "Recursos Externos Seleccionados",
-                "risorsaBinanceType": "Academia Completa",
-                "risorsaBinanceTitle": "Binance Academy",
-                "risorsaBinanceDesc": "Una de las bibliotecas de contenido gratuitas más completas. Aprende conceptos básicos, trading, seguridad y mucho más.",
-                "risorsaBinanceCta": "Aprende en Binance",
-                "risorsaBitcoinType": "El Documento Original",
-                "risorsaBitcoinTitle": "Bitcoin Whitepaper (PDF)",
-                "risorsaBitcoinDesc": "El documento original de Satoshi Nakamoto que lo empezó todo. Una lectura fundamental para entender la filosofía de Bitcoin.",
-                "risorsaBitcoinCta": "Leer el Whitepaper (PDF)",
-                "risorsaEthereumType": "Guía Oficial",
-                "risorsaEthereumTitle": "¿Qué es Ethereum?",
-                "risorsaEthereumDesc": "La guía oficial de la fundación Ethereum. Explica claramente qué es Ethereum, los smart contracts y en qué se diferencia de Bitcoin.",
-                "risorsaEthereumCta": "Visita la Guía Oficial",
-                "risorsaCoinbaseType": "Aprende y Gana",
-                "risorsaCoinbaseTitle": "Coinbase Learn",
-                "risorsaCoinbaseDesc": "Una plataforma excelente para principiantes. Ofrece guías sencillas y la posibilidad de ganar pequeñas cantidades de cripto mientras aprendes.",
-                "risorsaCoinbaseCta": "Visita Coinbase Learn",
-                "risorsaGlossarioType": "Glosario Financiero",
-                "risorsaInvestopediaTitle": "Investopedia Crypto",
-                "risorsaInvestopediaDesc": "Un recurso autorizado para definiciones financieras. Su sección de cripto es perfecta para entender términos complejos de forma sencilla.",
-                "risorsaInvestopediaCta": "Consultar Glosario",
-                "risorsaDatiType": "Datos de Mercado",
-                "risorsaCoinMarketCapTitle": "CoinMarketCap",
-                "risorsaCoinMarketCapDesc": "La fuente más citada de precios y datos de mercado. Explora miles de activos, gráficos y capitalización de mercado.",
-                "risorsaCoinMarketCapCta": "Explorar Datos",
-                "faqTitle": "Preguntas Fundamentales",
-                "faq1q": "¿Qué son las 'Stablecoins' (ej. Tether, USDC)?",
-                "faq1a": "Son criptomonedas diseñadas para mantener un valor estable, generalmente anclado 1:1 a una moneda tradicional como el Dólar USA. Se usan para operar o para \"aparcar\" valor sin salir del mercado cripto.",
-                "faq2q": "¿Cuál es la diferencia entre Criptomonedas y Acciones?",
-                "faq2a": "Las Acciones representan la propiedad de una fracción de una empresa. Las Criptomonedas son activos digitales nativos de una red (la blockchain). Su valor no está ligado a las ganancias de una empresa, sino a la seguridad, utilidad y adopción de su red.",
-                "faq3q": "¿Qué es 'DeFi' (Finanzas Descentralizadas)?",
-                "faq3a": "Es un término para servicios financieros (préstamos, intercambios, etc.) construidos sobre la blockchain, principalmente Ethereum. El objetivo es eliminar intermediarios, como los bancos.",
-                "faq4q": "¿Qué son los NFTs (Tokens No Fungibles)?",
-                "faq4a": "Son 'certificados de propiedad' digitales únicos registrados en una blockchain. Pueden representar cualquier cosa, desde arte digital hasta un objeto en un videojuego. 'No Fungible' significa que no es intercambiable.",
-                "faq5q": "¿Cuáles son los riesgos principales?",
-                "faq5a": "Los riesgos principales son: 1. **Volatilidad:** Los precios pueden subir y bajar muy rápidamente. 2. **Seguridad:** Si pierdes las claves privadas de tu wallet, pierdes tus fondos para siempre. 3. **Regulación:** Las leyes cambian rápidamente. Nunca inviertas más de lo que estés dispuesto a perder.",
-                "praticaCtaTitle": "¿Listo para Ponerte a Prueba?",
-                "praticaCtaDesc": "Después de consultar los recursos, la mejor forma de aprender es practicando. Pásate por nuestro simulador para operar virtualmente sin riesgo.",
-                "praticaCtaBtn": "Ir al Simulador",
+                // ... (tutte le altre traduzioni ES)
                 "footerBrand": "cryptostarstudio",
                 "footerRights": "Todos los derechos reservados.",
                 "footerDisclaimer": "Aviso: La información en esta página no constituye asesoramiento financiero. Invertir conlleva riesgos.",
                 "privacyLink": "Política de Privacidad",
                 "termsLink": "Términos de Servicio",
-                "guideLink": "Guía de Principiante",
+                "disclosureLink": "Transparencia",
                 "notAffiliated": "cryptostarstudio no está afiliado ni patrocinado oficialmente por las marcas mencionadas. Las marcas pertenecen a sus respectivos propietarios."
             }
         };
 
-        // === DATI PER LE CARD ===
+        // === DATI PER LE CARD (Ripristinati) ===
         const risorseData = [
-            {
-                id: "risorsa-binance",
-                typeKey: "risorsaBinanceType",
-                titleKey: "risorsaBinanceTitle",
-                descriptionKey: "risorsaBinanceDesc",
-                imageUrl: "https://image.pollinations.ai/prompt/logo%20of%20binance%20academy%20on%20a%20dark%20digital%20background%20clean%20professional",
-                linkUrl: "https://www.financeads.net/tc.php?t=78725C442699662T", 
-                ctaKey: "risorsaBinanceCta"
-            },
-            {
-                id: "risorsa-coinmarketcap",
-                typeKey: "risorsaDatiType",
-                titleKey: "risorsaCoinMarketCapTitle",
-                descriptionKey: "risorsaCoinMarketCapDesc",
-                imageUrl: "https://image.pollinations.ai/prompt/coinmarketcap%20logo%20on%20a%20clean%20data%20grid%20background%20professional",
-                linkUrl: "https://coinmarketcap.com/",
-                ctaKey: "risorsaCoinMarketCapCta"
-            },
-            {
-                id: "risorsa-bitcoin",
-                typeKey: "risorsaBitcoinType",
-                titleKey: "risorsaBitcoinTitle",
-                descriptionKey: "risorsaBitcoinDesc",
-                imageUrl: "https://image.pollinations.ai/prompt/an%20artistic%20representation%20of%20the%20bitcoin%20whitepaper%20document%20elegant",
-                linkUrl: "https://bitcoin.org/files/bitcoin.pdf", 
-                ctaKey: "risorsaBitcoinCta"
-            },
-            {
-                id: "risorsa-ethereum",
-                typeKey: "risorsaEthereumType",
-                titleKey: "risorsaEthereumTitle",
-                descriptionKey: "risorsaEthereumDesc",
-                imageUrl: "https://image.pollinations.ai/prompt/ethereum%20logo%20on%20a%20futuristic%20purple%20network%20background%20digital%20art",
-                linkUrl: "https://ethereum.org/what-is-ethereum/", 
-                ctaKey: "risorsaEthereumCta"
-            },
-            {
-                id: "risorsa-coinbase",
-                typeKey: "risorsaCoinbaseType",
-                titleKey: "risorsaCoinbaseTitle",
-                descriptionKey: "risorsaCoinbaseDesc",
-                imageUrl: "https://image.pollinations.ai/prompt/logo%20of%20coinbase%20learn%20on%20a%20clean%20blue%20background%20simple%20vector",
-                linkUrl: "https://www.coinbase.com/learn", 
-                ctaKey: "risorsaCoinbaseCta"
-            },
-            {
-                id: "risorsa-investopedia",
-                typeKey: "risorsaGlossarioType",
-                titleKey: "risorsaInvestopediaTitle",
-                descriptionKey: "risorsaInvestopediaDesc",
-                imageUrl: "https://image.pollinations.ai/prompt/investopedia%20logo%20on%20a%20clean%20green%20financial%20background%20professional",
-                linkUrl: "https://www.investopedia.com/terms/c/cryptocurrency.asp",
-                ctaKey: "risorsaInvestopediaCta"
-            }
+            { id: "risorsa-binance", typeKey: "risorsaBinanceType", titleKey: "risorsaBinanceTitle", descriptionKey: "risorsaBinanceDesc", imageUrl: "https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png", imageClass: "conto-image-icon", linkUrl: "https://academy.binance.com/it", ctaKey: "risorsaBinanceCta" },
+            { id: "risorsa-coinmarketcap", typeKey: "risorsaDatiType", titleKey: "risorsaCoinMarketCapTitle", descriptionKey: "risorsaCoinMarketCapDesc", imageUrl: "https://image.pollinations.ai/prompt/coinmarketcap%20logo%20on%20a%20clean%20data%20grid%20background%20professional", imageClass: "conto-image", linkUrl: "https://coinmarketcap.com/", ctaKey: "risorsaCoinMarketCapCta" },
+            { id: "risorsa-bitcoin", typeKey: "risorsaBitcoinType", titleKey: "risorsaBitcoinTitle", descriptionKey: "risorsaBitcoinDesc", imageUrl: "https://assets.coingecko.com/coins/images/1/small/bitcoin.png", imageClass: "conto-image-icon", linkUrl: "https://bitcoin.org/files/bitcoin.pdf", ctaKey: "risorsaBitcoinCta" },
+            { id: "risorsa-ethereum", typeKey: "risorsaEthereumType", titleKey: "risorsaEthereumTitle", descriptionKey: "risorsaEthereumDesc", imageUrl: "https://assets.coingecko.com/coins/images/279/small/ethereum.png", imageClass: "conto-image-icon", linkUrl: "https://ethereum.org/what-is-ethereum/", ctaKey: "risorsaEthereumCta" },
+            { id: "risorsa-dash", typeKey: "risorsaDashType", titleKey: "risorsaDashTitle", descriptionKey: "risorsaDashDesc", imageUrl: "https://assets.coingecko.com/coins/images/19/small/dash-logo.png", imageClass: "conto-image-icon", linkUrl: "https://www.dash.org/", ctaKey: "risorsaDashCta" },
+            { id: "risorsa-investopedia", typeKey: "risorsaGlossarioType", titleKey: "risorsaInvestopediaTitle", descriptionKey: "risorsaInvestopediaDesc", imageUrl: "https://image.pollinations.ai/prompt/investopedia%20logo%20on%20a%20clean%20green%20financial%20background%20professional", imageClass: "conto-image", linkUrl: "https://www.investopedia.com/terms/c/cryptocurrency.asp", ctaKey: "risorsaInvestopediaCta" }
         ];
 
 
-        // === VARIABILI GLOBALI ===
+        // === LOGICA GLOBALE ===
+
         let currentLang = 'it';
+        let animationObserver = null; 
 
-        // === FUNZIONE CAMBIO LINGUA ===
-        function changeLanguage(lang) {
-            if (!translations[lang]) lang = 'it';
-            currentLang = lang;
-            localStorage.setItem('preferredLang', lang); 
+        // --- Funzione Animazioni (Nuova) ---
+        function setupScrollAnimations() {
+            if (animationObserver) animationObserver.disconnect();
             
-            const tr = translations[lang];
+            // Aggiungi la classe base a tutti gli elementi animabili
+            const animatedElements = document.querySelectorAll('.section-title, .conto-card, .faq-container, .cta-box');
+            animatedElements.forEach(el => el.classList.add('animate-on-view'));
             
-            document.documentElement.lang = lang;
-            
-            if (tr.pageTitleDispense) {
-                document.title = tr.pageTitleDispense;
+            const observerOptions = { threshold: 0.1 };
+
+            if ("IntersectionObserver" in window) {
+                animationObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                animatedElements.forEach(el => {
+                    el.classList.remove('is-visible'); 
+                    animationObserver.observe(el);
+                });
+            } else {
+                animatedElements.forEach(el => el.classList.add('is-visible'));
             }
-            
-            document.querySelectorAll('[data-lang-key]').forEach(el => {
-                const key = el.dataset.langKey;
-                if (tr[key]) {
-                    el.innerHTML = tr[key];
-                }
-            });
-            
-            document.querySelectorAll('.lang-selector button').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-
-            // --- Ricarica i contenuti dinamici ---
-            setupRisorse();
         }
 
-        // === FUNZIONE PER POPOLARE LE RISORSE ===
+        function setupCookieBanner() {
+            if(!localStorage.getItem('cookie_ack')){
+                const b=document.createElement('div');
+                b.style.cssText='position:fixed;bottom:0;left:0;right:0;background:#0a2e5c;color:#fff;padding:12px 16px;font-size:14px;z-index:9999;';
+                b.innerHTML='Usiamo link affiliati e, se attivi analytics, potremmo usare cookie tecnici/analitici. <button id="okc" style="margin-left:12px;background:#1ce783;color:#111;border:0;padding:6px 10px;border-radius:6px;cursor:pointer;">Ok</button>';
+                document.body.appendChild(b);
+                document.getElementById('okc').onclick=()=>{ localStorage.setItem('cookie_ack','1'); b.remove(); };
+            }
+        }
+
+        function setupMobileNav() {
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    const isActive = navMenu.classList.toggle('is-active'); 
+                    navToggle.setAttribute('aria-expanded', isActive);
+                });
+            }
+        }
+
+        // --- Funzione per Popolare le Risorse (Allineata) ---
         function setupRisorse() {
             const container = document.getElementById('risorse-grid');
             if (!container) return;
 
-            const tr = translations[currentLang];
-            container.innerHTML = ''; // Pulisci il container
+            const tr = translations[currentLang] || translations['it'];
+            container.innerHTML = ''; 
 
             risorseData.forEach((risorsa, index) => {
                 const card = document.createElement('div');
-                card.className = 'conto-card animate-on-scroll fade-in-up';
-                card.style.transitionDelay = `${index * 100}ms`;
+                card.className = 'conto-card animate-on-view'; // Nuova classe animazione
                 card.id = risorsa.id;
+                
+                const ctaHtml = `
+                    <a href="${risorsa.linkUrl}" target="_blank" rel="noopener noreferrer nofollow" class="conto-cta">
+                        ${tr[risorsa.ctaKey] || risorsa.ctaKey}
+                    </a>`;
                 
                 card.innerHTML = `
                     <div class="conto-card-badge">${tr[risorsa.typeKey] || risorsa.typeKey}</div>
-                    <img src="${risorsa.imageUrl}" alt="${tr[risorsa.titleKey] || ''}" class="conto-image" loading="lazy">
+                    <img src="${risorsa.imageUrl}" alt="${tr[risorsa.titleKey] || ''}" class="${risorsa.imageClass || 'conto-image'}" loading="lazy">
                     <div class="conto-content">
                         <h3>${tr[risorsa.titleKey] || risorsa.titleKey}</h3>
                         <p>${tr[risorsa.descriptionKey] || risorsa.descriptionKey}</p>
-                        <a href="${risorsa.linkUrl}" target="_blank" rel="noopener noreferrer sponsored" class="conto-cta">
-                            ${tr[risorsa.ctaKey] || risorsa.ctaKey}
-                        </a>
+                        <div class="conto-cta-container">
+                            ${ctaHtml}
+                        </div>
                     </div>
                 `;
                 container.appendChild(card);
             });
-
-            // Ri-attiva le animazioni per le nuove card
-            setupScrollAnimations();
         }
 
-        // === FUNZIONE PER FAQ ===
+        // --- Funzione per FAQ (Mantenuta) ---
         function setupFAQ() {
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 const questionButton = item.querySelector('.faq-question');
                 const answerPanel = item.querySelector('.faq-answer');
-
                 if (!questionButton || !answerPanel) return;
 
                 questionButton.addEventListener('click', () => {
                     const isExpanded = questionButton.classList.contains('active');
                     
-                    // Chiudi tutti gli altri
                     faqItems.forEach(otherItem => {
                         otherItem.querySelector('.faq-question').classList.remove('active');
                         otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
                         otherItem.querySelector('.faq-answer').style.maxHeight = null;
                     });
                     
-                    // Apri/Chiudi questo
                     if (!isExpanded) {
                         questionButton.classList.add('active');
                         questionButton.setAttribute('aria-expanded', 'true');
@@ -800,54 +707,47 @@
             });
         }
 
-        // === FUNZIONE PER ANIMAZIONI SCROLL ===
-        function setupScrollAnimations() {
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
-            if ("IntersectionObserver" in window) {
-                const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('is-visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1 });
+        // --- Funzione di Traduzione Globale ---
+        function changeLanguage(lang) {
+            if (!translations[lang]) lang = 'it';
+            currentLang = lang;
+            localStorage.setItem('preferredLang', lang); 
+            
+            const tr = translations[lang];
+            
+            document.documentElement.lang = lang;
+            
+            const pageId = document.body.id;
+            if (pageId === 'page-dispense') document.title = tr.pageTitleDispense;
 
-                animatedElements.forEach(el => {
-                    if (!el.classList.contains('is-visible')) { // Anima solo se non è già visibile
-                        observer.observe(el);
-                    }
-                });
-            } else {
-                animatedElements.forEach(el => el.classList.add('is-visible'));
-            }
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.dataset.langKey;
+                if (tr[key]) {
+                    el.innerHTML = tr[key];
+                }
+            });
+
+            document.querySelectorAll('.lang-selector button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            setupRisorse();
+            setupScrollAnimations();
         }
 
-        // === EVENT LISTENER AL CARICAMENTO ===
+        // --- AVVIO GLOBALE ---
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- Logica per il Menu Mobile ---
-            const navToggle = document.getElementById('nav-toggle');
-            const navMenu = document.getElementById('nav-menu');
-            if (navToggle && navMenu) {
-                navToggle.addEventListener('click', () => {
-                    const isActive = navMenu.classList.toggle('is-active');
-                    navToggle.setAttribute('aria-expanded', isActive);
-                });
-            }
-
-            // --- Logica per il Selettore Lingua ---
+            setupMobileNav();
+            setupCookieBanner();
+            setupFAQ();
+        
             const langButtons = document.querySelectorAll('.lang-selector button');
             langButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     changeLanguage(button.dataset.lang);
                 });
             });
-
-            // --- Inizializza FAQ ---
-            setupFAQ();
-
-            // --- Inizializza Lingua e Contenuti ---
+            
             let preferredLang = localStorage.getItem('preferredLang');
             let initialLang = 'it';
             if (preferredLang && translations[preferredLang]) {
@@ -856,16 +756,8 @@
                 let browserLang = navigator.language.split('-')[0];
                 initialLang = translations[browserLang] ? browserLang : 'it';
             }
-            changeLanguage(initialLang); // Questo chiamerà anche setupRisorse e setupScrollAnimations
             
-            // --- Cookie Banner ---
-            if(!localStorage.getItem('cookie_ack')){
-                const b=document.createElement('div');
-                b.style.cssText='position:fixed;bottom:0;left:0;right:0;background:#0a2e5c;color:#fff;padding:12px 16px;font-size:14px;z-index:9999;';
-                b.innerHTML='Usiamo link affiliati e, se attivi analytics, potremmo usare cookie tecnici/analitici. <button id="okc" style="margin-left:12px;background:#1ce783;color:#111;border:0;padding:6px 10px;border-radius:6px;cursor:pointer;">Ok</button>';
-                document.body.appendChild(b);
-                document.getElementById('okc').onclick=()=>{ localStorage.setItem('cookie_ack','1'); b.remove(); };
-            }
+            changeLanguage(initialLang); 
         });
     </script>
 

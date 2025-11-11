@@ -259,14 +259,12 @@
         .osservazione-grafico-box {
             background: var(--light-color);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 1.5rem; 
             box-shadow: var(--card-shadow);
-            height: 500px; /* --- MODIFICA: Ridotto da 600px --- */
+            height: 500px; 
             border: 1px solid #eef;
             overflow: hidden; 
             min-width: 0; 
-            display: flex;
-            flex-direction: column;
         }
         .osservazione-guida-box {
             background: var(--light-color);
@@ -275,32 +273,31 @@
             box-shadow: var(--card-shadow);
             border: 1px solid #eef;
         }
-        .osservazione-sub-title {
+        /* Titolo secondario generico */
+        .subsection-title {
             font-family: var(--font-heading);
-            font-size: 1.8rem; /* --- MODIFICA: Ridotto da 2rem --- */
+            font-size: 1.8rem; 
             color: var(--primary-color);
             font-weight: 700;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid #eef;
-            flex-shrink: 0; 
         }
         .guida-passo {
-            margin-bottom: 1.25rem; /* --- MODIFICA: Ridotto da 1.5rem --- */
+            margin-bottom: 1.25rem; 
         }
         .guida-passo h4 {
             font-family: var(--font-heading);
-            font-size: 1.15rem; /* --- MODIFICA: Ridotto da 1.3rem --- */
+            font-size: 1.15rem; 
             font-weight: 700;
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
         .guida-passo p {
-            font-size: 0.95rem; /* --- MODIFICA: Ridotto da 1rem --- */
+            font-size: 0.95rem; 
             line-height: 1.6;
             color: var(--text-color);
         }
-        /* Stile per il CTA Kraken nella guida */
         .guida-cta {
             display: inline-block;
             background: var(--kraken-color);
@@ -314,13 +311,12 @@
             margin-top: 0.5rem;
         }
         .guida-cta:hover {
-            background: #4130A0; /* Kraken scurito */
+            background: #4130A0; 
             transform: scale(1.05);
         }
         .tradingview-widget-container {
-            flex-grow: 1; 
             width: 100%;
-            min-height: 0; 
+            height: 100%; /* Occupa il 100% del box genitore */
         }
 
         /* === STILI SIMULATORE (Pagina Pratica) === */
@@ -338,7 +334,6 @@
             box-shadow: var(--card-shadow);
             margin-top: 0; 
             min-width: 0; 
-            /* height e max-height rimossi, la lista è corta */
         }
         #portafoglio-container {
             background: var(--light-color);
@@ -360,15 +355,8 @@
             flex-shrink: 0;
         }
         
-        /* Barra di Ricerca e Lista Mercato RIMOSSE/SEMPLIFICATE */
-        .sim-search-input { display: none; } /* Nascosto */
-        #mercato-list {
-            /* overflow-y: auto; -- RIMOSSO -- */
-        }
-        #mercato-list h3 { /* Titoli "Profittevoli" rimossi */
-           display: none;
-        }
-
+        .sim-search-input { display: none; } 
+        #mercato-list h3 { display: none; }
 
         .portafoglio-valori { margin-bottom: 2rem; }
         .portafoglio-valori p {
@@ -388,8 +376,16 @@
         }
         #portfolio-valore-totale {
             color: var(--cta-color);
-            margin-bottom: 1rem;
         }
+        #portfolio-pl {
+            font-size: 1.8rem; 
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .profitto-positivo { color: var(--success-color); }
+        .profitto-negativo { color: var(--danger-color); }
+        .profitto-neutro { color: var(--text-color); }
+        
         #portfolio-liquidi {
             font-size: 1.8rem;
             color: var(--text-color);
@@ -484,7 +480,8 @@
             margin-bottom: 1rem;
             text-align: center;
         }
-        .portfolio-cta-box .btn-sim { 
+        /* --- CORREZIONE BOTTONI CTA --- */
+        .portfolio-cta-box .btn-cta { 
             display: block;
             width: 100%;
             text-align: center;
@@ -492,28 +489,32 @@
             padding: 0.8rem 1rem;
             margin-bottom: 0.5rem;
             text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white; /* Assicura testo bianco */
         }
         .btn-cta-kraken {
             background: var(--kraken-color); 
-            color: white;
         }
         .btn-cta-kraken:hover {
             background: #4130A0;
         }
         .btn-cta-youhodler {
             background: var(--youhodler-color); 
-            color: white;
         }
         .btn-cta-youhodler:hover {
             background: #18609C;
         }
         .btn-cta-bitpanda { 
             background: var(--bitpanda-color); 
-            color: white;
         }
         .btn-cta-bitpanda:hover { 
             background: #0e8c5a;
         }
+        /* --- FINE CORREZIONE --- */
 
         #reset-sim-btn {
             background: none;
@@ -526,6 +527,7 @@
             transition: all 0.3s ease;
             margin-top: 1.5rem;
             display: inline-block;
+            width: 100%;
         }
         #reset-sim-btn:hover { background: var(--primary-color); color: var(--light-color); }
 
@@ -690,7 +692,7 @@
             }
             #mercato-container {
                 height: auto; 
-                max-height: none; /* Rimuovi max-height, la lista è corta */
+                max-height: none; 
             }
         }
 
@@ -756,12 +758,18 @@
 
             .btn-sim { padding: 0.75rem; }
             .portafoglio-valori strong { font-size: 2.2rem; }
+            #portfolio-pl { font-size: 1.6rem; } 
             .portafoglio-valori #portfolio-liquidi { font-size: 1.3rem; }
             .modal-content { padding: 2rem 1.5rem; }
             .modal-content h3 { font-size: 1.6rem; }
             
-            .osservazione-grafico-box { padding: 1rem; height: 400px; }
-            .osservazione-sub-title { font-size: 1.8rem; }
+            .osservazione-grafico-box { 
+                padding: 1rem 0.5rem; 
+                height: 350px; 
+            }
+            .subsection-title { font-size: 1.6rem; } 
+            .guida-passo h4 { font-size: 1.1rem; }
+            .guida-passo p { font-size: 0.9rem; line-height: 1.5; }
         }
     </style>
 </head>
@@ -795,33 +803,37 @@
             <div class="container">
                 <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="osservazioneTitle"></h2>
                 <div class="osservazione-container">
-                    <div class="osservazione-grafico-box animate-on-scroll fade-in-up">
-                        <h3 class="osservazione-sub-title" data-lang-key="osservazioneGraficoTitle"></h3>
-                        <div class="tradingview-widget-container" id="tradingview_widget_container_inner">
-                            </div>
+                    <div class="animate-on-scroll fade-in-up">
+                        <h3 class="subsection-title" data-lang-key="osservazioneGraficoTitle"></h3>
+                        <div class="osservazione-grafico-box">
+                            <div class="tradingview-widget-container" id="tradingview_widget_container_inner">
+                                </div>
+                        </div>
                     </div>
-                    <div class="osservazione-guida-box animate-on-scroll fade-in-up" style="transition-delay: 200ms;">
-                        <h3 class="osservazione-sub-title" data-lang-key="guidaBoxTitle"></h3>
-                        <div class="guida-passo">
-                            <h4 data-lang-key="guida1Title"></h4>
-                            <p data-lang-key="guida1Desc"></p>
-                        </div>
-                        <div class="guida-passo">
-                            <h4 data-lang-key="guida2Title"></h4>
-                            <p data-lang-key="guida2Desc"></p>
-                        </div>
-                        <div class="guida-passo">
-                            <h4 data-lang-key="guida3Title"></h4>
-                            <p data-lang-key="guida3Desc"></p>
-                        </div>
-                        <div class="guida-passo">
-                            <h4 data-lang-key="guida4Title"></h4>
-                            <p data-lang-key="guida4Desc"></p>
-                        </div>
-                        <div class="guida-passo">
-                            <h4 data-lang-key="guida5Title"></h4>
-                            <p data-lang-key="guida5Desc"></p>
-                            <a href="index.html#app-kraken" target="_blank" rel="noopener noreferrer sponsored" class="guida-cta" data-lang-key="guida5Cta"></a>
+                    <div class="animate-on-scroll fade-in-up" style="transition-delay: 200ms;">
+                         <h3 class="subsection-title" data-lang-key="guidaBoxTitle"></h3>
+                        <div class="osservazione-guida-box">
+                            <div class="guida-passo">
+                                <h4 data-lang-key="guida1Title"></h4>
+                                <p data-lang-key="guida1Desc"></p>
+                            </div>
+                            <div class="guida-passo">
+                                <h4 data-lang-key="guida2Title"></h4>
+                                <p data-lang-key="guida2Desc"></p>
+                            </div>
+                            <div class="guida-passo">
+                                <h4 data-lang-key="guida3Title"></h4>
+                                <p data-lang-key="guida3Desc"></p>
+                            </div>
+                            <div class="guida-passo">
+                                <h4 data-lang-key="guida4Title"></h4>
+                                <p data-lang-key="guida4Desc"></p>
+                            </div>
+                            <div class="guida-passo">
+                                <h4 data-lang-key="guida5Title"></h4>
+                                <p data-lang-key="guida5Desc"></p>
+                                <a href="index.html#app-kraken" target="_blank" rel="noopener noreferrer sponsored" class="guida-cta" data-lang-key="guida5Cta"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -834,6 +846,7 @@
                 <div class="simulatore-container">
                     <div id="mercato-container" class="animate-on-scroll fade-in-up">
                         <h3 class="simulatore-sub-title" data-lang-key="simMercatoTitle"></h3>
+                        
                         <div id="mercato-list">
                             <p data-lang-key="simLoading"></p>
                         </div>
@@ -843,6 +856,10 @@
                         <div class="portafoglio-valori">
                             <p data-lang-key="simTotalValue"></p>
                             <strong id="portfolio-valore-totale">€10,000.00</strong>
+                            
+                            <p data-lang-key="simPL"></p>
+                            <strong id="portfolio-pl" class="profitto-neutro">€0.00</strong>
+
                             <p data-lang-key="simCash"></p>
                             <strong id="portfolio-liquidi">€10,000.00</strong>
                         </div>
@@ -853,9 +870,9 @@
                         
                         <div class="portfolio-cta-box">
                             <h4 data-lang-key="simCtaTitle"></h4>
-                            <a href="index.html#app-kraken" target="_blank" rel="noopener noreferrer sponsored" class="btn-sim btn-cta-kraken" data-lang-key="simCtaKraken"></a>
-                            <a href="index.html#app-bitpanda" target="_blank" rel="noopener noreferrer sponsored" class="btn-sim btn-cta-bitpanda" data-lang-key="simCtaBitpanda"></a>
-                            <a href="index.html#app-youhodler" target="_blank" rel="noopener noreferrer sponsored" class="btn-sim btn-cta-youhodler" data-lang-key="simCtaYouHodler"></a>
+                            <a href="index.html#app-kraken" target="_blank" rel="noopener noreferrer sponsored" class="btn-cta btn-cta-kraken" data-lang-key="simCtaKraken"></a>
+                            <a href="index.html#app-bitpanda" target="_blank" rel="noopener noreferrer sponsored" class="btn-cta btn-cta-bitpanda" data-lang-key="simCtaBitpanda"></a>
+                            <a href="index.html#app-youhodler" target="_blank" rel="noopener noreferrer sponsored" class="btn-cta btn-cta-youhodler" data-lang-key="simCtaYouHodler"></a>
                         </div>
                         <button id="reset-sim-btn" data-lang-key="simReset"></button>
                     </div>
@@ -960,13 +977,11 @@
 
                 "simTitle": "2. Campo di Addestramento",
                 "simMercatoTitle": "Mercato Selezionato",
-                "simSearchPlaceholder": "Cerca valuta (es. Bitcoin, BTC)...",
-                "simMarketPositive": "Profittevoli (24h)",
-                "simMarketNegative": "In Perdita (24h)",
                 "simPortfolioTitle": "Il Mio Portafoglio Virtuale",
-                "simLoading": "Caricamento prezzi in corso...",
-                "simApiError": "Errore nel caricamento dei prezzi live. Per attivare il simulatore, prova a caricare questa pagina da un server (vedi istruzioni).",
+                "simLoading": "Caricamento prezzi...", // Più corto
+                "simApiError": "Errore API. Riprovo a breve...", // Più corto
                 "simTotalValue": "Valore Totale Portafoglio:",
+                "simPL": "Profitto/Perdita (P/L):", 
                 "simCash": "Liquidità Virtuale:",
                 "simMyAssets": "I Miei Asset",
                 "simNoAssets": "Non possiedi ancora asset.",
@@ -1029,13 +1044,11 @@
                 "guida5Cta": "Explore Kraken Pro charts",
                 "simTitle": "2. Virtual Training Ground",
                 "simMercatoTitle": "Selected Market",
-                "simSearchPlaceholder": "Search currency (e.g. Bitcoin, BTC)...",
-                "simMarketPositive": "Gainers (24h)",
-                "simMarketNegative": "Losers (24h)",
                 "simPortfolioTitle": "My Virtual Portfolio",
                 "simLoading": "Loading prices...",
-                "simApiError": "Error loading live prices. To activate the simulator, please try loading this page from a web server (see instructions).",
+                "simApiError": "Error loading live prices. Retrying shortly...",
                 "simTotalValue": "Total Portfolio Value:",
+                "simPL": "Profit/Loss (P/L):",
                 "simCash": "Virtual Cash:",
                 "simMyAssets": "My Assets",
                 "simNoAssets": "You don't own any assets yet.",
@@ -1095,13 +1108,11 @@
                 "guida5Cta": "Explora los gráficos de Kraken Pro",
                 "simTitle": "2. Campo de Entrenamiento",
                 "simMercatoTitle": "Mercado Seleccionado",
-                "simSearchPlaceholder": "Buscar moneda (ej. Bitcoin, BTC)...",
-                "simMarketPositive": "Ganadores (24h)",
-                "simMarketNegative": "Perdedores (24h)",
                 "simPortfolioTitle": "Mi Cartera Virtual",
                 "simLoading": "Cargando precios...",
-                "simApiError": "Error al cargar los precios en vivo. Para activar el simulador, intente cargar esta página desde un servidor (vea las instrucciones).",
+                "simApiError": "Error al cargar los precios en vivo. Reintentando en breve...",
                 "simTotalValue": "Valor Total de la Cartera:",
+                "simPL": "Ganancias/Pérdidas (P/L):",
                 "simCash": "Efectivo Virtual:",
                 "simMyAssets": "Mis Activos",
                 "simNoAssets": "Aún no posees activos.",
@@ -1137,7 +1148,7 @@
             }
         };
         
-        // NUOVO: Mappa statica per i dati delle crypto
+        // --- MAPPA DATI CRYPTO (Veloce) ---
         const coinDetails = {
             'bitcoin': { name: 'Bitcoin', symbol: 'BTC', icon: 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png' },
             'ethereum': { name: 'Ethereum', symbol: 'ETH', icon: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png' },
@@ -1146,17 +1157,35 @@
             'binancecoin': { name: 'BNB', symbol: 'BNB', icon: 'https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png' },
             'ripple': { name: 'XRP', symbol: 'XRP', icon: 'https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png' },
             'usd-coin': { name: 'USDC', symbol: 'USDC', icon: 'https://assets.coingecko.com/coins/images/6319/small/usdc.png' },
-            'lido-staked-ether': { name: 'Lido Staked Ether', symbol: 'stETH', icon: 'https://assets.coingecko.com/coins/images/13442/small/steth_logo.png' },
             'cardano': { name: 'Cardano', symbol: 'ADA', icon: 'https://assets.coingecko.com/coins/images/975/small/cardano.png' },
             'dogecoin': { name: 'Dogecoin', symbol: 'DOGE', icon: 'https://assets.coingecko.com/coins/images/5/small/dogecoin.png' },
             'avalanche-2': { name: 'Avalanche', symbol: 'AVAX', icon: 'https://assets.coingecko.com/coins/images/12559/small/avalanche-avax-logo.png' },
-            'tron': { name: 'TRON', symbol: 'TRX', icon: 'https://assets.coingecko.com/coins/images/1094/small/tron-logo.png' },
             'chainlink': { name: 'Chainlink', symbol: 'LINK', icon: 'https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png' },
             'polkadot': { name: 'Polkadot', symbol: 'DOT', icon: 'https://assets.coingecko.com/coins/images/12171/small/polkadot.png' },
             'shiba-inu': { name: 'Shiba Inu', symbol: 'SHIB', icon: 'https://assets.coingecko.com/coins/images/11939/small/shiba.png' },
+            'litecoin': { name: 'Litecoin', symbol: 'LTC', icon: 'https://assets.coingecko.com/coins/images/2/small/litecoin.png' },
             'dash': { name: 'Dash', symbol: 'DASH', icon: 'https://assets.coingecko.com/coins/images/19/small/dash-logo.png' }
+            // 'tron' e 'lido-staked-ether' rimossi per brevità
         };
 
+        // --- DATI PRE-CARICATI (per caricamento istantaneo) ---
+        const staticPrices = {
+            'bitcoin': { eur: 65000, eur_24h_change: 1.5 },
+            'ethereum': { eur: 3500, eur_24h_change: -0.5 },
+            'tether': { eur: 0.92, eur_24h_change: 0.01 },
+            'solana': { eur: 150, eur_24h_change: 3.2 },
+            'binancecoin': { eur: 580, eur_24h_change: 0.2 },
+            'ripple': { eur: 0.50, eur_24h_change: -1.1 },
+            'usd-coin': { eur: 0.92, eur_24h_change: 0.02 },
+            'cardano': { eur: 0.45, eur_24h_change: 2.5 },
+            'dogecoin': { eur: 0.15, eur_24h_change: 1.0 },
+            'avalanche-2': { eur: 35, eur_24h_change: 4.1 },
+            'chainlink': { eur: 14.5, eur_24h_change: -2.0 },
+            'polkadot': { eur: 7.2, eur_24h_change: 1.2 },
+            'shiba-inu': { eur: 0.000022, eur_24h_change: 0.8 },
+            'litecoin': { eur: 80, eur_24h_change: 0.5 },
+            'dash': { eur: 30, eur_24h_change: 1.8 }
+        };
 
         // === LOGICA GLOBALE ===
 
@@ -1199,24 +1228,26 @@
             const navMenu = document.getElementById('nav-menu');
             if (navToggle && navMenu) {
                 navToggle.addEventListener('click', () => {
-                    const isActive = navMenu.classList.toggle('is-active'); // 'is-active' per il menu blu
+                    const isActive = navMenu.classList.toggle('is-active'); 
                     navToggle.setAttribute('aria-expanded', isActive);
                 });
             }
         }
 
         // === LOGICA SPECIFICA PAGINA: pratica.html ===
-        let portafoglio = { liquidi: 10000, crypto: {} };
+        const STARTING_CASH = 10000;
+        let portafoglio = { liquidi: STARTING_CASH, crypto: {} };
         let prezziAttuali = {}; 
         let modalData = {};
         let fetchInterval;
         
-        // API AGGIORNATA a 16 monete specifiche
-        const COIN_IDS = 'bitcoin,ethereum,tether,solana,binancecoin,ripple,usd-coin,lido-staked-ether,cardano,dogecoin,avalanche-2,tron,chainlink,polkadot,shiba-inu,dash';
+        const COIN_IDS = Object.keys(coinDetails).join(','); 
         const API_URL = `https://api.coingecko.com/api/v3/simple/price?ids=${COIN_IDS}&vs_currencies=eur&include_24hr_change=true`;
 
         function setupPraticaPage() {
             loadPortafoglio();
+            loadStaticPrices(); // Carica dati finti IMMEDIATAMENTE
+            fetchPrezzi(); // Avvia il primo fetch live in background
             
             const resetBtn = document.getElementById('reset-sim-btn');
             if(resetBtn) resetBtn.addEventListener('click', resetPortafoglio);
@@ -1234,13 +1265,8 @@
                 }
             }
             
-            // Rimuovi listener per la ricerca
-            // const searchInput = document.getElementById('sim-search-input');
-            // if(searchInput) searchInput.addEventListener('input', renderMercato);
-            
             if (fetchInterval) clearInterval(fetchInterval);
-            // AGGIORNATO: Intervallo a 60 secondi
-            fetchInterval = setInterval(fetchPrezzi, 60000); 
+            fetchInterval = setInterval(fetchPrezzi, 60000); // 60 secondi
         }
 
         function loadPortafoglio() {
@@ -1251,9 +1277,8 @@
                 }
             } catch(e) { 
                 console.warn("Impossibile caricare portafoglio, reset in corso.");
-                portafoglio = { liquidi: 10000, crypto: {} }; 
+                portafoglio = { liquidi: STARTING_CASH, crypto: {} }; 
             }
-            renderPortafoglio();
         }
 
         function savePortafoglio() {
@@ -1266,14 +1291,31 @@
         function resetPortafoglio() {
             const tr = translations[currentLang];
             if (confirm(tr.simResetConfirm)) {
-                portafoglio = { liquidi: 10000, crypto: {} };
-                prezziAttuali = {}; 
-                savePortafoglio();
+                portafoglio = { liquidi: STARTING_CASH, crypto: {} };
+                savePortafoglio(); 
+                loadStaticPrices();
                 fetchPrezzi(); 
             }
         }
 
-        // --- FETCHPREZZI MODIFICATO PER API /simple/price ---
+        function loadStaticPrices() {
+            const newPrezziAttuali = {};
+            for (const id in staticPrices) {
+                if (coinDetails[id]) { 
+                    newPrezziAttuali[id] = {
+                        eur: staticPrices[id].eur,
+                        eur_24h_change: staticPrices[id].eur_24h_change,
+                        name: coinDetails[id].name, 
+                        symbol: coinDetails[id].symbol, 
+                        icon: coinDetails[id].icon 
+                    };
+                }
+            }
+            prezziAttuali = newPrezziAttuali;
+            renderMercato();
+            renderPortafoglio();
+        }
+
         async function fetchPrezzi() {
             const mercatoList = document.getElementById('mercato-list');
             if (!mercatoList) return; 
@@ -1281,20 +1323,19 @@
             try {
                 const response = await fetch(API_URL);
                 if (!response.ok) throw new Error(`API Error: ${response.status}`);
-                const data = await response.json(); // Questo è un OGGETTO
+                const data = await response.json(); 
                 
                 if (Object.keys(data).length === 0) throw new Error("API data empty");
 
-                // Combina i dati live (prezzo, 24h) con i dati statici (nome, simbolo)
                 const newPrezziAttuali = {};
                 for (const id in data) {
-                    if (coinDetails[id]) { // Assicurati che la moneta sia nella nostra mappa
+                    if (coinDetails[id]) { 
                         newPrezziAttuali[id] = {
                             eur: data[id].eur,
                             eur_24h_change: data[id].eur_24h_change,
-                            name: coinDetails[id].name, // Da mappa statica
-                            symbol: coinDetails[id].symbol, // Da mappa statica
-                            icon: coinDetails[id].icon // Da mappa statica
+                            name: coinDetails[id].name, 
+                            symbol: coinDetails[id].symbol, 
+                            icon: coinDetails[id].icon 
                         };
                     }
                 }
@@ -1312,7 +1353,6 @@
             }
         }
 
-        // --- RENDERMERCATO SEMPLIFICATO ---
         function renderMercato() {
             const tr = translations[currentLang] || translations['it'];
             const mercatoList = document.getElementById('mercato-list');
@@ -1325,13 +1365,11 @@
                 return;
             }
 
-            mercatoList.innerHTML = ''; // Pulisci la lista
-
-            // Ordina la lista in base a come è definita in coinDetails (Market Cap)
+            mercatoList.innerHTML = ''; 
             const orderedIds = Object.keys(coinDetails);
             
             for (const id of orderedIds) {
-                if (prezziAttuali[id]) { // Se abbiamo i dati del prezzo per questo ID
+                if (prezziAttuali[id]) { 
                     const coin = prezziAttuali[id];
                     mercatoList.appendChild(creaElementoMercato(id, coin, tr));
                 }
@@ -1341,7 +1379,6 @@
             document.querySelectorAll('.btn-vendi').forEach(btn => btn.addEventListener('click', () => _apriModalSim('vendi', btn.dataset)));
         }
 
-        // Funzione helper per creare un elemento della lista
         function creaElementoMercato(id, coin, tr) {
             const item = document.createElement('div');
             item.className = 'mercato-item';
@@ -1374,6 +1411,7 @@
             const tr = translations[currentLang] || translations['it'];
             const portfolioAssetsEl = document.getElementById('portfolio-assets');
             const portfolioValoreTotaleEl = document.getElementById('portfolio-valore-totale');
+            const portfolioPlEl = document.getElementById('portfolio-pl'); 
             const portfolioLiquidiEl = document.getElementById('portfolio-liquidi');
             
             if (!portfolioAssetsEl) return; 
@@ -1410,8 +1448,19 @@
             }
             
             const valoreTotale = portafoglio.liquidi + valoreCryptoTotale;
+            const profitLoss = valoreTotale - STARTING_CASH; 
+            
             portfolioValoreTotaleEl.innerText = formatCurrency(valoreTotale);
             portfolioLiquidiEl.innerText = formatCurrency(portafoglio.liquidi);
+            
+            portfolioPlEl.innerText = formatCurrency(profitLoss);
+            if (profitLoss > 0.01) {
+                portfolioPlEl.className = 'profitto-positivo';
+            } else if (profitLoss < -0.01) {
+                portfolioPlEl.className = 'profitto-negativo';
+            } else {
+                portfolioPlEl.className = 'profitto-neutro';
+            }
         }
 
         function _apriModalSim(tipo, data) {
@@ -1480,7 +1529,7 @@
                 const quantitaCryptoDaVendere = importoEuro / prezzo;
                 const quantitaPosseduta = portafoglio.crypto[id] || 0;
                 
-                if (quantitaCryptoDaVendere > (quantitaPosseduta + 1e-9)) { // Tolleranza per floating point
+                if (quantitaCryptoDaVendere > (quantitaPosseduta + 1e-9)) { 
                     modalError.innerText = tr.simErrorAsset.replace('{symbol}', modalData.simbolo.toUpperCase());
                     modalError.style.display = 'block';
                     return;
@@ -1513,13 +1562,13 @@
             new TradingView.widget({
                 "width": "100%",
                 "height": "100%",
-                "symbol": "BINANCE:BTCUSDT", // Simbolo più robusto
+                "symbol": "BINANCE:BTCUSDT", 
                 "interval": "D", 
                 "timezone": "Europe/Rome",
                 "theme": "light",
                 "style": "1",
                 "locale": lang,
-                "toolbar_bg": "#f9faff", // Allineato allo sfondo
+                "toolbar_bg": "#f9faff", 
                 "enable_publishing": false,
                 "allow_symbol_change": true,
                 "container_id": "tradingview_widget_container_inner"
@@ -1545,8 +1594,6 @@
                     el.innerHTML = tr[key];
                 }
             });
-
-            // Rimuovi aggiornamento placeholder (non c'è più)
             
             langButtons.forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
@@ -1555,7 +1602,7 @@
             setupScrollAnimations();
             
             if (document.body.id === 'page-pratica') {
-                renderMercato(); // Riesegue il render
+                renderMercato(); 
                 loadTradingViewWidget(lang); 
             }
         }

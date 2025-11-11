@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="pageTitleTeoria">cryptostarstudio - Teoria</title>
+    <title data-lang-key="pageTitle">cryptostarstudio - Guida alla Teoria Crypto</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
+
     <style>
-        /* === STILI CSS UNIFICATI === */
         :root {
             --primary-color: #0a2e5c;
             --secondary-color: #D4AF37;
@@ -21,63 +20,170 @@
             --light-color: #ffffff;
             --background-color: #f9faff;
             --text-color: #333;
-            --danger-color: #e71c1c;
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Lato', sans-serif;
             --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+            --transition-speed: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            --hero-image-url: url('https://images.unsplash.com/photo-1547849495-2579f1025537?q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1600&h=800&fit=crop');
         }
+
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body {
-            font-family: var(--font-body);
-            line-height: 1.7;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            overflow-x: hidden;
-        }
+        body { font-family: var(--font-body); line-height: 1.7; color: var(--text-color); background-color: var(--background-color); overflow-x: hidden; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
         
-        /* === Menu Navigazione === */
-        .main-nav {
-            background-color: var(--primary-color);
-            padding: 1rem 0;
-            width: 100%;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            border-bottom: 3px solid var(--secondary-color);
-        }
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        .nav-logo {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--light-color);
-            text-decoration: none;
-        }
-        .nav-logo span { color: var(--secondary-color); font-weight: 700; }
+        /* Nav (Allineato a index.html) */
+        .main-nav { background-color: var(--primary-color); padding: 1rem 0; width: 100%; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.2); border-bottom: 3px solid var(--secondary-color); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        .nav-logo { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: var(--light-color); text-decoration: none; }
+        .nav-logo span { color: var(--light-color); } /* CORREZIONE: 'studio' è bianco */
         .nav-menu { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; }
-        .nav-menu li a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            transition: color 0.3s ease;
-            padding: 0.5rem 0;
+        .nav-menu li a { 
+            color: rgba(255, 255, 255, 0.8); 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-family: var(--font-heading); 
+            font-size: 1rem; /* CORREZIONE: Allineato a index.html */
+            transition: color 0.3s ease; 
+            padding: 0.5rem 0; /* CORREZIONE: Allineato a index.html */
+            border-bottom: 2px solid transparent; 
         }
-        .nav-menu li a:hover,
-        .nav-menu li a.current {
-            color: var(--light-color);
-            border-bottom: 2px solid var(--secondary-color);
-        }
+        .nav-menu li a:hover, .nav-menu li a.current { color: var(--light-color); border-bottom: 2px solid var(--secondary-color); }
         .nav-toggle { display: none; }
+        
+        /* Hero (Mantenuto) */
+        .hero { position: relative; height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--light-color); overflow: hidden; background-position: center; background-size: cover; background-attachment: fixed; background-image: var(--hero-image-url); }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, rgba(10, 46, 92, 0.9), rgba(0, 0, 0, 0.7)); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; max-width: 950px; padding: 2rem; margin: 0 auto; }
+        .hero-content h1 { font-family: var(--font-heading); font-size: 4rem; margin-bottom: 1rem; line-height: 1.1; font-weight: 800; text-shadow: 0 5px 15px rgba(0,0,0,0.3); color: var(--secondary-color); }
+        .hero-content p { font-size: 1.5rem; margin-bottom: 2.5rem; font-weight: 400; text-shadow: 0 2px 5px rgba(0,0,0,0.2); color: rgba(255, 255, 255, 0.9); }
+        
+        /* Sezioni (Mantenuti) */
+        .section { padding: 5.5rem 0; position: relative; }
+        .section-title { font-family: var(--font-heading); font-size: 3.5rem; color: var(--primary-color); margin-bottom: 3.5rem; font-weight: 700; text-align: center; position: relative; }
+        .section-title::after { content: ''; position: absolute; left: 50%; bottom: -15px; transform: translateX(-50%); width: 80px; height: 5px; background: var(--secondary-color); border-radius: 3px; }
+        
+        /* Animazioni (Mantenute) */
+        .animate-on-view { opacity: 0; transform: translateY(30px) scale(0.98); transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
+        .animate-on-view.is-visible { opacity: 1; transform: translate(0, 0) scale(1); }
+        
+        /* Timeline (Design Migliorato) */
+        .timeline-container { max-width: 1000px; margin: 0 auto; position: relative; padding: 50px 0; }
+        .timeline-container::after { content: ''; position: absolute; width: 4px; background-color: var(--primary-color); top: 0; bottom: 0; left: 50%; margin-left: -2px; z-index: 0; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; z-index: 1; }
+        .timeline-item::after { content: '🚀'; position: absolute; width: 30px; height: 30px; right: -19px; background-color: var(--cta-color); border: 4px solid var(--primary-color); top: 15px; border-radius: 50%; z-index: 1; text-align: center; line-height: 22px; font-size: 1.2rem; }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -19px; content: '⚙️'; }
+        .left::before { content: " "; height: 0; position: absolute; top: 22px; width: 0; z-index: 1; right: 30px; border: medium solid var(--primary-color); border-width: 10px 0 10px 10px; border-color: transparent transparent transparent var(--primary-color); }
+        .right::before { content: " "; height: 0; position: absolute; top: 22px; width: 0; z-index: 1; left: 30px; border: medium solid var(--primary-color); border-width: 10px 10px 10px 0; border-color: transparent var(--primary-color) transparent transparent; }
+        
+        .timeline-content { padding: 20px 30px; background-color: var(--primary-color); color: var(--light-color); position: relative; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); border: 2px solid var(--secondary-color); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .timeline-content:hover { transform: scale(1.02); box-shadow: 0 15px 35px rgba(10, 46, 92, 0.15); }
+        
+        .timeline-content h4 { font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--secondary-color); }
+        .timeline-date { font-family: var(--font-heading); font-weight: 800; color: var(--cta-color); font-size: 1.1rem; margin-bottom: 1.5rem; }
+        .timeline-details-btn { background: var(--cta-color); color: var(--dark-color); border: none; padding: 10px 20px; font-size: 0.9rem; font-weight: 700; font-family: var(--font-heading); border-radius: 50px; cursor: pointer; transition: all 0.3s ease; }
+        .timeline-details-btn:hover { background: var(--light-color); color: var(--primary-color); transform: scale(1.05); }
+
+        /* Terminologia Accordion (Design Migliorato) */
+        .accordion-container { max-width: 800px; margin: 0 auto; }
+        .accordion-item { margin-bottom: 15px; border-radius: 10px; overflow: hidden; box-shadow: var(--card-shadow); border: 1px solid #e0e0e0; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .accordion-item:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(10, 46, 92, 0.12); }
+        
+        .accordion-header { background-color: var(--light-color); padding: 20px; font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: var(--primary-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; border-left: 5px solid var(--light-color); }
+        .accordion-header:hover { background-color: #f0f0f5; border-left: 5px solid var(--secondary-color); }
+        .accordion-header.active { background-color: var(--primary-color); color: var(--light-color); border-left: 5px solid var(--cta-color); }
+        .accordion-header.active .accordion-icon { transform: rotate(180deg); color: var(--cta-color); }
+        .accordion-icon { font-size: 1.5rem; font-weight: 900; color: var(--secondary-color); transition: transform 0.3s ease, color 0.3s ease; }
+        .accordion-content { background-color: #f0f3f6; color: var(--text-color); padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out; }
+        .accordion-content.open { max-height: 900px; padding: 20px; }
+        .accordion-content p { margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.7; }
+        .accordion-content h5 { font-family: var(--font-heading); font-size: 1.2rem; color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 0.5rem; }
+
+        /* CPA Inline (Mantenuti) */
+        .affiliate-cta-container { display: inline-block; position: relative; }
+        .affiliate-cta-container img { display: none; position: absolute; width: 0; height: 0; }
+        .inline-cpa-box { background-color: var(--light-color); border: 2px dashed var(--secondary-color); border-radius: 10px; padding: 1.5rem; margin-top: 1rem; }
+        .inline-cpa-box p { font-size: 1rem !important; font-weight: 600; color: var(--primary-color); margin-bottom: 1rem !important; }
+        .inline-cpa-link { display: inline-block; background: var(--cta-color); color: var(--dark-color); padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: all 0.3s ease; margin-right: 10px; margin-bottom: 10px; }
+        .inline-cpa-link:hover { background: var(--primary-color); color: var(--light-color); transform: translateY(-3px); }
+        
+        /* Stili Quiz (Migliorati) */
+        #crypto-quiz { background-color: var(--background-color); }
+        
+        /* NUOVO: Stile per la selezione (non più un box) */
+        .quiz-selection-buttons {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .quiz-selection-buttons h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-start-btn { display: block; background: var(--primary-color); color: var(--light-color); padding: 1.2rem 2rem; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1.3rem; transition: all 0.3s ease; border: 2px solid var(--primary-color); cursor: pointer; margin: 15px 0; width: 100%; }
+        .quiz-start-btn:hover { background: var(--light-color); color: var(--primary-color); transform: translateY(-5px); }
+        .quiz-start-btn span { font-size: 0.9rem; font-weight: 400; color: var(--secondary-color); display: block; margin-top: 5px; }
+        .quiz-start-btn:hover span { color: var(--primary-color); }
+        .quiz-box { max-width: 700px; margin: 0 auto; background-color: var(--light-color); padding: 2rem; border-radius: 15px; box-shadow: var(--card-shadow); border: 2px solid #eee; display: none; }
+        .question-item { margin-bottom: 20px; padding: 20px; background-color: #f0f3f6; border-radius: 10px; text-align: left; border-left: 5px solid var(--primary-color); }
+        .question-item h4 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--primary-color); margin-bottom: 1rem; }
+        
+        .quiz-option { display: block; margin: 10px 0; padding: 12px 15px; background-color: var(--light-color); border: 2px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-size: 1rem; font-weight: 600; width: 100%; text-align: left; }
+        .quiz-option:hover { background-color: #e9eef2; border-color: var(--secondary-color); }
+        .quiz-option.selected {
+            background-color: #e6f0ff; color: var(--primary-color);
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(10, 46, 92, 0.2);
+        }
+        .quiz-option.correct { background-color: #1ce783 !important; color: var(--dark-color) !important; border-color: #1ce783 !important; font-weight: 700; }
+        .quiz-option.incorrect { background-color: #ff6b6b !important; color: var(--light-color) !important; border-color: #ff6b6b !important; font-weight: 700; }
+        .quiz-option:disabled { cursor: not-allowed; }
+        .quiz-option:disabled:not(.correct):not(.incorrect) { background-color: #f9f9f9; color: #aaa; border-color: #ddd; box-shadow: none; }
+        
+        .quiz-feedback-wrong { font-size: 0.95rem; font-weight: 700; color: #d90429; margin-top: 10px; padding: 8px; background-color: #fff0f0; border-radius: 5px; border: 1px solid #d90429; }
+        .quiz-feedback-wrong a { color: #d90429; font-weight: 900; text-decoration: underline; cursor: pointer; }
+        .quiz-feedback-wrong a:hover { color: #b20000; }
+        
+        .quiz-submit { display: inline-block; background: var(--cta-color); color: var(--dark-color); padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.2rem; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(28, 231, 131, 0.3); border: none; cursor: pointer; margin-top: 20px; }
+        .quiz-submit:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(28, 231, 131, 0.5); }
+        
+        #quiz-result-box { margin-top: 40px; padding: 2rem; border-radius: 10px; background-color: var(--background-color); border: 3px dashed var(--secondary-color); text-align: center; }
+        #quiz-result-box h3 { font-family: var(--font-heading); font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem; }
+        #quiz-result-box p { font-size: 1.1rem; margin-bottom: 2rem; }
+        .quiz-result-actions { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        .quiz-result-btn { background: var(--primary-color); color: var(--light-color); border: 2px solid var(--primary-color); padding: 0.8rem 2rem; font-size: 1rem; font-weight: 700; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; }
+        .quiz-result-btn:hover { background: var(--light-color); color: var(--primary-color); }
+        .quiz-result-btn.secondary { background: none; color: var(--primary-color); }
+        .quiz-result-btn.secondary:hover { background: var(--primary-color); color: var(--light-color); }
+        
+        /* Footer (Mantenuto) */
+        footer { background-color: var(--primary-color); color: rgba(255, 255, 255, 0.7); text-align: center; padding: 4rem 2rem 2rem 2rem; margin-top: 5rem; position: relative; }
+        .lang-selector { margin-bottom: 2rem; display: flex; justify-content: center; gap: 10px; }
+        .lang-selector button { background: none; border: 2px solid var(--secondary-color); color: var(--secondary-color); padding: 8px 15px; font-weight: 700; font-family: var(--font-heading); border-radius: 20px; cursor: pointer; transition: all 0.3s ease; }
+        .lang-selector button:hover, .lang-selector button.active { background-color: var(--secondary-color); color: var(--dark-color); box-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+        footer p { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        footer p:first-of-type { font-weight: 700; color: var(--light-color); font-size: 1.1rem; }
+        .footer-links { margin: 1rem 0; }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600; }
+        .footer-links a:hover { color: var(--light-color); text-decoration: underline; }
+        
+        /* Modale (Migliorato) */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(10, 46, 92, 0.8); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); animation: fadeIn 0.3s ease-out; }
+        .modal-content { background-color: var(--light-color); margin: 15% auto; padding: 3rem; border: 4px solid var(--secondary-color); width: 90%; max-width: 700px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); position: relative; animation: slideIn 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
+        .modal-close { color: #aaa; position: absolute; top: 15px; right: 25px; font-size: 2.5rem; font-weight: bold; line-height: 1; cursor: pointer; }
+        .modal-close:hover, .modal-close:focus { color: var(--primary-color); }
+        .modal-content h3 { font-family: var(--font-heading); font-size: 2.2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        .modal-content p { font-size: 1.1rem; line-height: 1.8; color: var(--text-color); }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-50px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+
+        /* Media Query (Mantenuti) */
         @media (max-width: 768px) {
             .nav-container { flex-wrap: wrap; padding: 0 1rem; }
             .nav-menu { display: none; flex-direction: column; width: 100%; gap: 0.5rem; margin-top: 1rem; }
@@ -86,401 +192,35 @@
             .nav-menu li a { display: block; padding: 0.75rem 0; }
             .nav-menu li a:hover, .nav-menu li a.current { border-bottom: none; background-color: rgba(255,255,255,0.1); }
             .nav-toggle { display: block; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; }
+             .container { padding: 0 1rem; }
+             .hero { height: 50vh; }
+             .hero-content h1 { font-size: 2.8rem; }
+             .hero-content p { font-size: 1.4rem; }
+             .section-title { font-size: 2.5rem; }
+             .timeline-container::after { left: 31px; }
+             .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+             .timeline-item::before { left: 60px; border-width: 10px 10px 10px 0; border-color: transparent var(--primary-color) transparent transparent; }
+             .left::after, .right::after { left: 15px; }
+             .right { left: 0%; }
+             .accordion-header { font-size: 1.2rem; }
+             .accordion-content p { font-size: 1rem; }
+             .cta-section-links { padding: 2rem 1.5rem; flex-direction: column; }
+             .cta-section-links h3 { font-size: 1.8rem; }
+             .cta-link-box { width: 100%; font-size: 1.3rem; }
+             .quiz-box, .quiz-selection-buttons { padding: 2rem 1.5rem; }
+             .quiz-option { font-size: 0.9rem; }
+             .quiz-start-btn { font-size: 1.1rem; }
+             .modal-content { margin: 20% auto; padding: 2rem; }
+             .modal-content h3 { font-size: 1.8rem; }
         }
         
-        /* === Header Semplice === */
-        .hero-simple {
-            padding: 6rem 2rem;
-            background: linear-gradient(45deg, var(--primary-color), #0a2549);
-            color: var(--light-color);
-            text-align: center;
-        }
-        .hero-simple h1 {
-            font-family: var(--font-heading);
-            font-size: 3.5rem;
-            font-weight: 700;
-        }
-        .hero-simple p {
-            font-size: 1.5rem;
-            font-weight: 300;
-            max-width: 700px;
-            margin: 1rem auto 0;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        /* === Sezioni === */
-        .section { padding: 5.5rem 0; position: relative; }
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: 3.5rem;
-            color: var(--primary-color);
-            margin-bottom: 3.5rem; 
-            font-weight: 700;
-            text-align: center;
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: -15px;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 5px;
-            background: var(--secondary-color);
-            border-radius: 3px;
-        }
-        
-        /* === Contenuto Pagina === */
-        .content-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .section-concetti { background-color: var(--light-color); }
-        /* La sezione .section-grafico è stata rimossa */
-        .section-rischi { background-color: var(--background-color); } /* Colore cambiato per alternanza */
-        .section-dispense-cta { background-color: var(--light-color); }
-
-        /* === Accordion === */
-        .accordion-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .accordion-btn {
-            background-color: var(--light-color);
-            color: var(--primary-color);
-            cursor: pointer;
-            padding: 1.5rem 2rem;
-            width: 100%;
-            border: 1px solid #eef;
-            text-align: left;
-            outline: none;
-            font-size: 1.5rem;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            transition: all 0.3s ease;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            padding-left: 4.5rem; 
-        }
-        .accordion-btn::before {
-            content: attr(data-lesson-number);
-            position: absolute;
-            left: 1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--secondary-color);
-            color: var(--dark-color);
-            font-weight: 700;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .accordion-btn:hover, .accordion-btn.active {
-            background-color: var(--primary-color);
-            color: var(--light-color);
-            box-shadow: 0 8px 25px rgba(10, 46, 92, 0.15);
-            transform: translateY(-3px);
-        }
-        .accordion-btn.active::before {
-            background: var(--light-color);
-            color: var(--primary-color);
-        }
-        
-        .accordion-btn::after {
-            content: '+';
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--secondary-color);
-        }
-        .accordion-btn.active::after {
-            content: '−';
-        }
-        .accordion-panel {
-            padding: 1.5rem 2rem 2rem 2rem;
-            background-color: var(--light-color);
-            border: 1px solid #eef;
-            border-top: none;
-            display: none;
-            overflow: hidden;
-            border-radius: 0 0 12px 12px;
-            margin-top: -10px;
-        }
-        .accordion-panel p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-        /* Stile per la nuova spiegazione testuale del grafico */
-        .accordion-panel .spiegazione-grafico strong {
-            display: block;
-            font-family: var(--font-heading);
-            color: var(--primary-color);
-            margin-top: 1.2rem;
-            font-size: 1.1rem;
-        }
-        .accordion-panel .spiegazione-grafico strong:first-child {
-            margin-top: 0;
-        }
-        .accordion-panel.is-open {
-            display: block;
-        }
-        
-        /* CTA Box Lezione */
-        .lesson-cta-box {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: var(--background-color);
-            border-radius: 8px;
-            border: 1px dashed var(--secondary-color);
-            text-align: center;
-        }
-        .lesson-cta-box p {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-        .lesson-cta-btn {
-            display: inline-block;
-            background: var(--cta-color);
-            color: var(--dark-color);
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        .lesson-cta-btn:hover {
-            background: var(--primary-color);
-            color: var(--light-color);
-            transform: scale(1.05);
-        }
-        
-        /* Hotspot Testo */
-        .hotspot {
-            color: var(--secondary-color);
-            font-weight: 700;
-            cursor: pointer;
-            border-bottom: 2px dotted var(--secondary-color);
-        }
-        .hotspot:hover {
-            color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
-        }
-
-        /* === Stili Grafico Rimossi === */
-        /* Tutti gli stili per .grafico-interattivo-container, .hotspot-pulsante, @keyframes pulse-hotspot sono stati rimossi */
-
-        /* === Griglia Rischi === */
-        .risk-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        .risk-card {
-            background: var(--light-color);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-            border: 1px solid #eef;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .risk-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 45px rgba(0,0,0,0.1);
-        }
-        .risk-card h4 {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-        .risk-card p {
-            font-size: 1rem;
-        }
-
-        /* === CTA Box === */
-        .cta-box {
-            background: var(--light-color);
-            padding: 3rem;
-            border-radius: 16px;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-            box-shadow: var(--card-shadow);
-        }
-        .cta-box.cta-dispense {
-             background: linear-gradient(45deg, var(--primary-color), #0a2549);
-             color: var(--light-color);
-        }
-        .cta-box.cta-dispense h3 {
-            color: var(--light-color);
-        }
-        .cta-box.cta-dispense p {
-            color: rgba(255,255,255,0.8);
-        }
-        
-        .cta-box h3 {
-            font-family: var(--font-heading);
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 0.75rem;
-        }
-        .cta-box p {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-        .cta-box-link {
-            display: inline-block;
-            background: var(--cta-color);
-            color: var(--dark-color);
-            padding: 1.1rem 3rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-        .cta-box-link:hover {
-            background: var(--light-color);
-            color: var(--primary-color);
-            transform: scale(1.05);
-        }
-        .cta-box.cta-dispense .cta-box-link:hover {
-            background: var(--secondary-color);
-            color: var(--dark-color);
-        }
-        
-        /* === Modal === */
-        .modal {
-            display: none; 
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.6);
-            animation: fadeIn 0.3s ease;
-        }
-        .modal-content {
-            background-color: var(--light-color);
-            margin: 15% auto;
-            padding: 2rem;
-            border-radius: 12px;
-            max-width: 500px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            animation: slideIn 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        .modal-content h3 {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-        .modal-content p {
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-        .modal-bottoni {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-            margin-top: 1.5rem;
-        }
-        .modal-bottoni button {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        #modal-hotspot-chiudi {
-            background: var(--primary-color);
-            color: var(--light-color);
-        }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        /* === Animazioni Scroll === */
-        .animate-on-scroll {
-            opacity: 0;
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        .fade-in-up {
-            transform: translateY(50px);
-        }
-        .is-visible {
-            opacity: 1;
-            transform: translate(0, 0);
-        }
-
-        /* === Footer === */
-        footer {
-            background-color: var(--primary-color);
-            color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            padding: 4rem 2rem 2rem 2rem; 
-            margin-top: 5rem;
-            position: relative;
-        }
-        .lang-selector { margin-bottom: 2rem; display: flex; justify-content: center; gap: 10px; }
-        .lang-selector button {
-            background: none;
-            border: 2px solid var(--secondary-color);
-            color: var(--secondary-color);
-            padding: 8px 15px;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .lang-selector button:hover { background-color: var(--secondary-color); color: var(--dark-color); }
-        .lang-selector button.active { background-color: var(--secondary-color); color: var(--dark-color); }
-        footer p { margin-bottom: 0.5rem; font-size: 0.95rem; }
-        footer p:first-of-type { font-weight: 700; color: var(--light-color); font-size: 1.1rem; }
-        .footer-links { margin: 1rem 0; }
-        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-weight: 600; }
-        .footer-links a:hover { color: var(--light-color); text-decoration: underline; }
-        
-        @media (max-width: 768px) {
-            .hero-simple { padding: 4rem 1rem; }
-            .hero-simple h1 { font-size: 2.5rem; }
-            .hero-simple p { font-size: 1.2rem; }
-            .section { padding: 4rem 0; }
-            .section-title { font-size: 2.5rem; }
-            .container { padding: 0 1rem; }
-            .accordion-btn { padding: 1rem 1.5rem 1rem 4rem; font-size: 1.2rem; }
-            .accordion-btn::before { left: 1rem; width: 30px; height: 30px; font-size: 1rem; }
-            .cta-box { padding: 2rem; }
-            .cta-box h3 { font-size: 1.8rem; }
-            .modal-content { margin: 20% auto; padding: 1.5rem; }
-        }
     </style>
 </head>
 <body>
 
     <nav class="main-nav">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo" data-lang-key="footerBrand">cryptostar<span>studio</span></a>
-            
-            <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
+            <a href="index.html" class="nav-logo" data-lang-key="navLogo">cryptostarstudio</a>
             
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="index.html" data-lang-key="navHome"></a></li>
@@ -488,110 +228,202 @@
                 <li><a href="dispense.html" data-lang-key="navDispense"></a></li>
                 <li><a href="pratica.html" data-lang-key="navPratica"></a></li>
             </ul>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
         </div>
     </nav>
 
-    <header class="hero-simple">
-        <div class="hero-simple-content">
-            <h1 class="animate-on-scroll fade-in-up" data-lang-key="teoriaHeroTitle"></h1>
-            <p class="animate-on-scroll fade-in-up" style="transition-delay: 150ms;" data-lang-key="teoriaHeroSubtitle"></p>
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInDown" data-lang-key="teoriaHeroTitle"></h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s" data-lang-key="teoriaHeroSubtitle"></p>
         </div>
     </header>
 
     <main>
-        
-        <section class="section section-concetti">
-            <div class="container content-wrapper">
-                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="teoriaAccordionTitle"></h2>
+
+        <section id="crypto-timeline" class="section">
+            <div class="container">
+                <h2 class="section-title animate-on-view" data-lang-key="timelineTitle"></h2>
                 
-                <div class="accordion-container animate-on-scroll fade-in-up" style="transition-delay: 200ms;">
+                <div class="timeline-container">
                     
-                    <button class="accordion-btn" id="acc-btn-1" data-lesson-number="1" data-lang-key="acc1Title" aria-expanded="false" aria-controls="acc-panel-1"></button>
-                    <div class="accordion-panel" id="acc-panel-1" role="region" aria-labelledby="acc-btn-1">
-                        <p>
-                            <span data-lang-key="acc1Desc"></span>
-                            <span class="hotspot" data-key="hotspotDecentralizzato" data-lang-key="hotspotDecentralizzatoTerm"></span>
-                        </p>
-                        <div class="lesson-cta-box">
-                            <p data-lang-key="cta1Text"></p>
-                            <a href="index.html#app-bitpanda" class="lesson-cta-btn" data-lang-key="cta1Btn"></a>
-                        </div>
-                    </div>
-
-                    <button class="accordion-btn" id="acc-btn-2" data-lesson-number="2" data-lang-key="acc2Title" aria-expanded="false" aria-controls="acc-panel-2"></button>
-                    <div class="accordion-panel" id="acc-panel-2" role="region" aria-labelledby="acc-btn-2">
-                        <p data-lang-key="acc2Desc"></p>
-                        <div class="lesson-cta-box">
-                            <p data-lang-key="cta2Text"></p>
-                            <a href="index.html#app-bitpanda" class="lesson-cta-btn" data-lang-key="cta2Btn"></a>
-                        </div>
-                    </div>
-
-                    <button class="accordion-btn" id="acc-btn-3" data-lesson-number="3" data-lang-key="acc3Title" aria-expanded="false" aria-controls="acc-panel-3"></button>
-                    <div class="accordion-panel" id="acc-panel-3" role="region" aria-labelledby="acc-btn-3">
-                        <p>
-                            <span data-lang-key="acc3Desc"></span>
-                            <span class="hotspot" data-key="hotspotEthereum" data-lang-key="hotspotEthereumTerm"></span>
-                        </p>
-                        <div class="lesson-cta-box">
-                            <p data-lang-key="cta3Text"></p>
-                            <a href="index.html#app-kraken" class="lesson-cta-btn" data-lang-key="cta3Btn"></a>
-                        </div>
-                    </div>
-
-                    <button class="accordion-btn" id="acc-btn-4" data-lesson-number="4" data-lang-key="acc4Title" aria-expanded="false" aria-controls="acc-panel-4"></button>
-                    <div class="accordion-panel" id="acc-panel-4" role="region" aria-labelledby="acc-btn-4">
-                        <p data-lang-key="acc4Desc"></p>
-                        <div class="lesson-cta-box">
-                            <p data-lang-key="cta4Text"></p>
-                            <a href="index.html#app-moonpay" class="lesson-cta-btn" data-lang-key="cta4Btn"></a>
-                        </div>
-                    </div>
-
-                    <button class="accordion-btn" id="acc-btn-5" data-lesson-number="5" data-lang-key="acc5Title" aria-expanded="false" aria-controls="acc-panel-5"></button>
-                    <div class="accordion-panel" id="acc-panel-5" role="region" aria-labelledby="acc-btn-5">
-                        <p class="spiegazione-grafico" data-lang-key="acc5Desc"></p>
-                        <div class="lesson-cta-box">
-                            <p data-lang-key="cta5Text"></p>
-                            <a href="pratica.html" class="lesson-cta-btn" data-lang-key="cta5Btn"></a>
+                    <div class="timeline-item left animate-on-view">
+                        <div class="timeline-content">
+                            <p class="timeline-date" data-lang-key="timelineDate1991"></p>
+                            <h4 data-lang-key="timelineTitle1991"></h4>
+                            <button class="timeline-details-btn" data-modal-title-key="timelineTitle1991" data-modal-content-key="timelineDesc1991" data-lang-key="timelineDetailsBtn"></button>
                         </div>
                     </div>
                     
+                    <div class="timeline-item right animate-on-view">
+                        <div class="timeline-content">
+                            <p class="timeline-date" data-lang-key="timelineDate1"></p>
+                            <h4 data-lang-key="timelineTitle1"></h4>
+                            <button class="timeline-details-btn" data-modal-title-key="timelineTitle1" data-modal-content-key="timelineDesc1" data-lang-key="timelineDetailsBtn"></button>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item left animate-on-view">
+                        <div class="timeline-content">
+                            <p class="timeline-date" data-lang-key="timelineDate2010"></p>
+                            <h4 data-lang-key="timelineTitle2010"></h4>
+                            <button class="timeline-details-btn" data-modal-title-key="timelineTitle2010" data-modal-content-key="timelineDesc2010" data-lang-key="timelineDetailsBtn"></button>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item right animate-on-view">
+                        <div class="timeline-content">
+                            <p class="timeline-date" data-lang-key="timelineDate2"></p>
+                            <h4 data-lang-key="timelineTitle2"></h4>
+                            <button class="timeline-details-btn" data-modal-title-key="timelineTitle2" data-modal-content-key="timelineDesc2" data-lang-key="timelineDetailsBtn"></button>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item left animate-on-view">
+                        <div class="timeline-content">
+                            <p class="timeline-date" data-lang-key="timelineDate2016"></p>
+                            <h4 data-lang-key="timelineTitle2016"></h4>
+                            <button class="timeline-details-btn" data-modal-title-key="timelineTitle2016" data-modal-content-key="timelineDesc2016" data-lang-key="timelineDetailsBtn"></button>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item right animate-on-view">
+                        <div class="timeline-content">
+                            <p class="timeline-date" data-lang-key="timelineDate2022"></p>
+                            <h4 data-lang-key="timelineTitle2022"></h4>
+                            <button class="timeline-details-btn" data-modal-title-key="timelineTitle2022" data-modal-content-key="timelineDesc2022" data-lang-key="timelineDetailsBtn"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="crypto-terminologia" class="section" style="background-color: var(--background-color);">
+            <div class="container">
+                <h2 class="section-title animate-on-view" data-lang-key="terminologyTitle"></h2>
+                
+                <div id="accordion-container" class="accordion-container">
+                    
+                    <div class="accordion-item animate-on-view">
+                        <div class="accordion-header" data-term="bitcoin">
+                            <span data-lang-key="termBitcoinTitle"></span> <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-lang-key="termBitcoinDesc"></p>
+                            <div class="inline-cpa-box">
+                                <p data-lang-key="cpaBitcoin"></p>
+                                <div class="affiliate-cta-container">
+                                    <a href="https://www.financeads.net/tc.php?t=78725C4746108270T" target="_blank" rel="sponsored nofollow noopener noreferrer" class="inline-cpa-link">Kraken Pro</a>
+                                    <img src="https://www.financeads.net/tb.php?t=78725V4746108270T" alt="" border="0" width="0" height="0">
+                                </div>
+                                <div class="affiliate-cta-container">
+                                    <a href="https://www.financeads.net/tc.php?t=78725C290656288T" target="_blank" rel="sponsored nofollow noopener noreferrer" class="inline-cpa-link">Bitpanda</a>
+                                    <img src="https://www.financeads.net/tb.php?t=78725V290656288T" alt="" border="0" width="0" height="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item animate-on-view">
+                        <div class="accordion-header" data-term="blockchain">
+                            <span data-lang-key="term1Title"></span> <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-lang-key="term1Desc"></p>
+                            <h5 data-lang-key="term1SubTitle"></h5>
+                            <p data-lang-key="term1DescPoW"></p>
+                            <p data-lang-key="term1DescPoS"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item animate-on-view">
+                        <div class="accordion-header" data-term="wallet">
+                            <span data-lang-key="term3Title"></span> <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-lang-key="term3Desc"></p>
+                            <h5 data-lang-key="term3SubTitle"></h5>
+                            <p data-lang-key="term3DescHot"></p>
+                            <p data-lang-key="term3DescCold"></p>
+                            <div class="inline-cpa-box">
+                                <p data-lang-key="cpaWallet"></p>
+                                <div class="affiliate-cta-container">
+                                    <a href="https://www.financeads.net/tc.php?t=78725C5508129482T" target="_blank" rel="sponsored nofollow noopener noreferrer" class="inline-cpa-link">Visita MoonPay</a>
+                                    <img src="https://www.financeads.net/tb.php?t=78725V5508129482T" alt="" border="0" width="0" height="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item animate-on-view">
+                        <div class="accordion-header" data-term="smartcontract">
+                            <span data-lang-key="term5Title"></span> <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-lang-key="term5Desc"></p>
+                            <p data-lang-key="term5DescGas"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item animate-on-view">
+                        <div class="accordion-header" data-term="defi">
+                            <span data-lang-key="term4Title"></span> <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-lang-key="term4Desc"></p>
+                            <p data-lang-key="term4DescCeFi"></p>
+                            <div class="inline-cpa-box">
+                                <p data-lang-key="cpaDeFi"></p>
+                                <div class="affiliate-cta-container">
+                                    <a href="https://www.financeads.net/tc.php?t=78725C324060796T" target="_blank" rel="sponsored nofollow noopener noreferrer" class="inline-cpa-link">Scopri YouHodler</a>
+                                    <img src="https://www.financeads.net/tb.php?t=78725V324060796T" alt="" border="0" width="0" height="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item animate-on-view">
+                        <div class="accordion-header" data-term="l2">
+                            <span data-lang-key="termL2Title"></span> <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-lang-key="termL2Desc"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section section-rischi">
-            <div class="container content-wrapper">
-                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="teoriaRiskTitle"></h2>
-                <div class="risk-grid animate-on-scroll fade-in-up" style="transition-delay: 200ms;">
-                    <div class="risk-card">
-                        <h4 data-lang-key="risk1Title"></h4>
-                        <p data-lang-key="risk1Desc"></p>
-                    </div>
-                    <div class="risk-card">
-                        <h4 data-lang-key="risk2Title"></h4>
-                        <p data-lang-key="risk2Desc"></p>
-                    </div>
-                    <div class="risk-card">
-                        <h4 data-lang-key="risk3Title"></h4>
-                        <p data-lang-key="risk3Desc"></p>
+        <section id="crypto-quiz" class="section">
+            <div class="container">
+                <h2 class="section-title animate-on-view" data-lang-key="quizTitle"></h2>
+                
+                <div id="quiz-selection-buttons" class="quiz-selection-buttons animate-on-view">
+                    <h3 data-lang-key="quizSelectTitle"></h3>
+                    <button id="start-quiz-basi" class="quiz-start-btn">
+                        <span data-lang-key="quizStartBasi"></span>
+                        <span data-lang-key="quizStartBasiDesc"></span>
+                    </button>
+                    <button id="start-quiz-avanzato" class="quiz-start-btn">
+                        <span data-lang-key="quizStartAvanzato"></span>
+                        <span data-lang-key="quizStartAvanzatoDesc"></span>
+                    </button>
+                </div>
+
+                <div id="quiz-box" class="quiz-box" style="display: none;">
+                    <form id="quiz-form">
+                        </form>
+                    <div id="quiz-result-box" style="display: none;">
+                        <h3 id="quiz-result-title"></h3>
+                        <p id="quiz-result-message"></p>
+                        <div id="quiz-result-actions" class="quiz-result-actions">
+                            </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section section-dispense-cta">
-             <div class="container">
-                 <div class="cta-box cta-dispense animate-on-scroll fade-in-up" style="transition-delay: 200ms;">
-                    <h3 data-lang-key="dispenseCtaTitle"></h3>
-                    <p data-lang-key="dispenseCtaDesc"></p>
-                    <a href="dispense.html" class="cta-box-link" data-lang-key="dispenseCtaBtn"></a>
-                </div>
-            </div>
-        </section>
-
-        </main>
+    </main>
 
     <footer>
         <div class="container">
@@ -602,7 +434,6 @@
             </div>
             <p data-lang-key="footerBrand"></p>
             <p>&copy; 2025. <span data-lang-key="footerRights"></span></p>
-            
             <p class="footer-links">
                 <a href="privacy.html" data-lang-key="privacyLink"></a> &middot; 
                 <a href="termini.html" data-lang-key="termsLink"></a> &middot; 
@@ -612,270 +443,619 @@
             <p data-lang-key="footerDisclaimer"></p>
         </div>
     </footer>
-
-    <div id="hotspot-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-hotspot-title">
+    
+    <div id="timeline-modal" class="modal">
         <div class="modal-content">
-            <h3 id="modal-hotspot-title"></h3>
-            <p id="modal-hotspot-desc"></p>
-            <div class="modal-bottoni">
-                <button id="modal-hotspot-chiudi" data-lang-key="hotspotChiudi"></button>
-            </div>
+            <span id="modal-close-btn" class="modal-close">&times;</span>
+            <h3 id="modal-title"></h3>
+            <p id="modal-body"></p>
         </div>
     </div>
 
-
     <script>
-        // === OGGETTO TRADUZIONI (AGGIORNATO) ===
+        // --- OGGETTO TRANSLATIONS ESTESO (Testi professionali) ---
         const translations = {
             "it": {
-                "pageTitleTeoria": "cryptostarstudio - Teoria: Le Basi",
-                "navHome": "Home",
-                "navTeoria": "Teoria",
-                "navDispense": "Dispense",
-                "navPratica": "Pratica",
-                "teoriaHeroTitle": "Teoria: Le Basi",
-                "teoriaHeroSubtitle": "Comprendi i concetti fondamentali prima di iniziare.",
-                "teoriaAccordionTitle": "Lezioni Fondamentali",
+                "pageTitle": "🚀 cryptostarstudio: Teoria e Concetti Fondamentali",
+                "navLogo": "cryptostarstudio", // CORREZIONE: Chiave per logo senza span
+                "navHome": "Home", "navTeoria": "Teoria", "navDispense": "Dispense", "navPratica": "Pratica",
+                "footerBrand": "cryptostarstudio", "footerRights": "Tutti i diritti riservati.", "footerDisclaimer": "Disclaimer: Le informazioni su questa pagina non costituiscono consulenza finanziaria. L'investimento in asset digitali comporta un rischio elevato.",
+                "privacyLink": "Privacy Policy", "termsLink": "Termini di Servizio", "guideLink": "Guida alla Teoria",
+                "notAffiliated": "cryptostarstudio non è affiliato né sponsorizzato ufficialmente dai brand menzionati. I marchi appartengono ai rispettivi proprietari.",
                 
-                "acc1Title": "Cos'è la Blockchain?",
-                "acc1Desc": "Pensa alla blockchain come a un grande quaderno digitale. Immagina una catena di blocchi: ogni blocco contiene un elenco di transazioni (es. 'Paolo ha inviato 1€ a Maria'). Ogni nuovo blocco è legato crittograficamente al precedente. Questo lo rende immutabile: per modificare un blocco, dovresti modificare anche tutti i blocchi successivi su migliaia di computer contemporaneamente. È la tecnologia che permette l'esistenza di un sistema sicuro e...",
-                "hotspotDecentralizzatoTerm": "...decentralizzato.",
-                "hotspotDecentralizzatoTitle": "Decentralizzato",
-                "hotspotDecentralizzatoDesc": "Significa che non è controllato da una singola entità (come una banca o un governo). Il controllo è distribuito tra tutti i partecipanti della rete.",
-                "cta1Text": "Interessante, vero? Il modo più semplice per iniziare è usare una piattaforma all-in-one.",
-                "cta1Btn": "Vedi l'offerta su Bitpanda",
+                "teoriaHeroTitle": "La Tua Base di Conoscenza Crypto",
+                "teoriaHeroSubtitle": "Comprendi la Blockchain, il Web3 e la Rivoluzione Finanziaria Digitale.",
                 
-                "acc2Title": "Cos'è Bitcoin (BTC)?",
-                "acc2Desc": "Bitcoin è la prima e più famosa criptovaluta. È stato creato come 'oro digitale' - una riserva di valore che non è controllata da nessuna banca centrale. La sua rete è protetta dal 'Proof-of-Work': computer (miner) competono per risolvere complessi problemi matematici per validare i blocchi, ricevendo nuovi Bitcoin come ricompensa. Questo processo (mining) richiede molta energia ma rende la rete incredibilmente sicura. Esisteranno mai solo 21 milioni di Bitcoin, rendendolo un bene scarso.",
-                "cta2Text": "Bitcoin è la base di tutto. Puoi iniziare a investire in BTC tramite un piano di risparmio.",
-                "cta2Btn": "Esplora Bitpanda",
+                "timelineTitle": "Timeline: Le Tappe Fondamentali",
+                "timelineDetailsBtn": "Scopri di più",
                 
-                "acc3Title": "Cosa sono le Altcoin?",
-                "acc3Desc": "Altcoin sta per 'alternative coin', ovvero qualsiasi criptovaluta che non sia Bitcoin. Molte sono nate per migliorare Bitcoin (es. più veloci, più efficienti), mentre altre hanno scopi completamente diversi. L'esempio più famoso è...",
-                "hotspotEthereumTerm": "...Ethereum (ETH).",
-                "hotspotEthereumTitle": "Ethereum (ETH)",
-                "hotspotEthereumDesc": "Ethereum non è solo una moneta. È una piattaforma 'programmabile', un computer decentralizzato globale. Permette agli sviluppatori di creare 'Smart Contract' (contratti digitali automatici) e 'DApps' (applicazioni decentralizzate) che funzionano sulla sua blockchain.",
-                "cta3Text": "Le Altcoin offrono molte opportunità, come lo 'staking'. Scopri un exchange avanzato.",
-                "cta3Btn": "Vedi l'offerta su Kraken",
+                "timelineDate1991": "1991", "timelineTitle1991": "Il Concetto Primordiale", 
+                "timelineDesc1991": "I ricercatori Stuart Haber e W. Scott Stornetta introducono il concetto di una 'catena di blocchi' con marcature temporali crittografiche, ponendo le fondamenta teoriche per la tecnologia blockchain come sistema per verificare l'integrità dei dati.",
                 
-                "acc4Title": "Cos'è un Wallet (Portafoglio)?",
-                "acc4Desc": "È il tuo 'conto corrente' crypto. Non contiene fisicamente le tue monete (che sono sempre sulla blockchain), ma contiene la 'chiave privata': una password segretissima che prova che tu sei il proprietario di quelle monete e ti permette di spenderle. Chiunque conosca la tua chiave privata, possiede le tue crypto. Si dividono in 'Hot Wallet' (app su telefono/PC, connessi a internet, comodi ma più vulnerabili) e 'Cold Wallet' (dispositivi fisici USB, offline, molto sicuri).",
-                "cta4Text": "Vuoi comprare crypto e inviarle subito al tuo wallet personale (non-custodial)?",
-                "cta4Btn": "Prova il servizio MoonPay",
-
-                // NUOVA LEZIONE 5 (testo)
-                "acc5Title": "Come Leggere un Grafico (Le Basi)",
-                "acc5Desc": "<strong>Candela Verde (Rialzo):</strong> Il prezzo è SALITO. Il fondo del 'corpo' (la parte spessa) è il prezzo di APERTURA. La cima del 'corpo' è il prezzo di CHIUSURA.<br><strong>Candela Rossa (Ribasso):</strong> Il prezzo è SCESO. La cima del 'corpo' è il prezzo di APERTURA. Il fondo del 'corpo' è il prezzo di CHIUSURA.<br><strong>Stoppini (Linee sottili):</strong> Mostrano il prezzo massimo e minimo raggiunto in quel periodo.<br><strong>Volume (Barre in basso):</strong> Mostra QUANTE monete sono state scambiate. Un volume alto (barre alte) significa che c'è molto interesse e che il trend (la direzione del prezzo) è 'forte'.<br><strong>Timeframe (Intervallo):</strong> Indica quanto tempo rappresenta una singola candela (es. 1G = 1 Giorno, 1H = 1 Ora).",
-                "cta5Text": "Ora che sai cosa cercare, è il momento di vederlo in azione su un grafico reale.",
-                "cta5Btn": "Vai al Simulatore Pratico",
-
-                // Chiavi del vecchio grafico (non più usate, ma innocue)
-                "teoriaGraficoTitle": "Come Leggere un Grafico",
-
-                "teoriaRiskTitle": "I 3 Rischi Principali da Capire",
-                "risk1Title": "1. Volatilità",
-                "risk1Desc": "I prezzi delle crypto possono salire o scendere molto velocemente (anche del 20% o più in un solo giorno). Non investire mai più di quanto sei disposto a perdere.",
-                "risk2Title": "2. Sicurezza (Self-Custody)",
-                "risk2Desc": "Se gestisci tu il tuo wallet ('self-custody'), sei l'unico responsabile. Se perdi le tue chiavi private o la tua 'frase di recupero', perdi l'accesso ai tuoi fondi per SEMPRE.",
-                "risk3Title": "3. Truffe e Phishing",
-                "risk3Desc": "Stai attento a email false, siti clone e promesse di guadagni facili e garantiti. Nessuno ti regalerà mai crypto. Verifica sempre due volte i link prima di cliccare.",
-
-                "dispenseCtaTitle": "Vuoi Saperne di Più?",
-                "dispenseCtaDesc": "La teoria è la base, ma gli strumenti giusti fanno la differenza. Visita le nostre dispense per un elenco di risorse esterne, calcolatori e glossari.",
-                "dispenseCtaBtn": "Vai alle Dispense",
+                "timelineDate1": "2008-2009", "timelineTitle1": "La Nascita di Bitcoin", 
+                "timelineDesc1": "Uno pseudonimo, Satoshi Nakamoto, pubblica il whitepaper 'Bitcoin: A Peer-to-Peer Electronic Cash System'. Il 3 Gennaio 2009, mina il 'Blocco Genesi', dando vita alla prima applicazione pratica e decentralizzata della blockchain.",
                 
-                // Vecchio CTA finale (non più usato)
-                "teoriaCtaTitle": "Hai capito le basi?",
-                "teoriaCtaDesc": "Ottimo lavoro. Ora che conosci i concetti fondamentali, puoi passare al livello successivo: osservare i mercati e provare a simulare.",
-                "teoriaCtaBtn": "Vai alla Pratica",
+                "timelineDate2010": "2010", "timelineTitle2010": "Il 'Bitcoin Pizza Day'", 
+                "timelineDesc2010": "Avviene la prima transazione commerciale documentata nel mondo reale: Laszlo Hanyecz acquista due pizze per 10.000 BTC. Questo evento segna il momento in cui Bitcoin passa da un progetto accademico a un mezzo di scambio con un valore percepito.",
 
-                "hotspotChiudi": "Chiudi",
-                "footerBrand": "cryptostarstudio",
-                "footerRights": "Tutti i diritti riservati.",
-                "footerDisclaimer": "Disclaimer: Le informazioni su questa pagina non costituiscono consulenza finanziaria. Investire comporta dei rischi.",
-                "privacyLink": "Privacy Policy",
-                "termsLink": "Termini di Servizio",
-                "guideLink": "Guida per Principianti",
-                "notAffiliated": "cryptostarstudio non è affiliato né sponsorizzato ufficialmente dai brand menzionati. I marchi appartengono ai rispettivi proprietari."
+                "timelineDate2": "2015", "timelineTitle2": "L'Avvento di Ethereum", 
+                "timelineDesc2": "Vitalik Buterin e il suo team lanciano Ethereum, introducendo una blockchain Turing-completa. Questo abilita l'esecuzione di 'Smart Contract', programmi auto-eseguibili che aprono la strada alle Applicazioni Decentralizzate (DApp).",
+                
+                "timelineDate2016": "2016", "timelineTitle2016": "L'Hack di 'The DAO'", 
+                "timelineDesc2016": "Un attacco hacker a 'The DAO', uno dei primi fondi di investimento decentralizzati, porta via milioni di dollari e causa un 'hard fork' contenzioso che divide Ethereum (ETH) ed Ethereum Classic (ETC).",
+                
+                "timelineDate2022": "2022", "timelineTitle2022": "The Merge di Ethereum", 
+                "timelineDesc2022": "Ethereum completa la sua transizione storica dal Proof-of-Work (Mining) al Proof-of-Stake (Staking), riducendo il consumo energetico della rete di oltre il 99,9%.",
+
+                "terminologyTitle": "I 6 Concetti Chiave",
+                
+                "termBitcoinTitle": "1. Bitcoin (L'Oro Digitale)",
+                "termBitcoinDesc": "Bitcoin (BTC) è la prima criptovaluta decentralizzata, un asset digitale nativo di Internet. Funziona senza un'autorità centrale (come una banca o un governo) grazie alla sua rete peer-to-peer. La sua caratteristica principale è la **scarsità programmata**: esisteranno al massimo 21 milioni di monete. Utilizza il meccanismo di consenso **Proof-of-Work (PoW)**, dove i 'minatori' competono usando potenza di calcolo per validare le transazioni e proteggere la rete. Questa sicurezza e scarsità lo rendono simile all'oro, una 'riserva di valore' digitale.",
+                "cpaBitcoin": "Interessato ad acquisire Bitcoin? Exchange regolamentati e sicuri sono il punto di partenza ideale:",
+                
+                "term1Title": "2. Blockchain (Il Registro Distribuito)",
+                "term1Desc": "Una blockchain è un tipo specifico di database, un registro digitale (ledger) che è immutabile e decentralizzato. Le transazioni vengono raggruppate in 'blocchi', che vengono poi collegati crittograficamente in una 'catena'. Poiché questo registro è copiato su migliaia di computer (nodi) in tutto il mondo, è quasi impossibile da alterare, censurare o spegnere. È la tecnologia fondamentale che permette l'esistenza di Bitcoin e di altre crypto.",
+                "term1SubTitle": "Come si ottiene il consenso? (PoW vs. PoS)",
+                "term1DescPoW": "**Proof-of-Work (PoW):** Usato da Bitcoin. I 'Minatori' usano hardware specializzato (e molta energia) per risolvere complessi puzzle matematici. Il primo che trova la soluzione valida un blocco e viene ricompensato. È estremamente sicuro ma lento e dispendioso.",
+                "term1DescPoS": "**Proof-of-Stake (PoS):** Usato da Ethereum. I 'Validatori' bloccano le proprie monete ('staking') come garanzia. Se agiscono onestamente, vengono ricompensati; se tentano di imbrogliare, perdono le monete bloccate. È molto più efficiente dal punto di vista energetico.",
+
+                "term3Title": "3. Portafoglio (Wallet)",
+                "term3Desc": "Un wallet non contiene fisicamente le tue criptovalute (che vivono sulla blockchain). Esso custodisce la tua **Chiave Privata**: una password crittografica segreta che ti dà la proprietà e il controllo dei tuoi fondi. Chiunque conosca la tua chiave privata può rubare le tue monete. Ricorda: *'Not your keys, not your coins'*. La **Chiave Pubblica** (o indirizzo) è come il tuo IBAN: puoi condividerla per ricevere fondi.",
+                "term3SubTitle": "Hot Wallet vs. Cold Wallet",
+                "term3DescHot": "**Hot Wallet:** Un software (app su telefono o estensione browser) connesso a Internet. È comodo per le transazioni quotidiane ma più vulnerabile ad attacchi hacker.",
+                "term3DescCold": "**Cold Wallet:** Un dispositivo hardware (come una chiavetta USB) che mantiene la tua chiave privata sempre offline. È il metodo più sicuro per conservare grandi quantità di crypto a lungo termine.",
+                "cpaWallet": "Per acquistare le tue prime crypto e inviarle a un wallet, i servizi 'on-ramp' (ponte tra valuta tradizionale e crypto) come MoonPay sono una soluzione rapida:",
+                
+                "term5Title": "4. Smart Contract (Contratto Intelligente)",
+                "term5Desc": "Uno Smart Contract è un programma software che viene eseguito automaticamente sulla blockchain (come Ethereum). È 'intelligente' perché esegue i termini di un accordo in modo automatico e deterministico, senza bisogno di fiducia o di un intermediario. La logica è semplice: **'SE accade questo, ALLORA fai quello'**. Sono la base di tutte le applicazioni decentralizzate (DApp), della DeFi, degli NFT e delle DAO.",
+                "term5DescGas": "Per eseguire uno smart contract, è necessario pagare una commissione alla rete, nota come **'Gas Fee'**. Questa commissione compensa i validatori per il lavoro computazionale richiesto.",
+
+                "term4Title": "5. DeFi (Finanza Decentralizzata)",
+                "term4Desc": "La DeFi è un ecosistema di applicazioni finanziarie costruite su blockchain pubbliche tramite Smart Contract. Mira a ricreare i servizi finanziari tradizionali (come prestiti, scambi, guadagno di interessi, derivati) in modo aperto, globale e trasparente, senza intermediari centralizzati come le banche.",
+                "term4DescCeFi": "Esistono anche piattaforme **CeFi** (Finanza Centralizzata), come YouHodler, che offrono servizi simili (es. conti 'earn' per guadagnare interessi) ma in un ambiente controllato e regolamentato, più facile da usare per i principianti.",
+                "cpaDeFi": "Piattaforme CeFi come YouHodler offrono servizi ispirati alla DeFi in un ambiente regolamentato e di facile accesso:",
+                
+                "termL2Title": "6. Layer 2 (Soluzioni di Scalabilità)",
+                "termL2Desc": "Le blockchain principali come Ethereum (definite 'Layer 1' o L1) possono essere lente e costose quando la rete è congestionata (le 'Gas Fee' aumentano). Un **'Layer 2' (L2)** è una rete secondaria costruita *sopra* il Layer 1 per risolvere questo problema. Gli L2 (come i 'Rollups') elaborano migliaia di transazioni in modo rapido ed economico 'fuori catena' (off-chain) e poi registrano un riepilogo sicuro sul Layer 1, ereditandone la sicurezza ma offrendo prestazioni superiori.",
+                
+                "quizTitle": "Metti alla Prova le Tue Conoscenze",
+                "quizSelectTitle": "Scegli il tuo argomento",
+                "quizStartBasi": "Quiz: Concetti Base",
+                "quizStartBasiDesc": "(Bitcoin, Blockchain, Wallet)",
+                "quizStartAvanzato": "Quiz: Concetti Avanzati",
+                "quizStartAvanzatoDesc": "(Smart Contract, DeFi, L2)",
+                "quizSubmit": "Controlla Risposte",
+                
+                "quizResultTitle": "Risultato Quiz:",
+                "quizResultMsg": "Hai risposto correttamente a {correct} domande su {total}.",
+                "quizResultPerfect": "🚀 Eccellente! Hai una solida comprensione.",
+                "quizResultGood": "👍 Ottimo lavoro! Sei sulla strada giusta.",
+                "quizResultBad": "🧠 Non male, ma è necessario un ripasso.",
+                
+                "quizActionPractice": "Vai alla Pratica",
+                "quizActionDispense": "Vai alle Dispense",
+                "quizActionReview": "Ripassa i Concetti",
+                "quizActionRetry": "Riprova il Quiz"
             },
             "en": {
-                // ... (Traduci tutte le nuove chiavi in Inglese)
-                "pageTitleTeoria": "cryptostarstudio - Theory: The Basics",
-                "navHome": "Home",
-                "navTeoria": "Theory",
-                "navDispense": "Resources",
-                "navPratica": "Practice",
-                "acc5Title": "How to Read a Chart (The Basics)",
-                "acc5Desc": "<strong>Green Candle (Bullish):</strong> The price WENT UP. The bottom of the 'body' (thick part) is the OPEN price. The top is the CLOSE price.<br><strong>Red Candle (Bearish):</strong> The price WENT DOWN. The top of the 'body' is the OPEN price. The bottom is the CLOSE price.<br><strong>Wicks (Thin lines):</strong> Show the highest and lowest price reached in that period.<br><strong>Volume (Bars below):</strong> Shows HOW MANY coins were traded. High volume (tall bars) means high interest and a 'strong' trend.<br><strong>Timeframe:</strong> Indicates how much time one candle represents (e.g., 1D = 1 Day, 1H = 1 Hour).",
-                "cta5Text": "Now that you know what to look for, it's time to see it in action on a real chart.",
-                "cta5Btn": "Go to the Practice Simulator",
-                "dispenseCtaTitle": "Want to Learn More?",
-                "dispenseCtaDesc": "Theory is the foundation, but the right tools make the difference. Visit our resources for a list of external guides, calculators, and glossaries.",
-                "dispenseCtaBtn": "Go to Resources"
-                // ... etc ...
+                "pageTitle": "🚀 cryptostarstudio: Crypto Theory & Concepts",
+                "navLogo": "cryptostarstudio",
+                "navHome": "Home", "navTeoria": "Theory", "navDispense": "Handouts", "navPratica": "Practice",
+                "footerBrand": "cryptostarstudio", "footerRights": "All rights reserved.", "footerDisclaimer": "Disclaimer: The information on this page does not constitute financial advice. Investing in digital assets involves high risk.",
+                "privacyLink": "Privacy Policy", "termsLink": "Terms of Service", "guideLink": "Theory Guide",
+                "notAffiliated": "cryptostarstudio is not officially affiliated with or sponsored by the mentioned brands. Trademarks belong to their respective owners.",
+                
+                "teoriaHeroTitle": "Your Crypto Knowledge Base",
+                "teoriaHeroSubtitle": "Understand Blockchain, Web3, and the Digital Financial Revolution.",
+                
+                "timelineTitle": "Timeline: Key Milestones",
+                "timelineDetailsBtn": "Learn More",
+                
+                "timelineDate1991": "1991", "timelineTitle1991": "The Primordial Concept", 
+                "timelineDesc1991": "Researchers Stuart Haber and W. Scott Stornetta introduced the concept of a cryptographically secured 'chain of blocks' with timestamps, laying the theoretical groundwork for blockchain technology as a system to verify data integrity.",
+                
+                "timelineDate1": "2008-2009", "timelineTitle1": "The Birth of Bitcoin", 
+                "timelineDesc1": "A pseudonym, Satoshi Nakamoto, publishes the whitepaper 'Bitcoin: A Peer-to-Peer Electronic Cash System'. On January 3, 2009, the 'Genesis Block' is mined, bringing to life the first practical, decentralized application of blockchain.",
+                
+                "timelineDate2010": "2010", "timelineTitle2010": "'Bitcoin Pizza Day'", 
+                "timelineDesc2010": "The first documented real-world commercial transaction occurs: Laszlo Hanyecz buys two pizzas for 10,000 BTC. This event marks the moment Bitcoin shifted from an academic project to a medium of exchange with perceived value.",
+
+                "timelineDate2": "2015", "timelineTitle2": "The Advent of Ethereum", 
+                "timelineDesc2": "Vitalik Buterin and his team launch Ethereum, introducing a Turing-complete blockchain. This enables the execution of 'Smart Contracts,' self-executing programs that pave the way for Decentralized Applications (DApps).",
+                
+                "timelineDate2016": "2016", "timelineTitle2016": "'The DAO' Hack", 
+                "timelineDesc2016": "An attack on 'The DAO,' one of the first and largest decentralized investment funds, drains millions of dollars due to a code vulnerability. The event causes a contentious 'hard fork,' splitting the network into Ethereum (ETH) and Ethereum Classic (ETC).",
+                
+                "timelineDate2022": "2022", "timelineTitle2022": "The Ethereum Merge", 
+                "timelineDesc2022": "Ethereum successfully completes its historic transition from the Proof-of-Work (Mining) consensus mechanism to Proof-of-Stake (Staking). This update, known as 'The Merge,' reduces the network's energy consumption by over 99.9%.",
+
+                "terminologyTitle": "The 6 Key Concepts",
+                
+                "termBitcoinTitle": "1. Bitcoin (Digital Gold)",
+                "termBitcoinDesc": "Bitcoin (BTC) is the first and most prominent cryptocurrency. It's a decentralized digital asset that operates on a global peer-to-peer network, without the need for intermediaries like banks or governments. Its main feature is **programmed scarcity**: a maximum of 21 million coins will ever exist. It uses the **Proof-of-Work (PoW)** consensus mechanism, where 'miners' compete using computational power to validate transactions and secure the network. This security and scarcity make it akin to 'digital gold,' a store of value.",
+                "cpaBitcoin": "Interested in acquiring Bitcoin? Regulated and secure exchanges are the ideal starting point:",
+                
+                "term1Title": "2. Blockchain (The Distributed Ledger)",
+                "term1Desc": "A blockchain is a specific type of database, a digital ledger that is immutable and distributed. Transactions are grouped into 'blocks,' which are then cryptographically linked in a 'chain.' Because this ledger is copied across thousands of computers (nodes) worldwide, it is nearly impossible to alter, censor, or shut down. It is the foundational technology that enables Bitcoin and other cryptos.",
+                "term1SubTitle": "How is consensus reached? (PoW vs. PoS)",
+                "term1DescPoW": "**Proof-of-Work (PoW):** Used by Bitcoin. 'Miners' use specialized hardware (and a lot of energy) to solve complex mathematical puzzles. The first to find the solution validates a block and is rewarded. It is extremely secure but slow and energy-intensive.",
+                "term1DescPoS": "**Proof-of-Stake (PoS):** Used by Ethereum. 'Validators' lock up their own coins ('staking') as collateral. If they act honestly, they are rewarded; if they try to cheat, they lose their locked coins. It is far more energy-efficient.",
+
+                "term3Title": "3. Wallet",
+                "term3Desc": "A wallet does not physically contain your cryptocurrencies (which live on the blockchain). It holds your **Private Key**: a secret cryptographic password that proves your ownership and gives you control over your funds. Anyone who knows your private key can steal your coins. Remember: *'Not your keys, not your coins'*. The **Public Key** (or address) is like your bank account number: you can share it to receive funds.",
+                "term3SubTitle": "Hot Wallet vs. Cold Wallet",
+                "term3DescHot": "**Hot Wallet:** A software (phone app or browser extension) connected to the internet. It's convenient for daily transactions but more vulnerable to hacking.",
+                "term3DescCold": "**Cold Wallet:** A hardware device (like a USB stick) that keeps your private key completely offline. It is the most secure method for storing large amounts of crypto long-term.",
+                "cpaWallet": "To buy your first crypto and send it to a wallet, 'on-ramp' services (bridging traditional currency and crypto) like MoonPay are a quick solution:",
+                
+                "term5Title": "4. Smart Contract",
+                "term5Desc": "A Smart Contract is a software program that runs automatically on the blockchain (like Ethereum). It's 'smart' because it executes the terms of an agreement automatically and deterministically as soon as predefined conditions are met. The logic is simple: **'IF this happens, THEN do that'**. They are the foundation of all Decentralized Applications (DApps), DeFi, NFTs, and DAOs.",
+                "term5DescGas": "To execute a smart contract, you must pay a fee to the network, known as a **'Gas Fee'**. This fee compensates validators for the computational work required.",
+
+                "term4Title": "5. DeFi (Decentralized Finance)",
+                "term4Desc": "DeFi is an ecosystem of financial applications built on public blockchains using Smart Contracts. It aims to recreate traditional financial systems (like lending, trading, earning interest, derivatives) in an open, global, and transparent way, without relying on centralized intermediaries like banks.",
+                "term4DescCeFi": "**CeFi** (Centralized Finance) platforms, like YouHodler, also exist. They offer DeFi-inspired services (e.g., 'earn' accounts to earn interest) but in a controlled, regulated environment that is easier for beginners to use.",
+                "cpaDeFi": "CeFi platforms like YouHodler offer DeFi-inspired services in a regulated and user-friendly environment:",
+                
+                "termL2Title": "6. Layer 2 (Scaling Solutions)",
+                "termL2Desc": "Main blockchains like Ethereum (called 'Layer 1' or L1) can become slow and expensive when the network is congested (high 'Gas Fees'). A **'Layer 2' (L2)** is a secondary network or protocol built *on top* of a Layer 1 to solve this problem. L2s (like 'Rollups') process thousands of transactions quickly and cheaply 'off-chain' and then post a secure summary back to the Layer 1, inheriting its security while offering superior performance.",
+                
+                "quizTitle": "Test Your Knowledge",
+                "quizSelectTitle": "Choose your topic",
+                "quizStartBasi": "Quiz: Basic Concepts",
+                "quizStartBasiDesc": "(Bitcoin, Blockchain, Wallet)",
+                "quizStartAvanzato": "Quiz: Advanced Concepts",
+                "quizStartAvanzatoDesc": "(Smart Contract, DeFi, L2)",
+                "quizSubmit": "Check Answers",
+                
+                "quizResultTitle": "Quiz Result:",
+                "quizResultMsg": "You answered {correct} out of {total} questions correctly.",
+                "quizResultPerfect": "🚀 Excellent! You have a solid understanding.",
+                "quizResultGood": "👍 Great job! You're on the right track.",
+                "quizResultBad": "🧠 Not bad, but a review is needed.",
+                
+                "quizActionPractice": "Go to Practice",
+                "quizActionDispense": "Go to Handouts",
+                "quizActionReview": "Review Concepts",
+                "quizActionRetry": "Retry Quiz"
             },
             "es": {
-                // ... (Traduci tutte le nuove chiavi in Spagnolo)
-                "pageTitleTeoria": "cryptostarstudio - Teoría: Las Bases",
-                "navHome": "Inicio",
-                "navTeoria": "Teoría",
-                "navDispense": "Recursos",
-                "navPratica": "Práctica",
-                "acc5Title": "Cómo Leer un Gráfico (Lo Básico)",
-                "acc5Desc": "<strong>Vela Verde (Alcista):</strong> El precio SUBIÓ. La base del 'cuerpo' (parte gruesa) es el precio de APERTURA. La cima es el precio de CIERRE.<br><strong>Vela Roja (Bajista):</strong> El precio BAJÓ. La cima del 'cuerpo' es el precio de APERTURA. La base es el precio de CIERRE.<br><strong>Mechas (Líneas finas):</strong> Muestran el precio máximo y mínimo alcanzado en ese período.<br><strong>Volumen (Barras inferiores):</strong> Muestra CUÁNTAS monedas se intercambiaron. Un volumen alto (barras altas) significa que hay mucho interés y que la tendencia es 'fuerte'.<br><strong>Timeframe (Intervalo):</strong> Indica cuánto tiempo representa una sola vela (ej. 1D = 1 Día, 1H = 1 Hora).",
-                "cta5Text": "Ahora que sabes qué buscar, es hora de verlo en acción en un gráfico real.",
-                "cta5Btn": "Ir al Simulador Práctico",
-                "dispenseCtaTitle": "¿Quieres Saber Más?",
-                "dispenseCtaDesc": "La teoría es la base, pero las herramientas adecuadas marcan la diferencia. Visita nuestros recursos para ver una lista de guías externas, calculadoras y glosarios.",
-                "dispenseCtaBtn": "Ir a Recursos"
-                // ... etc ...
+                "pageTitle": "🚀 cryptostarstudio: Teoría y Conceptos Cripto",
+                "navLogo": "cryptostarstudio",
+                "navHome": "Inicio", "navTeoria": "Teoría", "navDispense": "Material", "navPratica": "Práctica",
+                "footerBrand": "cryptostarstudio", "footerRights": "Todos los derechos reservados.", "footerDisclaimer": "Aviso: La información en esta página no constituye asesoramiento financiero. La inversión en activos digitales conlleva un alto riesgo.",
+                "privacyLink": "Política de Privacidad", "termsLink": "Términos de Servicio", "guideLink": "Guía de Teoría",
+                "notAffiliated": "cryptostarstudio no está afiliado ni patrocinado oficialmente por las marcas mencionadas. Las marcas pertenecen a sus respectivos propietarios.",
+                
+                "teoriaHeroTitle": "Tu Base de Conocimiento Cripto",
+                "teoriaHeroSubtitle": "Comprende la Blockchain, la Web3 y la Revolución Financiera Digital.",
+                
+                "timelineTitle": "Cronología: Hitos Clave",
+                "timelineDetailsBtn": "Saber más",
+                
+                "timelineDate1991": "1991", "timelineTitle1991": "El Concepto Primordial", 
+                "timelineDesc1991": "Los investigadores Stuart Haber y W. Scott Stornetta introducen el concepto de una 'cadena de bloques' con marcas de tiempo criptográficas, sentando las bases teóricas de la tecnología blockchain.",
+                
+                "timelineDate1": "2008-2009", "timelineTitle1": "El Nacimiento de Bitcoin", 
+                "timelineDesc1": "Un seudónimo, Satoshi Nakamoto, publica el whitepaper 'Bitcoin: Un Sistema de Dinero Electrónico de Par a Par'. El 3 de enero de 2009, mina el 'Bloque Génesis', dando vida a la primera aplicación práctica y descentralizada de la blockchain.",
+                
+                "timelineDate2010": "2010", "timelineTitle2010": "'Bitcoin Pizza Day'", 
+                "timelineDesc2010": "Ocurre la primera transacción comercial documentada en el mundo real: Laszlo Hanyecz compra dos pizzas por 10.000 BTC. Este evento marca el momento en que Bitcoin pasa de ser un proyecto académico a un medio de intercambio con valor percibido.",
+
+                "timelineDate2": "2015", "timelineTitle2": "El Advenimiento de Ethereum", 
+                "timelineDesc2": "Vitalik Buterin y su equipo lanzan Ethereum, introduciendo una blockchain Turing-completa. Esto habilita la ejecución de 'Smart Contracts', programas auto-ejecutables que abren el camino a las Aplicaciones Descentralizadas (DApps).",
+                
+                "timelineDate2016": "2016", "timelineTitle2016": "El Hackeo de 'The DAO'", 
+                "timelineDesc2016": "Un ataque a 'The DAO', uno de los primeros fondos de inversión descentralizados, resulta en el robo de millones de dólares y provoca un 'hard fork' contencioso, dividiendo la red en Ethereum (ETH) y Ethereum Classic (ETC).",
+                
+                "timelineDate2022": "2022", "timelineTitle2022": "La Fusión de Ethereum ('The Merge')", 
+                "timelineDesc2022": "Ethereum completa su histórica transición del mecanismo de consenso Proof-of-Work (Minería) a Proof-of-Stake (Staking), reduciendo el consumo de energía de la red en más de un 99,9%.",
+
+                "terminologyTitle": "Los 6 Conceptos Clave",
+                
+                "termBitcoinTitle": "1. Bitcoin (El Oro Digital)",
+                "termBitcoinDesc": "Bitcoin (BTC) es la primera y más importante criptomoneda. Es un activo digital descentralizado que funciona en una red global peer-to-peer, sin necesidad de intermediarios como bancos o gobiernos. Su característica principal es la **escasez programada**: solo existirán 21 millones de monedas. Utiliza el mecanismo de consenso **Proof-of-Work (PoW)**, donde los 'mineros' compiten usando poder computacional para validar transacciones y asegurar la red. Esta seguridad y escasez lo asemejan al 'oro digital', una reserva de valor.",
+                "cpaBitcoin": "¿Interesado en adquirir Bitcoin? Los exchanges regulados y seguros son el punto de partida ideal:",
+                
+                "term1Title": "2. Blockchain (El Libro Contable Distribuido)",
+                "term1Desc": "Una blockchain es un tipo específico de base de datos, un libro contable digital (ledger) que es inmutable y descentralizado. Las transacciones se agrupan en 'bloques', que luego se enlazan criptográficamente en una 'cadena'. Dado que este registro se copia en miles de computadoras (nodos) en todo el mundo, es casi imposible de alterar, censurar o apagar.",
+                "term1SubTitle": "¿Cómo se alcanza el consenso? (PoW vs. PoS)",
+                "term1DescPoW": "**Proof-of-Work (PoW):** Usado por Bitcoin. Los 'Mineros' usan hardware especializado (y mucha energía) para resolver complejos rompecabezas matemáticos. El primero que encuentra la solución valida un bloque y es recompensado. Es extremadamente seguro pero lento y costoso.",
+                "term1DescPoS": "**Proof-of-Stake (PoS):** Usado por Ethereum. Los 'Validadores' bloquean sus propias monedas ('staking') como garantía. Si actúan con honestidad, son recompensados; si intentan hacer trampa, pierden sus monedas bloqueadas. Es mucho más eficiente energéticamente.",
+
+                "term3Title": "3. Billetera (Wallet)",
+                "term3Desc": "Una wallet no contiene físicamente tus criptomonedas (que viven en la blockchain). Almacena tu **Clave Privada**: una contraseña criptográfica secreta que te da la propiedad y el control de tus fondos. Cualquiera que conozca tu clave privada puede robar tus monedas. Recuerda: *'Not your keys, not your coins'*. La **Clave Pública** (o dirección) es como tu número de cuenta bancaria: puedes compartirla para recibir fondos.",
+                "term3SubTitle": "Hot Wallet vs. Cold Wallet",
+                "term3DescHot": "**Hot Wallet:** Un software (app en el móvil o extensión de navegador) conectado a Internet. Es conveniente para transacciones diarias pero más vulnerable a hackeos.",
+                "term3DescCold": "**Cold Wallet:** Un dispositivo de hardware (como un USB) que mantiene tu clave privada siempre desconectada. Es el método más seguro para almacenar grandes cantidades de cripto a largo plazo.",
+                "cpaWallet": "Para comprar tus primeras cripto y enviarlas a una wallet, los servicios 'on-ramp' (puente entre moneda fiduciaria y cripto) como MoonPay son una solución rápida:",
+                
+                "term5Title": "4. Smart Contract (Contrato Inteligente)",
+                "term5Desc": "Un Smart Contract es un programa de software que se ejecuta automáticamente en la blockchain (como Ethereum). Es 'inteligente' porque ejecuta los términos de un acuerdo de forma automática y determinista en cuanto se cumplen las condiciones predefinidas. La lógica es simple: **'SI ocurre esto, ENTONCES haz aquello'**. Son la base de todas las DApps, DeFi, NFTs y DAOs.",
+                "term5DescGas": "Para ejecutar un smart contract, debes pagar una comisión a la red, conocida como **'Gas Fee'**. Esta comisión compensa a los validadores por el trabajo computacional requerido.",
+
+                "term4Title": "5. DeFi (Finanzas Descentralizadas)",
+                "term4Desc": "DeFi es un ecosistema de aplicaciones financieras construido sobre blockchains públicas mediante Smart Contracts. Su objetivo es recrear los servicios financieros tradicionales (préstamos, intercambios, generación de intereses) de forma abierta, global y transparente, sin intermediarios centralizados.",
+                "term4DescCeFi": "También existen plataformas **CeFi** (Finanzas Centralizadas), como YouHodler, que ofrecen servicios similares (ej. cuentas 'earn' para ganar intereses) pero en un entorno controlado y regulado, más fácil de usar para principiantes.",
+                "cpaDeFi": "Las plataformas CeFi como YouHodler ofrecen servicios inspirados en DeFi en un entorno regulado y fácil de usar:",
+                
+                "termL2Title": "6. Capa 2 (Soluciones de Escalabilidad)",
+                "termL2Desc": "Las blockchains principales como Ethereum (llamadas 'Capa 1' o L1) pueden volverse lentas y caras cuando la red está congestionada (altas 'Gas Fees'). Una **'Capa 2' (L2)** es una red secundaria construida *sobre* la Capa 1 para resolver este problema. Las L2 (como los 'Rollups') procesan miles de transacciones de forma rápida y económica 'fuera de cadena' (off-chain) y luego registran un resumen seguro en la Capa 1, heredando su seguridad pero ofreciendo un rendimiento superior.",
+                
+                "quizTitle": "Pon a Prueba Tus Conocimientos",
+                "quizSelectTitle": "Elige tu tema",
+                "quizStartBasi": "Quiz: Conceptos Básicos",
+                "quizStartBasiDesc": "(Bitcoin, Blockchain, Wallet)",
+                "quizStartAvanzato": "Quiz: Conceptos Avanzados",
+                "quizStartAvanzatoDesc": "(Smart Contract, DeFi, L2)",
+                "quizSubmit": "Verificar Respuestas",
+                
+                "quizResultTitle": "Resultado del Quiz:",
+                "quizResultMsg": "Respondiste correctamente a {correct} de {total} preguntas.",
+                "quizResultPerfect": "🚀 ¡Excelente! Tienes una sólida comprensión.",
+                "quizResultGood": "👍 ¡Muy bien! Estás en el camino correcto.",
+                "quizResultBad": "🧠 No está mal, pero necesitas repasar.",
+                
+                "quizActionPractice": "Ir a la Práctica",
+                "quizActionDispense": "Ir al Material",
+                "quizActionReview": "Repasar Conceptos",
+                "quizActionRetry": "Repetir Quiz"
+            }
+        };
+        
+        // --- BANCA DOMANDE QUIZ AGGIORNATA ---
+        const questionBank = {
+            "it": {
+                "basi": [
+                    { q: "Qual è la caratteristica fondamentale della Blockchain?", options: ["È gestita da una banca centrale.", "È un registro centralizzato e modificabile.", "È un registro decentralizzato e immutabile."], a: "È un registro decentralizzato e immutabile.", hint: "blockchain", hintText: "Rivedi la sezione 'Blockchain'." },
+                    { q: "Cosa custodisce un Wallet Crypto?", options: ["Le monete e i token fisicamente.", "Le Chiavi Private per autorizzare le transazioni.", "Un certificato di proprietà emesso da una banca."], a: "Le Chiavi Private per autorizzare le transazioni.", hint: "wallet", hintText: "Rivedi la sezione 'Wallet'." },
+                    { q: "Qual è la fornitura massima (max supply) di Bitcoin?", options: ["21 milioni.", "100 milioni.", "È illimitata, come l'Euro."], a: "21 milioni.", hint: "bitcoin", hintText: "Rivedi la sezione 'Bitcoin'." }
+                ],
+                "avanzato": [
+                    { q: "Cos'è uno 'Smart Contract'?", options: ["Un contratto legale scritto da un avvocato crypto.", "Un programma software auto-eseguibile sulla blockchain.", "Un accordo verbale tra due trader."], a: "Un programma software auto-eseguibile sulla blockchain.", hint: "smartcontract", hintText: "Rivedi la sezione 'Smart Contract'." },
+                    { q: "A cosa serve un 'Layer 2' (L2)?", options: ["A creare un backup fisico della blockchain.", "A migliorare la scalabilità (velocità e costi) di un Layer 1.", "È un altro nome per il mining di Bitcoin."], a: "A migliorare la scalabilità (velocità e costi) di un Layer 1.", hint: "l2", hintText: "Rivedi la sezione 'Layer 2'." },
+                    { q: "Cosa significa 'DeFi'?", options: ["Design Finanziario.", "Debito Finanziario.", "Finanza Decentralizzata."], a: "Finanza Decentralizzata.", hint: "defi", hintText: "Rivedi la sezione 'DeFi'." }
+                ]
+            },
+            "en": {
+                "basi": [
+                    { q: "What is the fundamental characteristic of a Blockchain?", options: ["It is managed by a central bank.", "It is a centralized and editable ledger.", "It is a decentralized and immutable ledger."], a: "It is a decentralized and immutable ledger.", hint: "blockchain", hintText: "Review the 'Blockchain' section." },
+                    { q: "What does a Crypto Wallet store?", options: ["The coins and tokens physically.", "The Private Keys to authorize transactions.", "An ownership certificate from a bank."], a: "The Private Keys to authorize transactions.", hint: "wallet", hintText: "Review the 'Wallet' section." },
+                    { q: "What is the maximum supply of Bitcoin?", options: ["21 million.", "100 million.", "It is unlimited, like the Euro."], a: "21 million.", hint: "bitcoin", hintText: "Review the 'Bitcoin' section." }
+                ],
+                "avanzato": [
+                    { q: "What is a 'Smart Contract'?", options: ["A legal contract written by a crypto lawyer.", "A self-executing software program on the blockchain.", "A verbal agreement between two traders."], a: "A self-executing software program on the blockchain.", hint: "smartcontract", hintText: "Review the 'Smart Contract' section." },
+                    { q: "What is a 'Layer 2' (L2) for?", options: ["To create a physical backup of the blockchain.", "To improve the scalability (speed and cost) of a Layer 1.", "It's another name for Bitcoin mining."], a: "To improve the scalability (speed and cost) of a Layer 1.", hint: "l2", hintText: "Review the 'Layer 2' section." },
+                    { q: "What does 'DeFi' stand for?", options: ["Financial Design.", "Financial Debt.", "Decentralized Finance."], a: "Decentralized Finance.", hint: "defi", hintText: "Review the 'DeFi' section." }
+                ]
+            },
+            "es": {
+                "basi": [
+                    { q: "¿Cuál es la característica fundamental de una Blockchain?", options: ["Es gestionada por un banco central.", "Es un registro centralizado y editable.", "Es un registro descentralizado e inmutable."], a: "Es un registro descentralizado e inmutable.", hint: "blockchain", hintText: "Revisa la sección 'Blockchain'." },
+                    { q: "¿Qué almacena una Billetera (Wallet) Cripto?", options: ["Las monedas y tokens físicamente.", "Las Claves Privadas para autorizar transacciones.", "Un certificado de propiedad emitido por un banco."], a: "Las Claves Privadas para autorizar transacciones.", hint: "wallet", hintText: "Revisa la sección 'Wallet'." },
+                    { q: "¿Cuál es el suministro máximo (max supply) de Bitcoin?", options: ["21 millones.", "100 millones.", "Es ilimitado, como el Euro."], a: "21 millones.", hint: "bitcoin", hintText: "Revisa la sección 'Bitcoin'." }
+                ],
+                "avanzato": [
+                    { q: "¿Qué es un 'Smart Contract'?", options: ["Un contrato legal escrito por un abogado cripto.", "Un programa de software autoejecutable en la blockchain.", "Un acuerdo verbal entre dos traders."], a: "Un programa de software autoejecutable en la blockchain.", hint: "smartcontract", hintText: "Revisa la sección 'Smart Contract'." },
+                    { q: "¿Para qué sirve una 'Capa 2' (L2)?", options: ["Para crear una copia de seguridad física de la blockchain.", "Para mejorar la escalabilidad (velocidad y costes) de una Capa 1.", "Es otro nombre para la minería de Bitcoin."], a: "Para mejorar la escalabilidad (velocidad y costes) de una Capa 1.", hint: "l2", hintText: "Revisa la sección 'Capa 2'." },
+                    { q: "¿Qué significa 'DeFi'?", options: ["Diseño Financiero.", "Deuda Financiera.", "Finanzas Descentralizadas."], a: "Finanzas Descentralizadas.", hint: "defi", hintText: "Revisa la sección 'DeFi'." }
+                ]
             }
         };
 
-        // === SCRIPT GLOBALE ===
         let currentLang = 'it';
+        let currentQuizQuestions = []; 
+        let animationObserver = null;
+        
+        // Funzione helper per mescolare un array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
 
-        // === FUNZIONE CAMBIO LINGUA ===
+        // --- Genera Quiz Dinamico ---
+        function generateQuiz(category, numQuestions = 3) {
+            const tr = translations[currentLang] || translations['it'];
+            const langBank = questionBank[currentLang] || questionBank['it'];
+            const bank = langBank[category] || [];
+            
+            if (!bank || bank.length === 0) { return; }
+
+            const shuffledBank = shuffleArray([...bank]);
+            currentQuizQuestions = shuffledBank.slice(0, numQuestions);
+
+            const quizForm = document.getElementById('quiz-form');
+            quizForm.innerHTML = ''; 
+            
+            currentQuizQuestions.forEach((qData, index) => {
+                const questionIndex = index;
+                const shuffledOptions = shuffleArray([...qData.options]);
+                
+                const optionsHtml = shuffledOptions.map((optionText) => `
+                    <button type="button" class="quiz-option" data-q-index="${questionIndex}" data-option-text="${optionText}">
+                        ${optionText}
+                    </button>
+                `).join('');
+
+                const questionHtml = `
+                    <div class="question-item">
+                        <h4>${index + 1}. ${qData.q}</h4>
+                        <div class="options-container" data-question-index="${questionIndex}">
+                            ${optionsHtml}
+                        </div>
+                        <div class="quiz-feedback-wrong" style="display: none;"></div>
+                    </div>
+                `;
+                quizForm.innerHTML += questionHtml;
+            });
+            
+            quizForm.innerHTML += `
+                <button type="button" id="quiz-submit" class="quiz-submit">${tr.quizSubmit}</button>
+            `;
+
+            document.getElementById('quiz-selection-buttons').style.display = 'none';
+            document.getElementById('quiz-result-box').style.display = 'none';
+            document.getElementById('quiz-box').style.display = 'block';
+            document.getElementById('quiz-box').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            attachQuizListeners();
+        }
+
+        // --- Attacca Listener al Quiz generato (Corretto) ---
+        function attachQuizListeners() {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(option => {
+                option.addEventListener('click', handleOptionClick);
+            });
+            
+            const submitButton = document.getElementById('quiz-submit');
+            if (submitButton) {
+                submitButton.addEventListener('click', checkQuiz);
+            }
+        }
+        
+        // --- Handler per il click sulle opzioni (Migliorato) ---
+        function handleOptionClick(event) {
+            const clickedOption = event.currentTarget;
+            if (clickedOption.disabled) return; 
+            
+            const qIndex = clickedOption.dataset.qIndex;
+            document.querySelectorAll(`.quiz-option[data-q-index="${qIndex}"]`).forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            clickedOption.classList.add('selected');
+        }
+        
+        // --- CheckQuiz (Migliorato con Risultati Dinamici e Scroll-to-Term) ---
+        function checkQuiz() {
+            let correctCount = 0;
+            const tr = translations[currentLang] || translations['it'];
+            const allOptions = document.querySelectorAll('.quiz-option');
+            
+            allOptions.forEach(opt => {
+                opt.disabled = true;
+                opt.removeEventListener('click', handleOptionClick);
+            }); 
+            
+            currentQuizQuestions.forEach((qData, index) => {
+                const selectedOption = document.querySelector(`.quiz-option[data-q-index="${index}"].selected`);
+                
+                if (selectedOption) {
+                    const selectedText = selectedOption.dataset.optionText;
+                    if (selectedText === qData.a) {
+                        correctCount++;
+                        selectedOption.classList.add('correct');
+                    } else {
+                        selectedOption.classList.add('incorrect');
+                        const feedbackBox = selectedOption.parentElement.nextElementSibling;
+                        if (feedbackBox) {
+                            const langBank = questionBank[currentLang] || questionBank['it'];
+                            const hintText = langBank[qData.hint.startsWith('l') || qData.hint.startsWith('d') || qData.hint.startsWith('s') ? 'avanzato' : 'basi'].find(q => q.hint === qData.hint).hintText;
+                            feedbackBox.innerHTML = `⚠️ <a onclick="scrollToTerm('${qData.hint}')">${hintText}</a>`;
+                            feedbackBox.style.display = 'block';
+                        }
+                    }
+                }
+                
+                document.querySelectorAll(`.quiz-option[data-q-index="${index}"]`).forEach(opt => {
+                    if (opt.dataset.optionText === qData.a) {
+                        opt.classList.add('correct');
+                    }
+                });
+            });
+
+            // Popola i risultati
+            const resultBox = document.getElementById('quiz-result-box');
+            const submitButton = document.getElementById('quiz-submit');
+            if (submitButton) submitButton.style.display = 'none';
+            
+            document.getElementById('quiz-result-message').textContent = `${tr.quizResultMsg.replace('{correct}', correctCount).replace('{total}', 3)}`;
+            
+            const actionsContainer = document.getElementById('quiz-result-actions');
+            actionsContainer.innerHTML = ''; 
+            
+            if (correctCount === 3) {
+                document.getElementById('quiz-result-title').textContent = tr.quizResultPerfect;
+                actionsContainer.innerHTML = `
+                    <a href="pratica.html" class="quiz-result-btn">${tr.quizActionPractice}</a>
+                    <button type="button" id="quiz-retry-btn" class="quiz-result-btn secondary">${tr.quizActionRetry}</button>
+                `;
+            } else if (correctCount === 2) {
+                document.getElementById('quiz-result-title').textContent = tr.quizResultGood;
+                actionsContainer.innerHTML = `
+                    <a href="dispense.html" class="quiz-result-btn">${tr.quizActionDispense}</a>
+                    <button type="button" id="quiz-retry-btn" class="quiz-result-btn secondary">${tr.quizActionRetry}</button>
+                `;
+            } else {
+                document.getElementById('quiz-result-title').textContent = tr.quizResultBad;
+                actionsContainer.innerHTML = `
+                    <a onclick="scrollToTerm()" class="quiz-result-btn">${tr.quizActionReview}</a>
+                    <button type="button" id="quiz-retry-btn" class="quiz-result-btn secondary">${tr.quizActionRetry}</button>
+                `;
+            }
+            
+            document.getElementById('quiz-retry-btn').addEventListener('click', retryQuiz);
+            
+            resultBox.style.display = 'block';
+            resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        // --- NUOVA FUNZIONE: Scroll-to-Term ---
+        function scrollToTerm(termKey) {
+            let targetElement;
+            
+            if (termKey) {
+                targetElement = document.querySelector(`.accordion-header[data-term="${termKey}"]`);
+            } else {
+                targetElement = document.getElementById('crypto-terminologia');
+            }
+
+            if (!targetElement) return;
+
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            if (termKey && targetElement.classList.contains('accordion-header') && !targetElement.classList.contains('active')) {
+                setTimeout(() => {
+                    targetElement.click();
+                }, 700); 
+            }
+        }
+        
+        // --- Funzione Riprova Quiz (Corretta) ---
+        function retryQuiz() {
+            document.getElementById('quiz-box').style.display = 'none';
+            document.getElementById('quiz-result-box').style.display = 'none';
+            document.getElementById('quiz-selection-buttons').style.display = 'block';
+            document.getElementById('quiz-form').innerHTML = ''; 
+        }
+
+        // --- Funzione Cambio Lingua (Mantenuta) ---
         function changeLanguage(lang) {
             if (!translations[lang]) lang = 'it';
             currentLang = lang;
             localStorage.setItem('preferredLang', lang); 
             
-            const tr = translations[lang];
+            const tr = translations[lang] || translations['it'];
             
             document.documentElement.lang = lang;
-            
-            if (tr.pageTitleTeoria) {
-                document.title = tr.pageTitleTeoria;
-            }
+            document.title = tr.pageTitle;
             
             document.querySelectorAll('[data-lang-key]').forEach(el => {
                 const key = el.dataset.langKey;
-                if (tr[key]) {
-                    el.innerHTML = tr[key];
-                }
+                if (tr[key]) el.innerHTML = tr[key];
             });
             
             document.querySelectorAll('.lang-selector button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
+            
+            setupAccordion();
+            setupScrollAnimations();
+            setupModalTriggers();
+            retryQuiz(); 
         }
 
-        // === FUNZIONE PER ANIMAZIONI SCROLL ===
+        // --- Funzione Animazioni (Mantenuta) ---
         function setupScrollAnimations() {
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            if (animationObserver) animationObserver.disconnect();
+            
+            const animatedElements = document.querySelectorAll('.animate-on-view, .section-title');
+            animatedElements.forEach(el => el.classList.add('animate-on-view'));
+
+            const observerOptions = { threshold: 0.1 };
+
             if ("IntersectionObserver" in window) {
-                const observer = new IntersectionObserver((entries, observer) => {
+                animationObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
                             observer.unobserve(entry.target);
                         }
                     });
-                }, {
-                    threshold: 0.1 
-                });
+                }, observerOptions);
 
                 animatedElements.forEach(el => {
                     el.classList.remove('is-visible'); 
-                    observer.observe(el);
+                    animationObserver.observe(el);
                 });
             } else {
                 animatedElements.forEach(el => el.classList.add('is-visible'));
             }
         }
-         
-        // === SCRIPT PER INTERATTIVITÀ ===
+        
+        // --- Funzione Accordion (Mantenuta) ---
+        function setupAccordion() {
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.onclick = () => {
+                    const content = header.nextElementSibling;
+                    const isActive = header.classList.contains('active');
+                    
+                    document.querySelectorAll('.accordion-header.active').forEach(activeHeader => {
+                        if (activeHeader !== header) {
+                            activeHeader.classList.remove('active');
+                            activeHeader.nextElementSibling.classList.remove('open');
+                        }
+                    });
+                    
+                    header.classList.toggle('active');
+                    content.classList.toggle('open');
+                };
+            });
+        }
+        
+        // --- Logica Modale (Mantenuta) ---
+        function setupModalTriggers() {
+            const modal = document.getElementById('timeline-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const closeBtn = document.getElementById('modal-close-btn');
+            
+            document.querySelectorAll('.timeline-details-btn').forEach(button => {
+                button.onclick = null; 
+                button.onclick = () => {
+                    const tr = translations[currentLang] || translations['it'];
+                    const titleKey = button.dataset.modalTitleKey;
+                    const contentKey = button.dataset.modalContentKey;
+                    
+                    modalTitle.textContent = tr[titleKey] || "Dettaglio";
+                    modalBody.textContent = tr[contentKey] || "Contenuto non disponibile.";
+                    
+                    modal.style.display = "block";
+                };
+            });
+            
+            closeBtn.onclick = () => modal.style.display = "none";
+            window.onclick = (event) => {
+                if (event.target == modal) modal.style.display = "none";
+            };
+        }
+        
+        // --- ESECUZIONE ALL'AVVIO ---
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- Logica per il Menu Mobile (con A11y) ---
             const navToggle = document.getElementById('nav-toggle');
             const navMenu = document.getElementById('nav-menu');
             if (navToggle && navMenu) {
                 navToggle.addEventListener('click', () => {
-                    const isActive = navMenu.classList.toggle('is-active');
-                    navToggle.setAttribute('aria-expanded', isActive);
+                    navMenu.classList.toggle('is-active');
                 });
             }
 
-            // --- Logica per il Selettore Lingua ---
             const langButtons = document.querySelectorAll('.lang-selector button');
             langButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    const newLang = button.dataset.lang;
-                    changeLanguage(newLang);
-                    setupScrollAnimations(); // Riesegui animazioni
+                    changeLanguage(button.dataset.lang);
                 });
             });
-
-            // Determina la lingua iniziale
             let preferredLang = localStorage.getItem('preferredLang');
-            let initialLang = 'it';
-            if (preferredLang && translations[preferredLang]) {
-                initialLang = preferredLang;
-            } else {
-                let browserLang = navigator.language.split('-')[0];
-                initialLang = translations[browserLang] ? browserLang : 'it';
-            }
+            changeLanguage(preferredLang || navigator.language.split('-')[0] || 'it');
             
-            // Applica lingua e avvia animazioni
-            changeLanguage(initialLang);
-            setupScrollAnimations();
+            document.getElementById('start-quiz-basi').addEventListener('click', () => generateQuiz('basi', 3));
+            document.getElementById('start-quiz-avanzato').addEventListener('click', () => generateQuiz('avanzato', 3));
             
-            // --- Logica Accordion (con A11y) ---
-            const accordionBtns = document.querySelectorAll('.accordion-btn');
-            accordionBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const isExpanded = this.classList.contains('active');
-                    
-                    // Chiudi tutti gli altri pannelli
-                    accordionBtns.forEach(otherBtn => {
-                        if (otherBtn !== this) {
-                            otherBtn.classList.remove('active');
-                            otherBtn.setAttribute('aria-expanded', 'false');
-                            otherBtn.nextElementSibling.classList.remove('is-open');
-                        }
-                    });
-                    
-                    // Apri/Chiudi questo pannello
-                    this.classList.toggle('active');
-                    this.setAttribute('aria-expanded', !isExpanded);
-                    this.nextElementSibling.classList.toggle('is-open');
-                });
-            });
-
-            // --- Logica Hotspot (Modal) ---
-            const modal = document.getElementById('hotspot-modal');
-            const modalTitle = document.getElementById('modal-hotspot-title');
-            const modalDesc = document.getElementById('modal-hotspot-desc');
-            const closeBtn = document.getElementById('modal-hotspot-chiudi');
-            
-            // Gestore per gli hotspot nel TESTO
-            document.querySelectorAll('.hotspot').forEach(spot => {
-                spot.addEventListener('click', function() {
-                    const key = this.dataset.key; 
-                    const tr = translations[currentLang];
-                    
-                    if (tr[key + 'Title'] && tr[key + 'Desc']) {
-                        modalTitle.innerHTML = tr[key + 'Title'];
-                        modalDesc.innerHTML = tr[key + 'Desc'];
-                        modal.style.display = 'block';
-                    }
-                });
-            });
-            
-            // Gestore per gli hotspot sul GRAFICO è stato RIMOSSO (non più necessario)
-
-            // Gestori per chiudere il modal
-            const closeModal = () => { modal.style.display = 'none'; };
-            closeBtn.addEventListener('click', closeModal);
-            window.addEventListener('click', (event) => {
-                if (event.target == modal) {
-                    closeModal();
-                }
-            });
-
-            // --- Cookie Banner ---
             if(!localStorage.getItem('cookie_ack')){
                 const b=document.createElement('div');
                 b.style.cssText='position:fixed;bottom:0;left:0;right:0;background:#0a2e5c;color:#fff;padding:12px 16px;font-size:14px;z-index:9999;';

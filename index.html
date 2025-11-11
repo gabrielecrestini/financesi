@@ -6,12 +6,12 @@
     <title>cryptostarstudio - Piattaforme Selezionate</title>
 
     
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
     
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
         :root {
@@ -26,6 +26,7 @@
             --font-body: 'Lato', sans-serif;
             --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
             --transition-speed: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            --hero-image-url: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80');
         }
 
         *, *::before, *::after {
@@ -97,6 +98,7 @@
             font-size: 1rem;
             transition: color 0.3s ease;
             padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
         }
         .nav-menu li a:hover,
         .nav-menu li a.current {
@@ -156,7 +158,7 @@
             background-position: center;
             background-size: cover;
             background-attachment: fixed;
-            background-image: url('https://image.pollinations.ai/prompt/futuristic%20financial%20digital%20interface%20background%20blue%20and%20gold%20data%20network%20secure%20elegant%20high%20resolution%204k');
+            background-image: var(--hero-image-url);
         }
 
         .hero::before {
@@ -269,14 +271,13 @@
             border-radius: 3px;
         }
         
-        /* .section-conti { background-color: var(--light-color); } -- SEZIONE RIMOSSA */
         .section-app { background-color: var(--background-color); }
         
         /* === STILI PER LA NUOVA SEZIONE GUIDA === */
         .section-guida-banner {
-            background-color: var(--light-color); /* Cambiato per alternare con le app */
-            padding-top: 3rem; /* Meno padding sopra */
-            padding-bottom: 3rem; /* Meno padding sotto */
+            background-color: var(--light-color); 
+            padding-top: 3rem; 
+            padding-bottom: 3rem; 
         }
         
         .guida-banner-box {
@@ -317,7 +318,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(28, 231, 131, 0.3);
             text-transform: uppercase;
-            white-space: nowrap; /* Evita che il testo vada a capo */
+            white-space: nowrap; 
         }
         
         .guida-banner-link:hover {
@@ -327,8 +328,6 @@
             box-shadow: 0 12px 35px rgba(255, 255, 255, 0.3);
         }
         /* ======================================= */
-
-        /* === Stili Card-Grid rimossi perché non più usati === */
 
         .app-feature-container {
             display: flex;
@@ -349,19 +348,24 @@
             flex-direction: row-reverse;
         }
 
+        /* --- CSS CORRETTO PER IMMAGINI PNG --- */
         .app-image-wrapper {
             flex: 1;
             max-width: 500px;
             margin: 0 auto;
+            /* Rimosso sfondo, ombra e bordi da qui */
         }
         
         .app-image {
             width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-            transition: transform var(--transition-speed);
+            height: auto; /* Altezza automatica per PNG */
+            object-fit: contain; /* Adatta l'immagine senza tagliarla */
             display: block;
+            transition: transform var(--transition-speed);
+            /* Ombra applicata direttamente al PNG trasparente */
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.15));
         }
+        /* --- FINE MODIFICA --- */
         
         .app-feature-item:hover .app-image {
             transform: scale(1.03);
@@ -407,6 +411,19 @@
             color: var(--cta-color);
             font-size: 1.3rem;
             font-weight: 700;
+        }
+
+        /* Contenitore per il bottone e il pixel di tracciamento */
+        .affiliate-cta-container {
+            display: inline-block;
+            position: relative;
+        }
+        /* Pixel di tracciamento invisibile */
+        .affiliate-cta-container img {
+            display: none;
+            position: absolute;
+            width: 0;
+            height: 0;
         }
 
         .app-cta {
@@ -595,6 +612,7 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.15);
             border: 3px solid var(--light-color);
             object-fit: cover;
+            transform: scale(1.1);
         }
         .assistant-bubble {
             background: var(--light-color);
@@ -656,7 +674,8 @@
                 gap: 2rem;
                 text-align: center;
             }
-            .app-image-wrapper { max-width: 80%; }
+            .app-image-wrapper { max-width: 80%; height: auto; } 
+            .app-image { height: auto; }
             .app-content { text-align: center; }
             .app-features-list { text-align: center; }
             .app-features-list li { 
@@ -673,7 +692,7 @@
             .app-cta { text-align: center; }
         }
         
-        @media (max-width: 900px) { /* Responsive per il nuovo banner */
+        @media (max-width: 900px) { 
             .guida-banner-box {
                 flex-direction: column;
                 text-align: center;
@@ -696,7 +715,6 @@
             .hero-cta { font-size: 1.1rem; padding: 1rem 2.5rem; }
             .section { padding: 4rem 0; }
             .section-title { font-size: 2.5rem; }
-            /* .card-grid { grid-template-columns: 1fr; gap: 2rem; } -- Rimosso */
             .app-content h3 { font-size: 2.2rem; }
             .app-content .description { font-size: 1.1rem; }
             .app-features-list li { 
@@ -735,7 +753,7 @@
             }
             .assistant-bubble { width: 100%; }
             
-            .guida-banner-content h2 { /* Responsive per il nuovo banner */
+            .guida-banner-content h2 { 
                 font-size: 1.8rem;
             }
         }
@@ -789,8 +807,7 @@
             <div class="container">
                 <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="appTitle"></h2>
                 <div id="app-container" class="app-feature-container">
-                    
-                </div>
+                    </div>
             </div>
         </section>
         
@@ -828,7 +845,7 @@
 
     <div id="crypto-assistant" class="crypto-assistant">
         <button id="assistant-close" class="assistant-close" aria-label="Chiudi">&times;</button>
-        <img src="https://image.pollinations.ai/prompt/cute%20cartoon%20robot%20financial%20assistant%20vector%20logo%20clean%20white%20background" alt="Crypto Mascot" class="assistant-mascot">
+        <img src="https://api.dicebear.com/8.x/bottts/svg?seed=crypto-assistant&backgroundColor=ffffff&radius=50&scale=90" alt="Crypto Mascot" class="assistant-mascot">
         <div class="assistant-bubble">
             <p class="assistant-question" data-lang-key="assistantQuestion"></p>
             <div class="assistant-options">
@@ -848,13 +865,12 @@
                 "heroTitle": "Il Futuro delle Tue Finanze Inizia Qui",
                 "heroSubtitle": "Una selezione di app crypto e piattaforme che ho analizzato per te.",
                 "heroCta": "Esplora le App",
-                "contiTitle": "Piattaforme Selezionate", // Chiave ancora presente ma sezione rimossa
                 "appTitle": "App Crypto in Evidenza",
                 "footerBrand": "cryptostarstudio",
                 "footerRights": "Tutti i diritti riservati.",
                 "footerDisclaimer": "Disclaimer: Le informazioni su questa pagina non costituiscono consulenza finanziaria. Investire comporta dei rischi.",
                 "disclosureTitle": "Nota sulla Trasparenza",
-                "disclosureText": "Questa pagina è supportata dai lettori. Alcuni link sono affiliati/sponsored: se apri un conto o completi un’azione tramite i miei link, potrei ricevere una commissione senza costi aggiuntivi per te.\n\nSeleziono piattaforme che ritengo utili, ma i contenuti sono informativi e non costituiscono consulenza finanziaria. Verifica sempre termini, costi e requisiti sul sito ufficiale del partner.\n\nProdotti finanziari e crypto comportano rischi (anche perdita del capitale). Offerte e disponibilità possono variare per Paese. Accesso riservato a maggiorenni (18+).",
+                "disclosureText": "Questa pagina è supportata dai lettori. Alcuni link sono affiliati/sponsored: se apri un conto o completi un’azione tramite i miei link, potrei ricevere una commissione senza costi aggiuntivi per te.\n\nSeleziono piattaforme che ritengo utili, ma i contenuti sono informativi e non costituiscono consulenza finanziaria. Verifica sempre termini, costi e requisiti sul sito ufficiale del partner.\n\nProdotti finanziari e crypto comportano rischi (anche perdita del capitale). Offerte e disponibilità possono variare per Paese. Accesso riservato a maggiornni (18+).",
                 "privacyLink": "Privacy Policy",
                 "termsLink": "Termini di Servizio",
                 "guideLink": "Guida per Principianti", 
@@ -863,12 +879,10 @@
                 "riskWarning": "⚠️ Servizi per 18+. Investimenti e crypto comportano rischi di perdita del capitale.",
                 "geoWarning": "Disponibilità e condizioni possono variare per Paese. Verifica sempre sul sito ufficiale.",
                 
-                // --- NUOVE CHIAVI MENU ---
                 "navHome": "Home",
                 "navTeoria": "Teoria",
                 "navDispense": "Dispense",
                 "navPratica": "Pratica",
-                // -------------------------
 
                 "guidaBannerTitle": "Sei nuovo nel mondo Crypto?", 
                 "guidaBannerDesc": "Parti con il piede giusto. Consulta la nostra guida gratuita per capire le basi della blockchain prima di iniziare.", 
@@ -909,15 +923,15 @@
                 "assistantQuestion": "Non sai da dove iniziare?",
                 "assistantOpt1": "Cerco una piattaforma All-in-One (Bitpanda)",
                 "assistantOpt2": "Voglio far fruttare le mie crypto (YouHodler)",
-                "assistantOpt3_new": "Voglio comprare crypto facilmente (MoonPay)", // Chiave aggiornata
-                "assistantOpt4_new": "Cerco un exchange Pro (Kraken)" // Chiave aggiornata
+                "assistantOpt3_new": "Voglio comprare crypto facilmente (MoonPay)",
+                "assistantOpt4_new": "Cerco un exchange Pro (Kraken)"
             },
             "en": {
+                // ... (TRADUZIONI INGLESI COMPLETE)
                 "pageTitle": "🚀 cryptostarstudio: Selected Crypto Apps 🚀",
                 "heroTitle": "The Future of Your Finances Starts Here",
                 "heroSubtitle": "A selection of financial platforms and apps I've analyzed for you.",
                 "heroCta": "Explore Apps",
-                "contiTitle": "Selected Platforms",
                 "appTitle": "Featured Crypto Apps",
                 "footerBrand": "cryptostarstudio",
                 "footerRights": "All rights reserved.",
@@ -931,26 +945,20 @@
                 "notAffiliated": "cryptostarstudio is not officially affiliated with or sponsored by the mentioned brands. Trademarks belong to their respective owners.",
                 "riskWarning": "⚠️ Services for 18+. Investments and crypto involve risks of capital loss.",
                 "geoWarning": "Availability and terms may vary by country. Always verify on the official website.",
-                
-                // --- NUOVE CHIAVI MENU ---
                 "navHome": "Home",
                 "navTeoria": "Theory",
                 "navDispense": "Resources",
                 "navPratica": "Practice",
-                // -------------------------
-
                 "guidaBannerTitle": "New to Crypto?", 
                 "guidaBannerDesc": "Start on the right foot. Check out our free guide to understand the basics of blockchain before you begin.", 
                 "guidaBannerCta": "Start Here", 
-                
                 "appBitpandaTitle": "Bitpanda",
                 "appBitpandaDesc": "Investment platform providing access to various assets. A European broker with industry registrations, designed for diversification from a single hub.",
                 "appBitpandaFeat1": "Access to Crypto, Stocks, ETFs, and Metals",
                 "appBitpandaFeat2": "Savings Plans",
                 "appBitpandaFeat3": "Intuitive user interface",
-                "appBitpandaFeat4": "European broker (verify licenses/registrations on the official site)",
+                "appBitpandaFeat4": "European broker (verify licenses/registrazioni on the official site)",
                 "appBitpandaCta": "Visit Bitpanda",
-                
                 "appYouhodlerTitle": "YouHodler",
                 "appYouhodlerDesc": "FinTech platform that allows earning interest on supported crypto and accessing liquidity solutions using digital assets as collateral.",
                 "appYouhodlerFeat1": "Interest on supported assets (variable, not guaranteed)",
@@ -958,7 +966,6 @@
                 "appYouhodlerFeat3": "Trading and conversion tools",
                 "appYouhodlerFeat4": "Platform based in Switzerland",
                 "appYouhodlerCta": "Visit YouHodler",
-
                 "appMoonpayTitle": "MoonPay",
                 "appMoonpayDesc": "MoonPay is a global cryptocurrency payments provider. It enables buying and selling of 170+ cryptos with cards, bank transfers, Apple Pay, and more. It's a non-custodial, beginner-friendly solution.",
                 "appMoonpayFeat1": "Easy Buys (Cards, Apple Pay, Transfer)",
@@ -966,7 +973,6 @@
                 "appMoonpayFeat3": "Non-custodial service (you control your funds)",
                 "appMoonpayFeat4": "24/7 Customer Support",
                 "appMoonpayCta": "Visit MoonPay",
-
                 "appKrakenTitle": "Kraken",
                 "appKrakenDesc": "One of the longest-running and most secure crypto exchanges. It offers access to 200+ crypto, staking options (up to 24% APY), and advanced trading tools.",
                 "appKrakenFeat1": "Over 200+ cryptocurrencies available",
@@ -974,7 +980,6 @@
                 "appKrakenFeat3": "Robust security measures",
                 "appKrakenFeat4": "Low fees and 24/7 support",
                 "appKrakenCta": "Visit Kraken",
-                
                 "assistantQuestion": "Not sure where to start?",
                 "assistantOpt1": "I want an All-in-One platform (Bitpanda)",
                 "assistantOpt2": "I want to earn interest on my crypto (YouHodler)",
@@ -982,11 +987,11 @@
                 "assistantOpt4_new": "I'm looking for a Pro exchange (Kraken)"
             },
             "es": {
+                // ... (TRADUZIONI SPAGNOLE COMPLETE)
                 "pageTitle": "🚀 cryptostarstudio: Apps Crypto Seleccionadas 🚀",
                 "heroTitle": "El Futuro de Tus Finanzas Comienza Aquí",
                 "heroSubtitle": "Una selección de plataformas y apps financieras que he analizado para ti.",
                 "heroCta": "Explora Apps",
-                "contiTitle": "Plataformas Seleccionadas",
                 "appTitle": "Apps Financieras Destacadas",
                 "footerBrand": "cryptostarstudio",
                 "footerRights": "Todos los derechos reservados.",
@@ -1000,18 +1005,13 @@
                 "notAffiliated": "cryptostarstudio no está afiliado ni patrocinado oficialmente por las marcas mencionadas. Las marcas pertenecen a sus respectivos propietarios.",
                 "riskWarning": "⚠️ Servicios para 18+. Las inversiones y criptomonedas implican riesgos de pérdida de capital.",
                 "geoWarning": "La disponibilidad y los términos pueden variar según el país. Verifica siempre en el sitio web oficial.",
-                
-                // --- NUOVE CHIAVI MENU ---
                 "navHome": "Inicio",
                 "navTeoria": "Teoría",
                 "navDispense": "Recursos",
                 "navPratica": "Práctica",
-                // -------------------------
-
                 "guidaBannerTitle": "¿Nuevo en el mundo Cripto?", 
                 "guidaBannerDesc": "Empieza con buen pie. Consulta nuestra guía gratuita para entender las bases de la blockchain antes de comenzar.", 
                 "guidaBannerCta": "Empieza Aquí", 
-
                 "appBitpandaTitle": "Bitpanda",
                 "appBitpandaDesc": "Plataforma de inversión que da acceso a diversos activos. Un bróker europeo con registros del sector, diseñado para diversificar desde un solo lugar.",
                 "appBitpandaFeat1": "Acceso a Cripto, Acciones, ETFs y Metales",
@@ -1019,7 +1019,6 @@
                 "appBitpandaFeat3": "Interfaz de usuario intuitiva",
                 "appBitpandaFeat4": "Bróker europeo (verifica licencias/registros en el sitio oficial)",
                 "appBitpandaCta": "Visitar Bitpanda",
-                
                 "appYouhodlerTitle": "YouHodler",
                 "appYouhodlerDesc": "Plataforma FinTech que permite obtener intereses sobre criptomonedas compatibles y acceder a soluciones de liquidez utilizando activos digitales como garantía.",
                 "appYouhodlerFeat1": "Intereses sobre activos compatibles (variables, no garantizados)",
@@ -1027,7 +1026,6 @@
                 "appYouhodlerFeat3": "Herramientas de trading y conversión",
                 "appYouhodlerFeat4": "Plataforma con sede en Suiza",
                 "appYouhodlerCta": "Visitar YouHodler",
-                
                 "appMoonpayTitle": "MoonPay",
                 "appMoonpayDesc": "MoonPay es una infraestructura de pago de criptomonedas. Permette di acquistare e vendere más de 170 criptos con tarjetas, transferencias, Apple Pay y más. Es una solución sin custodia (mantienes el control), fácil para principiantes.",
                 "appMoonpayFeat1": "Compras fáciles (Tarjetas, Apple Pay, Transferencia)",
@@ -1035,15 +1033,13 @@
                 "appMoonpayFeat3": "Servicio sin custodia (tú controlas los fondos)",
                 "appMoonpayFeat4": "Soporte al cliente 24/7",
                 "appMoonpayCta": "Visitar MoonPay",
-                
                 "appKrakenTitle": "Kraken",
                 "appKrakenDesc": "Uno de los exchanges de criptomonedas más antiguos y seguros. Ofrece acceso a más de 200 criptos, opciones de staking (hasta 24% APY) y herramientas de trading avanzadas.",
-                "appKrakenFeat1": "Más de 200+ criptomonedas disponibles",
+                "appKrakenFeat1": "Más de 200+ criptomodenas disponibles",
                 "appKrakenFeat2": "Staking on-chain (hasta 24% APY)",
                 "appKrakenFeat3": "Medidas de seguridad robustas",
                 "appKrakenFeat4": "Comisiones bajas y soporte 24/7",
                 "appKrakenCta": "Visitar Kraken",
-
                 "assistantQuestion": "¿No sabes por dónde empezar?",
                 "assistantOpt1": "Busco una plataforma Todo-en-Uno (Bitpanda)",
                 "assistantOpt2": "Quiero ganar intereses con mis cripto (YouHodler)",
@@ -1052,55 +1048,53 @@
             }
         };
 
-        // DATI RIMOSSI
-        // const contiData = [ ... ];
-
+        // --- DATI APP CON LINK IMMAGINE LOCALI E LINK AFFILIAZIONE CORRETTI ---
         const appData = [
             {
-                 id: "app-bitpanda",
-                 titleKey: "appBitpandaTitle",
-                 descriptionKey: "appBitpandaDesc",
-                 featureKeys: ["appBitpandaFeat1", "appBitpandaFeat2", "appBitpandaFeat3", "appBitpandaFeat4"],
-                 imageUrl: "https://image.pollinations.ai/prompt/crypto%20investment%20app%20on%20smartphone%20bitpanda%20style%20interface%20dark%20mode%20with%20green%20and%20gold%20accents",
-                 affiliateLink: "https://www.financeads.net/tc.php?t=78725C290656312B",
-                 ctaKey: "appBitpandaCta"
+                id: "app-bitpanda",
+                titleKey: "appBitpandaTitle",
+                descriptionKey: "appBitpandaDesc",
+                featureKeys: ["appBitpandaFeat1", "appBitpandaFeat2", "appBitpandaFeat3", "appBitpandaFeat4"],
+                imageUrl: "img/bitpanda.png", 
+                affiliateLink: "https://www.financeads.net/tc.php?t=78725C290656288T",
+                trackingPixel: "https://www.financeads.net/tb.php?t=78725V290656288T",
+                ctaKey: "appBitpandaCta"
             },
             {
-                 id: "app-youhodler",
-                 titleKey: "appYouhodlerTitle",
-                 descriptionKey: "appYouhodlerDesc",
-                 featureKeys: ["appYouhodlerFeat1", "appYouhodlerFeat2", "appYouhodlerFeat3", "appYouhodlerFeat4"],
-                 imageUrl: "https://image.pollinations.ai/prompt/financial%20savings%20app%20interface%20youhodler%20style%20showing%20high%20interest%20rates%20blue%20and%20white%20secure",
-                 affiliateLink: "https://www.financeads.net/tc.php?t=78725C324061192B",
-                 ctaKey: "appYouhodlerCta"
+                id: "app-youhodler",
+                titleKey: "appYouhodlerTitle",
+                descriptionKey: "appYouhodlerDesc",
+                featureKeys: ["appYouhodlerFeat1", "appYouhodlerFeat2", "appYouhodlerFeat3", "appYouhodlerFeat4"],
+                imageUrl: "img/youhodler.png",  /* <-- !!! CORREZIONE !!! Era "youandler.png" */
+                affiliateLink: "https://www.financeads.net/tc.php?t=78725C324060796T",
+                trackingPixel: "https://www.financeads.net/tb.php?t=78725V324060796T",
+                ctaKey: "appYouhodlerCta"
             },
             {
-                 id: "app-moonpay",
-                 titleKey: "appMoonpayTitle",
-                 descriptionKey: "appMoonpayDesc",
-                 featureKeys: ["appMoonpayFeat1", "appMoonpayFeat2", "appMoonpayFeat3", "appMoonpayFeat4"],
-                 imageUrl: "https://image.pollinations.ai/prompt/crypto%20payment%20app%20moonpay%20style%20interface%20on%20smartphone%20showing%20buy%20crypto%20screen%20light%20mode",
-                 affiliateLink: "https://www.financeads.net/tc.php?t=78725C5508129482T",
-                 ctaKey: "appMoonpayCta"
+                id: "app-moonpay",
+                titleKey: "appMoonpayTitle",
+                descriptionKey: "appMoonpayDesc",
+                featureKeys: ["appMoonpayFeat1", "appMoonpayFeat2", "appMoonpayFeat3", "appMoonpayFeat4"],
+                imageUrl: "img/moonpay.png", 
+                affiliateLink: "https://www.financeads.net/tc.php?t=78725C5508129482T",
+                trackingPixel: "https://www.financeads.net/tb.php?t=78725V5508129482T",
+                ctaKey: "appMoonpayCta"
             },
             {
-                 id: "app-kraken",
-                 titleKey: "appKrakenTitle",
-                 descriptionKey: "appKrakenDesc",
-                 featureKeys: ["appKrakenFeat1", "appKrakenFeat2", "appKrakenFeat3", "appKrakenFeat4"],
-                 imageUrl: "https://image.pollinations.ai/prompt/crypto%20exchange%20app%20kraken%20style%20interface%20on%20smartphone%20dark%20mode%20with%20charts%20and%20octopus%20logo",
-                 affiliateLink: "https://www.financeads.net/tc.php?t=78725C4746108268T",
-                 ctaKey: "appKrakenCta"
+                id: "app-kraken",
+                titleKey: "appKrakenTitle",
+                descriptionKey: "appKrakenDesc",
+                featureKeys: ["appKrakenFeat1", "appKrakenFeat2", "appKrakenFeat3", "appKrakenFeat4"],
+                imageUrl: "img/kraken.png", 
+                affiliateLink: "https://www.financeads.net/tc.php?t=78725C4746108270T",
+                trackingPixel: "https://www.financeads.net/tb.php?t=78725V4746108270T",
+                ctaKey: "appKrakenCta"
             }
         ];
         
         let currentLang = 'it';
         const langButtons = document.querySelectorAll('.lang-selector button');
-        // const contiGrid = document.getElementById('conti-grid'); // Rimosso
         const appContainer = document.getElementById('app-container');
-        
-        // FUNZIONE RIMOSSA
-        // function populateConti(lang) { ... }
         
         function populateApp(lang) {
             appContainer.innerHTML = '';
@@ -1116,9 +1110,21 @@
                 const imageAnim = (index % 2 === 0) ? 'slide-in-left' : 'slide-in-right';
                 const contentAnim = (index % 2 === 0) ? 'slide-in-right' : 'slide-in-left';
 
+                // --- LOGICA CTA CON LINK AFFILIAZIONE CORRETTI ---
+                const ctaText = tr[app.ctaKey];
+                const ctaHtml = `
+                    <div class="affiliate-cta-container">
+                        <a href="${app.affiliateLink}" target="_blank" rel="sponsored nofollow noopener noreferrer" class="app-cta">
+                            ${ctaText}
+                        </a>
+                        <img src="${app.trackingPixel}" alt="" border="0" width="0" height="0" style="display:none; position:absolute;">
+                    </div>
+                `;
+                // --- FINE LOGICA CTA ---
+
                 item.innerHTML = `
                     <div class="app-image-wrapper animate-on-scroll ${imageAnim}">
-                        <img src="${app.imageUrl}" alt="${tr[app.titleKey]}" class="app-image">
+                        <img src="${app.imageUrl}" alt="${tr[app.titleKey]}" class="app-image" loading="lazy">
                     </div>
                     <div class="app-content animate-on-scroll ${contentAnim}">
                         <h3>${tr[app.titleKey]}</h3>
@@ -1132,9 +1138,7 @@
                             <p class="geo-warning">${tr.geoWarning}</p>
                         </div>
 
-                        <a href="${app.affiliateLink}" target="_blank" rel="sponsored nofollow noopener noreferrer" class="app-cta">
-                            ${tr[app.ctaKey]}
-                        </a>
+                        ${ctaHtml}
                     </div>
                 `;
                 appContainer.appendChild(item);
@@ -1158,7 +1162,6 @@
                 }
             });
             
-            // populateConti(lang); // Rimosso
             populateApp(lang);
             
             langButtons.forEach(btn => {
