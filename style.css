@@ -22,7 +22,7 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden; /* [CORREZIONE] Impedisce overflow orizzontale */
+    overflow-x: hidden; /* Impedisce overflow orizzontale */
 }
 
 body {
@@ -30,7 +30,7 @@ body {
     color: var(--text-light);
     background-color: var(--primary-bg);
     line-height: 1.6;
-    overflow-x: hidden; /* [CORREZIONE] Impedisce overflow orizzontale */
+    overflow-x: hidden; /* Impedisce overflow orizzontale */
 }
 
 body.modal-open {
@@ -160,7 +160,6 @@ input[type="number"] {
     opacity: 1;
     visibility: visible;
 }
-
 .modal-content {
     position: fixed;
     top: 50%;
@@ -184,7 +183,6 @@ input[type="number"] {
     visibility: visible;
     transform: translate(-50%, -50%) scale(1);
 }
-
 .modal-close {
     position: absolute;
     top: 1rem;
@@ -199,7 +197,7 @@ input[type="number"] {
     color: var(--text-light);
 }
 
-/* --- [MODIFICA] Navbar e Menu Hamburger --- */
+/* --- [CORRETTO] Navbar e Menu Hamburger --- */
 .navbar {
     background-color: rgba(15, 15, 26, 0.8);
     backdrop-filter: blur(10px);
@@ -215,7 +213,7 @@ input[type="number"] {
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    padding: 0 2rem; 
+    padding: 0 1.5rem; /* Ridotto padding per mobile */
 }
 .navbar .logo { 
     font-family: var(--font-heading); 
@@ -260,7 +258,6 @@ input[type="number"] {
     background: var(--gradient-end);
 }
 
-/* Pulsanti Hamburger (nascosti su desktop) */
 .nav-toggle, .nav-close {
     display: none;
     background: none;
@@ -289,7 +286,6 @@ input[type="number"] {
 .hero-content { z-index: 1; max-width: 900px; padding: 0 1rem; }
 .hero-content h1 { font-family: var(--font-heading); font-size: 4.5rem; margin-bottom: 1.5rem; line-height: 1.1; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero-content p { font-family: var(--font-body); font-size: 1.5rem; margin-bottom: 2.5rem; color: var(--text-dark); }
-
 
 /* --- Call to Action per PWA Toolkit --- */
 .toolkit-cta {
@@ -324,7 +320,6 @@ input[type="number"] {
     padding: 1.2rem 3rem;
 }
 
-
 /* --- Section Styling --- */
 section { padding: 6rem 0; background-color: var(--secondary-bg); position: relative; }
 section:nth-child(even) { background-color: var(--primary-bg); }
@@ -341,7 +336,6 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     justify-content: center;
     min-height: 400px;
 }
-/* (Animazione CSS Art è invariata) */
 .css-art-box { width: 100%; max-width: 400px; aspect-ratio: 1/1; background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); position: relative; overflow: hidden; border: 1px solid var(--accent-color); display: flex; align-items: center; justify-content: center; }
 .explorer-core { position: absolute; width: 25px; height: 25px; background: var(--gradient-end); border-radius: 50%; box-shadow: 0 0 15px 5px rgba(0, 255, 194, 0.7); animation: explorePath 10s infinite cubic-bezier(0.8, 0, 0.2, 1); z-index: 2; }
 .path-segment { position: absolute; background-color: rgba(0, 168, 255, 0.2); border-radius: 50%; opacity: 0; animation: drawPath 10s infinite linear; }
@@ -358,9 +352,16 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 @keyframes explorePath { 0% { transform: translate(-150px, -150px); opacity: 0; } 10% { transform: translate(-100px, -100px); opacity: 1; } 25% { transform: translate(-50px, 50px); } 40% { transform: translate(100px, -50px); } 50% { transform: translate(0, 0); opacity: 1; } 90% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(0, 0); opacity: 0; } }
 @keyframes drawPath { 0% { opacity: 0; transform: scale(0); } 10% { opacity: 0.5; transform: scale(1); } 20% { opacity: 0; transform: scale(1.5); } 100% { opacity: 0; transform: scale(0); } }
 @keyframes revealIcon { 0% { opacity: 0; transform: scale(0.5); } 20% { opacity: 1; transform: scale(1.2); } 30% { opacity: 1; transform: scale(1); } 40% { opacity: 0; transform: scale(0.8); } 100% { opacity: 0; transform: scale(0.5); } }
-@keyframes revealBrand { 0%   { width: 0; opacity: 0; } 50%  { width: 0; opacity: 1; border-right-color: var(--accent-color); } 70%  { width: 240px; opacity: 1; } 85%  { opacity: 1; border-right-color: transparent; } 95%  { opacity: 0; } 100% { opacity: 0; width: 0; } }
+/* [CORREZIONE] Animazione "typing" ora usa max-width per essere responsive */
+@keyframes revealBrand { 
+    0%   { max-width: 0; opacity: 0; } 
+    50%  { max-width: 0; opacity: 1; border-right-color: var(--accent-color); } 
+    70%  { max-width: 100%; opacity: 1; } /* Usa 100% invece di 240px */
+    85%  { opacity: 1; border-right-color: transparent; } 
+    95%  { opacity: 0; } 
+    100% { opacity: 0; max-width: 0; } 
+}
 @keyframes typingCursor { 0%, 100% { border-right-color: transparent; } 50% { border-right-color: var(--accent-color); } }
-
 
 /* --- Impara Section (Teoria Visuale) --- */
 .impara-content { display: flex; flex-direction: column; gap: 3rem; }
@@ -392,8 +393,8 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .staking-calculator .btn { width: 100%; margin-top: 1rem; }
 
 /* Guide */
-/* [CORREZIONE] Larghezza minima ridotta per mobile */
-.guides-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; }
+/* [CORREZIONE] Larghezza minima ridotta per mobile (da 350 a 280) */
+.guides-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 4rem; }
 .guide-card { background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; display: flex; flex-direction: column; border: 1px solid transparent; }
 .guide-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3); border-color: var(--accent-color); }
 .guide-card-content { padding: 2rem; }
@@ -417,7 +418,8 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .arrow { color: var(--text-dark); font-size: 2rem; min-width: 50px; animation: fadeIn 0.5s ease; }
 
 /* Piattaforme */
-.platforms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; }
+/* [CORREZIONE] Larghezza minima ridotta (da 300 a 280) */
+.platforms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 4rem; }
 .platform-card { background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); padding: 2rem; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; display: flex; flex-direction: column; justify-content: space-between; height: 100%; border: 1px solid transparent; }
 .platform-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3); border-color: var(--accent-color); }
 .platform-card h3 { font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -466,9 +468,9 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 #glossario {
     background-color: var(--primary-bg);
 }
-/* [CORREZIONE] Larghezza minima ridotta per mobile */
 .glossary-grid {
     display: grid;
+    /* [CORREZIONE] Ridotto minmax per mobile */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-top: 4rem;
@@ -506,11 +508,11 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .footer p { margin-top: 1.5rem; margin-bottom: 0; font-size: 0.9rem; }
 
 /* ============================================== */
-/* --- [CORREZIONI] Media Queries per Responsiveness --- */
+/* --- [CORREZIONE] Media Queries per Responsiveness --- */
 /* ============================================== */
 
+/* Nasconde i link e mostra l'hamburger */
 @media (max-width: 1024px) {
-    /* --- Correzione Navbar per Tablet e Mobile --- */
     .navbar .container {
         padding: 0 1.5rem; 
     }
@@ -531,7 +533,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vh; /* Usa 100vh (viewport height) per sicurezza */
+        height: 100vh;
         background-color: var(--primary-bg);
         z-index: 1003;
         animation: fadeIn 0.3s ease; 
@@ -545,16 +547,14 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     .nav-links.nav-menu-open .nav-close-li {
         display: block;
         position: absolute;
-        top: 1.2rem; /* Allineato meglio */
-        right: 1.5rem; /* Allineato meglio */
+        top: 1.2rem;
+        right: 1.5rem;
     }
     .nav-links.nav-menu-open .nav-close {
         display: block;
-        font-size: 2rem; /* Più grande */
+        font-size: 2rem;
     }
-    /* --- Fine Correzione Navbar --- */
 
-    
     .hero-content h1 { font-size: 3.5rem; }
     .hero-content p { font-size: 1.2rem; }
     
@@ -564,7 +564,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
         gap: 2rem; 
     }
     .concept-step:nth-child(even) { flex-direction: column; }
-    .step-icon { margin: 0 auto 1rem auto; } /* Centra l'icona */
+    .step-icon { margin: 0 auto 1rem auto; }
     .chi-siamo-image { margin-top: 2rem; }
     .guides-grid { grid-template-columns: 1fr; }
     
@@ -573,10 +573,10 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 
 @media (max-width: 768px) {
     h1 { font-size: 2.8rem; }
-    h2 { font-size: 2.2rem; } /* Coerenza */
-    section h2 { font-size: 2.2rem; } /* Coerenza */
+    h2 { font-size: 2.2rem; }
+    section h2 { font-size: 2.2rem; }
     .hero-content h1 { font-size: 2.8rem; }
-    .hero-content p { font-size: 1.1rem; } /* Leggermente più grande */
+    .hero-content p { font-size: 1.1rem; }
     .container { padding: 1rem; }
     section { padding: 4rem 1rem; } 
     
@@ -597,7 +597,6 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     .hero-content h1 { font-size: 2.5rem; } 
     .navbar .logo { font-size: 1.5rem; }
 
-    /* [CORREZIONE] Riduci i font dei titoli per schermi piccoli */
     h1 { font-size: 2.2rem; }
     h2 { font-size: 1.8rem; }
     section h2 { font-size: 1.8rem; }
@@ -609,12 +608,14 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
         font-size: 2rem;
     }
     
-    /* [CORREZIONE] Riduci padding per le card */
     .platform-card, .tool-card, .glossary-item, .concept-step {
         padding: 1.5rem;
     }
     
-    /* [CORREZIONE] Riduci la larghezza minima della griglia */
-    .guides-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    /* [CORREZIONE] Riduci la larghezza minima per evitare overflow */
+    .guides-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .platforms-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .glossary-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .tools-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 }
 }
