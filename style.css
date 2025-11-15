@@ -194,6 +194,7 @@ input[type="number"] {
     text-decoration: none;
     font-weight: 700;
     transition: color 0.3s ease;
+    cursor: pointer;
 }
 .modal-close:hover {
     color: var(--text-light);
@@ -228,6 +229,8 @@ input[type="number"] {
 }
 .navbar .nav-links {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 .navbar .nav-links li { 
     display: inline-block; 
@@ -367,7 +370,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .guide-card-content h4 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-light); }
 .guide-card-content p { color: var(--text-dark); margin-bottom: 1.5rem; }
 .guide-card-footer { padding: 1rem 2rem; background-color: var(--secondary-bg); margin-top: auto; }
-.guide-card-footer a { font-weight: 700; color: var(--accent-color); cursor: pointer; } /* Aggiunto cursor pointer */
+.guide-card-footer a { font-weight: 700; color: var(--accent-color); cursor: pointer; } 
 .guide-card-footer a i { margin-left: 0.5rem; transition: transform 0.3s ease; }
 .guide-card-footer a:hover i { transform: translateX(5px); }
 
@@ -375,7 +378,6 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .blockchain-visualizer { display: flex; flex-wrap: wrap; align-items: center; margin-top: 1.5rem; gap: 1.5rem; padding: 1rem; background: var(--secondary-bg); border-radius: var(--border-radius); }
 .block, .arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
 .block { border: 2px solid var(--gradient-end); background-color: var(--primary-bg); padding: 1rem; border-radius: var(--border-radius); box-shadow: 0 0 15px rgba(0, 255, 194, 0.3); min-width: 150px; height: 100px; transition: all 0.5s ease-out; animation: fadeIn 0.5s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 .block.verified { border-color: var(--accent-color); box-shadow: 0 0 15px rgba(0, 168, 255, 0.5); }
 .block-header { font-weight: 700; color: var(--text-light); margin-bottom: 5px; }
 .block-data { font-size: 0.9rem; color: var(--text-dark); }
@@ -583,5 +585,4 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     .platforms-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
     .glossary-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
     .tools-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-}
 }
