@@ -3,1260 +3,651 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cryptostarstudio - Piattaforme Selezionate</title>
-
+    <title>CryptoStarStudio.it - Supera i Limiti del Cripto</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Lato:wght@300;400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-    <style>
-        :root {
-            --primary-color: #0a2e5c;
-            --secondary-color: #D4AF37;
-            --cta-color: #1ce783;
-            --dark-color: #1a1a1a;
-            --light-color: #ffffff;
-            --background-color: #f9faff;
-            --text-color: #333;
-            --font-heading: 'Montserrat', sans-serif;
-            --font-body: 'Lato', sans-serif;
-            --card-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
-            --transition-speed: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            --hero-image-url: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80');
-        }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-body);
-            line-height: 1.7;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        /* === Stili per il Nuovo Menu di Navigazione === */
-        .main-nav {
-            background-color: var(--primary-color);
-            padding: 1rem 0;
-            width: 100%;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            border-bottom: 3px solid var(--secondary-color);
-        }
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        .nav-logo {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--light-color);
-            text-decoration: none;
-        }
-        .nav-logo span {
-            color: var(--secondary-color);
-            font-weight: 700;
-        }
-        .nav-menu {
-            list-style: none;
-            display: flex;
-            gap: 1.5rem;
-            margin: 0;
-            padding: 0;
-        }
-        .nav-menu li a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            transition: color 0.3s ease;
-            padding: 0.5rem 0;
-            border-bottom: 2px solid transparent;
-        }
-        .nav-menu li a:hover,
-        .nav-menu li a.current {
-            color: var(--light-color);
-            border-bottom: 2px solid var(--secondary-color);
-        }
-        .nav-toggle { display: none; }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-wrap: wrap;
-                padding: 0 1rem;
-            }
-            .nav-menu {
-                display: none; 
-                flex-direction: column;
-                width: 100%;
-                gap: 0.5rem;
-                margin-top: 1rem;
-            }
-            .nav-menu.is-active {
-                display: flex; 
-            }
-            .nav-menu li {
-                text-align: center;
-                width: 100%;
-            }
-            .nav-menu li a {
-                display: block;
-                padding: 0.75rem 0;
-            }
-            .nav-menu li a:hover,
-            .nav-menu li a.current {
-                border-bottom: none; 
-                background-color: rgba(255,255,255,0.1);
-            }
-            .nav-toggle {
-                display: block;
-                background: none;
-                border: none;
-                color: white;
-                font-size: 2rem;
-                cursor: pointer;
-            }
-        }
-        /* ============================================= */
-
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--light-color);
-            overflow: hidden;
-            background-position: center;
-            background-size: cover;
-            background-attachment: fixed;
-            background-image: var(--hero-image-url);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(10, 46, 92, 0.85), rgba(0, 0, 0, 0.7));
-            z-index: 1;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 950px;
-            padding: 2rem;
-            margin: 0 auto;
-        }
-
-        .hero-content h1 {
-            font-family: var(--font-heading);
-            font-size: 5rem; 
-            margin-bottom: 1rem;
-            line-height: 1.1;
-            font-weight: 800;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            color: var(--light-color);
-        }
-
-        .hero-content p {
-            font-size: 2rem; 
-            margin-bottom: 2.5rem;
-            font-weight: 300;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .hero-cta {
-            display: inline-block;
-            background: var(--cta-color);
-            color: var(--dark-color);
-            padding: 1.2rem 3.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.4rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(28, 231, 131, 0.3);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .hero-cta:hover {
-            background: var(--light-color);
-            color: var(--primary-color);
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.3);
-        }
-        
-        .scroll-down-arrow {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-            width: 40px;
-            height: 40px;
-            border: 2px solid rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: white;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-            40% { transform: translate(-50%, -15px); }
-            60% { transform: translate(-50%, -5px); }
-        }
-
-        .section {
-            padding: 5.5rem 0; 
-            position: relative;
-        }
-        
-        .section-title {
-            font-family: var(--font-heading);
-            font-size: 3.5rem;
-            color: var(--primary-color);
-            margin-bottom: 3.5rem; 
-            font-weight: 700;
-            text-align: center;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: -15px;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 5px;
-            background: var(--secondary-color);
-            border-radius: 3px;
-        }
-        
-        .section-app { background-color: var(--background-color); }
-        
-        /* === STILI PER LA NUOVA SEZIONE GUIDA === */
-        .section-guida-banner {
-            background-color: var(--light-color); 
-            padding-top: 3rem; 
-            padding-bottom: 3rem; 
-        }
-        
-        .guida-banner-box {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: linear-gradient(45deg, var(--primary-color), #0a2549);
-            color: var(--light-color);
-            padding: 3.5rem 4rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(10, 46, 92, 0.2);
-            gap: 2rem;
-        }
-
-        .guida-banner-content h2 {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-        
-        .guida-banner-content p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            max-width: 600px;
-            line-height: 1.6;
-        }
-        
-        .guida-banner-link {
-            display: inline-block;
-            background: var(--cta-color);
-            color: var(--dark-color);
-            padding: 1.1rem 3rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(28, 231, 131, 0.3);
-            text-transform: uppercase;
-            white-space: nowrap; 
-        }
-        
-        .guida-banner-link:hover {
-            background: var(--light-color);
-            color: var(--primary-color);
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 35px rgba(255, 255, 255, 0.3);
-        }
-        /* ======================================= */
-
-        .app-feature-container {
-            display: flex;
-            flex-direction: column;
-            gap: 4.5rem; 
-            align-items: center;
-        }
-        
-        .app-feature-item {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-            width: 100%;
-            max-width: 1100px;
-        }
-        
-        .app-feature-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        /* --- CSS CORRETTO PER IMMAGINI PNG --- */
-        .app-image-wrapper {
-            flex: 1;
-            max-width: 500px;
-            margin: 0 auto;
-            /* Rimosso sfondo, ombra e bordi da qui */
-        }
-        
-        .app-image {
-            width: 100%;
-            height: auto; /* Altezza automatica per PNG */
-            object-fit: contain; /* Adatta l'immagine senza tagliarla */
-            display: block;
-            transition: transform var(--transition-speed);
-            /* Ombra applicata direttamente al PNG trasparente */
-            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.15));
-        }
-        /* --- FINE MODIFICA --- */
-        
-        .app-feature-item:hover .app-image {
-            transform: scale(1.03);
-        }
-
-        .app-content {
-            flex: 1;
-            text-align: left;
-        }
-
-        .app-content h3 {
-            font-family: var(--font-heading);
-            font-size: 2.6rem; 
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-
-        .app-content .description {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-        
-        .app-features-list {
-            list-style: none;
-            margin-bottom: 2.5rem;
-        }
-        
-        .app-features-list li {
-            position: relative;
-            padding-left: 35px;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-        
-        .app-features-list li::before {
-            content: '✔';
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: var(--cta-color);
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        /* Contenitore per il bottone e il pixel di tracciamento */
-        .affiliate-cta-container {
-            display: inline-block;
-            position: relative;
-        }
-        /* Pixel di tracciamento invisibile */
-        .affiliate-cta-container img {
-            display: none;
-            position: absolute;
-            width: 0;
-            height: 0;
-        }
-
-        .app-cta {
-            display: inline-block;
-            background: var(--cta-color);
-            color: var(--dark-color);
-            padding: 1.1rem 3rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(28, 231, 131, 0.3);
-        }
-
-        .app-cta:hover {
-            background: var(--primary-color);
-            color: var(--light-color);
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 35px rgba(10, 46, 92, 0.3);
-        }
-
-        .card-disclaimers {
-            margin: 1.5rem 0;
-            padding-top: 1rem;
-            border-top: 1px solid #eee;
-        }
-        .risk-warning {
-            font-size: 0.9rem;
-            color: #555;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        .geo-warning {
-            font-size: 0.85rem;
-            color: #777;
-        }
-        .app-content .card-disclaimers {
-             margin-top: 0;
-             padding-top: 0;
-             border-top: none;
-             margin-bottom: 1.5rem;
-        }
-
-        .section-disclosure {
-            background-color: var(--background-color);
-            padding-bottom: 0;
-            margin-top: -3rem;
-            padding-top: 5rem;
-        }
-
-        .disclosure-box {
-            background-color: var(--light-color);
-            border: 1px solid #eef;
-            border-radius: 16px;
-            padding: 2.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
-        }
-        
-        .disclosure-box h3 {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .disclosure-box p {
-            font-size: 1rem;
-            color: #555;
-            line-height: 1.8;
-            white-space: pre-wrap;
-        }
-
-        footer {
-            background-color: var(--primary-color);
-            color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            padding: 4rem 2rem 2rem 2rem; 
-            margin-top: 5rem;
-            position: relative;
-        }
-        
-        .lang-selector {
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .lang-selector button {
-            background: none;
-            border: 2px solid var(--secondary-color);
-            color: var(--secondary-color);
-            padding: 8px 15px;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .lang-selector button:hover {
-            background-color: var(--secondary-color);
-            color: var(--dark-color);
-        }
-        
-        .lang-selector button.active {
-            background-color: var(--secondary-color);
-            color: var(--dark-color);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-        }
-
-        footer p {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-        
-        footer p:first-of-type { 
-            font-weight: 700;
-            color: var(--light-color);
-            font-size: 1.1rem;
-        }
-        
-        .footer-links {
-            margin: 1rem 0;
-        }
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .footer-links a:hover {
-            color: var(--light-color);
-            text-decoration: underline;
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        
-        .fade-in-up {
-            transform: translateY(50px);
-        }
-        
-        .slide-in-left {
-            transform: translateX(-100px);
-        }
-        
-        .slide-in-right {
-            transform: translateX(100px);
-        }
-        
-        .zoom-in {
-            transform: scale(0.9);
-        }
-
-        .is-visible {
-            opacity: 1;
-            transform: translate(0, 0) scale(1);
-        }
-        
-        .crypto-assistant {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            align-items: flex-end;
-            gap: 10px;
-            z-index: 1000;
-            transform: translateX(120%);
-            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        .crypto-assistant.is-visible {
-            transform: translateX(0);
-        }
-        .assistant-mascot {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--light-color);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            border: 3px solid var(--light-color);
-            object-fit: cover;
-            transform: scale(1.1);
-        }
-        .assistant-bubble {
-            background: var(--light-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: var(--card-shadow);
-            width: 320px;
-            position: relative;
-        }
-        .assistant-question {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-        .assistant-options {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .assistant-btn {
-            display: block;
-            text-decoration: none;
-            background: var(--background-color);
-            color: var(--primary-color);
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-        .assistant-btn:hover {
-            background: var(--primary-color);
-            color: var(--light-color);
-        }
-        .assistant-close {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: #aaa;
-            cursor: pointer;
-            z-index: 2;
-            line-height: 1;
-        }
-        .assistant-close:hover { color: #333; }
-
-        @media (max-width: 1024px) {
-            .hero-content h1 { font-size: 4rem; }
-            .hero-content p { font-size: 1.7rem; }
-            .section { padding: 4.5rem 0; }
-            .section-title { font-size: 2.8rem; }
-            .app-content h3 { font-size: 2.4rem; }
-            .app-feature-item, .app-feature-item:nth-child(even) {
-                flex-direction: column;
-                gap: 2rem;
-                text-align: center;
-            }
-            .app-image-wrapper { max-width: 80%; height: auto; } 
-            .app-image { height: auto; }
-            .app-content { text-align: center; }
-            .app-features-list { text-align: center; }
-            .app-features-list li { 
-                padding-left: 0; 
-                display: inline-block;
-                margin-right: 15px;
-                text-align: left;
-                font-size: 1rem;
-            }
-            .app-features-list li::before {
-                position: static;
-                margin-right: 8px;
-            }
-            .app-cta { text-align: center; }
-        }
-        
-        @media (max-width: 900px) { 
-            .guida-banner-box {
-                flex-direction: column;
-                text-align: center;
-                padding: 3rem 2.5rem;
-                gap: 2.5rem;
-            }
-            .guida-banner-content h2 {
-                font-size: 2.2rem;
-            }
-            .guida-banner-content p {
-                 font-size: 1.1rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .container { padding: 0 1rem; }
-            .hero { height: 90vh; }
-            .hero-content h1 { font-size: 2.8rem; }
-            .hero-content p { font-size: 1.4rem; }
-            .hero-cta { font-size: 1.1rem; padding: 1rem 2.5rem; }
-            .section { padding: 4rem 0; }
-            .section-title { font-size: 2.5rem; }
-            .app-content h3 { font-size: 2.2rem; }
-            .app-content .description { font-size: 1.1rem; }
-            .app-features-list li { 
-                font-size: 0.95rem; 
-                margin-bottom: 0.8rem;
-                display: block;
-                text-align: center;
-            }
-            .app-features-list li::before {
-                margin-right: 5px;
-                font-size: 1.1rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero-content h1 { font-size: 2.4rem; }
-            .hero-content p { font-size: 1.2rem; }
-            .section-title { font-size: 2rem; }
-            .app-content h3 { font-size: 1.8rem; }
-            .app-cta { padding: 0.9rem 2rem; font-size: 1.1rem; }
-            
-            .lang-selector {
-                gap: 5px;
-            }
-            .lang-selector button {
-                padding: 6px 12px;
-                font-size: 0.9rem;
-            }
-
-            .assistant-mascot { display: none; }
-            .crypto-assistant {
-                left: 10px;
-                right: 10px;
-                bottom: 10px;
-                width: auto;
-            }
-            .assistant-bubble { width: 100%; }
-            
-            .guida-banner-content h2 { 
-                font-size: 1.8rem;
-            }
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css"> 
+    
 </head>
 <body>
 
-    <nav class="main-nav">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo" data-lang-key="footerBrand">cryptostar<span>studio</span></a>
-            
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.html" class="current" data-lang-key="navHome"></a></li>
-                <li><a href="teoria.html" data-lang-key="navTeoria"></a></li>
-                <li><a href="dispense.html" data-lang-key="navDispense"></a></li>
-                <li><a href="pratica.html" data-lang-key="navPratica"></a></li>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#hero" class="logo">CryptoStarStudio.it</a>
+            <ul class="nav-links">
+                <li><a href="#chi-siamo">Chi Siamo</a></li>
+                <li><a href="#impara">Impara</a></li>
+                <li><a href="#piattaforme">Piattaforme</a></li>
+                <li><a href="#strumenti">Strumenti</a></li>
+                <li><a href="#glossario">Glossario</a></li>
+                <li><a href="auth.html" style="color: var(--gradient-end); font-weight: 900;">Accedi / Registrati</a></li>
             </ul>
-            
-            <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1 class="animate__animated animate__fadeInDown" data-lang-key="heroTitle"></h1>
-            <p class="animate__animated animate__fadeInUp animate__delay-1s" data-lang-key="heroSubtitle"></p>
-            <a href="#app" class="hero-cta animate__animated animate__pulse animate__delay-2s" data-lang-key="heroCta"></a>
+    <section id="hero" class="hero">
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+            <h1>CryptoStarStudio.it</h1>
+            <p>Supera i limiti dei siti comuni. Scopri il futuro della finanza con guide chiare, piattaforme testate e un design che ti farà tornare.</p>
+            <a href="#impara" class="btn">Inizia il tuo viaggio</a>
+            <a href="#piattaforme" class="btn btn-outline">Esplora le Piattaforme</a>
         </div>
-        <a href="#app" class="scroll-down-arrow" aria-label="Scorri verso il basso">↓</a>
-    </header>
+    </section>
 
-    <main>
-
+    <section class="toolkit-cta" data-aos="fade-up">
+        <h2>Lancia il Super-Toolkit</h2>
+        <p>
+            Accedi al nostro cruscotto PWA gratuito. Tieni traccia del tuo portfolio
+            con prezzi in tempo reale e usa i nostri calcolatori professionali,
+            anche offline e dal tuo telefono.
+        </p>
         
-        <section id="guida-banner" class="section section-guida-banner">
-            <div class="container">
-                <div class="guida-banner-box animate-on-scroll fade-in-up">
-                    <div class="guida-banner-content">
-                        <h2 data-lang-key="guidaBannerTitle"></h2>
-                        <p data-lang-key="guidaBannerDesc"></p>
-                    </div>
-                    <div class="guida-banner-cta">
-                        <a href="teoria.html" class="guida-banner-link" data-lang-key="guidaBannerCta"></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="app" class="section section-app">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll fade-in-up" data-lang-key="appTitle"></h2>
-                <div id="app-container" class="app-feature-container">
-                    </div>
-            </div>
-        </section>
-        
-        <section id="disclosure" class="section section-disclosure">
-            <div class="container">
-                <div class="disclosure-box animate-on-scroll fade-in-up">
-                    <h3 data-lang-key="disclosureTitle"></h3>
-                    <p data-lang-key="disclosureText"></p>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
+        <a href="toolkit.html" class="btn">
+            Avvia l'App (Gratis) 
+            <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+        </a>
+    </section>
+    <section id="chi-siamo">
         <div class="container">
-            <div class="lang-selector">
-                <button data-lang="it">Italiano</button>
-                <button data-lang="en">English</button>
-                <button data-lang="es">Español</button>
+            <h2 data-aos="fade-down">Chi Siamo: La Nostra Missione</h2>
+            <div class="chi-siamo-content">
+                <div class="chi-siamo-text" data-aos="fade-right" data-aos-delay="200">
+                    <h3>Il Tuo Studio Personale nel Mondo Cripto</h3>
+                    <p>Benvenuto in CryptoStarStudio, il tuo punto di riferimento esclusivo per navigare l'universo delle criptovalute. Siamo nati dalla convinzione che la complessità non debba essere un ostacolo, ma una sfida da superare con chiarezza, design e un approccio educativo di eccellenza.</p>
+                    <p>La nostra missione è demistificare il mondo blockchain, fornendo guide intuitive, analisi approfondite delle piattaforme e strumenti essenziali per farti prendere decisioni informate e sicure. Non solo informiamo, ma ti guidiamo passo dopo passo verso l'indipendenza finanziaria nel futuro digitale.</p>
+                    <a href="#impara" class="btn btn-outline">Scopri la Nostra Visione</a>
+                </div>
+                <div class="chi-siamo-image" data-aos="fade-left" data-aos-delay="400">
+                    <div class="css-art-box">
+                        <div class="explorer-core"></div>
+                        <div class="path-segment"></div>
+                        <div class="path-segment"></div>
+                        <div class="path-segment"></div>
+                        <div class="path-segment"></div>
+                        <div class="btc-icon"></div>
+                        <div class="eth-icon"></div>
+                        <span class="brand-text">CryptoStarStudio.it</span>
+                    </div>
+                </div>
             </div>
-            <p data-lang-key="footerBrand"></p>
-            <p>&copy; 2025. <span data-lang-key="footerRights"></span></p>
-            
-            <p class="footer-links">
-                <a href="privacy.html" data-lang-key="privacyLink"></a> &middot; 
-                <a href="termini.html" data-lang-key="termsLink"></a> &middot; 
-                <a href="teoria.html" data-lang-key="guideLink"></a> &middot; 
-                <a href="#disclosure" data-lang-key="disclosureLink"></a>
+        </div>
+    </section>
+
+    <section id="impara">
+        <div class="container">
+            <h2 data-aos="fade-down">Il Tuo Percorso in 3 Passi</h2> 
+            <p class="text-center" style="color: var(--text-dark); max-width: 800px; margin: -2rem auto 4rem auto;" data-aos="fade-up">
+                Abbiamo creato un percorso chiaro per portarti da zero alla piena consapevolezza. Segui questi passi per padroneggiare il mondo cripto.
             </p>
-            <p data-lang-key="notAffiliated"></p>
-            <p data-lang-key="footerDisclaimer"></p>
+            
+            <div class="impara-content">
+
+                <div class="concept-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-icon"><i class="fas fa-project-diagram"></i></div>
+                    <div class="step-text">
+                        <h3>1. Capisci: La Blockchain "Viva"</h3>
+                        <p>Invece di un testo noioso, ti mostriamo visivamente come funziona. Clicca "Aggiungi Blocco" per vedere la catena crescere. Ogni blocco è collegato al precedente, creando una catena sicura e immutabile.</p>
+                        <div class="blockchain-visualizer" id="blockchain-chain">
+                            <div class="block verified" data-aos="zoom-in">
+                                <span class="block-header">Blocco #1 (Genesi)</span>
+                                <span class="block-data">...</span>
+                                <span class="block-hash">000...a1b</span>
+                                <i class="fas fa-lock block-lock-icon" style="opacity: 1;"></i>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="200">
+                            <a class="btn btn-outline btn-small" onclick="addBlockToChain()">Aggiungi Blocco</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="concept-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-icon"><i class="fas fa-wallet"></i></div>
+                    <div class="step-text">
+                        <h3>2. Proteggi: La Guida ai Wallet</h3>
+                        <p>Prima di acquistare, devi sapere come proteggere. Non tutti i wallet sono uguali. Scegli in base all'uso:</p>
+                        <div class="wallet-comparison">
+                            <div class="wallet-type hot">
+                                <h4><i class="fas fa-mobile-alt"></i> Hot Wallet (Software)</h4>
+                                <p><strong>Usalo per:</strong> Pagamenti veloci, trading, piccole cifre. <br><strong>Pro:</strong> Gratuito e comodo. <br><strong>Contro:</strong> Connesso a Internet.</p>
+                            </div>
+                            <div class="wallet-type cold">
+                                <h4><i class="fas fa-usb"></i> Cold Wallet (Hardware)</h4>
+                                <p><strong>Usalo per:</strong> Risparmi a lungo termine, grosse cifre. <br><strong>Pro:</strong> Massima sicurezza (offline). <br><strong>Contro:</strong> Costoso, meno comodo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="concept-step" id="passo-3-staking" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="step-text">
+                        <h3>3. Guadagna: Calcolatore Interessi</h3>
+                        <p>Una volta che possiedi crypto, puoi farle "lavorare". Molte piattaforme offrono interessi (APY) sui tuoi depositi. Simula i tuoi profitti nel tempo con la potenza dell'interesse composto.</p>
+                        <div class="staking-calculator">
+                            <div class="staking-inputs">
+                                <div>
+                                    <label for="stakingInitial">Investimento Iniziale (€)</label>
+                                    <input type="number" id="stakingInitial" value="1000">
+                                    <p class="input-help-text">La somma con cui inizi.</p>
+                                </div>
+                                <div>
+                                    <label for="stakingMonthly">Contributo Mensile (€)</label>
+                                    <input type="number" id="stakingMonthly" value="100">
+                                    <p class="input-help-text">Quanto aggiungi ogni mese.</p>
+                                </div>
+                                <div>
+                                    <label for="stakingAPY">Interesse Annuo (APY %)</label>
+                                    <input type="number" id="stakingAPY" value="8">
+                                    <p class="input-help-text">L'interesse che ti aspetti.</p>
+                                </div>
+                                <div>
+                                    <label for="stakingYears">Durata (Anni)</label>
+                                    <input type="number" id="stakingYears" value="5">
+                                    <p class="input-help-text">Per quanti anni investi.</p>
+                                </div>
+                            </div>
+                            <a class="btn" onclick="calculateStaking()">Calcola e Salva</a>
+                            <div style="overflow-x: auto; margin-top: 1.5rem;">
+                                <table class="result-table" id="stakingResultTable">
+                                </table>
+                            </div>
+                        </div>
+                        <p class="mt-4">Pronto a guadagnare davvero? <a href="https://www.financeads.net/tc.php?t=78725C324060796T" target="_blank">Inizia su YouHodler</a>.</p>
+                    </div>
+                </div>
+                
+                </div>
+
+            <h3 class="text-center mt-5" data-aos="fade-up">Le Nostre Guide Principali</h3>
+            <p class="text-center" style="color: var(--text-dark);" data-aos="fade-up" data-aos-delay="100">Ora sei pronto. Approfondisci gli argomenti chiave.</p>
+
+            <div class="guides-grid mt-4">
+                <div class="guide-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="guide-card-content">
+                        <h4>Guida Definitiva al Bitcoin</h4>
+                        <p>Cos'è, perché ha valore e le strategie migliori per acquistarlo e conservarlo in sicurezza.</p>
+                    </div>
+                    <div class="guide-card-footer">
+                        <a onclick="openModal('bitcoin-modal')">Leggi la guida <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="guide-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="guide-card-content">
+                        <h4>Capire Ethereum e gli Smart Contract</h4>
+                        <p>Perché Ethereum è più di una valuta e come sta costruendo il nuovo internet (Web3).</p>
+                    </div>
+                    <div class="guide-card-footer">
+                        <a onclick="openModal('ethereum-modal')">Leggi la guida <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="guide-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="guide-card-content">
+                        <h4>Introduzione alla DeFi (Finanza Decentralizzata)</h4>
+                        <p>Prestiti, scambi e rendite passive. Scopri come la finanza sta cambiando, senza più banche.</p>
+                    </div>
+                    <div class="guide-card-footer">
+                        <a onclick="openModal('defi-modal')">Leggi la guida <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="piattaforme">
+        <div class="container">
+            <h2 data-aos="fade-down">Piattaforme: Le Migliori Scelte per Te</h2>
+            <p class="text-center" style="color: var(--text-dark); margin-bottom: 3rem;" data-aos="fade-up">Abbiamo selezionato e recensito le piattaforme più affidabili e performanti per le tue esigenze crypto.</p>
+
+            <div class="platforms-grid">
+                <div class="platform-card" data-aos="zoom-in" data-aos-delay="100">
+                    <h3>Bitpanda</h3>
+                    <p>Ideale per principianti, Bitpanda offre un'interfaccia intuitiva e una vasta gamma di asset. Acquista e vendi cripto, metalli preziosi e azioni frazionate in modo semplice e sicuro. Perfetto per iniziare il tuo percorso.</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C290656288T" target="_blank" class="btn">Scopri Bitpanda</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V290656288T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
+
+                <div class="platform-card" data-aos="zoom-in" data-aos-delay="200">
+                    <h3>Kraken</h3>
+                    <p>Per i trader più esperti, Kraken Pro è la scelta vincente. Offre un'ampia selezione di criptovalute, commissioni competitive e strumenti avanzati di trading e futures. La piattaforma è rinomata per la sua sicurezza e liquidità.</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C4746108270T" target="_blank" class="btn">Vai a Kraken Pro</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V4746108270T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
+
+                <div class="platform-card" data-aos="zoom-in" data-aos-delay="300">
+                    <h3>Moonpay</h3>
+                    <p>La soluzione più rapida per acquistare criptovalute. Moonpay si integra ovunque e ti permette di comprare crypto istantaneamente con carta di credito, Apple Pay o Google Pay. Massima velocità per chi non vuole perdere tempo.</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C5508129482T" target="_blank" class="btn">Compra Veloce con Moonpay</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V5508129482T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
+
+                <div class="platform-card" data-aos="zoom-in" data-aos-delay="400">
+                    <h3>YouHodler</h3>
+                    <p>Fai lavorare le tue cripto. YouHodler è la piattaforma leader per guadagnare interessi sui tuoi asset digitali, ottenere prestiti crypto-backed e utilizzare strumenti avanzati di trading come Multi HODL. Ottimizza il tuo portafoglio.</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C324060796T" target="_blank" class="btn">Guadagna Interessi</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V324060796T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="strumenti">
+        <div class="container">
+            <h2 data-aos="fade-down">Strumenti Essenziali (Le Dispense)</h2>
+            <p class="text-center" style="color: var(--text-dark); margin-bottom: 3rem;" data-aos="fade-up">Le risorse che ti servono per operare al meglio. Questi sono gli strumenti che ti faranno tornare.</p>
+
+            <div class="tools-grid">
+                
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="100">
+                    <a href="https://koinly.io/crypto-tax-calculator/" target="_blank">
+                        <i class="fas fa-calculator fa-icon"></i>
+                        <h4>Calcolatore Tasse Crypto</h4>
+                        <p>Usa il calcolatore di Koinly per stimare le tue tasse crypto.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="150">
+                    <a href="https://www.ledger.com/academy/crypto-security-checklist" target="_blank">
+                        <i class="fas fa-list-check fa-icon"></i>
+                        <h4>Checklist Sicurezza</h4>
+                        <p>La guida essenziale di Ledger per mettere in sicurezza i tuoi asset. Da leggere.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="200">
+                    <a href="https://coinmarketcap.com/portfolio-tracker/" target="_blank">
+                        <i class="fas fa-chart-pie fa-icon"></i>
+                        <h4>Portfolio Tracker</h4>
+                        <p>Usa il tracker di CoinMarketCap per tracciare tutti i tuoi investimenti in un unico posto.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="250">
+                    <a href="https://etherscan.io/" target="_blank">
+                        <i class="fas fa-search-location fa-icon"></i>
+                        <h4>Block Explorer (Etherscan)</h4>
+                        <p>Esplora la blockchain di Ethereum, traccia transazioni e wallet in tempo reale.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="300">
+                    <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank">
+                        <i class="fas fa-tachometer-alt fa-icon"></i>
+                        <h4>Fear & Greed Index</h4>
+                        <p>Misura il sentiment del mercato in tempo reale. Comprare con la paura, vendere con l'euforia?</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="350">
+                    <a href="https://etherscan.io/gastracker" target="_blank">
+                        <i class="fas fa-gas-pump fa-icon"></i>
+                        <h4>Gas Fee Tracker (ETH)</h4>
+                        <p>Controlla i costi di transazione (Gas) sulla rete Ethereum in tempo reale prima di operare.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="400">
+                    <a href="https://bitcoin.org/bitcoin.pdf" target="_blank">
+                        <i class="fas fa-file-alt fa-icon"></i>
+                        <h4>Libreria Whitepaper</h4>
+                        <p>Leggi il documento fondativo. Il Whitepaper originale di Bitcoin.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="450">
+                    <a href="https://coinmarketcap.com/events/" target="_blank">
+                        <i class="fas fa-calendar-alt fa-icon"></i>
+                        <h4>Calendario Eventi</h4>
+                        <p>Tieni traccia dei prossimi Airdrop e Halving.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="500">
+                    <a href="https://academy.binance.com/it" target="_blank">
+                        <i class="fas fa-graduation-cap fa-icon"></i>
+                        <h4>Binance Academy</h4>
+                        <p>Una delle migliori risorse gratuite per imparare tutto sul mondo crypto e blockchain.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="550">
+                    <a href="https://www.coinbase.com/it/learn" target="_blank">
+                        <i class="fas fa-book-reader fa-icon"></i>
+                        <h4>Coinbase Learn</h4>
+                        <p>Guide semplici e tutorial per principianti per iniziare a capire i concetti base.</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="glossario">
+        <div class="container">
+            <h2 data-aos="fade-down">Glossario: I Termini Chiave</h2>
+            <p class="text-center" style="color: var(--text-dark); max-width: 800px; margin: -2rem auto 4rem auto;" data-aos="fade-up">
+                Usa questa sezione come un dizionario rapido per i termini più comuni che incontrerai.
+            </p>
+            <div class="glossary-grid">
+                
+                <div class="glossary-item" data-aos="fade-up" data-aos-delay="50">
+                    <h4>Airdrop</h4>
+                    <p>Una distribuzione gratuita di token a un gran numero di portafogli, di solito per scopi di marketing o per premiare i primi utenti.</p>
+                </div>
+                
+                <div class="glossary-item" data-aos="fade-up" data-aos-delay="100">
+                    <h4>Blockchain</h4>
+                    <p>Un registro digitale distribuito, immutabile e decentralizzato. È la tecnologia alla base della maggior parte delle criptovalute.</p>
+                </div>
+                
+                <div class="glossary-item" data-aos="fade-up" data-aos-delay="150">
+                    <h4>Cold Wallet</h4>
+                    <p>Un portafoglio hardware (fisico, simile a una USB) che rimane offline. Offre massima sicurezza per l'archiviazione a lungo termine.</p>
+                </div>
+
+                <div class="glossary-item" data-aos="fade-up" data-aos-delay="200">
+                    <h4>DeFi (Finanza Decentralizzata)</h4>
+                    <p>Un sistema di app finanziarie su blockchain che operano senza intermediari come le banche (es. per prestiti o scambi).</p>
+                </div>
+
+                <div class="glossary-item" data-aos="fade-up" data-aos-delay="250">
+                    <h4>Gas Fees</h4>
+                    <p>Le commissioni pagate ai validatori/miner per elaborare una transazione su una rete blockchain, specialmente comune su Ethereum.</p>
+                </div>
+
+                <div class="glossary-item" data-aos="fade-up" data-aos-delay="300">
+                    <h4>Halving</h4>
+                    <p>Un evento, specifico di Bitcoin, che dimezza la ricompensa per il mining di un blocco. Avviene circa ogni 4 anni e riduce l'offerta di nuovi BTC.</p>
+                </div>
+
+                <div class="glossary-item" data-aos="fade-up" data-aos-delay="350">
+                    <h4>HODL</h4>
+                    <p>Termine gergale per "Hold" (tenere). Significa mantenere i propri investimenti crypto a lungo termine, senza vendere, indipendentemente dalla volatilità.</p>
+                </div>
+
+                <div class="glossary-item" data-aos="fade-up" data-aos-delay="400">
+                    <h4>Hot Wallet</h4>
+                    <p>Un portafoglio digitale connesso a Internet (es. app per telefono, estensione browser). È comodo per l'uso quotidiano ma più vulnerabile.</p>
+                </div>
+
+                <div class="glossary-item" data-aos="fade-up" data-aos-delay="450">
+                    <h4>Interesse Composto</h4>
+                    <p>L'interesse calcolato non solo sul capitale iniziale, ma anche sugli interessi accumulati in precedenza. (Interesse sull'interesse).</p>
+                </div>
+
+                <div class="glossary-item" data-aos="fade-up" data-aos-delay="500">
+                    <h4>Smart Contract</h4>
+                    <p>Un programma che esegue automaticamente degli accordi (es. "SE accade X, ALLORA paga Y"). Sono la base della DeFi e degli NFT.</p>
+                </div>
+
+                <div class="glossary-item" data-aos="fade-up" data-aos-delay="550">
+                    <h4>Whitepaper</h4>
+                    <p>Un documento ufficiale rilasciato da un progetto crypto che ne spiega in dettaglio la tecnologia, gli obiettivi, l'architettura e la roadmap.</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links" data-aos="fade-up">
+                <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p data-aos="fade-up" data-aos-delay="100">&copy; 2025 CryptoStarStudio.it - Tutti i diritti riservati.</p>
+            <p data-aos="fade-up" data-aos-delay="200" style="font-size: 0.8rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Disclaimer: CryptoStarStudio.it fornisce contenuti a scopo puramente informativo ed educativo. Non costituisce consulenza finanziaria. Investire in criptovalute comporta un alto livello di rischio. Alcuni link su questo sito sono link di affiliazione, il che significa che potremmo guadagnare una commissione senza costi aggiuntivi per te.
+            </p>
         </div>
     </footer>
+    
+    
+    <div id="modal-overlay" class="modal-overlay" onclick="closeModal()"></div>
 
-    <div id="crypto-assistant" class="crypto-assistant">
-        <button id="assistant-close" class="assistant-close" aria-label="Chiudi">&times;</button>
-        <img src="https://api.dicebear.com/8.x/bottts/svg?seed=crypto-assistant&backgroundColor=ffffff&radius=50&scale=90" alt="Crypto Mascot" class="assistant-mascot">
-        <div class="assistant-bubble">
-            <p class="assistant-question" data-lang-key="assistantQuestion"></p>
-            <div class="assistant-options">
-                <a href="#app-bitpanda" class="assistant-btn" data-lang-key="assistantOpt1"></a>
-                <a href="#app-youhodler" class="assistant-btn" data-lang-key="assistantOpt2"></a>
-                <a href="#app-moonpay" class="assistant-btn" data-lang-key="assistantOpt3_new"></a>
-                <a href="#app-kraken" class="assistant-btn" data-lang-key="assistantOpt4_new"></a>
-            </div>
+    <div id="bitcoin-modal" class="modal-content">
+        <a class="modal-close" onclick="closeModal()">&times;</a>
+        <div class="modal-guide-content">
+            <h2>Guida Definitiva al Bitcoin</h2>
+            <p class="text-dark">La guida completa per capire cos'è Bitcoin, perché è rivoluzionario e come puoi acquistarne una frazione in totale sicurezza.</p>
+            <div class="css-guide-art btc-art"></div> 
+
+            <h3>Cos'è Bitcoin (spiegato semplice)</h3>
+            <p>Immagina un grande libro mastro digitale che non appartiene a nessuna banca o governo. Questo libro mastro è pubblico e distribuito su migliaia di computer (la Blockchain). Bitcoin è la "valuta" che viene usata per scrivere su questo libro mastro. È la prima forma di denaro digitale decentralizzato.</p>
+
+            <h3>Perché ha Valore?</h3>
+            <ul>
+                <li><strong>Scarsità:</strong> Esisteranno solo 21 milioni di Bitcoin. Non se ne possono "stampare" di più, a differenza delle valute tradizionali.</li>
+                <li><strong>Decentralizzazione:</strong> Nessuna singola entità (banca, stato, CEO) può controllarlo, censurarlo o bloccare le tue transazioni.</li>
+                <li><strong>Sicurezza:</strong> La rete Bitcoin non è mai stata hackerata. È protetta da un'immensa potenza di calcolo.</li>
+            </ul>
+
+            <h3>Come Acquistare i Tuoi Primi Bitcoin (Step-by-Step)</h3>
+            <p>Il modo più semplice e sicuro per i principianti è usare una piattaforma regolamentata chiamata "exchange".</p>
+
+            <h4>1. Scegli una Piattaforma Affidabile</h4>
+            <p>Per iniziare, la semplicità è tutto. Consigliamo **Bitpanda**, perché ti permette di acquistare non solo crypto, ma anche azioni e metalli con un unico account.</p>
+            <a href="https://www.financeads.net/tc.php?t=78725C290656288T" target="_blank" class="btn">Inizia su Bitpanda</a>
+
+            <h4>2. Per Utenti Intermedi e Trader</h4>
+            <p>Se hai già esperienza o vuoi strumenti di trading più avanzati, **Kraken Pro** è lo standard del settore per basse commissioni e alta sicurezza.</p>
+            <a href="https://www.financeads.net/tc.php?t=78725C4746108270T" target="_blank" class="btn btn-outline">Vai a Kraken Pro</a>
+
         </div>
     </div>
 
+    <div id="ethereum-modal" class="modal-content">
+        <a class="modal-close" onclick="closeModal()">&times;</a>
+        <div class="modal-guide-content">
+            <h2>Capire Ethereum e gli Smart Contract</h2>
+            <p class="text-dark">Se Bitcoin è l'oro digitale, Ethereum è un "computer mondiale" programmabile. È molto più di una semplice valuta.</p>
+            <div class="css-guide-art eth-art">
+                <div class="eth-logo">
+                    <div class="eth-top"></div>
+                    <div class="eth-top-inner"></div>
+                    <div class="eth-bottom"></div>
+                    <div class="eth-bottom-inner"></div>
+                </div>
+            </div>
 
+            <h3>Cos'è Ethereum?</h3>
+            <p>Ethereum è una Blockchain, come Bitcoin, ma con una differenza fondamentale: è **programmabile**. Gli sviluppatori possono costruire e pubblicare "applicazioni decentralizzate" (DApps) e Smart Contract che girano sulla sua rete.</p>
+            <p>La valuta della rete, usata per pagare le Gas Fees, si chiama **Ether (ETH)**.</p>
+
+            <h3>Cosa sono gli Smart Contract?</h3>
+            <p>Sono la vera rivoluzione. Uno Smart Contract è un semplice programma che esegue automaticamente degli accordi.</p>
+            <ul>
+                <li><strong>Esempio Semplice:</strong> Un distributore automatico è uno smart contract fisico. SE inserisci 1€, ALLORA la macchina rilascia la bevanda.</li>
+                <li><strong>Esempio Digitale:</strong> SE il Volo X è in ritardo (verificato da un oracolo), ALLORA il contratto invia automaticamente un rimborso.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="defi-modal" class="modal-content">
+        <a class="modal-close" onclick="closeModal()">&times;</a>
+        <div class="modal-guide-content">
+            <h2>Introduzione alla DeFi (Finanza Decentralizzata)</h2>
+            <p class="text-dark">Immagina un sistema finanziario aperto a tutti, senza banche, che ti permette di guadagnare interessi, scambiare asset e ottenere prestiti.</p>
+            <div class="css-guide-art defi-art">
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="line l1"></div>
+                <div class="line l2"></div>
+                <div class="line l3"></div>
+            </div> 
+
+            <h3>Cos'è la DeFi?</h3>
+            <p>DeFi è un ecosistema di applicazioni finanziarie costruite su blockchain (principalmente Ethereum). Queste app ricreano i servizi bancari tradizionali (prestiti, risparmi, scambi) ma in modo aperto, globale e senza intermediari.</p>
+
+            <h3>Cosa puoi fare con la DeFi?</h3>
+            <ul>
+                <li><strong>Lending & Borrowing (Prestiti):</strong> Puoi prestare le tue crypto e guadagnare interessi, oppure puoi usare le tue crypto come collaterale per ottenere un prestito istantaneo.</li>
+                <li><strong>Staking (Mettere a Rendita):</strong> Puoi "bloccare" alcune crypto per contribuire alla sicurezza di una rete e ricevere in cambio ricompense (interessi).</li>
+                <li><strong>DEX (Exchange Decentralizzati):</strong> Puoi scambiare centinaia di token diversi istantaneamente, senza dover depositare i tuoi fondi su un exchange centralizzato come Kraken.</li>
+            </ul>
+
+            <h3>Come Iniziare a Guadagnare Rendite Passive (Modo Semplice)</h3>
+            <p>La DeFi "pura" può essere complessa. Per fortuna, piattaforme "CeFi" come **YouHodler** prendono il meglio della DeFi e lo rendono semplice come un'app bancaria. Ti permettono di depositare le tue crypto e iniziare a guadagnare interessi giornalieri in modo automatico. È il modo migliore per mettere in pratica ciò che hai imparato nel <a onclick="closeModal(); document.getElementById('passo-3-staking').scrollIntoView({ behavior: 'smooth' });">Passo 3 del nostro percorso</a>.</p>
+            
+            <a href="https://www.financeads.net/tc.php?t=78725C324060796T" target="_blank" class="btn">Guadagna Interessi su YouHodler</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
-        const translations = {
-            "it": {
-                "pageTitle": "🚀 cryptostarstudio: App Crypto Selezionate 🚀",
-                "heroTitle": "Il Futuro delle Tue Finanze Inizia Qui",
-                "heroSubtitle": "Una selezione di app crypto e piattaforme che ho analizzato per te.",
-                "heroCta": "Esplora le App",
-                "appTitle": "App Crypto in Evidenza",
-                "footerBrand": "cryptostarstudio",
-                "footerRights": "Tutti i diritti riservati.",
-                "footerDisclaimer": "Disclaimer: Le informazioni su questa pagina non costituiscono consulenza finanziaria. Investire comporta dei rischi.",
-                "disclosureTitle": "Nota sulla Trasparenza",
-                "disclosureText": "Questa pagina è supportata dai lettori. Alcuni link sono affiliati/sponsored: se apri un conto o completi un’azione tramite i miei link, potrei ricevere una commissione senza costi aggiuntivi per te.\n\nSeleziono piattaforme che ritengo utili, ma i contenuti sono informativi e non costituiscono consulenza finanziaria. Verifica sempre termini, costi e requisiti sul sito ufficiale del partner.\n\nProdotti finanziari e crypto comportano rischi (anche perdita del capitale). Offerte e disponibilità possono variare per Paese. Accesso riservato a maggiornni (18+).",
-                "privacyLink": "Privacy Policy",
-                "termsLink": "Termini di Servizio",
-                "guideLink": "Guida per Principianti", 
-                "disclosureLink": "Trasparenza",
-                "notAffiliated": "cryptostarstudio non è affiliato né sponsorizzato ufficialmente dai brand menzionati. I marchi appartengono ai rispettivi proprietari.",
-                "riskWarning": "⚠️ Servizi per 18+. Investimenti e crypto comportano rischi di perdita del capitale.",
-                "geoWarning": "Disponibilità e condizioni possono variare per Paese. Verifica sempre sul sito ufficiale.",
-                
-                "navHome": "Home",
-                "navTeoria": "Teoria",
-                "navDispense": "Dispense",
-                "navPratica": "Pratica",
-
-                "guidaBannerTitle": "Sei nuovo nel mondo Crypto?", 
-                "guidaBannerDesc": "Parti con il piede giusto. Consulta la nostra guida gratuita per capire le basi della blockchain prima di iniziare.", 
-                "guidaBannerCta": "Inizia da Qui", 
-
-                "appBitpandaTitle": "Bitpanda",
-                "appBitpandaDesc": "Piattaforma d'investimento che permette di accedere a diversi asset. Un broker europeo con registrazioni di settore, pensato per diversificare da un unico hub.",
-                "appBitpandaFeat1": "Accesso a Cripto, Azioni, ETF e Metalli",
-                "appBitpandaFeat2": "Piani di Risparmio (PAC)",
-                "appBitpandaFeat3": "Interfaccia utente intuitiva",
-                "appBitpandaFeat4": "Broker europeo (verifica licenze/registrazioni sul sito ufficiale)",
-                "appBitpandaCta": "Visita Bitpanda",
-                
-                "appYouhodlerTitle": "YouHodler",
-                "appYouhodlerDesc": "Piattaforma FinTech che consente di ottenere interessi sulle crypto supportate e di accedere a soluzioni di liquidità utilizzando gli asset digitali come collaterale.",
-                "appYouhodlerFeat1": "Interessi su asset supportati (variabili, non garantiti)",
-                "appYouhodlerFeat2": "Accesso a linee di credito crypto",
-                "appYouhodlerFeat3": "Strumenti di trading e conversione",
-                "appYouhodlerFeat4": "Piattaforma con sede in Svizzera",
-                "appYouhodlerCta": "Visita YouHodler",
-
-                "appMoonpayTitle": "MoonPay",
-                "appMoonpayDesc": "MoonPay è un'infrastruttura di pagamento per criptovalute. Permette di acquistare e vendere oltre 170 crypto con carte, bonifici, Apple Pay e altro. È una soluzione non-custodial (mantieni il controllo), facile per i principianti.",
-                "appMoonpayFeat1": "Acquisti facili (Carte, Apple Pay, Bonifico)",
-                "appMoonpayFeat2": "Supporta oltre 170 criptovalute",
-                "appMoonpayFeat3": "Servizio non-custodial (tu controlli i fondi)",
-                "appMoonpayFeat4": "Supporto clienti 24/7",
-                "appMoonpayCta": "Visita MoonPay",
-                
-                "appKrakenTitle": "Kraken",
-                "appKrakenDesc": "Uno degli exchange di criptovalute più longevi e sicuri. Offre accesso a oltre 200 crypto, opzioni di staking (fino al 24% di rendimento annuo) e strumenti di trading avanzati.",
-                "appKrakenFeat1": "Oltre 200+ criptovalute disponibili",
-                "appKrakenFeat2": "Staking on-chain (fino al 24% APY)",
-                "appKrakenFeat3": "Misure di sicurezza robuste",
-                "appKrakenFeat4": "Commissioni basse e supporto 24/7",
-                "appKrakenCta": "Visita Kraken",
-
-                "assistantQuestion": "Non sai da dove iniziare?",
-                "assistantOpt1": "Cerco una piattaforma All-in-One (Bitpanda)",
-                "assistantOpt2": "Voglio far fruttare le mie crypto (YouHodler)",
-                "assistantOpt3_new": "Voglio comprare crypto facilmente (MoonPay)",
-                "assistantOpt4_new": "Cerco un exchange Pro (Kraken)"
-            },
-            "en": {
-                // ... (TRADUZIONI INGLESI COMPLETE)
-                "pageTitle": "🚀 cryptostarstudio: Selected Crypto Apps 🚀",
-                "heroTitle": "The Future of Your Finances Starts Here",
-                "heroSubtitle": "A selection of financial platforms and apps I've analyzed for you.",
-                "heroCta": "Explore Apps",
-                "appTitle": "Featured Crypto Apps",
-                "footerBrand": "cryptostarstudio",
-                "footerRights": "All rights reserved.",
-                "footerDisclaimer": "Disclaimer: The information on this page does not constitute financial advice. Investing involves risks.",
-                "disclosureTitle": "Transparency Note",
-                "disclosureText": "This page is reader-supported. Some links are affiliated/sponsored: if you open an account or complete an action through my links, I may receive a commission at no extra cost to you.\n\nI select platforms I find useful, but the content is informational and does not constitute financial advice. Always verify terms, costs, and requirements on the partner's official website.\n\nFinancial products and crypto involve risks (including capital loss). Offers and availability may vary by country. Access restricted to adults (18+).",
-                "privacyLink": "Privacy Policy",
-                "termsLink": "Terms of Service",
-                "guideLink": "Beginner's Guide",
-                "disclosureLink": "Transparency",
-                "notAffiliated": "cryptostarstudio is not officially affiliated with or sponsored by the mentioned brands. Trademarks belong to their respective owners.",
-                "riskWarning": "⚠️ Services for 18+. Investments and crypto involve risks of capital loss.",
-                "geoWarning": "Availability and terms may vary by country. Always verify on the official website.",
-                "navHome": "Home",
-                "navTeoria": "Theory",
-                "navDispense": "Resources",
-                "navPratica": "Practice",
-                "guidaBannerTitle": "New to Crypto?", 
-                "guidaBannerDesc": "Start on the right foot. Check out our free guide to understand the basics of blockchain before you begin.", 
-                "guidaBannerCta": "Start Here", 
-                "appBitpandaTitle": "Bitpanda",
-                "appBitpandaDesc": "Investment platform providing access to various assets. A European broker with industry registrations, designed for diversification from a single hub.",
-                "appBitpandaFeat1": "Access to Crypto, Stocks, ETFs, and Metals",
-                "appBitpandaFeat2": "Savings Plans",
-                "appBitpandaFeat3": "Intuitive user interface",
-                "appBitpandaFeat4": "European broker (verify licenses/registrazioni on the official site)",
-                "appBitpandaCta": "Visit Bitpanda",
-                "appYouhodlerTitle": "YouHodler",
-                "appYouhodlerDesc": "FinTech platform that allows earning interest on supported crypto and accessing liquidity solutions using digital assets as collateral.",
-                "appYouhodlerFeat1": "Interest on supported assets (variable, not guaranteed)",
-                "appYouhodlerFeat2": "Access to crypto credit lines",
-                "appYouhodlerFeat3": "Trading and conversion tools",
-                "appYouhodlerFeat4": "Platform based in Switzerland",
-                "appYouhodlerCta": "Visit YouHodler",
-                "appMoonpayTitle": "MoonPay",
-                "appMoonpayDesc": "MoonPay is a global cryptocurrency payments provider. It enables buying and selling of 170+ cryptos with cards, bank transfers, Apple Pay, and more. It's a non-custodial, beginner-friendly solution.",
-                "appMoonpayFeat1": "Easy Buys (Cards, Apple Pay, Transfer)",
-                "appMoonpayFeat2": "Supports 170+ cryptocurrencies",
-                "appMoonpayFeat3": "Non-custodial service (you control your funds)",
-                "appMoonpayFeat4": "24/7 Customer Support",
-                "appMoonpayCta": "Visit MoonPay",
-                "appKrakenTitle": "Kraken",
-                "appKrakenDesc": "One of the longest-running and most secure crypto exchanges. It offers access to 200+ crypto, staking options (up to 24% APY), and advanced trading tools.",
-                "appKrakenFeat1": "Over 200+ cryptocurrencies available",
-                "appKrakenFeat2": "On-chain Staking (up to 24% APY)",
-                "appKrakenFeat3": "Robust security measures",
-                "appKrakenFeat4": "Low fees and 24/7 support",
-                "appKrakenCta": "Visit Kraken",
-                "assistantQuestion": "Not sure where to start?",
-                "assistantOpt1": "I want an All-in-One platform (Bitpanda)",
-                "assistantOpt2": "I want to earn interest on my crypto (YouHodler)",
-                "assistantOpt3_new": "I want to buy crypto easily (MoonPay)",
-                "assistantOpt4_new": "I'm looking for a Pro exchange (Kraken)"
-            },
-            "es": {
-                // ... (TRADUZIONI SPAGNOLE COMPLETE)
-                "pageTitle": "🚀 cryptostarstudio: Apps Crypto Seleccionadas 🚀",
-                "heroTitle": "El Futuro de Tus Finanzas Comienza Aquí",
-                "heroSubtitle": "Una selección de plataformas y apps financieras que he analizado para ti.",
-                "heroCta": "Explora Apps",
-                "appTitle": "Apps Financieras Destacadas",
-                "footerBrand": "cryptostarstudio",
-                "footerRights": "Todos los derechos reservados.",
-                "footerDisclaimer": "Aviso: La información en esta página no constituye asesoramiento financiero. Invertir conlleva riesgos.",
-                "disclosureTitle": "Nota de Transparencia",
-                "disclosureText": "Esta página es financiada por sus lectores. Algunos enlaces son de afiliados/patrocinados: si abres una cuenta o completas una acción a través de mis enlaces, podría recibir una comisión sin coste adicional para ti.\n\nSelecciono plataformas que considero útiles, pero el contenido es informativo y no constituye asesoramiento financiero. Verifica siempre los términos, costes y requisitos en el sitio web oficial del socio.\n\nLos productos financieros y las criptomonedas conllevan riesgos (incluida la pérdida de capital). Las ofertas y la disponibilidad pueden variar según el país. Acceso reservado a mayores de edad (18+).",
-                "privacyLink": "Política de Privacidad",
-                "termsLink": "Términos de Servicio",
-                "guideLink": "Guía de Principiante",
-                "disclosureLink": "Transparencia",
-                "notAffiliated": "cryptostarstudio no está afiliado ni patrocinado oficialmente por las marcas mencionadas. Las marcas pertenecen a sus respectivos propietarios.",
-                "riskWarning": "⚠️ Servicios para 18+. Las inversiones y criptomonedas implican riesgos de pérdida de capital.",
-                "geoWarning": "La disponibilidad y los términos pueden variar según el país. Verifica siempre en el sitio web oficial.",
-                "navHome": "Inicio",
-                "navTeoria": "Teoría",
-                "navDispense": "Recursos",
-                "navPratica": "Práctica",
-                "guidaBannerTitle": "¿Nuevo en el mundo Cripto?", 
-                "guidaBannerDesc": "Empieza con buen pie. Consulta nuestra guía gratuita para entender las bases de la blockchain antes de comenzar.", 
-                "guidaBannerCta": "Empieza Aquí", 
-                "appBitpandaTitle": "Bitpanda",
-                "appBitpandaDesc": "Plataforma de inversión que da acceso a diversos activos. Un bróker europeo con registros del sector, diseñado para diversificar desde un solo lugar.",
-                "appBitpandaFeat1": "Acceso a Cripto, Acciones, ETFs y Metales",
-                "appBitpandaFeat2": "Planes de Ahorro",
-                "appBitpandaFeat3": "Interfaz de usuario intuitiva",
-                "appBitpandaFeat4": "Bróker europeo (verifica licencias/registros en el sitio oficial)",
-                "appBitpandaCta": "Visitar Bitpanda",
-                "appYouhodlerTitle": "YouHodler",
-                "appYouhodlerDesc": "Plataforma FinTech que permite obtener intereses sobre criptomonedas compatibles y acceder a soluciones de liquidez utilizando activos digitales como garantía.",
-                "appYouhodlerFeat1": "Intereses sobre activos compatibles (variables, no garantizados)",
-                "appYouhodlerFeat2": "Acceso a líneas de crédito cripto",
-                "appYouhodlerFeat3": "Herramientas de trading y conversión",
-                "appYouhodlerFeat4": "Plataforma con sede en Suiza",
-                "appYouhodlerCta": "Visitar YouHodler",
-                "appMoonpayTitle": "MoonPay",
-                "appMoonpayDesc": "MoonPay es una infraestructura de pago de criptomonedas. Permette di acquistare e vendere más de 170 criptos con tarjetas, transferencias, Apple Pay y más. Es una solución sin custodia (mantienes el control), fácil para principiantes.",
-                "appMoonpayFeat1": "Compras fáciles (Tarjetas, Apple Pay, Transferencia)",
-                "appMoonpayFeat2": "Soporta más de 170 criptomonedas",
-                "appMoonpayFeat3": "Servicio sin custodia (tú controlas los fondos)",
-                "appMoonpayFeat4": "Soporte al cliente 24/7",
-                "appMoonpayCta": "Visitar MoonPay",
-                "appKrakenTitle": "Kraken",
-                "appKrakenDesc": "Uno de los exchanges de criptomonedas más antiguos y seguros. Ofrece acceso a más de 200 criptos, opciones de staking (hasta 24% APY) y herramientas de trading avanzadas.",
-                "appKrakenFeat1": "Más de 200+ criptomodenas disponibles",
-                "appKrakenFeat2": "Staking on-chain (hasta 24% APY)",
-                "appKrakenFeat3": "Medidas de seguridad robustas",
-                "appKrakenFeat4": "Comisiones bajas y soporte 24/7",
-                "appKrakenCta": "Visitar Kraken",
-                "assistantQuestion": "¿No sabes por dónde empezar?",
-                "assistantOpt1": "Busco una plataforma Todo-en-Uno (Bitpanda)",
-                "assistantOpt2": "Quiero ganar intereses con mis cripto (YouHodler)",
-                "assistantOpt3_new": "Quiero comprar cripto fácilmente (MoonPay)",
-                "assistantOpt4_new": "Busco un exchange Pro (Kraken)"
-            }
-        };
-
-        // --- DATI APP CON LINK IMMAGINE LOCALI E LINK AFFILIAZIONE CORRETTI ---
-        const appData = [
-            {
-                id: "app-bitpanda",
-                titleKey: "appBitpandaTitle",
-                descriptionKey: "appBitpandaDesc",
-                featureKeys: ["appBitpandaFeat1", "appBitpandaFeat2", "appBitpandaFeat3", "appBitpandaFeat4"],
-                imageUrl: "img/bitpanda.png", 
-                affiliateLink: "https://www.financeads.net/tc.php?t=78725C290656288T",
-                trackingPixel: "https://www.financeads.net/tb.php?t=78725V290656288T",
-                ctaKey: "appBitpandaCta"
-            },
-            {
-                id: "app-youhodler",
-                titleKey: "appYouhodlerTitle",
-                descriptionKey: "appYouhodlerDesc",
-                featureKeys: ["appYouhodlerFeat1", "appYouhodlerFeat2", "appYouhodlerFeat3", "appYouhodlerFeat4"],
-                imageUrl: "img/youhodler.png",  /* <-- !!! CORREZIONE !!! Era "youandler.png" */
-                affiliateLink: "https://www.financeads.net/tc.php?t=78725C324060796T",
-                trackingPixel: "https://www.financeads.net/tb.php?t=78725V324060796T",
-                ctaKey: "appYouhodlerCta"
-            },
-            {
-                id: "app-moonpay",
-                titleKey: "appMoonpayTitle",
-                descriptionKey: "appMoonpayDesc",
-                featureKeys: ["appMoonpayFeat1", "appMoonpayFeat2", "appMoonpayFeat3", "appMoonpayFeat4"],
-                imageUrl: "img/moonpay.png", 
-                affiliateLink: "https://www.financeads.net/tc.php?t=78725C5508129482T",
-                trackingPixel: "https://www.financeads.net/tb.php?t=78725V5508129482T",
-                ctaKey: "appMoonpayCta"
-            },
-            {
-                id: "app-kraken",
-                titleKey: "appKrakenTitle",
-                descriptionKey: "appKrakenDesc",
-                featureKeys: ["appKrakenFeat1", "appKrakenFeat2", "appKrakenFeat3", "appKrakenFeat4"],
-                imageUrl: "img/kraken.png", 
-                affiliateLink: "https://www.financeads.net/tc.php?t=78725C4746108270T",
-                trackingPixel: "https://www.financeads.net/tb.php?t=78725V4746108270T",
-                ctaKey: "appKrakenCta"
-            }
-        ];
-        
-        let currentLang = 'it';
-        const langButtons = document.querySelectorAll('.lang-selector button');
-        const appContainer = document.getElementById('app-container');
-        
-        function populateApp(lang) {
-            appContainer.innerHTML = '';
-            appData.forEach((app, index) => {
-                const item = document.createElement('div');
-                item.className = 'app-feature-item';
-                item.id = app.id;
-                
-                const tr = translations[lang]; 
-                
-                const featuresHtml = app.featureKeys.map(key => `<li>${tr[key] || key}</li>`).join('');
-                
-                const imageAnim = (index % 2 === 0) ? 'slide-in-left' : 'slide-in-right';
-                const contentAnim = (index % 2 === 0) ? 'slide-in-right' : 'slide-in-left';
-
-                // --- LOGICA CTA CON LINK AFFILIAZIONE CORRETTI ---
-                const ctaText = tr[app.ctaKey];
-                const ctaHtml = `
-                    <div class="affiliate-cta-container">
-                        <a href="${app.affiliateLink}" target="_blank" rel="sponsored nofollow noopener noreferrer" class="app-cta">
-                            ${ctaText}
-                        </a>
-                        <img src="${app.trackingPixel}" alt="" border="0" width="0" height="0" style="display:none; position:absolute;">
-                    </div>
-                `;
-                // --- FINE LOGICA CTA ---
-
-                item.innerHTML = `
-                    <div class="app-image-wrapper animate-on-scroll ${imageAnim}">
-                        <img src="${app.imageUrl}" alt="${tr[app.titleKey]}" class="app-image" loading="lazy">
-                    </div>
-                    <div class="app-content animate-on-scroll ${contentAnim}">
-                        <h3>${tr[app.titleKey]}</h3>
-                        <p class="description">${tr[app.descriptionKey]}</p>
-                        <ul class="app-features-list">
-                            ${featuresHtml}
-                        </ul>
-                        
-                        <div class="card-disclaimers">
-                            <p class="risk-warning">${tr.riskWarning}</p>
-                            <p class="geo-warning">${tr.geoWarning}</p>
-                        </div>
-
-                        ${ctaHtml}
-                    </div>
-                `;
-                appContainer.appendChild(item);
-            });
-        }
-
-        function changeLanguage(lang) {
-            if (!translations[lang]) lang = 'it';
-            currentLang = lang;
-            localStorage.setItem('preferredLang', lang); 
-            
-            const tr = translations[lang];
-            
-            document.documentElement.lang = lang;
-            document.title = tr.pageTitle;
-            
-            document.querySelectorAll('[data-lang-key]').forEach(el => {
-                const key = el.dataset.langKey;
-                if (tr[key]) {
-                    el.innerHTML = tr[key];
-                }
-            });
-            
-            populateApp(lang);
-            
-            langButtons.forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-            
-            setupScrollAnimations();
-        }
-
+        // Inizializza tutto dopo il caricamento del DOM
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- LOGICA PER IL MENU NAV ---
-            const navToggle = document.getElementById('nav-toggle');
-            const navMenu = document.getElementById('nav-menu');
-
-            if (navToggle && navMenu) {
-                navToggle.addEventListener('click', () => {
-                    navMenu.classList.toggle('is-active');
-                });
-            }
-            // ------------------------------
-
-            langButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    changeLanguage(button.dataset.lang);
-                });
+            // Inizializza AOS (Animate On Scroll)
+            AOS.init({
+                duration: 800, // durata animazione
+                once: true, // anima solo una volta
+                offset: 50, // offset dal viewport per triggerare l'animazione
             });
+            
+            // Carica i dati del calcolatore da Local Storage
+            loadCalculatorState();
+            
+        });
+        
+        // --- JS PER I MODAL ---
+        const modalOverlay = document.getElementById('modal-overlay');
+        const allModals = document.querySelectorAll('.modal-content');
 
-            let preferredLang = localStorage.getItem('preferredLang');
-            if (preferredLang && translations[preferredLang]) {
-                changeLanguage(preferredLang);
-            } else {
-                let browserLang = navigator.language.split('-')[0];
-                changeLanguage(translations[browserLang] ? browserLang : 'it');
-            }
+        function openModal(modalId) {
+            closeModal(); // Chiude eventuali modal già aperti
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            
+            modalOverlay.classList.add('active');
+            modal.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
 
-            const assistant = document.getElementById('crypto-assistant');
-            const closeBtn = document.getElementById('assistant-close');
-
-            if (assistant && closeBtn) {
-                if (!localStorage.getItem('assistant_closed')) {
-                    setTimeout(() => {
-                        assistant.classList.add('is-visible');
-                    }, 7000);
-                }
-
-                const closeAssistant = () => {
-                    assistant.classList.remove('is-visible');
-                    localStorage.setItem('assistant_closed', 'true');
-                };
-
-                closeBtn.addEventListener('click', closeAssistant);
-
-                document.querySelectorAll('.assistant-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        setTimeout(closeAssistant, 300);
-                    });
-                });
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            allModals.forEach(modal => modal.classList.remove('active'));
+            document.body.classList.remove('modal-open');
+        }
+        
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                closeModal();
             }
         });
+        
+        // --- [RIPRISTINATO] JS PER BLOCKCHAIN VIVA ---
+        let blockCount = 1;
+        let lastHash = '000...a1b';
 
-        function setupScrollAnimations() {
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        function addBlockToChain() {
+            blockCount++;
+            const chain = document.getElementById('blockchain-chain');
+            
+            const arrow = document.createElement('div');
+            arrow.classList.add('arrow');
+            arrow.innerHTML = '<i class="fas fa-arrow-right"></i>';
+            chain.appendChild(arrow);
+            
+            const newBlock = document.createElement('div');
+            newBlock.classList.add('block');
+            
+            const newHash = `000...${(Math.random() + 1).toString(36).substring(7)}`;
+            
+            newBlock.innerHTML = `
+                <span class="block-header">Blocco #${blockCount}</span>
+                <span class="block-data">Hash Prec: ${lastHash.substring(7)}</span>
+                <span class="block-hash">${newHash}</span>
+                <i class="fas fa-lock block-lock-icon"></i>
+            `;
+            chain.appendChild(newBlock);
+            
+            setTimeout(() => {
+                newBlock.classList.add('verified');
+            }, 500);
+            
+            lastHash = newHash;
+        }
 
-            if ("IntersectionObserver" in window) {
-                const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('is-visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, {
-                    threshold: 0.1
-                });
+        // --- Calcolatore Interessi Composto + Local Storage ---
+        function calculateStaking() {
+            const initialInput = document.getElementById('stakingInitial');
+            const monthlyInput = document.getElementById('stakingMonthly');
+            const apyInput = document.getElementById('stakingAPY');
+            const yearsInput = document.getElementById('stakingYears');
+            const tableBody = document.getElementById('stakingResultTable');
 
-                animatedElements.forEach(el => {
-                    el.classList.remove('is-visible'); 
-                    observer.observe(el);
-                });
-            } else {
-                animatedElements.forEach(el => {
-                    el.classList.add('is-visible');
-                });
+            const initial = parseFloat(initialInput.value) || 0;
+            const monthly = parseFloat(monthlyInput.value) || 0;
+            const apyPercent = parseFloat(apyInput.value) || 0;
+            const years = parseInt(yearsInput.value) || 0;
+            
+            const monthlyRate = apyPercent / 100 / 12; // Tasso di interesse mensile
+
+            // Salva i valori in Local Storage
+            localStorage.setItem('stakingInitial', initial);
+            localStorage.setItem('stakingMonthly', monthly);
+            localStorage.setItem('stakingAPY', apyPercent);
+            localStorage.setItem('stakingYears', years);
+            
+            // Pulisci e crea la tabella
+            tableBody.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Anno</th>
+                        <th>Totale Contribuito</th>
+                        <th>Interessi Guadagnati</th>
+                        <th>Bilancio Finale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            `;
+            
+            let currentBalance = initial;
+            let totalContributed = initial;
+            let totalInterest = 0;
+
+            for (let y = 1; y <= years; y++) {
+                let yearInterest = 0;
+                let yearContribution = 0;
+                
+                for (let m = 1; m <= 12; m++) {
+                    let interestThisMonth = currentBalance * monthlyRate;
+                    
+                    // Aggiungi contributo mensile *dopo* aver calcolato l'interesse sul saldo precedente
+                    currentBalance += monthly;
+                    yearContribution += monthly;
+                    
+                    // Aggiungi l'interesse
+                    yearInterest += interestThisMonth;
+                    currentBalance += interestThisMonth;
+                }
+                
+                totalContributed += yearContribution;
+                totalInterest += yearInterest;
+                
+                // Aggiungi riga alla tabella
+                const row = `
+                    <tr>
+                        <td>${y}</td>
+                        <td>${totalContributed.toFixed(2)} €</td>
+                        <td>${totalInterest.toFixed(2)} €</td>
+                        <td>${currentBalance.toFixed(2)} €</td>
+                    </tr>
+                `;
+                tableBody.querySelector('tbody').innerHTML += row;
             }
         }
         
-        if(!localStorage.getItem('cookie_ack')){
-            const b=document.createElement('div');
-            b.style.cssText='position:fixed;bottom:0;left:0;right:0;background:#0a2e5c;color:#fff;padding:12px 16px;font-size:14px;z-index:9999;';
-            b.innerHTML='Usiamo link affiliati e, se attivi analytics, potremmo usare cookie tecnici/analitici. <button id="okc" style="margin-left:12px;background:#1ce783;color:#111;border:0;padding:6px 10px;border-radius:6px;cursor:pointer;">Ok</button>';
-            document.body.appendChild(b);
-            document.getElementById('okc').onclick=()=>{ localStorage.setItem('cookie_ack','1'); b.remove(); };
+        // --- Funzione per caricare i dati da Local Storage ---
+        function loadCalculatorState() {
+            document.getElementById('stakingInitial').value = localStorage.getItem('stakingInitial') || 1000;
+            document.getElementById('stakingMonthly').value = localStorage.getItem('stakingMonthly') || 100;
+            document.getElementById('stakingAPY').value = localStorage.getItem('stakingAPY') || 8;
+            document.getElementById('stakingYears').value = localStorage.getItem('stakingYears') || 5;
+            
+            // Esegui il calcolo al caricamento della pagina
+            calculateStaking();
         }
     </script>
-
 </body>
 </html>
