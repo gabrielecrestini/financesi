@@ -1,17 +1,17 @@
 :root {
     --primary-bg: #0F0F1A;
     --secondary-bg: #1A1A2A;
-    --accent-color: #00A8FF; /* Blu elettrico */
+    --accent-color: #00A8FF;
     --text-light: #EFEFEF;
     --text-dark: #A0A0B0;
     --gradient-start: #00A8FF;
-    --gradient-end: #00FFC2; /* Verde neon */
+    --gradient-end: #00FFC2;
     --border-radius: 8px;
     --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     
     --font-heading: 'Inter', sans-serif;
     --font-body: 'Lato', sans-serif;
-    --font-serif: 'Merriweather', serif; /* Font professionale per la lettura */
+    --font-serif: 'Merriweather', serif;
 }
 
 * {
@@ -22,6 +22,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden; /* [CORREZIONE] Impedisce overflow orizzontale */
 }
 
 body {
@@ -29,7 +30,7 @@ body {
     color: var(--text-light);
     background-color: var(--primary-bg);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: hidden; /* [CORREZIONE] Impedisce overflow orizzontale */
 }
 
 body.modal-open {
@@ -90,25 +91,20 @@ a:hover {
     text-align: center;
     animation: gradient-animation 4s ease infinite; 
 }
-
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 255, 194, 0.4);
     background-position: right center; 
 }
-
 @keyframes gradient-animation {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-
-
 .btn-small {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
 }
-
 .btn-outline {
     background: transparent;
     border: 2px solid var(--accent-color);
@@ -118,7 +114,6 @@ a:hover {
     background-size: auto;
     background-image: none;
 }
-
 .btn-outline:hover {
     background: var(--accent-color);
     color: var(--primary-bg);
@@ -204,9 +199,7 @@ input[type="number"] {
     color: var(--text-light);
 }
 
-/* ============================================== */
-/* --- [MODIFICA] Navbar e Menu Hamburger ---     */
-/* ============================================== */
+/* --- [MODIFICA] Navbar e Menu Hamburger --- */
 .navbar {
     background-color: rgba(15, 15, 26, 0.8);
     backdrop-filter: blur(10px);
@@ -234,7 +227,7 @@ input[type="number"] {
     -webkit-text-fill-color: transparent; 
 }
 .navbar .nav-links {
-    list-style: none; /* Rimuovi i punti elenco */
+    list-style: none;
 }
 .navbar .nav-links li { 
     display: inline-block; 
@@ -259,7 +252,6 @@ input[type="number"] {
 .navbar .nav-links a:hover::after { 
     width: 100%; 
 }
-/* Stile per il pulsante CTA (Call to Action) nel menu */
 .navbar .nav-links a.nav-cta {
     color: var(--gradient-end);
     font-weight: 900;
@@ -279,12 +271,11 @@ input[type="number"] {
     z-index: 1005;
 }
 .nav-close-li {
-    display: none; /* Nascosto di base */
+    display: none; 
 }
 
 /* --- Hero Section --- */
 .hero { 
-    /* [MODIFICA] min-height è più sicuro di height su mobile */
     min-height: 100vh; 
     display: flex; 
     align-items: center; 
@@ -310,7 +301,7 @@ input[type="number"] {
     text-align: center;
     border-top: 4px solid var(--accent-color);
     box-shadow: var(--shadow);
-    width: 90%; /* Si adatta alla larghezza */
+    width: 90%; 
 }
 .toolkit-cta h2 {
     font-family: var(--font-heading);
@@ -333,8 +324,9 @@ input[type="number"] {
     padding: 1.2rem 3rem;
 }
 
+
 /* --- Section Styling --- */
-section { padding: 8rem 0; background-color: var(--secondary-bg); position: relative; }
+section { padding: 6rem 0; background-color: var(--secondary-bg); position: relative; }
 section:nth-child(even) { background-color: var(--primary-bg); }
 section h2 { font-family: var(--font-heading); text-align: center; margin-bottom: 4rem; font-size: 3rem; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
@@ -342,7 +334,6 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .chi-siamo-content { display: flex; align-items: center; gap: 4rem; }
 .chi-siamo-text { flex: 1; }
 .chi-siamo-text p { margin-bottom: 1.5rem; font-size: 1.1rem; color: var(--text-dark); }
-
 .chi-siamo-image {
     flex: 1;
     display: flex;
@@ -350,7 +341,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     justify-content: center;
     min-height: 400px;
 }
-/* (Tutto il CSS per l'animazione .css-art-box, .explorer-core, ecc. è invariato) */
+/* (Animazione CSS Art è invariata) */
 .css-art-box { width: 100%; max-width: 400px; aspect-ratio: 1/1; background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); position: relative; overflow: hidden; border: 1px solid var(--accent-color); display: flex; align-items: center; justify-content: center; }
 .explorer-core { position: absolute; width: 25px; height: 25px; background: var(--gradient-end); border-radius: 50%; box-shadow: 0 0 15px 5px rgba(0, 255, 194, 0.7); animation: explorePath 10s infinite cubic-bezier(0.8, 0, 0.2, 1); z-index: 2; }
 .path-segment { position: absolute; background-color: rgba(0, 168, 255, 0.2); border-radius: 50%; opacity: 0; animation: drawPath 10s infinite linear; }
@@ -369,6 +360,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 @keyframes revealIcon { 0% { opacity: 0; transform: scale(0.5); } 20% { opacity: 1; transform: scale(1.2); } 30% { opacity: 1; transform: scale(1); } 40% { opacity: 0; transform: scale(0.8); } 100% { opacity: 0; transform: scale(0.5); } }
 @keyframes revealBrand { 0%   { width: 0; opacity: 0; } 50%  { width: 0; opacity: 1; border-right-color: var(--accent-color); } 70%  { width: 240px; opacity: 1; } 85%  { opacity: 1; border-right-color: transparent; } 95%  { opacity: 0; } 100% { opacity: 0; width: 0; } }
 @keyframes typingCursor { 0%, 100% { border-right-color: transparent; } 50% { border-right-color: var(--accent-color); } }
+
 
 /* --- Impara Section (Teoria Visuale) --- */
 .impara-content { display: flex; flex-direction: column; gap: 3rem; }
@@ -400,7 +392,8 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .staking-calculator .btn { width: 100%; margin-top: 1rem; }
 
 /* Guide */
-.guides-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 4rem; }
+/* [CORREZIONE] Larghezza minima ridotta per mobile */
+.guides-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; }
 .guide-card { background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; display: flex; flex-direction: column; border: 1px solid transparent; }
 .guide-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3); border-color: var(--accent-color); }
 .guide-card-content { padding: 2rem; }
@@ -415,7 +408,6 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .blockchain-visualizer { display: flex; flex-wrap: wrap; align-items: center; margin-top: 1.5rem; gap: 1.5rem; padding: 1rem; background: var(--secondary-bg); border-radius: var(--border-radius); }
 .block, .arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
 .block { border: 2px solid var(--gradient-end); background-color: var(--primary-bg); padding: 1rem; border-radius: var(--border-radius); box-shadow: 0 0 15px rgba(0, 255, 194, 0.3); min-width: 150px; height: 100px; transition: all 0.5s ease-out; animation: fadeIn 0.5s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 .block.verified { border-color: var(--accent-color); box-shadow: 0 0 15px rgba(0, 168, 255, 0.5); }
 .block-header { font-weight: 700; color: var(--text-light); margin-bottom: 5px; }
 .block-data { font-size: 0.9rem; color: var(--text-dark); }
@@ -442,7 +434,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .tool-card a { text-decoration: none; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; width: 100%; }
 .tool-card a:hover h4 { color: var(--gradient-end); }
 
-/* Stili *DENTRO* i Modal (Guide) */
+/* Modal (Guide) */
 .modal-guide-content h2 { text-align: left; font-size: 2.5rem; margin-bottom: 1rem; margin-top: 0.5rem; }
 .modal-guide-content h3 { font-size: 1.8rem; color: var(--text-light); margin-top: 2rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; }
 .modal-guide-content h4 { font-size: 1.3rem; color: var(--text-light); margin-top: 1.5rem; margin-bottom: 1rem; }
@@ -451,8 +443,6 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .modal-guide-content li { position: relative; padding-left: 30px; margin-bottom: 1rem; }
 .modal-guide-content li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--gradient-end); position: absolute; left: 0; top: 7px; font-size: 1rem; }
 .modal-guide-content .btn, .modal-guide-content .btn-outline { margin: 1rem 0.5rem 1rem 0; }
-
-/* Arte CSS per Guide */
 .modal-guide-content .css-guide-art { width: 100%; height: 200px; background-color: var(--primary-bg); border-radius: var(--border-radius); margin-top: 1rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
 .btc-art::before { content: '\f15a'; font-family: 'Font Awesome 6 Brands'; font-size: 6rem; color: #F7931A; text-shadow: 0 0 30px rgba(247, 147, 26, 0.7); animation: pulse 2s infinite ease-in-out; }
 .eth-art { transform: scale(0.8); }
@@ -472,14 +462,14 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .defi-art .line.l3 { top: 50%; left: 50%; width: 30%; transform: rotate(90deg); }
 @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(0.95); } }
 
-
 /* --- Sezione Glossario --- */
 #glossario {
     background-color: var(--primary-bg);
 }
+/* [CORREZIONE] Larghezza minima ridotta per mobile */
 .glossary-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-top: 4rem;
 }
@@ -519,19 +509,15 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 /* --- [CORREZIONI] Media Queries per Responsiveness --- */
 /* ============================================== */
 
-/* [MODIFICA] Da 1024px, il menu desktop è troppo largo. 
-   Passiamo al menu hamburger prima, a 1024px. */
 @media (max-width: 1024px) {
     /* --- Correzione Navbar per Tablet e Mobile --- */
     .navbar .container {
-        padding: 0 1.5rem; /* Riduci padding laterale */
+        padding: 0 1.5rem; 
     }
     .navbar .nav-links {
-        /* Nascondi i link desktop */
         display: none; 
     }
     .navbar .nav-toggle {
-        /* Mostra il pulsante hamburger */
         display: block; 
     }
     
@@ -545,22 +531,26 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vh; /* Altezza piena */
+        height: 100vh; /* Usa 100vh (viewport height) per sicurezza */
         background-color: var(--primary-bg);
         z-index: 1003;
-        animation: fadeIn 0.3s ease; /* Animazione entrata */
+        animation: fadeIn 0.3s ease; 
     }
     .nav-links.nav-menu-open li {
-        margin: 1.5rem 0; /* Spaziatura verticale */
+        margin: 1.5rem 0; 
     }
     .nav-links.nav-menu-open li a {
-        font-size: 1.5rem; /* Testo più grande */
+        font-size: 1.5rem; 
     }
     .nav-links.nav-menu-open .nav-close-li {
         display: block;
         position: absolute;
-        top: 2rem;
-        right: 2rem;
+        top: 1.2rem; /* Allineato meglio */
+        right: 1.5rem; /* Allineato meglio */
+    }
+    .nav-links.nav-menu-open .nav-close {
+        display: block;
+        font-size: 2rem; /* Più grande */
     }
     /* --- Fine Correzione Navbar --- */
 
@@ -574,7 +564,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
         gap: 2rem; 
     }
     .concept-step:nth-child(even) { flex-direction: column; }
-    .step-icon { margin-bottom: 1rem; }
+    .step-icon { margin: 0 auto 1rem auto; } /* Centra l'icona */
     .chi-siamo-image { margin-top: 2rem; }
     .guides-grid { grid-template-columns: 1fr; }
     
@@ -582,16 +572,11 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 }
 
 @media (max-width: 768px) {
-    /* [MODIFICA] La navbar è già hamburger,
-       quindi non serve più .flex-direction: column sul container */
-    .navbar .container {
-        padding: 0 1.5rem; /* Assicurati che il padding sia coerente */
-    }
-    
     h1 { font-size: 2.8rem; }
-    h2 { font-size: 2rem; }
+    h2 { font-size: 2.2rem; } /* Coerenza */
+    section h2 { font-size: 2.2rem; } /* Coerenza */
     .hero-content h1 { font-size: 2.8rem; }
-    .hero-content p { font-size: 1rem; }
+    .hero-content p { font-size: 1.1rem; } /* Leggermente più grande */
     .container { padding: 1rem; }
     section { padding: 4rem 1rem; } 
     
@@ -611,13 +596,25 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 @media (max-width: 480px) {
     .hero-content h1 { font-size: 2.5rem; } 
     .navbar .logo { font-size: 1.5rem; }
+
+    /* [CORREZIONE] Riduci i font dei titoli per schermi piccoli */
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    section h2 { font-size: 1.8rem; }
     
-    /* [MODIFICA] Riduci padding per il blocco app */
     .toolkit-cta {
         padding: 2.5rem 1.5rem;
     }
     .toolkit-cta h2 {
         font-size: 2rem;
     }
+    
+    /* [CORREZIONE] Riduci padding per le card */
+    .platform-card, .tool-card, .glossary-item, .concept-step {
+        padding: 1.5rem;
+    }
+    
+    /* [CORREZIONE] Riduci la larghezza minima della griglia */
+    .guides-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 }
 }
