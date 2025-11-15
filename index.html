@@ -30,7 +30,6 @@
                         <i class="fas fa-times"></i>
                     </button>
                 </li>
-                <li><a href="#chi-siamo">Chi Siamo</a></li>
                 <li><a href="#impara">Impara</a></li>
                 <li><a href="#piattaforme">Piattaforme</a></li>
                 <li><a href="#strumenti">Strumenti</a></li>
@@ -45,7 +44,7 @@
             <h1>CryptoStarStudio.it</h1>
             <p>Supera i limiti dei siti comuni. Scopri il futuro della finanza con guide chiare, piattaforme testate e un design che ti farà tornare.</p>
             <a href="#impara" class="btn">Inizia il tuo viaggio</a>
-            <a href="#piattaforme" class="btn btn-outline">Esplora le Piattaforme</a>
+            <a href="toolkit.html" class="btn btn-outline">Avvia l'App Toolkit</a>
         </div>
     </section>
 
@@ -60,32 +59,6 @@
             Avvia l'App (Gratis) 
             <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
         </a>
-    </section>
-
-    <section id="chi-siamo">
-        <div class="container">
-            <h2 data-aos="fade-down">Chi Siamo: La Nostra Missione</h2>
-            <div class="chi-siamo-content">
-                <div class="chi-siamo-text" data-aos="fade-right" data-aos-delay="200">
-                    <h3>Il Tuo Studio Personale nel Mondo Cripto</h3>
-                    <p>Benvenuto in CryptoStarStudio, il tuo punto di riferimento esclusivo per navigare l'universo delle criptovalute...</p>
-                    <p>La nostra missione è demistificare il mondo blockchain, fornendo guide intuitive, analisi approfondite delle piattaforme...</p>
-                    <a href="#impara" class="btn btn-outline">Scopri la Nostra Visione</a>
-                </div>
-                <div class="chi-siamo-image" data-aos="fade-left" data-aos-delay="400">
-                    <div class="css-art-box">
-                        <div class="explorer-core"></div>
-                        <div class="path-segment"></div>
-                        <div class="path-segment"></div>
-                        <div class="path-segment"></div>
-                        <div class="path-segment"></div>
-                        <div class="btc-icon"></div>
-                        <div class="eth-icon"></div>
-                        <span class="brand-text">CryptoStarStudio.it</span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <section id="impara">
@@ -111,7 +84,7 @@
                             </div>
                         </div>
                         <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="200">
-                            <a class="btn btn-outline btn-small" onclick="addBlockToChain()">Aggiungi Blocco</a>
+                            <a class="btn btn-outline btn-small" id="add-block-btn">Aggiungi Blocco</a>
                         </div>
                     </div>
                 </div>
@@ -160,7 +133,7 @@
                                     <p class="input-help-text">...</p>
                                 </div>
                             </div>
-                            <a class="btn" onclick="calculateStaking()">Calcola e Salva</a>
+                            <a class="btn" id="calculate-staking-btn">Calcola e Salva</a>
                             <div style="overflow-x: auto; margin-top: 1.5rem;">
                                 <table class="result-table" id="stakingResultTable">
                                 </table>
@@ -174,31 +147,31 @@
             <h3 class="text-center mt-5" data-aos="fade-up">Le Nostre Guide Principali</h3>
             <p class="text-center" style="color: var(--text-dark);" data-aos="fade-up" data-aos-delay="100">Ora sei pronto. Approfondisci gli argomenti chiave.</p>
             <div class="guides-grid mt-4">
-                <div class="guide-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="guide-card" data-aos="fade-up" data-aos-delay="200" data-modal-target="bitcoin-modal">
                     <div class="guide-card-content">
                         <h4>Guida Definitiva al Bitcoin</h4>
                         <p>Cos'è, perché ha valore e le strategie migliori...</p>
                     </div>
                     <div class="guide-card-footer">
-                        <a onclick="openModal('bitcoin-modal')">Leggi la guida <i class="fas fa-arrow-right"></i></a>
+                        <a>Leggi la guida <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="guide-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="guide-card" data-aos="fade-up" data-aos-delay="300" data-modal-target="ethereum-modal">
                     <div class="guide-card-content">
                         <h4>Capire Ethereum e gli Smart Contract</h4>
                         <p>Perché Ethereum è più di una valuta...</p>
                     </div>
                     <div class="guide-card-footer">
-                        <a onclick="openModal('ethereum-modal')">Leggi la guida <i class="fas fa-arrow-right"></i></a>
+                        <a>Leggi la guida <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="guide-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="guide-card" data-aos="fade-up" data-aos-delay="400" data-modal-target="defi-modal">
                     <div class="guide-card-content">
                         <h4>Introduzione alla DeFi (Finanza Decentralizzata)</h4>
                         <p>Prestiti, scambi e rendite passive...</p>
                     </div>
                     <div class="guide-card-footer">
-                        <a onclick="openModal('defi-modal')">Leggi la guida <i class="fas fa-arrow-right"></i></a>
+                        <a>Leggi la guida <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -210,25 +183,100 @@
             <h2 data-aos="fade-down">Piattaforme: Le Migliori Scelte per Te</h2>
             <p class="text-center" style="color: var(--text-dark); margin-bottom: 3rem;" data-aos="fade-up">Abbiamo selezionato e recensito le piattaforme più affidabili...</p>
             <div class="platforms-grid">
-                <div class="platform-card" data-aos="zoom-in" data-aos-delay="100"> ... </div>
-                 <div class="platform-card" data-aos="zoom-in" data-aos-delay="200"> ... </div>
-                 <div class="platform-card" data-aos="zoom-in" data-aos-delay="300"> ... </div>
-                 <div class="platform-card" data-aos="zoom-in" data-aos-delay="400"> ... </div>
+                 <div class="platform-card" data-aos="zoom-in" data-aos-delay="100">
+                    <h3>Bitpanda</h3>
+                    <p>Ideale per principianti, Bitpanda offre un'interfaccia intuitiva e una vasta gamma di asset...</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C290656288T" target="_blank" class="btn">Scopri Bitpanda</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V290656288T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
+
+                 <div class="platform-card" data-aos="zoom-in" data-aos-delay="200">
+                    <h3>Kraken</h3>
+                    <p>Per i trader più esperti, Kraken Pro è la scelta vincente...</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C4746108270T" target="_blank" class="btn">Vai a Kraken Pro</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V4746108270T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
+
+                 <div class="platform-card" data-aos="zoom-in" data-aos-delay="300">
+                    <h3>Moonpay</h3>
+                    <p>La soluzione più rapida per acquistare criptovalute...</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C5508129482T" target="_blank" class="btn">Compra Veloce con Moonpay</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V5508129482T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
+
+                 <div class="platform-card" data-aos="zoom-in" data-aos-delay="400">
+                    <h3>YouHodler</h3>
+                    <p>Fai lavorare le tue cripto. YouHodler è la piattaforma leader per guadagnare interessi...</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C324060796T" target="_blank" class="btn">Guadagna Interessi</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V324060796T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
             </div>
         </div>
     </section>
 
     <section id="strumenti">
         <div class="container">
-            <h2 data-aos="fade-down">Strumenti Essenziali (Le Dispense)</h2>
-            <p class="text-center" style="color: var(--text-dark); margin-bottom: 3rem;" data-aos="fade-up">Le risorse che ti servono per operare al meglio...</p>
+            <h2 data-aos="fade-down">Strumenti e Dispense</h2>
+            <p class="text-center" style="color: var(--text-dark); margin-bottom: 3rem;" data-aos="fade-up">Le risorse che ti servono per operare al meglio. Salva questa pagina.</p>
             <div class="tools-grid">
-                <div class="tool-card" data-aos="fade-up" data-aos-delay="100"> ... </div>
-                 <div class="tool-card" data-aos="fade-up" data-aos-delay="150"> ... </div>
-                 <div class="tool-card" data-aos="fade-up" data-aos-delay="200"> ... </div>
-                 <div class="tool-card" data-aos="fade-up" data-aos-delay="250"> ... </div>
-                 <div class="tool-card" data-aos="fade-up" data-aos-delay="300"> ... </div>
-                 <div class="tool-card" data-aos="fade-up" data-aos-delay="350"> ... </div>
+                
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="100">
+                    <a href="https://coinmarketcap.com/" target="_blank">
+                        <i class="fas fa-chart-pie fa-icon"></i>
+                        <h4>CoinMarketCap</h4>
+                        <p>Il tracker di prezzi e capitalizzazione più famoso al mondo.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="150">
+                    <a href="https://www.coindesk.com/" target="_blank">
+                        <i class="fas fa-newspaper fa-icon"></i>
+                        <h4>Coindesk</h4>
+                        <p>La fonte principale per notizie e analisi di mercato sul mondo crypto.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="200">
+                    <a href="https://www.investopedia.com/cryptocurrency-4427699" target="_blank">
+                        <i class="fas fa-book-open fa-icon"></i>
+                        <h4>Investopedia (Crypto)</h4>
+                        <p>Impara i concetti finanziari e di trading da una fonte autorevole.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="250">
+                    <a href="https://etherscan.io/" target="_blank">
+                        <i class="fas fa-search-location fa-icon"></i>
+                        <h4>Etherscan</h4>
+                        <p>Esplora la blockchain di Ethereum, traccia transazioni e wallet in tempo reale.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="300">
+                    <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank">
+                        <i class="fas fa-tachometer-alt fa-icon"></i>
+                        <h4>Fear & Greed Index</h4>
+                        <p>Misura il sentiment del mercato. Comprare con la paura, vendere con l'euforia?</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="350">
+                    <a href="https://bitcoin.org/bitcoin.pdf" target="_blank">
+                        <i class="fas fa-file-alt fa-icon"></i>
+                        <h4>Bitcoin Whitepaper</h4>
+                        <p>Il documento fondativo di Satoshi Nakamoto che ha dato inizio a tutto.</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="400">
+                    <a href="https://ethereum.org/it/whitepaper/" target="_blank">
+                        <i class="fas fa-file-contract fa-icon"></i>
+                        <h4>Ethereum Whitepaper</h4>
+                        <p>Leggi la visione originale di Vitalik Buterin per un "computer mondiale".</p>
+                    </a>
+                </div>
+                <div class="tool-card" data-aos="fade-up" data-aos-delay="450">
+                    <a href="https://academy.binance.com/it" target="_blank">
+                        <i class="fas fa-graduation-cap fa-icon"></i>
+                        <h4>Binance Academy</h4>
+                        <p>Una delle migliori risorse gratuite per imparare tutto sul mondo crypto.</p>
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
@@ -252,7 +300,7 @@
     </footer>
     
     
-    <div id="modal-overlay" class="modal-overlay" onclick="closeModal()"></div>
+    <div id="modal-overlay" class="modal-overlay"></div>
 
     <div id="bitcoin-modal" class="modal-content"> ... </div>
     <div id="ethereum-modal" class="modal-content"> ... </div>
@@ -262,148 +310,10 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
-        // Funzioni globali (devono essere qui per essere chiamate da 'onclick' nell'HTML)
-        const modalOverlay = document.getElementById('modal-overlay');
-        const allModals = document.querySelectorAll('.modal-content');
-
-        function openModal(modalId) {
-            closeModal(); 
-            const modal = document.getElementById(modalId);
-            if (!modal) return;
-            
-            modalOverlay.classList.add('active');
-            modal.classList.add('active');
-            document.body.classList.add('modal-open');
-        }
-
-        function closeModal() {
-            modalOverlay.classList.remove('active');
-            allModals.forEach(modal => modal.classList.remove('active'));
-            // [CORREZIONE] Non rimuovere 'modal-open' se il menu nav è ancora aperto
-            if (document.getElementById('nav-links') && !document.getElementById('nav-links').classList.contains('nav-menu-open')) {
-                 document.body.classList.remove('modal-open');
-            }
-        }
-        
-        let blockCount = 1;
-        let lastHash = '000...a1b';
-
-        function addBlockToChain() {
-            blockCount++;
-            const chain = document.getElementById('blockchain-chain');
-            const arrow = document.createElement('div');
-            arrow.classList.add('arrow');
-            arrow.innerHTML = '<i class="fas fa-arrow-right"></i>';
-            chain.appendChild(arrow);
-            const newBlock = document.createElement('div');
-            newBlock.classList.add('block');
-            const newHash = `000...${(Math.random() + 1).toString(36).substring(7)}`;
-            newBlock.innerHTML = `
-                <span class="block-header">Blocco #${blockCount}</span>
-                <span class="block-data">Hash Prec: ${lastHash.substring(7)}</span>
-                <span class="block-hash">${newHash}</span>
-                <i class="fas fa-lock block-lock-icon"></i>
-            `;
-            chain.appendChild(newBlock);
-            setTimeout(() => newBlock.classList.add('verified'), 500);
-            lastHash = newHash;
-        }
-
-        function calculateStaking() {
-            try {
-                const initialInput = document.getElementById('stakingInitial');
-                const monthlyInput = document.getElementById('stakingMonthly');
-                const apyInput = document.getElementById('stakingAPY');
-                const yearsInput = document.getElementById('stakingYears');
-                const tableBody = document.getElementById('stakingResultTable');
-
-                if (!initialInput || !monthlyInput || !apyInput || !yearsInput || !tableBody) {
-                    return;
-                }
-
-                const initial = parseFloat(initialInput.value) || 0;
-                const monthly = parseFloat(monthlyInput.value) || 0;
-                const apyPercent = parseFloat(apyInput.value) || 0;
-                const years = parseInt(yearsInput.value) || 0;
-                const monthlyRate = apyPercent / 100 / 12;
-
-                localStorage.setItem('stakingInitial', initial);
-                localStorage.setItem('stakingMonthly', monthly);
-                localStorage.setItem('stakingAPY', apyPercent);
-                localStorage.setItem('stakingYears', years);
-                
-                tableBody.innerHTML = `
-                    <thead>
-                        <tr>
-                            <th>Anno</th>
-                            <th>Totale Contribuito</th>
-                            <th>Interessi Guadagnati</th>
-                            <th>Bilancio Finale</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                `;
-                
-                let currentBalance = initial;
-                let totalContributed = initial;
-                let totalInterest = 0;
-
-                for (let y = 1; y <= years; y++) {
-                    let yearInterest = 0;
-                    let yearContribution = 0;
-                    
-                    for (let m = 1; m <= 12; m++) {
-                        let interestThisMonth = currentBalance * monthlyRate;
-                        currentBalance += monthly;
-                        yearContribution += monthly;
-                        yearInterest += interestThisMonth;
-                        currentBalance += interestThisMonth;
-                    }
-                    
-                    totalContributed += yearContribution;
-                    totalInterest += yearInterest;
-                    
-                    const row = `
-                        <tr>
-                            <td>${y}</td>
-                            <td>${totalContributed.toFixed(2)} €</td>
-                            <td>${totalInterest.toFixed(2)} €</td>
-                            <td>${currentBalance.toFixed(2)} €</td>
-                        </tr>
-                    `;
-                    tableBody.querySelector('tbody').innerHTML += row;
-                }
-            } catch (e) {
-                console.error("Errore nel calcolatore staking:", e);
-            }
-        }
-        
-        function loadCalculatorState() {
-             try {
-                const initialInput = document.getElementById('stakingInitial');
-                const monthlyInput = document.getElementById('stakingMonthly');
-                const apyInput = document.getElementById('stakingAPY');
-                const yearsInput = document.getElementById('stakingYears');
-                
-                if (!initialInput || !monthlyInput || !apyInput || !yearsInput) {
-                    return; 
-                }
-
-                initialInput.value = localStorage.getItem('stakingInitial') || 1000;
-                monthlyInput.value = localStorage.getItem('stakingMonthly') || 100;
-                apyInput.value = localStorage.getItem('stakingAPY') || 8;
-                yearsInput.value = localStorage.getItem('stakingYears') || 5;
-                
-                calculateStaking();
-            } catch (e) {
-                console.error("Errore caricamento stato calcolatore:", e);
-            }
-        }
-        
         // --- Inizializzazione al caricamento ---
         document.addEventListener('DOMContentLoaded', () => {
             
-            // [CORREZIONE] Il JS del menu ora è qui, all'inizio.
+            // --- JS PER IL MENU HAMBURGER (ORA FUNZIONA) ---
             const navToggle = document.getElementById('nav-toggle');
             const navClose = document.getElementById('nav-close');
             const navLinks = document.getElementById('nav-links');
@@ -414,14 +324,13 @@
                     document.body.classList.add('modal-open');
                 });
             }
-
             if (navClose) {
                 navClose.addEventListener('click', () => {
                     navLinks.classList.remove('nav-menu-open');
                     document.body.classList.remove('modal-open');
                 });
             }
-            
+            // Chiudi il menu se si clicca su un link
             navLinks.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     navLinks.classList.remove('nav-menu-open');
@@ -430,6 +339,146 @@
             });
             // --- Fine JS Menu ---
             
+
+            // --- JS PER I MODAL (Guide) ---
+            const modalOverlay = document.getElementById('modal-overlay');
+            const allModals = document.querySelectorAll('.modal-content');
+            
+            function openModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (!modal) return;
+                modalOverlay.classList.add('active');
+                modal.classList.add('active');
+                document.body.classList.add('modal-open');
+            }
+
+            function closeModal() {
+                modalOverlay.classList.remove('active');
+                allModals.forEach(modal => modal.classList.remove('active'));
+                if (!navLinks.classList.contains('nav-menu-open')) {
+                     document.body.classList.remove('modal-open');
+                }
+            }
+            
+            // Aggiungi listener ai pulsanti delle guide
+            document.querySelectorAll('[data-modal-target]').forEach(button => {
+                button.addEventListener('click', () => {
+                    openModal(button.dataset.modalTarget);
+                });
+            });
+            
+            // Aggiungi listener all'overlay e a ESC
+            modalOverlay.addEventListener('click', closeModal);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+
+            // --- JS PER BLOCKCHAIN VIVA ---
+            let blockCount = 1;
+            let lastHash = '000...a1b';
+            const addBlockBtn = document.getElementById('add-block-btn');
+            
+            if (addBlockBtn) {
+                addBlockBtn.addEventListener('click', () => {
+                    blockCount++;
+                    const chain = document.getElementById('blockchain-chain');
+                    const arrow = document.createElement('div');
+                    arrow.classList.add('arrow');
+                    arrow.innerHTML = '<i class="fas fa-arrow-right"></i>';
+                    chain.appendChild(arrow);
+                    const newBlock = document.createElement('div');
+                    newBlock.classList.add('block');
+                    const newHash = `000...${(Math.random() + 1).toString(36).substring(7)}`;
+                    newBlock.innerHTML = `
+                        <span class="block-header">Blocco #${blockCount}</span>
+                        <span class="block-data">Hash Prec: ${lastHash.substring(7)}</span>
+                        <span class="block-hash">${newHash}</span>
+                        <i class="fas fa-lock block-lock-icon"></i>
+                    `;
+                    chain.appendChild(newBlock);
+                    setTimeout(() => newBlock.classList.add('verified'), 500);
+                    lastHash = newHash;
+                });
+            }
+
+            // --- Calcolatore Interessi Composto + Local Storage ---
+            const stakingInitial = document.getElementById('stakingInitial');
+            const stakingMonthly = document.getElementById('stakingMonthly');
+            const stakingAPY = document.getElementById('stakingAPY');
+            const stakingYears = document.getElementById('stakingYears');
+            const stakingTable = document.getElementById('stakingResultTable');
+            const stakingBtn = document.getElementById('calculate-staking-btn');
+
+            function calculateStaking() {
+                try {
+                    const initial = parseFloat(stakingInitial.value) || 0;
+                    const monthly = parseFloat(stakingMonthly.value) || 0;
+                    const apyPercent = parseFloat(stakingAPY.value) || 0;
+                    const years = parseInt(stakingYears.value) || 0;
+                    const monthlyRate = apyPercent / 100 / 12;
+
+                    localStorage.setItem('stakingInitial', initial);
+                    localStorage.setItem('stakingMonthly', monthly);
+                    localStorage.setItem('stakingAPY', apyPercent);
+                    localStorage.setItem('stakingYears', years);
+                    
+                    stakingTable.innerHTML = `
+                        <thead>
+                            <tr>
+                                <th>Anno</th>
+                                <th>Totale Contribuito</th>
+                                <th>Interessi Guadagnati</th>
+                                <th>Bilancio Finale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    `;
+                    
+                    let currentBalance = initial;
+                    let totalContributed = initial;
+                    let totalInterest = 0;
+                    let tbody = stakingTable.querySelector('tbody');
+
+                    for (let y = 1; y <= years; y++) {
+                        let yearInterest = 0;
+                        for (let m = 1; m <= 12; m++) {
+                            let interestThisMonth = currentBalance * monthlyRate;
+                            currentBalance += monthly;
+                            totalContributed += monthly;
+                            yearInterest += interestThisMonth;
+                            currentBalance += interestThisMonth;
+                        }
+                        totalInterest += yearInterest;
+                        const row = `
+                            <tr>
+                                <td>${y}</td>
+                                <td>${totalContributed.toFixed(2)} €</td>
+                                <td>${totalInterest.toFixed(2)} €</td>
+                                <td>${currentBalance.toFixed(2)} €</td>
+                            </tr>
+                        `;
+                        tbody.innerHTML += row;
+                    }
+                } catch (e) { console.error("Errore Staking:", e); }
+            }
+            
+            function loadCalculatorState() {
+                 try {
+                    if (!stakingInitial) return; // Non siamo nella pagina giusta
+                    stakingInitial.value = localStorage.getItem('stakingInitial') || 1000;
+                    stakingMonthly.value = localStorage.getItem('stakingMonthly') || 100;
+                    stakingAPY.value = localStorage.getItem('stakingAPY') || 8;
+                    stakingYears.value = localStorage.getItem('stakingYears') || 5;
+                    calculateStaking();
+                } catch (e) { console.error("Errore Load Staking:", e); }
+            }
+            
+            if (stakingBtn) {
+                stakingBtn.addEventListener('click', calculateStaking);
+            }
+            
+            // Carica lo stato all'inizio
+            loadCalculatorState();
             
             // Inizializza AOS (Animazioni)
             try {
@@ -437,21 +486,10 @@
                     duration: 800, 
                     once: true, 
                     offset: 50,
-                    disable: 'phone' // Disabilita su 'phone' per sicurezza
+                    disable: 'phone' // [CORREZIONE] Le animazioni sono problematiche su mobile
                 });
-            } catch (e) {
-                console.warn("Errore AOS Init:", e);
-            }
+            } catch (e) { console.warn("Errore AOS Init:", e); }
             
-            // Carica i dati del calcolatore (ora è sicuro)
-            loadCalculatorState();
-        });
-        
-        // Gestione ESC per Modal
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' || e.key === 'Esc') {
-                closeModal();
-            }
         });
     </script>
 </body>
