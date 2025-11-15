@@ -50,15 +50,15 @@ h3 { font-size: 1.8rem; font-weight: 700; }
 p {
     color: var(--text-dark);
     margin-bottom: 1rem;
-    font-size: 1.1rem; /* Aumentata leggibilità */
-    font-family: var(--font-body); /* Assicura font base */
+    font-size: 1.1rem; 
+    font-family: var(--font-body);
 }
 
 a {
     color: var(--accent-color);
     text-decoration: none;
     transition: color 0.3s ease;
-    cursor: pointer; /* Assicura che tutti i link siano cliccabili */
+    cursor: pointer; 
 }
 
 a:hover {
@@ -75,29 +75,28 @@ a:hover {
 .btn {
     display: inline-block;
     background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end), var(--gradient-start));
-    background-size: 200% auto; /* Per animazione gradiente */
+    background-size: 200% auto; 
     color: var(--primary-bg);
     padding: 1rem 2.5rem;
     border-radius: var(--border-radius);
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 0.5px;
-    transition: all 0.4s ease; /* Transizione più morbida */
+    transition: all 0.4s ease; 
     border: none;
     cursor: pointer;
     box-shadow: var(--shadow);
     font-family: var(--font-heading);
     text-align: center;
-    animation: gradient-animation 4s ease infinite; /* Nuova animazione */
+    animation: gradient-animation 4s ease infinite; 
 }
 
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 255, 194, 0.4);
-    background-position: right center; /* Sposta gradiente al hover */
+    background-position: right center; 
 }
 
-/* Animazione per il gradiente "vivo" */
 @keyframes gradient-animation {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -115,7 +114,7 @@ a:hover {
     border: 2px solid var(--accent-color);
     color: var(--accent-color);
     box-shadow: none;
-    animation: none; /* Rimuove animazione gradiente dall'outline */
+    animation: none; 
     background-size: auto;
     background-image: none;
 }
@@ -236,13 +235,12 @@ input[type="number"] {
     position: relative; 
 }
 .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); }
-.hero-content { z-index: 1; max-width: 900px; }
+.hero-content { z-index: 1; max-width: 900px; padding: 0 1rem; /* Aggiunto padding per mobile */ }
 .hero-content h1 { font-family: var(--font-heading); font-size: 4.5rem; margin-bottom: 1.5rem; line-height: 1.1; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero-content p { font-family: var(--font-body); font-size: 1.5rem; margin-bottom: 2.5rem; color: var(--text-dark); }
 
 
 /* --- [NUOVO] Call to Action per PWA Toolkit --- */
-/* Questo è il blocco che hai aggiunto in index.html */
 .toolkit-cta {
     background-color: var(--secondary-bg);
     border-radius: var(--border-radius);
@@ -252,10 +250,8 @@ input[type="number"] {
     text-align: center;
     border-top: 4px solid var(--accent-color);
     box-shadow: var(--shadow);
-    /* Assicurati che sia nella section giusta */
-    /* Se lo metti fuori da una section, aggiungi: */
-    /* margin: -4rem auto 4rem auto; */
-    /* position: relative; z-index: 5; */
+    /* [CORREZIONE] Lo mettiamo dentro un container per la responsività */
+    width: 90%; 
 }
 .toolkit-cta h2 {
     font-family: var(--font-heading);
@@ -299,8 +295,8 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 }
 .css-art-box {
     width: 100%;
-    max-width: 400px; /* Limita dimensione */
-    aspect-ratio: 1/1; /* La rende quadrata e responsive */
+    max-width: 400px; 
+    aspect-ratio: 1/1; 
     background-color: var(--primary-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
@@ -380,18 +376,16 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     10% { transform: translate(-100px, -100px); opacity: 1; }
     25% { transform: translate(-50px, 50px); }
     40% { transform: translate(100px, -50px); }
-    50% { transform: translate(0, 0); opacity: 1; } /* Arriva al centro */
-    90% { transform: translate(0, 0); opacity: 1; } /* Rimane lì */
-    100% { transform: translate(0, 0); opacity: 0; } /* Reset */
+    50% { transform: translate(0, 0); opacity: 1; } 
+    90% { transform: translate(0, 0); opacity: 1; } 
+    100% { transform: translate(0, 0); opacity: 0; } 
 }
-
 @keyframes drawPath {
     0% { opacity: 0; transform: scale(0); }
     10% { opacity: 0.5; transform: scale(1); }
     20% { opacity: 0; transform: scale(1.5); }
     100% { opacity: 0; transform: scale(0); }
 }
-
 @keyframes revealIcon {
     0% { opacity: 0; transform: scale(0.5); }
     20% { opacity: 1; transform: scale(1.2); }
@@ -399,22 +393,18 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     40% { opacity: 0; transform: scale(0.8); }
     100% { opacity: 0; transform: scale(0.5); }
 }
-
 @keyframes revealBrand {
     0%   { width: 0; opacity: 0; }
-    50%  { width: 0; opacity: 1; border-right-color: var(--accent-color); } /* Attende il nucleo */
-    70%  { width: 240px; opacity: 1; } /* Scrive (larghezza fissa) */
-    85%  { opacity: 1; border-right-color: transparent; } /* Ferma cursore */
+    50%  { width: 0; opacity: 1; border-right-color: var(--accent-color); }
+    70%  { width: 240px; opacity: 1; } 
+    85%  { opacity: 1; border-right-color: transparent; } 
     95%  { opacity: 0; }
     100% { opacity: 0; width: 0; }
 }
-
 @keyframes typingCursor {
     0%, 100% { border-right-color: transparent; }
     50% { border-right-color: var(--accent-color); }
 }
-/* FINE MODIFICHE CSS ART */
-
 
 /* --- Impara Section (Teoria Visuale) --- */
 .impara-content { display: flex; flex-direction: column; gap: 3rem; }
@@ -427,11 +417,11 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     border-radius: var(--border-radius); 
     box-shadow: var(--shadow); 
     transition: transform 0.3s ease, border-color 0.3s ease; 
-    border: 1px solid transparent; /* [ANIMAZIONE] Bordo per hover */
+    border: 1px solid transparent; 
 }
 .concept-step:hover { 
     transform: translateY(-5px); 
-    border-color: var(--accent-color); /* [ANIMAZIONE] Bordo al hover */
+    border-color: var(--accent-color); 
 }
 .concept-step:nth-child(even) { flex-direction: row-reverse; background-color: var(--secondary-bg); }
 .step-icon { 
@@ -447,7 +437,6 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     border-radius: 50%; 
     background-color: rgba(0, 168, 255, 0.1); 
 }
-
 .step-text { 
     flex-grow: 1; 
     position: relative;
@@ -490,7 +479,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 }
 .staking-inputs {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colonne */
+    grid-template-columns: repeat(4, 1fr); 
     gap: 1rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -524,15 +513,15 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     border-radius: var(--border-radius); 
     box-shadow: var(--shadow); 
     overflow: hidden; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; /* [ANIMAZIONE] */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease;
     display: flex; 
     flex-direction: column; 
-    border: 1px solid transparent; /* [ANIMAZIONE] */
+    border: 1px solid transparent;
 }
 .guide-card:hover { 
     transform: translateY(-8px); 
     box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3); 
-    border-color: var(--accent-color); /* [ANIMAZIONE] */
+    border-color: var(--accent-color);
 }
 .guide-card-content { padding: 2rem; }
 .guide-card-content h4 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-light); }
@@ -563,17 +552,17 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     box-shadow: var(--shadow); 
     padding: 2rem; 
     text-align: center; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; /* [ANIMAZIONE] */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease;
     display: flex; 
     flex-direction: column; 
     justify-content: space-between; 
     height: 100%; 
-    border: 1px solid transparent; /* [ANIMAZIONE] */
+    border: 1px solid transparent;
 }
 .platform-card:hover { 
     transform: translateY(-8px); 
     box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3); 
-    border-color: var(--accent-color); /* [ANIMAZIONE] */
+    border-color: var(--accent-color);
 }
 .platform-card h3 { font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .platform-card p { color: var(--text-dark); margin-bottom: 1.5rem; flex-grow: 1; }
@@ -587,7 +576,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     box-shadow: var(--shadow); 
     padding: 1.5rem; 
     text-align: center; 
-    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* [ANIMAZIONE] */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
     min-height: 250px; 
     display: flex; 
     flex-direction: column; 
@@ -597,7 +586,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .tool-card:hover { 
     transform: translateY(-5px); 
     background-color: var(--secondary-bg); 
-    box-shadow: 0 5px 15px rgba(0, 255, 194, 0.2); /* [ANIMAZIONE] */
+    box-shadow: 0 5px 15px rgba(0, 255, 194, 0.2); 
 }
 .tool-card .fa-icon { font-size: 3rem; color: var(--gradient-end); margin-bottom: 1rem; }
 .tool-card h4 { font-size: 1.5rem; margin-bottom: 0.8rem; }
@@ -611,17 +600,17 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .modal-guide-content h3 { font-size: 1.8rem; color: var(--text-light); margin-top: 2rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; }
 .modal-guide-content h4 { font-size: 1.3rem; color: var(--text-light); margin-top: 1.5rem; margin-bottom: 1rem; }
 .modal-guide-content p, .modal-guide-content li { 
-    font-family: var(--font-serif); /* FONT PROFESSIONALE */
+    font-family: var(--font-serif); 
     font-size: 1.1rem; 
     color: var(--text-dark); 
-    line-height: 1.8; /* Maggiore spaziatura */
+    line-height: 1.8; 
 }
 .modal-guide-content ul { list-style-type: none; padding-left: 0; }
 .modal-guide-content li { position: relative; padding-left: 30px; margin-bottom: 1rem; }
 .modal-guide-content li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--gradient-end); position: absolute; left: 0; top: 7px; font-size: 1rem; }
 .modal-guide-content .btn, .modal-guide-content .btn-outline { margin: 1rem 0.5rem 1rem 0; }
 
-/* Arte CSS per Guide (sostituisce <img>) */
+/* Arte CSS per Guide */
 .modal-guide-content .css-guide-art { 
     width: 100%; 
     height: 200px;
@@ -687,7 +676,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 
 /* --- Sezione Glossario --- */
 #glossario {
-    background-color: var(--primary-bg); /* Sfondo scuro per staccare */
+    background-color: var(--primary-bg);
 }
 .glossary-grid {
     display: grid;
@@ -702,10 +691,10 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     border-left: 4px solid var(--accent-color);
     display: flex; 
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* [ANIMAZIONE] */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .glossary-item:hover {
-    transform: translateY(-5px); /* [ANIMAZIONE] */
+    transform: translateY(-5px); 
     box-shadow: 0 5px 15px rgba(0, 168, 255, 0.2);
 }
 .glossary-item h4 {
@@ -727,37 +716,59 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .footer .social-links a:hover { color: var(--accent-color); }
 .footer p { margin-top: 1.5rem; margin-bottom: 0; font-size: 0.9rem; }
 
-/* --- Media Queries for Responsiveness --- */
+/* ============================================== */
+/* --- [CORREZIONI] Media Queries per Responsiveness --- */
+/* ============================================== */
+
 @media (max-width: 1024px) {
     .navbar .nav-links li { margin-left: 1rem; }
     .hero-content h1 { font-size: 3.5rem; }
     .hero-content p { font-size: 1.2rem; }
-    .chi-siamo-content, .concept-step { flex-direction: column; text-align: center; }
+    
+    /* [CORREZIONE] Spaziatura ridotta quando impilati */
+    .chi-siamo-content, .concept-step { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 2rem; /* Ridotto da 4rem e 3rem */
+    }
     .concept-step:nth-child(even) { flex-direction: column; }
     .step-icon { margin-bottom: 1rem; }
     .chi-siamo-image { margin-top: 2rem; }
     .guides-grid { grid-template-columns: 1fr; }
-    /* Staking responsive */
+    
     .staking-inputs { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
-    .navbar .container { flex-direction: column; }
-    .navbar .nav-links { margin-top: 1rem; }
-    .navbar .nav-links li { margin: 0 0.5rem; }
+    .navbar .container { 
+        flex-direction: column; 
+        gap: 1rem; /* Aggiunto spazio */
+    }
+    
+    /* [CORREZIONE] Fai andare a capo i link anche su tablet */
+    .navbar .nav-links {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .navbar .nav-links li { 
+        margin: 0.3rem 0.5rem; /* Riduci margine */
+    }
+    
     h1 { font-size: 2.8rem; }
     h2 { font-size: 2rem; }
     .hero-content h1 { font-size: 2.8rem; }
     .hero-content p { font-size: 1rem; }
     .container { padding: 1rem; }
-    section { padding: 4rem 0; }
+    section { padding: 4rem 1rem; } /* Aggiunto padding laterale */
+    
     .platform-card, .tool-card { padding: 1.5rem; min-height: auto; }
     .arrow { transform: rotate(90deg); animation: bounceArrowVertical 2s infinite ease-in-out; }
     @keyframes bounceArrowVertical { 0%, 100% { transform: rotate(90deg) translateY(0); } 50% { transform: rotate(90deg) translateY(10px); } }
     
-    /* Responsive per sezioni pratiche */
     .wallet-comparison { grid-template-columns: 1fr; }
-    .staking-inputs { grid-template-columns: 1fr; } /* Impilati su mobile */
+    .staking-inputs { grid-template-columns: 1fr; }
     .staking-calculator .btn { width: 100%; }
     
     .modal-content { width: 95%; height: 90vh; padding: 1.5rem; }
@@ -767,9 +778,8 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 }
 
 @media (max-width: 480px) {
-    .hero-content h1 { font-size: 2rem; }
+    .hero-content h1 { font-size: 2.5rem; } /* Leggermente più grande */
     .navbar .logo { font-size: 1.5rem; }
-    .navbar .nav-links { display: flex; flex-wrap: wrap; justify-content: center; }
-    .navbar .nav-links li { margin: 0.3rem 0.5rem; }
+    /* Le regole per .nav-links sono già state spostate nel blocco 768px */
 }
 }
