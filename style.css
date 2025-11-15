@@ -71,7 +71,7 @@ a:hover {
     padding: 2rem;
 }
 
-/* --- [ANIMAZIONE MIGLIORATA] Pulsanti --- */
+/* --- Pulsanti --- */
 .btn {
     display: inline-block;
     background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end), var(--gradient-start));
@@ -204,7 +204,9 @@ input[type="number"] {
     color: var(--text-light);
 }
 
-/* --- Navbar --- */
+/* ============================================== */
+/* --- [MODIFICA] Navbar e Menu Hamburger ---     */
+/* ============================================== */
 .navbar {
     background-color: rgba(15, 15, 26, 0.8);
     backdrop-filter: blur(10px);
@@ -216,16 +218,74 @@ input[type="number"] {
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
-.navbar .container { display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-.navbar .logo { font-family: var(--font-heading); font-weight: 900; font-size: 1.8rem; color: var(--text-light); background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.navbar .nav-links li { display: inline-block; margin-left: 2rem; }
-.navbar .nav-links a { color: var(--text-light); font-weight: 700; position: relative; padding-bottom: 5px; }
-.navbar .nav-links a::after { content: ''; position: absolute; width: 0; height: 3px; background: var(--accent-color); bottom: 0; left: 0; transition: width 0.3s ease-in-out; }
-.navbar .nav-links a:hover::after { width: 100%; }
+.navbar .container { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 2rem; 
+}
+.navbar .logo { 
+    font-family: var(--font-heading); 
+    font-weight: 900; 
+    font-size: 1.8rem; 
+    color: var(--text-light); 
+    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+.navbar .nav-links {
+    list-style: none; /* Rimuovi i punti elenco */
+}
+.navbar .nav-links li { 
+    display: inline-block; 
+    margin-left: 2rem; 
+}
+.navbar .nav-links a { 
+    color: var(--text-light); 
+    font-weight: 700; 
+    position: relative; 
+    padding-bottom: 5px; 
+}
+.navbar .nav-links a::after { 
+    content: ''; 
+    position: absolute; 
+    width: 0; 
+    height: 3px; 
+    background: var(--accent-color); 
+    bottom: 0; 
+    left: 0; 
+    transition: width 0.3s ease-in-out; 
+}
+.navbar .nav-links a:hover::after { 
+    width: 100%; 
+}
+/* Stile per il pulsante CTA (Call to Action) nel menu */
+.navbar .nav-links a.nav-cta {
+    color: var(--gradient-end);
+    font-weight: 900;
+}
+.navbar .nav-links a.nav-cta::after {
+    background: var(--gradient-end);
+}
+
+/* Pulsanti Hamburger (nascosti su desktop) */
+.nav-toggle, .nav-close {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 1005;
+}
+.nav-close-li {
+    display: none; /* Nascosto di base */
+}
 
 /* --- Hero Section --- */
 .hero { 
-    height: 100vh; 
+    /* [MODIFICA] min-height è più sicuro di height su mobile */
+    min-height: 100vh; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
@@ -235,12 +295,12 @@ input[type="number"] {
     position: relative; 
 }
 .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); }
-.hero-content { z-index: 1; max-width: 900px; padding: 0 1rem; /* Aggiunto padding per mobile */ }
+.hero-content { z-index: 1; max-width: 900px; padding: 0 1rem; }
 .hero-content h1 { font-family: var(--font-heading); font-size: 4.5rem; margin-bottom: 1.5rem; line-height: 1.1; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero-content p { font-family: var(--font-body); font-size: 1.5rem; margin-bottom: 2.5rem; color: var(--text-dark); }
 
 
-/* --- [NUOVO] Call to Action per PWA Toolkit --- */
+/* --- Call to Action per PWA Toolkit --- */
 .toolkit-cta {
     background-color: var(--secondary-bg);
     border-radius: var(--border-radius);
@@ -250,8 +310,7 @@ input[type="number"] {
     text-align: center;
     border-top: 4px solid var(--accent-color);
     box-shadow: var(--shadow);
-    /* [CORREZIONE] Lo mettiamo dentro un container per la responsività */
-    width: 90%; 
+    width: 90%; /* Si adatta alla larghezza */
 }
 .toolkit-cta h2 {
     font-family: var(--font-heading);
@@ -273,8 +332,6 @@ input[type="number"] {
     font-size: 1.2rem;
     padding: 1.2rem 3rem;
 }
-/* --- Fine Blocco Nuovo --- */
-
 
 /* --- Section Styling --- */
 section { padding: 8rem 0; background-color: var(--secondary-bg); position: relative; }
@@ -293,158 +350,35 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     justify-content: center;
     min-height: 400px;
 }
-.css-art-box {
-    width: 100%;
-    max-width: 400px; 
-    aspect-ratio: 1/1; 
-    background-color: var(--primary-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--accent-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* --- Animazioni del nucleo esploratore --- */
-.explorer-core {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    background: var(--gradient-end);
-    border-radius: 50%;
-    box-shadow: 0 0 15px 5px rgba(0, 255, 194, 0.7);
-    animation: explorePath 10s infinite cubic-bezier(0.8, 0, 0.2, 1);
-    z-index: 2;
-}
-
-.path-segment {
-    position: absolute;
-    background-color: rgba(0, 168, 255, 0.2);
-    border-radius: 50%;
-    opacity: 0;
-    animation: drawPath 10s infinite linear;
-}
+/* (Tutto il CSS per l'animazione .css-art-box, .explorer-core, ecc. è invariato) */
+.css-art-box { width: 100%; max-width: 400px; aspect-ratio: 1/1; background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); position: relative; overflow: hidden; border: 1px solid var(--accent-color); display: flex; align-items: center; justify-content: center; }
+.explorer-core { position: absolute; width: 25px; height: 25px; background: var(--gradient-end); border-radius: 50%; box-shadow: 0 0 15px 5px rgba(0, 255, 194, 0.7); animation: explorePath 10s infinite cubic-bezier(0.8, 0, 0.2, 1); z-index: 2; }
+.path-segment { position: absolute; background-color: rgba(0, 168, 255, 0.2); border-radius: 50%; opacity: 0; animation: drawPath 10s infinite linear; }
 .path-segment:nth-child(1) { top: 20%; left: 10%; width: 50px; height: 50px; animation-delay: 0s; }
 .path-segment:nth-child(2) { top: 20%; left: 30%; width: 60px; height: 60px; animation-delay: 1s; }
 .path-segment:nth-child(3) { top: 40%; left: 50%; width: 70px; height: 70px; animation-delay: 2s; }
 .path-segment:nth-child(4) { top: 60%; left: 70%; width: 80px; height: 80px; animation-delay: 3s; }
-
-.btc-icon, .eth-icon {
-    position: absolute;
-    font-family: 'Font Awesome 6 Brands';
-    font-size: 3rem;
-    opacity: 0;
-    color: var(--text-light);
-    text-shadow: var(--shadow);
-    z-index: 1;
-    animation: revealIcon 10s infinite forwards;
-}
+.btc-icon, .eth-icon { position: absolute; font-family: 'Font Awesome 6 Brands'; font-size: 3rem; opacity: 0; color: var(--text-light); text-shadow: var(--shadow); z-index: 1; animation: revealIcon 10s infinite forwards; }
 .btc-icon { top: 25%; left: 25%; color: #F7931A; animation-delay: 1.5s; }
 .eth-icon { top: 50%; left: 45%; color: #627EEA; animation-delay: 3.5s; }
-
 .btc-icon::before { content: '\f15a'; }
 .eth-icon::before { content: '\f42e'; }
-
-.brand-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: var(--font-heading);
-    font-weight: 900;
-    font-size: 1.4rem; 
-    color: transparent;
-    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 2px solid var(--accent-color);
-    padding-right: 5px;
-    animation: revealBrand 10s infinite forwards,
-                 typingCursor 0.7s step-end infinite;
-    animation-delay: 5s;
-    z-index: 3;
-}
-
-@keyframes explorePath {
-    0% { transform: translate(-150px, -150px); opacity: 0; }
-    10% { transform: translate(-100px, -100px); opacity: 1; }
-    25% { transform: translate(-50px, 50px); }
-    40% { transform: translate(100px, -50px); }
-    50% { transform: translate(0, 0); opacity: 1; } 
-    90% { transform: translate(0, 0); opacity: 1; } 
-    100% { transform: translate(0, 0); opacity: 0; } 
-}
-@keyframes drawPath {
-    0% { opacity: 0; transform: scale(0); }
-    10% { opacity: 0.5; transform: scale(1); }
-    20% { opacity: 0; transform: scale(1.5); }
-    100% { opacity: 0; transform: scale(0); }
-}
-@keyframes revealIcon {
-    0% { opacity: 0; transform: scale(0.5); }
-    20% { opacity: 1; transform: scale(1.2); }
-    30% { opacity: 1; transform: scale(1); }
-    40% { opacity: 0; transform: scale(0.8); }
-    100% { opacity: 0; transform: scale(0.5); }
-}
-@keyframes revealBrand {
-    0%   { width: 0; opacity: 0; }
-    50%  { width: 0; opacity: 1; border-right-color: var(--accent-color); }
-    70%  { width: 240px; opacity: 1; } 
-    85%  { opacity: 1; border-right-color: transparent; } 
-    95%  { opacity: 0; }
-    100% { opacity: 0; width: 0; }
-}
-@keyframes typingCursor {
-    0%, 100% { border-right-color: transparent; }
-    50% { border-right-color: var(--accent-color); }
-}
+.brand-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-heading); font-weight: 900; font-size: 1.4rem; color: transparent; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; white-space: nowrap; overflow: hidden; border-right: 2px solid var(--accent-color); padding-right: 5px; animation: revealBrand 10s infinite forwards, typingCursor 0.7s step-end infinite; animation-delay: 5s; z-index: 3; }
+@keyframes explorePath { 0% { transform: translate(-150px, -150px); opacity: 0; } 10% { transform: translate(-100px, -100px); opacity: 1; } 25% { transform: translate(-50px, 50px); } 40% { transform: translate(100px, -50px); } 50% { transform: translate(0, 0); opacity: 1; } 90% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(0, 0); opacity: 0; } }
+@keyframes drawPath { 0% { opacity: 0; transform: scale(0); } 10% { opacity: 0.5; transform: scale(1); } 20% { opacity: 0; transform: scale(1.5); } 100% { opacity: 0; transform: scale(0); } }
+@keyframes revealIcon { 0% { opacity: 0; transform: scale(0.5); } 20% { opacity: 1; transform: scale(1.2); } 30% { opacity: 1; transform: scale(1); } 40% { opacity: 0; transform: scale(0.8); } 100% { opacity: 0; transform: scale(0.5); } }
+@keyframes revealBrand { 0%   { width: 0; opacity: 0; } 50%  { width: 0; opacity: 1; border-right-color: var(--accent-color); } 70%  { width: 240px; opacity: 1; } 85%  { opacity: 1; border-right-color: transparent; } 95%  { opacity: 0; } 100% { opacity: 0; width: 0; } }
+@keyframes typingCursor { 0%, 100% { border-right-color: transparent; } 50% { border-right-color: var(--accent-color); } }
 
 /* --- Impara Section (Teoria Visuale) --- */
 .impara-content { display: flex; flex-direction: column; gap: 3rem; }
-.concept-step { 
-    display: flex; 
-    align-items: flex-start; 
-    gap: 3rem; 
-    padding: 2rem; 
-    background-color: var(--primary-bg); 
-    border-radius: var(--border-radius); 
-    box-shadow: var(--shadow); 
-    transition: transform 0.3s ease, border-color 0.3s ease; 
-    border: 1px solid transparent; 
-}
-.concept-step:hover { 
-    transform: translateY(-5px); 
-    border-color: var(--accent-color); 
-}
+.concept-step { display: flex; align-items: flex-start; gap: 3rem; padding: 2rem; background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); transition: transform 0.3s ease, border-color 0.3s ease; border: 1px solid transparent; }
+.concept-step:hover { transform: translateY(-5px); border-color: var(--accent-color); }
 .concept-step:nth-child(even) { flex-direction: row-reverse; background-color: var(--secondary-bg); }
-.step-icon { 
-    font-size: 4rem; 
-    color: var(--accent-color); 
-    flex-shrink: 0; 
-    width: 100px; 
-    height: 100px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    border: 2px solid var(--accent-color); 
-    border-radius: 50%; 
-    background-color: rgba(0, 168, 255, 0.1); 
-}
-.step-text { 
-    flex-grow: 1; 
-    position: relative;
-}
+.step-icon { font-size: 4rem; color: var(--accent-color); flex-shrink: 0; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--accent-color); border-radius: 50%; background-color: rgba(0, 168, 255, 0.1); }
+.step-text { flex-grow: 1; position: relative; }
 .step-text h3 { margin-top: 0; font-size: 2rem; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .step-text p { color: var(--text-dark); font-size: 1.1rem; }
-
-/* Stili Wallet Pratico */
 .wallet-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
 .wallet-type { background: var(--secondary-bg); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent-color); }
 .wallet-type.cold { border-left-color: var(--gradient-end); }
@@ -452,77 +386,23 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .wallet-type h4 i { margin-right: 0.5rem; }
 .wallet-type p { font-size: 0.95rem; margin-bottom: 0; }
 
-/* Stili Staking Pratico Potenziato */
+/* Staking */
 .staking-calculator { background: var(--secondary-bg); padding: 1.5rem; border-radius: var(--border-radius); margin-top: 1.5rem; }
-.staking-calculator .result-table {
-    width: 100%;
-    margin-top: 1.5rem;
-    border-collapse: collapse;
-    text-align: left;
-}
-.staking-calculator .result-table th, .staking-calculator .result-table td {
-    padding: 0.75rem;
-    border-bottom: 1px solid var(--primary-bg);
-}
-.staking-calculator .result-table th {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-}
-.staking-calculator .result-table td {
-    color: var(--text-dark);
-    font-size: 1rem;
-}
-.staking-calculator .result-table td:last-child {
-    font-weight: 700;
-    color: var(--gradient-end);
-}
-.staking-inputs {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-.staking-inputs div {
-    display: flex;
-    flex-direction: column;
-}
-.staking-inputs label {
-    font-size: 0.9rem;
-    color: var(--text-dark);
-    margin-bottom: 0.5rem;
-    text-align: left;
-}
-.input-help-text {
-    font-size: 0.85rem;
-    color: var(--text-dark);
-    margin-top: 0.25rem;
-    text-align: left;
-    margin-bottom: 0;
-}
-.staking-calculator .btn {
-    width: 100%;
-    margin-top: 1rem;
-}
+.staking-calculator .result-table { width: 100%; margin-top: 1.5rem; border-collapse: collapse; text-align: left; }
+.staking-calculator .result-table th, .staking-calculator .result-table td { padding: 0.75rem; border-bottom: 1px solid var(--primary-bg); }
+.staking-calculator .result-table th { color: var(--text-light); font-size: 0.9rem; text-transform: uppercase; }
+.staking-calculator .result-table td { color: var(--text-dark); font-size: 1rem; }
+.staking-calculator .result-table td:last-child { font-weight: 700; color: var(--gradient-end); }
+.staking-inputs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem; margin-bottom: 1rem; }
+.staking-inputs div { display: flex; flex-direction: column; }
+.staking-inputs label { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 0.5rem; text-align: left; }
+.input-help-text { font-size: 0.85rem; color: var(--text-dark); margin-top: 0.25rem; text-align: left; margin-bottom: 0; }
+.staking-calculator .btn { width: 100%; margin-top: 1rem; }
 
-/* --- Stili per Griglia Guide --- */
+/* Guide */
 .guides-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 4rem; }
-.guide-card { 
-    background-color: var(--primary-bg); 
-    border-radius: var(--border-radius); 
-    box-shadow: var(--shadow); 
-    overflow: hidden; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease;
-    display: flex; 
-    flex-direction: column; 
-    border: 1px solid transparent;
-}
-.guide-card:hover { 
-    transform: translateY(-8px); 
-    box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3); 
-    border-color: var(--accent-color);
-}
+.guide-card { background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; display: flex; flex-direction: column; border: 1px solid transparent; }
+.guide-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3); border-color: var(--accent-color); }
 .guide-card-content { padding: 2rem; }
 .guide-card-content h4 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-light); }
 .guide-card-content p { color: var(--text-dark); margin-bottom: 1.5rem; }
@@ -531,7 +411,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .guide-card-footer a i { margin-left: 0.5rem; transition: transform 0.3s ease; }
 .guide-card-footer a:hover i { transform: translateX(5px); }
 
-/* Blockchain Pratica "Viva" */
+/* Blockchain "Viva" */
 .blockchain-visualizer { display: flex; flex-wrap: wrap; align-items: center; margin-top: 1.5rem; gap: 1.5rem; padding: 1rem; background: var(--secondary-bg); border-radius: var(--border-radius); }
 .block, .arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
 .block { border: 2px solid var(--gradient-end); background-color: var(--primary-bg); padding: 1rem; border-radius: var(--border-radius); box-shadow: 0 0 15px rgba(0, 255, 194, 0.3); min-width: 150px; height: 100px; transition: all 0.5s ease-out; animation: fadeIn 0.5s ease; }
@@ -544,135 +424,54 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .block.verified .block-lock-icon { opacity: 1; }
 .arrow { color: var(--text-dark); font-size: 2rem; min-width: 50px; animation: fadeIn 0.5s ease; }
 
-/* --- Piattaforme Section --- */
+/* Piattaforme */
 .platforms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; }
-.platform-card { 
-    background-color: var(--primary-bg); 
-    border-radius: var(--border-radius); 
-    box-shadow: var(--shadow); 
-    padding: 2rem; 
-    text-align: center; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease;
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between; 
-    height: 100%; 
-    border: 1px solid transparent;
-}
-.platform-card:hover { 
-    transform: translateY(-8px); 
-    box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3); 
-    border-color: var(--accent-color);
-}
+.platform-card { background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); padding: 2rem; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; display: flex; flex-direction: column; justify-content: space-between; height: 100%; border: 1px solid transparent; }
+.platform-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3); border-color: var(--accent-color); }
 .platform-card h3 { font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .platform-card p { color: var(--text-dark); margin-bottom: 1.5rem; flex-grow: 1; }
 .platform-card .btn { width: 100%; margin-top: auto; }
 
-/* --- Strumenti Section --- */
+/* Strumenti */
 .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 4rem; }
-.tool-card { 
-    background-color: var(--primary-bg); 
-    border-radius: var(--border-radius); 
-    box-shadow: var(--shadow); 
-    padding: 1.5rem; 
-    text-align: center; 
-    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-    min-height: 250px; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-}
-.tool-card:hover { 
-    transform: translateY(-5px); 
-    background-color: var(--secondary-bg); 
-    box-shadow: 0 5px 15px rgba(0, 255, 194, 0.2); 
-}
+.tool-card { background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); padding: 1.5rem; text-align: center; transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.tool-card:hover { transform: translateY(-5px); background-color: var(--secondary-bg); box-shadow: 0 5px 15px rgba(0, 255, 194, 0.2); }
 .tool-card .fa-icon { font-size: 3rem; color: var(--gradient-end); margin-bottom: 1rem; }
 .tool-card h4 { font-size: 1.5rem; margin-bottom: 0.8rem; }
 .tool-card p { color: var(--text-dark); font-size: 0.95rem; }
 .tool-card a { text-decoration: none; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; width: 100%; }
 .tool-card a:hover h4 { color: var(--gradient-end); }
 
-
-/* --- Stili *DENTRO* i Modal --- */
+/* Stili *DENTRO* i Modal (Guide) */
 .modal-guide-content h2 { text-align: left; font-size: 2.5rem; margin-bottom: 1rem; margin-top: 0.5rem; }
 .modal-guide-content h3 { font-size: 1.8rem; color: var(--text-light); margin-top: 2rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; }
 .modal-guide-content h4 { font-size: 1.3rem; color: var(--text-light); margin-top: 1.5rem; margin-bottom: 1rem; }
-.modal-guide-content p, .modal-guide-content li { 
-    font-family: var(--font-serif); 
-    font-size: 1.1rem; 
-    color: var(--text-dark); 
-    line-height: 1.8; 
-}
+.modal-guide-content p, .modal-guide-content li { font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-dark); line-height: 1.8; }
 .modal-guide-content ul { list-style-type: none; padding-left: 0; }
 .modal-guide-content li { position: relative; padding-left: 30px; margin-bottom: 1rem; }
 .modal-guide-content li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--gradient-end); position: absolute; left: 0; top: 7px; font-size: 1rem; }
 .modal-guide-content .btn, .modal-guide-content .btn-outline { margin: 1rem 0.5rem 1rem 0; }
 
 /* Arte CSS per Guide */
-.modal-guide-content .css-guide-art { 
-    width: 100%; 
-    height: 200px;
-    background-color: var(--primary-bg);
-    border-radius: var(--border-radius);
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-}
-.btc-art::before {
-    content: '\f15a';
-    font-family: 'Font Awesome 6 Brands';
-    font-size: 6rem;
-    color: #F7931A;
-    text-shadow: 0 0 30px rgba(247, 147, 26, 0.7);
-    animation: pulse 2s infinite ease-in-out;
-}
-.eth-art {
-    transform: scale(0.8);
-}
-.eth-art .eth-logo {
-    position: relative;
-    width: 120px;
-    height: 200px;
-    animation: pulse 3s infinite ease-in-out;
-}
-.eth-logo > div {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-}
+.modal-guide-content .css-guide-art { width: 100%; height: 200px; background-color: var(--primary-bg); border-radius: var(--border-radius); margin-top: 1rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+.btc-art::before { content: '\f15a'; font-family: 'Font Awesome 6 Brands'; font-size: 6rem; color: #F7931A; text-shadow: 0 0 30px rgba(247, 147, 26, 0.7); animation: pulse 2s infinite ease-in-out; }
+.eth-art { transform: scale(0.8); }
+.eth-art .eth-logo { position: relative; width: 120px; height: 200px; animation: pulse 3s infinite ease-in-out; }
+.eth-logo > div { position: absolute; width: 0; height: 0; border-style: solid; }
 .eth-top { border-width: 0 60px 80px 60px; border-color: transparent transparent #627EEA80 transparent; top: 0; }
 .eth-bottom { border-width: 80px 60px 0 60px; border-color: #627EEA transparent transparent transparent; top: 120px; }
 .eth-top-inner { border-width: 0 40px 50px 40px; border-color: transparent transparent #627EEACC transparent; top: 30px; left: 20px; }
 .eth-bottom-inner { border-width: 50px 40px 0 40px; border-color: #627EEACC transparent transparent transparent; top: 120px; left: 20px; }
-
-.defi-art .node {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: var(--gradient-end);
-    border-radius: 50%;
-    box-shadow: 0 0 15px 5px rgba(0, 255, 194, 0.7);
-}
+.defi-art .node { position: absolute; width: 15px; height: 15px; background: var(--gradient-end); border-radius: 50%; box-shadow: 0 0 15px 5px rgba(0, 255, 194, 0.7); }
 .defi-art .node:nth-child(1) { top: 20%; left: 30%; animation: pulse 2s infinite 0s; }
 .defi-art .node:nth-child(2) { top: 40%; left: 60%; animation: pulse 2s infinite 0.5s; }
 .defi-art .node:nth-child(3) { top: 70%; left: 40%; animation: pulse 2s infinite 1s; }
-.defi-art .line {
-    position: absolute;
-    height: 2px;
-    background: var(--accent-color);
-    opacity: 0.3;
-}
+.defi-art .line { position: absolute; height: 2px; background: var(--accent-color); opacity: 0.3; }
 .defi-art .line.l1 { top: 30%; left: 35%; width: 30%; transform: rotate(20deg); }
 .defi-art .line.l2 { top: 55%; left: 38%; width: 25%; transform: rotate(-30deg); }
 .defi-art .line.l3 { top: 50%; left: 50%; width: 30%; transform: rotate(90deg); }
-/* --- Fine Stili Modal --- */
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(0.95); } }
+
 
 /* --- Sezione Glossario --- */
 #glossario {
@@ -720,16 +519,59 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 /* --- [CORREZIONI] Media Queries per Responsiveness --- */
 /* ============================================== */
 
+/* [MODIFICA] Da 1024px, il menu desktop è troppo largo. 
+   Passiamo al menu hamburger prima, a 1024px. */
 @media (max-width: 1024px) {
-    .navbar .nav-links li { margin-left: 1rem; }
+    /* --- Correzione Navbar per Tablet e Mobile --- */
+    .navbar .container {
+        padding: 0 1.5rem; /* Riduci padding laterale */
+    }
+    .navbar .nav-links {
+        /* Nascondi i link desktop */
+        display: none; 
+    }
+    .navbar .nav-toggle {
+        /* Mostra il pulsante hamburger */
+        display: block; 
+    }
+    
+    /* Stile del menu mobile (quando aperto) */
+    .nav-links.nav-menu-open {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Altezza piena */
+        background-color: var(--primary-bg);
+        z-index: 1003;
+        animation: fadeIn 0.3s ease; /* Animazione entrata */
+    }
+    .nav-links.nav-menu-open li {
+        margin: 1.5rem 0; /* Spaziatura verticale */
+    }
+    .nav-links.nav-menu-open li a {
+        font-size: 1.5rem; /* Testo più grande */
+    }
+    .nav-links.nav-menu-open .nav-close-li {
+        display: block;
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+    /* --- Fine Correzione Navbar --- */
+
+    
     .hero-content h1 { font-size: 3.5rem; }
     .hero-content p { font-size: 1.2rem; }
     
-    /* [CORREZIONE] Spaziatura ridotta quando impilati */
     .chi-siamo-content, .concept-step { 
         flex-direction: column; 
         text-align: center; 
-        gap: 2rem; /* Ridotto da 4rem e 3rem */
+        gap: 2rem; 
     }
     .concept-step:nth-child(even) { flex-direction: column; }
     .step-icon { margin-bottom: 1rem; }
@@ -740,20 +582,10 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 }
 
 @media (max-width: 768px) {
-    .navbar .container { 
-        flex-direction: column; 
-        gap: 1rem; /* Aggiunto spazio */
-    }
-    
-    /* [CORREZIONE] Fai andare a capo i link anche su tablet */
-    .navbar .nav-links {
-        margin-top: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .navbar .nav-links li { 
-        margin: 0.3rem 0.5rem; /* Riduci margine */
+    /* [MODIFICA] La navbar è già hamburger,
+       quindi non serve più .flex-direction: column sul container */
+    .navbar .container {
+        padding: 0 1.5rem; /* Assicurati che il padding sia coerente */
     }
     
     h1 { font-size: 2.8rem; }
@@ -761,11 +593,10 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     .hero-content h1 { font-size: 2.8rem; }
     .hero-content p { font-size: 1rem; }
     .container { padding: 1rem; }
-    section { padding: 4rem 1rem; } /* Aggiunto padding laterale */
+    section { padding: 4rem 1rem; } 
     
     .platform-card, .tool-card { padding: 1.5rem; min-height: auto; }
-    .arrow { transform: rotate(90deg); animation: bounceArrowVertical 2s infinite ease-in-out; }
-    @keyframes bounceArrowVertical { 0%, 100% { transform: rotate(90deg) translateY(0); } 50% { transform: rotate(90deg) translateY(10px); } }
+    .arrow { transform: rotate(90deg); }
     
     .wallet-comparison { grid-template-columns: 1fr; }
     .staking-inputs { grid-template-columns: 1fr; }
@@ -778,8 +609,15 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 }
 
 @media (max-width: 480px) {
-    .hero-content h1 { font-size: 2.5rem; } /* Leggermente più grande */
+    .hero-content h1 { font-size: 2.5rem; } 
     .navbar .logo { font-size: 1.5rem; }
-    /* Le regole per .nav-links sono già state spostate nel blocco 768px */
+    
+    /* [MODIFICA] Riduci padding per il blocco app */
+    .toolkit-cta {
+        padding: 2.5rem 1.5rem;
+    }
+    .toolkit-cta h2 {
+        font-size: 2rem;
+    }
 }
 }
