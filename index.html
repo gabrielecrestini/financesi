@@ -96,6 +96,7 @@
             </p>
             
             <div class="impara-content">
+
                 <div class="concept-step" data-aos="fade-up" data-aos-delay="100">
                     <div class="step-icon"><i class="fas fa-project-diagram"></i></div>
                     <div class="step-text">
@@ -278,7 +279,8 @@
         function closeModal() {
             modalOverlay.classList.remove('active');
             allModals.forEach(modal => modal.classList.remove('active'));
-            if (!document.getElementById('nav-links').classList.contains('nav-menu-open')) {
+            // [CORREZIONE] Non rimuovere 'modal-open' se il menu nav è ancora aperto
+            if (document.getElementById('nav-links') && !document.getElementById('nav-links').classList.contains('nav-menu-open')) {
                  document.body.classList.remove('modal-open');
             }
         }
@@ -330,9 +332,47 @@
                 localStorage.setItem('stakingAPY', apyPercent);
                 localStorage.setItem('stakingYears', years);
                 
-                tableBody.innerHTML = `<thead>...</thead><tbody></tbody>`; // (omesso per brevità)
-                // (Logica di calcolo invariata)
-                // ...
+                tableBody.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Anno</th>
+                            <th>Totale Contribuito</th>
+                            <th>Interessi Guadagnati</th>
+                            <th>Bilancio Finale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+                
+                let currentBalance = initial;
+                let totalContributed = initial;
+                let totalInterest = 0;
+
+                for (let y = 1; y <= years; y++) {
+                    let yearInterest = 0;
+                    let yearContribution = 0;
+                    
+                    for (let m = 1; m <= 12; m++) {
+                        let interestThisMonth = currentBalance * monthlyRate;
+                        currentBalance += monthly;
+                        yearContribution += monthly;
+                        yearInterest += interestThisMonth;
+                        currentBalance += interestThisMonth;
+                    }
+                    
+                    totalContributed += yearContribution;
+                    totalInterest += yearInterest;
+                    
+                    const row = `
+                        <tr>
+                            <td>${y}</td>
+                            <td>${totalContributed.toFixed(2)} €</td>
+                            <td>${totalInterest.toFixed(2)} €</td>
+                            <td>${currentBalance.toFixed(2)} €</td>
+                        </tr>
+                    `;
+                    tableBody.querySelector('tbody').innerHTML += row;
+                }
             } catch (e) {
                 console.error("Errore nel calcolatore staking:", e);
             }
@@ -397,8 +437,7 @@
                     duration: 800, 
                     once: true, 
                     offset: 50,
-                    // [CORREZIONE] Disabilita AOS su 'phone' per evitare bug
-                    disable: 'phone' 
+                    disable: 'phone' // Disabilita su 'phone' per sicurezza
                 });
             } catch (e) {
                 console.warn("Errore AOS Init:", e);

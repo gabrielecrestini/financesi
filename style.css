@@ -22,7 +22,7 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden; /* Impedisce overflow orizzontale */
+    overflow-x: hidden; 
 }
 
 body {
@@ -30,7 +30,7 @@ body {
     color: var(--text-light);
     background-color: var(--primary-bg);
     line-height: 1.6;
-    overflow-x: hidden; /* Impedisce overflow orizzontale */
+    overflow-x: hidden; 
 }
 
 body.modal-open {
@@ -160,6 +160,7 @@ input[type="number"] {
     opacity: 1;
     visibility: visible;
 }
+
 .modal-content {
     position: fixed;
     top: 50%;
@@ -183,6 +184,7 @@ input[type="number"] {
     visibility: visible;
     transform: translate(-50%, -50%) scale(1);
 }
+
 .modal-close {
     position: absolute;
     top: 1rem;
@@ -348,20 +350,45 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .eth-icon { top: 50%; left: 45%; color: #627EEA; animation-delay: 3.5s; }
 .btc-icon::before { content: '\f15a'; }
 .eth-icon::before { content: '\f42e'; }
-.brand-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-heading); font-weight: 900; font-size: 1.4rem; color: transparent; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: 0; white-space: nowrap; overflow: hidden; border-right: 2px solid var(--accent-color); padding-right: 5px; animation: revealBrand 10s infinite forwards, typingCursor 0.7s step-end infinite; animation-delay: 5s; z-index: 3; }
+.brand-text { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    font-family: var(--font-heading); 
+    font-weight: 900; 
+    font-size: 1.4rem; 
+    color: transparent; 
+    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    opacity: 0; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    border-right: 2px solid var(--accent-color); 
+    padding-right: 5px; 
+    /* [CORREZIONE] max-width per responsività */
+    max-width: 100%; 
+    animation: revealBrand 10s infinite forwards, typingCursor 0.7s step-end infinite; 
+    animation-delay: 5s; 
+    z-index: 3; 
+}
+
 @keyframes explorePath { 0% { transform: translate(-150px, -150px); opacity: 0; } 10% { transform: translate(-100px, -100px); opacity: 1; } 25% { transform: translate(-50px, 50px); } 40% { transform: translate(100px, -50px); } 50% { transform: translate(0, 0); opacity: 1; } 90% { transform: translate(0, 0); opacity: 1; } 100% { transform: translate(0, 0); opacity: 0; } }
 @keyframes drawPath { 0% { opacity: 0; transform: scale(0); } 10% { opacity: 0.5; transform: scale(1); } 20% { opacity: 0; transform: scale(1.5); } 100% { opacity: 0; transform: scale(0); } }
 @keyframes revealIcon { 0% { opacity: 0; transform: scale(0.5); } 20% { opacity: 1; transform: scale(1.2); } 30% { opacity: 1; transform: scale(1); } 40% { opacity: 0; transform: scale(0.8); } 100% { opacity: 0; transform: scale(0.5); } }
-/* [CORREZIONE] Animazione "typing" ora usa max-width per essere responsive */
+
+/* [CORREZIONE] Animazione "typing" ora usa max-width */
 @keyframes revealBrand { 
-    0%   { max-width: 0; opacity: 0; } 
-    50%  { max-width: 0; opacity: 1; border-right-color: var(--accent-color); } 
-    70%  { max-width: 100%; opacity: 1; } /* Usa 100% invece di 240px */
+    0%   { max-width: 0px; opacity: 0; } 
+    50%  { max-width: 0px; opacity: 1; border-right-color: var(--accent-color); } 
+    70%  { max-width: 100%; opacity: 1; } /* Usa 100% */
     85%  { opacity: 1; border-right-color: transparent; } 
     95%  { opacity: 0; } 
-    100% { opacity: 0; max-width: 0; } 
+    100% { opacity: 0; max-width: 0px; } 
 }
 @keyframes typingCursor { 0%, 100% { border-right-color: transparent; } 50% { border-right-color: var(--accent-color); } }
+
 
 /* --- Impara Section (Teoria Visuale) --- */
 .impara-content { display: flex; flex-direction: column; gap: 3rem; }
@@ -470,7 +497,6 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 }
 .glossary-grid {
     display: grid;
-    /* [CORREZIONE] Ridotto minmax per mobile */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-top: 4rem;
