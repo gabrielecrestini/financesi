@@ -9,8 +9,9 @@
     --border-radius: 8px;
     --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     
-    --font-heading: 'Inter', sans-serif;
-    --font-body: 'Lato', sans-serif;
+    /* [FONT MIGLIORATI] Nuova combinazione */
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
     --font-serif: 'Merriweather', serif;
 }
 
@@ -22,7 +23,7 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden; /* [CORREZIONE] Impedisce overflow orizzontale */
+    overflow-x: hidden; 
 }
 
 body {
@@ -30,7 +31,8 @@ body {
     color: var(--text-light);
     background-color: var(--primary-bg);
     line-height: 1.6;
-    overflow-x: hidden; /* [CORREZIONE] Impedisce overflow orizzontale */
+    overflow-x: hidden;
+    font-size: 16px; /* [FONT MIGLIORATI] Imposta la base */
 }
 
 body.modal-open {
@@ -44,14 +46,15 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
 }
 
-h1 { font-size: 3.5rem; font-weight: 900; }
-h2 { font-size: 2.5rem; font-weight: 900; }
-h3 { font-size: 1.8rem; font-weight: 700; }
+/* [FONT MIGLIORATI] Dimensioni ottimizzate per Poppins */
+h1 { font-size: 3.2rem; font-weight: 900; }
+h2 { font-size: 2.2rem; font-weight: 900; }
+h3 { font-size: 1.6rem; font-weight: 700; }
 
 p {
     color: var(--text-dark);
     margin-bottom: 1rem;
-    font-size: 1.1rem; 
+    font-size: 1rem; /* [FONT MIGLIORATI] Standard 16px */
     font-family: var(--font-body);
 }
 
@@ -150,6 +153,7 @@ input[type="number"] {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     z-index: 1001;
     opacity: 0;
@@ -200,9 +204,10 @@ input[type="number"] {
     color: var(--text-light);
 }
 
-/* --- [CORRETTO] Navbar e Menu Hamburger --- */
+/* --- Navbar e Menu Hamburger --- */
 .navbar {
     background-color: rgba(15, 15, 26, 0.8);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     padding: 1rem 0;
     position: fixed;
@@ -216,7 +221,7 @@ input[type="number"] {
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    padding: 0 1.5rem; /* Ridotto padding per mobile */
+    padding: 0 1.5rem;
 }
 .navbar .logo { 
     font-family: var(--font-heading); 
@@ -288,9 +293,14 @@ input[type="number"] {
     position: relative; 
 }
 .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); }
-.hero-content { z-index: 1; max-width: 900px; padding: 0 1rem; }
+
+.hero-content {
+    z-index: 1;
+    max-width: 900px;
+    padding: 0 2rem;
+}
 .hero-content h1 { font-family: var(--font-heading); font-size: 4.5rem; margin-bottom: 1.5rem; line-height: 1.1; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero-content p { font-family: var(--font-body); font-size: 1.5rem; margin-bottom: 2.5rem; color: var(--text-dark); }
+.hero-content p { font-family: var(--font-body); font-size: 1.3rem; margin-bottom: 2.5rem; color: var(--text-dark); } /* [FONT MIGLIORATI] Leggermente ridotto */
 
 /* --- Call to Action per PWA Toolkit --- */
 .toolkit-cta {
@@ -307,7 +317,7 @@ input[type="number"] {
 .toolkit-cta h2 {
     font-family: var(--font-heading);
     font-weight: 900;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin-bottom: 1rem;
     background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
     -webkit-background-clip: text;
@@ -316,21 +326,19 @@ input[type="number"] {
 .toolkit-cta p {
     font-family: var(--font-body);
     color: var(--text-dark);
-    font-size: 1.1rem;
+    font-size: 1rem;
     max-width: 600px;
     margin: 0 auto 2rem auto;
 }
 .toolkit-cta .btn {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding: 1.2rem 3rem;
 }
 
 /* --- Section Styling --- */
 section { padding: 6rem 0; background-color: var(--secondary-bg); position: relative; }
 section:nth-child(even) { background-color: var(--primary-bg); }
-section h2 { font-family: var(--font-heading); text-align: center; margin-bottom: 4rem; font-size: 3rem; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-/* --- [RIMOSSO] Chi Siamo Section --- */
+section h2 { font-family: var(--font-heading); text-align: center; margin-bottom: 4rem; font-size: 2.5rem; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
 /* --- Impara Section (Teoria Visuale) --- */
 .impara-content { display: flex; flex-direction: column; gap: 3rem; }
@@ -339,12 +347,12 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .concept-step:nth-child(even) { flex-direction: row-reverse; background-color: var(--secondary-bg); }
 .step-icon { font-size: 4rem; color: var(--accent-color); flex-shrink: 0; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--accent-color); border-radius: 50%; background-color: rgba(0, 168, 255, 0.1); }
 .step-text { flex-grow: 1; position: relative; }
-.step-text h3 { margin-top: 0; font-size: 2rem; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.step-text p { color: var(--text-dark); font-size: 1.1rem; }
+.step-text h3 { margin-top: 0; font-size: 1.8rem; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.step-text p { color: var(--text-dark); font-size: 1rem; }
 .wallet-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
 .wallet-type { background: var(--secondary-bg); padding: 1.5rem; border-radius: var(--border-radius); border-left: 4px solid var(--accent-color); }
 .wallet-type.cold { border-left-color: var(--gradient-end); }
-.wallet-type h4 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+.wallet-type h4 { font-size: 1.3rem; margin-bottom: 0.5rem; }
 .wallet-type h4 i { margin-right: 0.5rem; }
 .wallet-type p { font-size: 0.95rem; margin-bottom: 0; }
 
@@ -355,19 +363,25 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .staking-calculator .result-table th { color: var(--text-light); font-size: 0.9rem; text-transform: uppercase; }
 .staking-calculator .result-table td { color: var(--text-dark); font-size: 1rem; }
 .staking-calculator .result-table td:last-child { font-weight: 700; color: var(--gradient-end); }
-.staking-inputs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem; margin-bottom: 1rem; }
+
+.staking-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
 .staking-inputs div { display: flex; flex-direction: column; }
 .staking-inputs label { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 0.5rem; text-align: left; }
-.input-help-text { font-size: 0.85rem; color: var(--text-dark); margin-top: 0.25rem; text-align: left; margin-bottom: 0; }
+/* [DESIGN MIGLIORATO] Rimuovo la regola per .input-help-text */
 .staking-calculator .btn { width: 100%; margin-top: 1rem; }
 
 /* Guide */
-/* [CORREZIONE] Larghezza minima ridotta per mobile (da 350 a 280) */
 .guides-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 4rem; }
 .guide-card { background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; display: flex; flex-direction: column; border: 1px solid transparent; }
 .guide-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3); border-color: var(--accent-color); }
 .guide-card-content { padding: 2rem; }
-.guide-card-content h4 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-light); }
+.guide-card-content h4 { font-size: 1.4rem; margin-bottom: 1rem; color: var(--text-light); }
 .guide-card-content p { color: var(--text-dark); margin-bottom: 1.5rem; }
 .guide-card-footer { padding: 1rem 2rem; background-color: var(--secondary-bg); margin-top: auto; }
 .guide-card-footer a { font-weight: 700; color: var(--accent-color); cursor: pointer; } 
@@ -387,27 +401,70 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .arrow { color: var(--text-dark); font-size: 2rem; min-width: 50px; animation: fadeIn 0.5s ease; }
 
 /* Piattaforme */
-/* [CORREZIONE] Larghezza minima ridotta (da 300 a 280) */
-.platforms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 4rem; }
-.platform-card { background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); padding: 2rem; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease; display: flex; flex-direction: column; justify-content: space-between; height: 100%; border: 1px solid transparent; }
-.platform-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3); border-color: var(--accent-color); }
-.platform-card h3 { font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.platform-card p { color: var(--text-dark); margin-bottom: 1.5rem; flex-grow: 1; }
-.platform-card .btn { width: 100%; margin-top: auto; }
+.platforms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+.platform-card {
+    background-color: var(--primary-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid transparent;
+    overflow: hidden;
+    text-align: left;
+}
+.platform-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 168, 255, 0.3);
+    border-color: var(--accent-color);
+}
+.platform-logo {
+    width: 100%;
+    height: 140px;
+    object-fit: contain; /* Questa è la modifica chiave */
+    background-color: #FFFFFF; /* Sfondo bianco per i loghi */
+    padding: 1.5rem; /* Aggiunge un po' di spazio intorno al logo */
+    margin-bottom: 2rem;
+}
+.platform-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0 2rem;
+    margin-top: 0;
+}
+.platform-card p {
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    padding: 0 2rem;
+}
+.platform-card .btn {
+    width: calc(100% - 4rem);
+    margin: 0 2rem 2rem 2rem;
+}
 
 /* Strumenti */
 .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 4rem; }
 .tool-card { background-color: var(--primary-bg); border-radius: var(--border-radius); box-shadow: var(--shadow); padding: 1.5rem; text-align: center; transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 .tool-card:hover { transform: translateY(-5px); background-color: var(--secondary-bg); box-shadow: 0 5px 15px rgba(0, 255, 194, 0.2); }
 .tool-card .fa-icon { font-size: 3rem; color: var(--gradient-end); margin-bottom: 1rem; }
-.tool-card h4 { font-size: 1.5rem; margin-bottom: 0.8rem; }
-.tool-card p { color: var(--text-dark); font-size: 0.95rem; }
+.tool-card h4 { font-size: 1.3rem; margin-bottom: 0.8rem; }
+.tool-card p { color: var(--text-dark); font-size: 0.9rem; }
 .tool-card a { text-decoration: none; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; width: 100%; }
 .tool-card a:hover h4 { color: var(--gradient-end); }
 
 /* Modal (Guide) */
-.modal-guide-content h2 { text-align: left; font-size: 2.5rem; margin-bottom: 1rem; margin-top: 0.5rem; }
-.modal-guide-content h3 { font-size: 1.8rem; color: var(--text-light); margin-top: 2rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; }
+.modal-guide-content h2 { text-align: left; font-size: 2.2rem; margin-bottom: 1rem; margin-top: 0.5rem; }
+.modal-guide-content h3 { font-size: 1.6rem; color: var(--text-light); margin-top: 2rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; }
 .modal-guide-content h4 { font-size: 1.3rem; color: var(--text-light); margin-top: 1.5rem; margin-bottom: 1rem; }
 .modal-guide-content p, .modal-guide-content li { font-family: var(--font-serif); font-size: 1.1rem; color: var(--text-dark); line-height: 1.8; }
 .modal-guide-content ul { list-style-type: none; padding-left: 0; }
@@ -457,7 +514,7 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     box-shadow: 0 5px 15px rgba(0, 168, 255, 0.2);
 }
 .glossary-item h4 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: var(--text-light);
     margin-bottom: 0.75rem;
     font-family: var(--font-heading);
@@ -476,10 +533,9 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .footer p { margin-top: 1.5rem; margin-bottom: 0; font-size: 0.9rem; }
 
 /* ============================================== */
-/* --- [CORREZIONE] Media Queries per Responsiveness --- */
+/* --- Media Queries per Responsiveness --- */
 /* ============================================== */
 
-/* Nasconde i link e mostra l'hamburger */
 @media (max-width: 1024px) {
     .navbar .container {
         padding: 0 1.5rem; 
@@ -491,7 +547,6 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
         display: block; 
     }
     
-    /* Stile del menu mobile (quando aperto) */
     .nav-links.nav-menu-open {
         display: flex;
         flex-direction: column;
@@ -526,39 +581,78 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
     .hero-content h1 { font-size: 3.5rem; }
     .hero-content p { font-size: 1.2rem; }
     
-    .chi-siamo-content, .concept-step { 
+    .concept-step { 
         flex-direction: column; 
         text-align: center; 
         gap: 2rem; 
     }
     .concept-step:nth-child(even) { flex-direction: column; }
     .step-icon { margin: 0 auto 1rem auto; }
-    .chi-siamo-image { margin-top: 2rem; }
-    .guides-grid { grid-template-columns: 1fr; }
-    
-    .staking-inputs { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
     h1 { font-size: 2.8rem; }
-    h2 { font-size: 2.2rem; }
-    section h2 { font-size: 2.2rem; }
+    h2 { font-size: 2rem; }
+    section h2 { font-size: 2rem; }
+    
+    .hero-content { padding: 0 1rem; }
     .hero-content h1 { font-size: 2.8rem; }
     .hero-content p { font-size: 1.1rem; }
     .container { padding: 1rem; }
     section { padding: 4rem 1rem; } 
     
-    .platform-card, .tool-card { padding: 1.5rem; min-height: auto; }
+    .tool-card { padding: 1.5rem; min-height: auto; }
     .arrow { transform: rotate(90deg); }
     
     .wallet-comparison { grid-template-columns: 1fr; }
-    .staking-inputs { grid-template-columns: 1fr; }
-    .staking-calculator .btn { width: 100%; }
-    
+
     .modal-content { width: 95%; height: 90vh; padding: 1.5rem; }
     .modal-guide-content h2 { font-size: 1.8rem; }
     .modal-guide-content h3 { font-size: 1.5rem; }
     
+    /* --- Tabella Staking Responsive --- */
+    .staking-calculator .result-table {
+        border: none;
+    }
+    .staking-calculator .result-table thead {
+        display: none;
+    }
+    .staking-calculator .result-table, 
+    .staking-calculator .result-table tbody, 
+    .staking-calculator .result-table tr, 
+    .staking-calculator .result-table td {
+        display: block;
+        width: 100%;
+    }
+    .staking-calculator .result-table tr {
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--text-dark);
+        border-radius: var(--border-radius);
+        padding: 1rem;
+    }
+    .staking-calculator .result-table td {
+        padding: 0.75rem 0.5rem;
+        border-bottom: 1px dotted var(--primary-bg);
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+        min-height: 1.5rem;
+    }
+    .staking-calculator .result-table tr td:last-child {
+        border-bottom: none;
+    }
+    
+    .staking-calculator .result-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0.5rem;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 700;
+        color: var(--text-light);
+    }
 }
 
 @media (max-width: 480px) {
@@ -576,13 +670,12 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
         font-size: 2rem;
     }
     
-    .platform-card, .tool-card, .glossary-item, .concept-step {
+    .tool-card, .glossary-item, .concept-step {
         padding: 1.5rem;
     }
     
-    /* [CORREZIONE] Riduci la larghezza minima per evitare overflow */
     .guides-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
     .platforms-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
     .glossary-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .tools-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .tools-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } 
 }

@@ -2,265 +2,317 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Super-Toolkit - CryptoStarStudio.it</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoToolkit</title>
     
-    <link rel="stylesheet" href="toolkit-style.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;700&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="toolkit-style.css">
     <link rel="manifest" href="manifest.json">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CryptoToolkit">
+    
     <meta name="theme-color" content="#0F0F1A">
+    
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
 </head>
 <body>
 
-    <div id="install-prompt-container">
-        <p>Installa il <strong>Super-Toolkit</strong> sul tuo telefono per un accesso rapido!</p>
-        <div class="install-buttons">
-            <button class="btn" id="install-btn">Installa</button>
-            <button class="btn btn-outline" id="dismiss-btn">Più tardi</button>
-        </div>
+    <div id="app-update-banner" style="display:none;">
+        Una nuova versione è disponibile!
+        <button id="app-reload-btn">Aggiorna</button>
     </div>
+
+    <header class="header">
+        <h1>CryptoToolkit</h1>
+        <div class="portfolio-summary">
+            <div class="summary-box">
+                <span>Valore Totale Portfolio</span>
+                <h2 id="total-value">0.00 €</h2>
+            </div>
+            <div class="summary-box">
+                <span>Totale Investito</span>
+                <h2 id="total-invested" class="text-neutral">0.00 €</h2>
+            </div>
+            <div class="summary-box">
+                <span>P/L Non Realizzato</span>
+                <h3 id="total-unrealized-pl" class="text-neutral">0.00 €</h3>
+            </div>
+            <div class="summary-box">
+                <span>P/L Realizzato (Vendite)</span>
+                <h3 id="total-realized-pl" class="text-neutral">0.00 €</h3>
+            </div>
+        </div>
+    </header>
 
     <main class="container">
 
-        <a href="index.html" class="back-to-home">
-            <i class="fas fa-arrow-left"></i> Torna al Sito Principale
-        </a>
-
-        <section id="page-portfolio" class="app-page active">
-            <h2>Registro Transazioni</h2>
-            <div class="card">
-                <div class="portfolio-summary">
-                    <p>Totale Investito (Posizioni Aperte)</p>
-                    <h1 id="total-invested">€0.00</h1>
-                    <p id="live-pl" style="font-weight: 700; font-size: 1.1rem;">P/L Live: €0.00 (0%)</p>
-                    <p id="last-updated" style="font-size: 0.8rem; margin-top: 0.5rem;"></p>
-                </div>
-            </div>
+        <div id="view-portfolio" class="view active">
             
-            <div id="portfolio-list-container" class="card">
+            <div class="card add-form-card">
                 <div class="card-header">
-                    <h3>Posizioni Aperte</h3>
+                    <h3>Registra Transazione</h3>
                 </div>
-                <div class="portfolio-list" id="portfolio-list">
-                    <div class="empty-message" id="empty-portfolio-message">
-                        <p>Nessun acquisto registrato. Clicca "+" per iniziare.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="history-list-container" class="card">
-                <div class="card-header">
-                    <h3>Storico Vendite (Profitti Realizzati)</h3>
-                </div>
-                <div class="history-list" id="history-list">
-                    <div class="empty-message" id="empty-history-message">
-                        <p>Nessuna vendita registrata.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="page-calculators" class="app-page">
-            <h2>Calcolatori</h2>
-            
-            <div class="card">
-                <h3><i class="fas fa-leaf" style="margin-right: 10px;"></i> Calcolatore Interesse Composto</h3>
-                <p style="color: var(--text-dark); margin-bottom: 1.5rem;">
-                    Simula i tuoi guadagni futuri. I valori inseriti qui vengono salvati automaticamente.
-                </p>
-                <form id="staking-calculator-form" style="margin-top: 1.5rem;">
-                    <div class="staking-inputs-advanced">
-                        <div class="form-group">
-                            <label for="staking-initial">Importo Iniziale (€)</label>
-                            <input type="number" id="staking-initial" placeholder="1000">
+                <form id="add-transaction-form" class="card-content">
+                    <div class="form-grid">
+                        <div>
+                            <label for="asset-name">1. Nome Valuta</label>
+                            <input type="text" id="asset-name" placeholder="Cerca (es. Bitcoin)" required>
+                            <div id="search-results"></div> 
                         </div>
-                        <div class="form-group">
-                            <label for="staking-apy">Interesse Annuo (APY %)</label>
-                            <input type="number" id="staking-apy" placeholder="8">
-                        </div>
-                        <div class="form-group">
-                            <label for="staking-years">Durata (Anni)</label>
-                            <input type="number" id="staking-years" placeholder="5">
-                        </div>
-                        <div class="form-group">
-                            <label for="staking-frequency">Frequenza Reinvestimento</label>
-                            <select id="staking-frequency">
-                                <option value="365">Giornaliero</option>
-                                <option value="52">Settimanale</option>
-                                <option value="12" selected>Mensile</option>
-                                <option value="1">Annuale</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="staking-monthly">Aggiunta Mensile (€)</label>
-                            <input type="number" id="staking-monthly" placeholder="100">
+                        <div>
+                            <label for="tx-total-cost">2. Costo Totale (€)</label>
+                            <input type="number" step="any" id="tx-total-cost" placeholder="1000" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn">Calcola</button>
+                    <div class="form-price-group">
+                        <div>
+                            <label for="tx-price">3. Prezzo per Unità (€)</label>
+                            <input type="number" step="any" id="tx-price" placeholder="60000" required>
+                        </div>
+                        <button type="button" class="btn btn-outline" id="get-price-btn">
+                            <i class="fas fa-search-dollar"></i> Usa Prezzo Corrente
+                        </button>
+                    </div>
+                    <button type="submit" class="btn btn-buy" id="tx-buy-btn">
+                        <i class="fas fa-plus"></i> Registra Acquisto
+                    </button>
+                    <div id="tx-loader" class="loader" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
                 </form>
-                <div class="staking-result-table" id="staking-result-table">
-                </div>
             </div>
-        </section>
 
-        <section id="page-partners" class="app-page">
-            <h2>Piattaforme Consigliate</h2>
+            <h3>I Tuoi Asset</h3>
+            <div id="holdings-list"></div>
+
+            <h3 class="mt-4">Cronologia Transazioni</h3>
+            <div id="transaction-list"></div>
+        </div>
+
+        <div id="view-mercato" class="view">
+            <h2>Mercato</h2>
             
-            <div class="platform-list">
-                
-                <a href="https://www.financeads.net/tc.php?t=78725C290656288T" target="_blank" class="platform-item">
-                    <div class="platform-logo"></div>
-                    <div class="platform-info">
-                        <h3>Bitpanda</h3>
-                        <p>Ideale per principianti, acquista crypto, azioni e metalli.</p>
-                    </div>
-                    <span class="btn btn-small" style="width: auto;">Visita</span>
-                    <img src="https://www.financeads.net/tb.php?t=78725V290656288T" alt="" border="0" width="0" height="0" style="display:none;">
-                </a>
-                
-                <a href="https://www.financeads.net/tc.php?t=78725C4746108270T" target="_blank" class="platform-item">
-                    <div class="platform-logo"></div>
-                    <div class="platform-info">
-                        <h3>Kraken</h3>
-                        <p>Commissioni basse e trading avanzato per esperti.</p>
-                    </div>
-                    <span class="btn btn-small" style="width: auto;">Visita</span>
-                    <img src="https://www.financeads.net/tb.php?t=78725V4746108270T" alt="" border="0" width="0" height="0" style="display:none;">
-                </a>
-
-                <a href="https://www.financeads.net/tc.php?t=78725C5508129482T" target="_blank" class="platform-item">
-                    <div class="platform-logo"></div>
-                    <div class="platform-info">
-                        <h3>Moonpay</h3>
-                        <p>Acquista crypto istantaneamente con carta di credito.</p>
-                    </div>
-                    <span class="btn btn-small" style="width: auto;">Visita</span>
-                    <img src="https://www.financeads.net/tb.php?t=78725V5508129482T" alt="" border="0" width="0" height="0" style="display:none;">
-                </a>
-
-                <a href="https://www.financeads.net/tc.php?t=78725C324060796T" target="_blank" class="platform-item">
-                    <div class="platform-logo"></div>
-                    <div class="platform-info">
-                        <h3>YouHodler</h3>
-                        <p>Fai lavorare le tue crypto e guadagna interessi passivi.</p>
-                    </div>
-                    <span class="btn btn-small" style="width: auto;">Guadagna</span>
-                    <img src="https://www.financeads.net/tb.php?t=78725V324060796T" alt="" border="0" width="0" height="0" style="display:none;">
-                </a>
-
+            <div class="pill-nav">
+                <button class="pill-btn active" data-market-view="news">
+                    <i class="fas fa-newspaper"></i> Notizie
+                </button>
+                <button class="pill-btn" data-market-view="gainers">
+                    <i class="fas fa-chart-line"></i> Top Gainers
+                </button>
+                <button class="pill-btn" data-market-view="losers">
+                    <i class="fas fa-chart-area"></i> Top Losers
+                </button>
             </div>
-        </section>
+
+            <div id="market-loader" class="loader" style="display: none; padding: 2rem;">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+
+            <div id="market-view-news" class="market-view active"></div>
+            <div id="market-view-gainers" class="market-view"></div>
+            <div id="market-view-losers" class="market-view"></div>
+        </div>
         
-        <section id="page-settings" class="app-page">
-            <h2>Impostazioni</h2>
-
-            <div class="card" id="manual-install-card" style="display: none;">
-                <h3><i class="fas fa-download" style="margin-right: 10px;"></i> Installa App</h3>
-                <p style="color: var(--text-dark); margin-bottom: 1.5rem;">
-                   Installa questa app sul tuo dispositivo per un accesso rapido
-                   e per usarla come un'app nativa.
-                </p>
-                <button class="btn" id="manual-install-btn">Installa sul dispositivo</button>
-            </div>
-            
+        <div id="view-convertitore" class="view">
+            <h2>Convertitore</h2>
             <div class="card">
-                <h3><i class="fas fa-save" style="margin-right: 10px;"></i> Backup Dati App</h3>
-                <p style="color: var(--text-dark); margin-bottom: 1.5rem;">
-                    Usa "Esporta" per salvare un codice di backup. Questo codice contiene
-                    **tutti i dati dell'app** (transazioni E valori del calcolatore).
-                </p>
-                <button class="btn" id="export-btn">Esporta Dati App</button>
-                <hr style="border-color: var(--primary-bg); margin: 1.5rem 0;">
-                <div class="form-group">
-                    <label for="import-data">Incolla qui il tuo codice di backup</label>
-                    <textarea id="import-data" rows="5" placeholder="..."></textarea>
+                <div class="card-content">
+                    <div class="converter-ui">
+                        <div class="converter-group">
+                            <label for="convert-from">Da:</label>
+                            <input type="number" id="convert-amount" value="1">
+                            <select id="convert-from"></select>
+                        </div>
+                        <div class="converter-swap">
+                            <button id="convert-swap-btn" class="btn-outline"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                        <div class="converter-group">
+                            <label for="convert-to">A:</label>
+                            <input type="text" id="convert-result" readonly placeholder="0.00">
+                            <select id="convert-to"></select>
+                        </div>
+                    </div>
+                    <button class="btn" id="convert-btn">Converti</button>
                 </div>
-                <button class="btn btn-outline" id="import-btn" style="margin-top: 1rem;">Importa Dati App</button>
+            </div>
+        </div>
+
+        <div id="view-calcolatore" class="view">
+            <h2>Calcolatore Interessi</h2>
+            <div class="calc-summary">
+                <div class="summary-box">
+                    <span>Valore Finale</span>
+                    <h2 id="calc-total-value">0.00 €</h2>
+                </div>
+                <div class="summary-box">
+                    <span>Totale Interessi</span>
+                    <h3 id="calc-total-interest" class="text-profit">0.00 €</h3>
+                </div>
+                <div class="summary-box">
+                    <span>Totale Investito</span>
+                    <h3 id="calc-total-invested">0.00 €</h3>
+                </div>
+            </div>
+
+            <div class="card staking-calculator">
+                <div class="card-header">
+                     <h3>Simulatore di Risparmio</h3>
+                </div>
+                <div class="card-content">
+                    <div class="calc-input-group">
+                        <div>
+                            <label for="stakingInitial">Investimento Iniziale (€)</label>
+                            <input type="number" id="stakingInitial" value="1000">
+                        </div>
+                        <div>
+                            <label for="stakingMonthly">Contributo Mensile (€)</label>
+                            <input type="number" id="stakingMonthly" value="100">
+                        </div>
+                        <div>
+                            <label for="stakingAPY">Interesse Annuo (APY %)</label>
+                            <input type="number" id="stakingAPY" value="8">
+                        </div>
+                        <div>
+                            <label for="stakingYears">Durata (Anni)</label>
+                            <input type="number" id="stakingYears" value="5">
+                        </div>
+                    </div>
+                    <button class="btn" id="calculate-staking-btn">
+                        <i class="fas fa-calculator"></i> Calcola
+                    </button>
+                </div>
             </div>
             
-            <div class="card">
-                <h3><i class="fas fa-trash-alt" style="margin-right: 10px;"></i> Resetta App</h3>
-                <p style="color: var(--text-dark); margin-bottom: 1.5rem;">
-                   Attenzione: questo cancellerà **tutti** i tuoi dati salvati.
-                </p>
-                <button class="btn btn-danger" id="reset-app-btn">Cancella Tutti i Dati</button>
+            <h3 class="text-center" id="staking-summary-title" style="display: none;">Riepilogo Anno per Anno</h3>
+            <div id="staking-summary-list"></div>
+        </div>
+        
+        <div id="view-piattaforme" class="view">
+            <h2>Piattaforme Consigliate</h2>
+            <p class="text-center" style="color: var(--text-dark);">Le piattaforme che usiamo e raccomandiamo per diverse esigenze.</p>
+            
+            <div class="platforms-grid">
+                <div class="platform-card">
+                    <img src="assets/images/logo-bitpanda.png" alt="Bitpanda Logo" class="platform-logo">
+                    <h3>Bitpanda</h3>
+                    <p>Ideale per principianti, offre un'interfaccia intuitiva e una vasta gamma di asset.</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C290656288T" target="_blank" class="btn">Scopri Bitpanda</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V290656288T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
+                <div class="platform-card">
+                    <img src="assets/images/logo-kraken.png" alt="Kraken Logo" class="platform-logo">
+                    <h3>Kraken</h3>
+                    <p>Per i trader più esperti. Offre commissioni competitive e strumenti avanzati (Kraken Pro).</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C4746108270T" target="_blank" class="btn">Vai a Kraken Pro</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V4746108270T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
+                <div class="platform-card">
+                    <img src="assets/images/logo-youhodler.png" alt="YouHodler Logo" class="platform-logo">
+                    <h3>YouHodler</h3>
+                    <p>Fai lavorare le tue cripto. Leader per guadagnare interessi (come nel calcolatore) e ottenere prestiti.</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C324060796T" target="_blank" class="btn">Guadagna Interessi</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V324060796T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
+                <div class="platform-card">
+                    <img src="assets/images/logo-moonpay.png" alt="Moonpay Logo" class="platform-logo">
+                    <h3>Moonpay</h3>
+                    <p>La soluzione più rapida per acquistare criptovalute istantaneamente con carta di credito o Apple Pay.</p>
+                    <a href="https://www.financeads.net/tc.php?t=78725C5508129482T" target="_blank" class="btn">Compra Veloce</a>
+                    <img src="https://www.financeads.net/tb.php?t=78725V5508129482T" alt="" border="0" width="0" height="0" style="display:none;">
+                </div>
             </div>
-        </section>
+        </div>
 
+        <div id="view-settings" class="view">
+            <h2>Impostazioni</h2>
+            
+            <div class="card" id="install-section">
+                <div class="card-header">
+                    <h3>Installa App</h3>
+                </div>
+                <div class="card-content">
+                    <div id="install-prompt-desktop" class="install-prompt" style="display:none;">
+                        <p>Installa questa app sul tuo dispositivo per un accesso rapido e offline.</p>
+                        <button class="btn" id="install-app-btn">Installa App</button>
+                    </div>
+                    <div id="install-prompt-ios" class="install-prompt" style="display:none;">
+                        <p>Per installare su iPhone:</p>
+                        <ol>
+                            <li>Tocca l'icona "Condividi" <i class="fas fa-share-alt"></i> in Safari.</li>
+                            <li>Scorri verso il basso e tocca "Aggiungi alla schermata Home".</li>
+                            <li>Conferma toccando "Aggiungi".</li>
+                        </ol>
+                    </div>
+                    <div id="install-prompt-installed" class="install-prompt" style="display:none;">
+                        <p class="text-profit"><i class="fas fa-check-circle"></i> L'app è già installata!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Backup e Trasferimento Dati</h3>
+                </div>
+                <div class="card-content">
+                    <p>Le tue transazioni sono salvate solo su questo dispositivo.</p>
+                    <h4>Esporta Dati</h4>
+                    <button class="btn" id="export-btn">Esporta Backup</button>
+                    <hr class="spacer">
+                    <h4>Importa Dati</h4>
+                    <textarea id="import-area" rows="5" placeholder="Incolla qui i dati JSON..."></textarea>
+                    <button class="btn btn-outline" id="import-btn">Importa Dati</button>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <div class="modal-overlay" id="add-tx-modal-overlay"></div>
-    <div class="modal-content" id="add-tx-modal">
-        <h3>Registra Acquisto</h3>
-        <form id="add-tx-form">
-            <div class="form-group">
-                <label for="tx-coin-search">Cerca Crypto</label>
-                <input type="text" id="tx-coin-search" placeholder="Es. Bitcoin..." required autocomplete="off">
-                <div class="search-results" id="search-results"></div>
-            </div>
-            <input type="hidden" id="tx-coin-id">
-            <input type="hidden" id="tx-coin-icon">
-            <input type="hidden" id="tx-coin-price-live">
-            <div class="form-group" id="live-price-display" style="display: none;">
-                <label>Prezzo Attuale (per unità)</label>
-                <p id="live-price-text" style="font-size: 1.5rem; font-weight: 700; color: var(--text-light); margin: 0;"></p>
-            </div>
-            <div class="form-group">
-                <label for="tx-euros-invested">Importo Investito (€)</label>
-                <input type="number" step="0.01" id="tx-euros-invested" placeholder="Es. 1000" required>
-            </div>
-            <div class="modal-buttons">
-                <button type="button" class="btn btn-outline" id="modal-cancel-btn">Annulla</button>
-                <button type="submit" class="btn">Salva Acquisto</button>
-            </div>
-        </form>
-    </div>
-    
-    <div class="modal-overlay" id="sell-tx-modal-overlay"></div>
-    <div class="modal-content" id="sell-tx-modal">
-        <h3>Conferma Vendita</h3>
-        <p style="color: var(--text-light);">Stai vendendo:</p>
-        <h3 id="sell-modal-title" style="margin-top: 0; color: var(--gradient-end);">...</h3>
-        
-        <div id="sell-modal-details">
-            <div class="spinner-container" id="sell-price-spinner">
-                <div class="spinner"></div>
-                <p style="color: var(--text-dark);">Caricamento prezzo live...</p>
-            </div>
-            <div id="sell-confirmation-details" style="display: none;">
-                <p>Costo Acquisto: <strong id="sell-cost">€0.00</strong></p>
-                <p>Valore Vendita (Live): <strong id="sell-value">€0.00</strong></p>
-                <hr style="border-color: var(--primary-bg); margin: 1rem 0;">
-                <p style="font-size: 1.2rem;">Profitto/Perdita Stimato:</p>
-                <h2 id="sell-profit" class="pl-good" style="margin-bottom: 0;">+€0.00</h2>
-            </div>
-        </div>
-
-        <div class="modal-buttons" style="margin-top: 2rem;">
-            <button type="button" class="btn btn-outline" id="modal-sell-cancel-btn">Annulla</button>
-            <button type="button" class="btn btn-danger" id="modal-sell-confirm-btn" disabled>Conferma Vendita</button>
-        </div>
-    </div>
-
-
-    <button class="fab" id="fab-add-tx">
-        <i class="fas fa-plus"></i>
-    </button>
-
     <nav class="bottom-nav">
-        <button class="nav-item active" data-page="page-portfolio">
-            <i class="fas fa-chart-pie"></i><span>Cruscotto</span>
-        </button>
-        <button class="nav-item" data-page="page-calculators">
-            <i class="fas fa-calculator"></i><span>Calcolatori</span>
-        </button>
-        <button class="nav-item" data-page="page-partners">
-            <i class="fas fa-rocket"></i><span>Piattaforme</span>
-        </button>
-        <button class="nav-item" data-page="page-settings">
-            <i class="fas fa-cog"></i><span>Impostazioni</span>
-        </button>
+        <a href="#portfolio" class="nav-link active" data-view="portfolio">
+            <i class="fas fa-wallet"></i>
+            <span>Portfolio</span>
+        </a>
+        <a href="#mercato" class="nav-link" data-view="mercato">
+            <i class="fas fa-chart-bar"></i>
+            <span>Mercato</span>
+        </a>
+        <a href="#convertitore" class="nav-link" data-view="convertitore">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Converti</span>
+        </a>
+        <a href="#calcolatore" class="nav-link" data-view="calcolatore">
+            <i class="fas fa-calculator"></i>
+            <span>Calcolatore</span>
+        </a>
+        <a href="#piattaforme" class="nav-link" data-view="piattaforme">
+            <i class="fas fa-rocket"></i>
+            <span>Piattaforme</span>
+        </a>
+        <a href="#settings" class="nav-link" data-view="settings">
+            <i class="fas fa-cog"></i>
+            <span>Impostazioni</span>
+        </a>
     </nav>
+
+    <div class="modal-overlay" id="sell-modal-overlay" style="display: none;">
+        <div class="modal-content" id="sell-modal-content">
+            <button class="modal-close" id="sell-modal-close">&times;</button>
+            <h3 id="sell-modal-title">Vendi Asset</h3>
+            <form id="sell-modal-form">
+                <p id="sell-modal-text" class="text-dark">Stai vendendo <strong>tutte</strong> le tue unità.</p>
+                <div class="form-group">
+                    <label for="sell-price">A quale prezzo per unità (€)?</label>
+                    <input type="number" id="sell-price" step="any" required>
+                </div>
+                <button type="submit" class="btn btn-sell">Conferma Vendita</button>
+            </form>
+        </div>
+    </div>
 
     <script src="toolkit-script.js"></script>
 </body>

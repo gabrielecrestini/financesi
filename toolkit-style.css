@@ -1,6 +1,4 @@
-/* ============================================== */
-/* STILE GLOBALE E VARIABILI (DAL TUO SITO)      */
-/* ============================================== */
+/* --- Importa Variabili dal CSS Principale --- */
 :root {
     --primary-bg: #0F0F1A;
     --secondary-bg: #1A1A2A;
@@ -12,15 +10,16 @@
     --border-radius: 8px;
     --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     
-    --color-profit: #00FFC2; /* Verde */
-    --color-loss: #FF5050; /* Rosso */
-    
-    --font-heading: 'Inter', sans-serif;
-    --font-body: 'Lato', sans-serif;
-    
-    --nav-height: 65px;
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+
+    /* Colori specifici App */
+    --profit: #00FFC2;
+    --loss: #FF4D4D;
+    --neutral: #EFEFEF;
 }
 
+/* --- Setup Base dell'App --- */
 * {
     margin: 0;
     padding: 0;
@@ -32,8 +31,8 @@ body {
     color: var(--text-light);
     background-color: var(--primary-bg);
     line-height: 1.6;
-    padding-bottom: var(--nav-height);
-    padding-top: 60px; /* Spazio per pop-up PWA */
+    font-size: 16px;
+    padding-bottom: 80px; 
 }
 
 h1, h2, h3, h4 {
@@ -42,109 +41,563 @@ h1, h2, h3, h4 {
     color: var(--text-light);
     margin-bottom: 1rem;
 }
-h2 { font-size: 1.8rem; }
-h3 { font-size: 1.2rem; font-weight: 700; }
 
-a {
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+
+a { color: var(--accent-color); text-decoration: none; }
+.mt-4 { margin-top: 2.5rem; }
+
+.text-center { text-align: center; }
+.text-profit { color: var(--profit) !important; }
+.text-loss { color: var(--loss) !important; }
+.text-neutral { color: var(--neutral) !important; }
+
+/* --- Banner Aggiornamento App --- */
+#app-update-banner {
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    padding: 1rem;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    box-shadow: 0 5px 15px rgba(0, 168, 255, 0.4);
+}
+#app-reload-btn {
+    background: var(--primary-bg);
     color: var(--accent-color);
-    text-decoration: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    margin-left: 1rem;
+    cursor: pointer;
 }
 
-.container {
+/* --- Header Fisso --- */
+.header {
+    background: var(--secondary-bg);
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 2px solid var(--accent-color);
+    margin-top: 0;
+    transition: margin-top 0.3s ease;
+}
+body.update-available .header {
+    margin-top: 50px; /* Altezza del banner */
+}
+
+/* [MODIFICATO] Portfolio Summary per 4 elementi */
+.portfolio-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem; /* Aumentato gap */
+}
+.summary-box span {
+    font-size: 0.8rem; /* Riduci per più spazio */
+    color: var(--text-dark);
+}
+.summary-box h2 {
+    font-size: 1.1rem; /* Riduci per più spazio */
+    margin: 0;
+    color: var(--text-light);
+    font-weight: 700;
+}
+.summary-box h3 {
+    font-size: 1.0rem; /* Riduci per più spazio */
+    margin: 0;
+}
+.portfolio-summary .summary-box:nth-child(1) h2 {
+    color: var(--accent-color);
+    font-size: 1.2rem;
+}
+.portfolio-summary .summary-box:nth-child(2) h2 {
+    color: var(--text-light);
+    font-size: 1.2rem;
+}
+@media (min-width: 600px) {
+     .portfolio-summary {
+        grid-template-columns: repeat(4, 1fr);
+     }
+     .summary-box h2 { font-size: 1.3rem; }
+     .summary-box h3 { font-size: 1.1rem; }
+     .portfolio-summary .summary-box:nth-child(1) h2 { font-size: 1.4rem; }
+     .portfolio-summary .summary-box:nth-child(2) h2 { font-size: 1.4rem; }
+}
+
+/* --- Stile Card Migliorato --- */
+.card {
+    background-color: var(--secondary-bg);
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+.add-form-card {
+    padding: 0;
+}
+.card-header {
+    background-color: var(--primary-bg);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--text-dark);
+}
+.card-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+.card-content {
     padding: 1.5rem;
 }
 
-.back-to-home {
-    display: inline-block;
-    color: var(--text-dark);
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-.back-to-home:hover {
-    color: var(--text-light);
-}
-.back-to-home i {
-    margin-right: 0.5rem;
-}
 
-
-/* ============================================== */
-/* LAYOUT PRINCIPALE APP (PAGINE/SCHEDE)         */
-/* ============================================== */
-.app-page {
-    display: none; 
-}
-.app-page.active {
-    display: block;
+/* --- Viste (Pagine) --- */
+.view {
+    display: none;
     animation: fadeIn 0.3s ease;
+}
+.view.active {
+    display: block;
 }
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ============================================== */
-/* BARRA DI NAVIGAZIONE INFERIORE (MOBILE)       */
-/* ============================================== */
+/* --- Form --- */
+.add-form .form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+@media (min-width: 768px) {
+    .add-form .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+.add-form .form-grid-single {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+.form-price-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: flex-end;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+@media (min-width: 768px) {
+    .form-price-group {
+        grid-template-columns: 1fr auto;
+    }
+}
+.form-price-group .btn-outline {
+    padding: 0.75rem 1rem;
+    height: 47px; 
+    font-size: 0.9rem;
+}
+.form-price-group .btn-outline i {
+    margin-right: 0.5rem;
+}
+.add-form label {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.add-form input {
+    background: var(--primary-bg);
+    border: 1px solid var(--text-dark);
+    border-radius: var(--border-radius);
+    color: var(--text-light);
+    padding: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    width: 100%;
+}
+.tx-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.loader {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-top: 1rem;
+}
+
+/* --- Stili Ricerca Asset (Portfolio e Watchlist) --- */
+#search-results, #watchlist-search-results {
+    position: absolute;
+    background: var(--secondary-bg);
+    border: 1px solid var(--accent-color);
+    border-radius: var(--border-radius);
+    margin-top: 5px;
+    display: none;
+    z-index: 100;
+    width: 90%;
+    max-width: 400px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+.search-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.75rem;
+    color: var(--text-light);
+    cursor: pointer;
+    border-bottom: 1px solid var(--primary-bg);
+}
+.search-item:hover {
+    background: var(--primary-bg);
+}
+.search-item:last-child {
+    border-bottom: none;
+}
+.search-item img {
+    width: 24px;
+    height: 24px;
+}
+
+/* --- Lista Riepilogo Asset (Holdings) --- */
+.holding-card {
+    background: var(--secondary-bg);
+    border-radius: var(--border-radius);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--accent-color);
+}
+.holding-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+.holding-header .btn-sell {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    animation: none; /* Rimuove animazione pulsante */
+}
+.holding-card h3 {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    margin: 0;
+    text-transform: capitalize;
+}
+.holding-card .asset-id {
+    font-size: 0.8rem;
+    color: var(--text-dark);
+}
+.holding-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+.holding-metric span {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    display: block;
+}
+.holding-metric strong {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+.holding-metric.value {
+    text-align: right;
+}
+.holding-metric.value strong {
+    font-size: 1.3rem;
+}
+.holding-metric.pl {
+    text-align: right;
+}
+
+/* --- Lista Cronologia Transazioni --- */
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--secondary-bg);
+}
+.transaction-item:last-child {
+    border-bottom: none;
+}
+.tx-details { font-size: 1rem; }
+.tx-details strong {
+    color: var(--text-light);
+    font-family: var(--font-heading);
+}
+.tx-details .tx-name {
+    text-transform: capitalize;
+    font-size: 1.1rem;
+}
+.tx-details .tx-meta {
+    font-size: 0.8rem;
+    color: var(--text-dark);
+}
+.tx-amount {
+    text-align: right;
+    font-size: 1rem;
+    font-weight: 700;
+}
+.tx-amount.buy { color: var(--profit); }
+.tx-amount.sell { color: var(--loss); }
+.delete-tx-btn {
+    background: none;
+    border: none;
+    color: var(--text-dark);
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.delete-tx-btn:hover { color: var(--loss); }
+
+/* --- Stili Pagina Mercato --- */
+.pill-nav {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.pill-btn {
+    flex-grow: 1;
+    background: var(--secondary-bg);
+    border: 2px solid var(--secondary-bg);
+    color: var(--text-dark);
+    padding: 0.75rem 0.5rem; /* Riduci padding per 3 tab */
+    border-radius: var(--border-radius);
+    font-family: var(--font-heading);
+    font-size: 0.8rem; /* Riduci font per 3 tab */
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.pill-btn:hover {
+    color: var(--text-light);
+}
+.pill-btn.active {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    background: var(--primary-bg);
+}
+.pill-btn i {
+    margin-right: 0.3rem;
+}
+.market-view {
+    display: none;
+    background: var(--secondary-bg);
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+}
+.market-view.active {
+    display: block;
+}
+@media (max-width: 380px) {
+    /* Nascondi icone su schermi piccoli */
+    .pill-btn i { display: none; }
+}
+
+/* Stili Notizie */
+.news-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--primary-bg);
+    text-decoration: none;
+}
+.news-item:last-child { border-bottom: none; }
+.news-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+.news-item-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+    color: var(--text-light);
+}
+.news-item-content p {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+.news-item-content small {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    margin-top: 0.5rem;
+    display: block;
+}
+
+/* Stili Gainers/Losers */
+.gainer-loser-row {
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--primary-bg);
+}
+.gainer-loser-row:last-child { border-bottom: none; }
+.gainer-loser-row img {
+    width: 30px;
+    height: 30px;
+}
+.gainer-loser-row .coin-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.gainer-loser-row .coin-name span {
+    font-size: 0.8rem;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    display: block;
+}
+.gainer-loser-row .coin-price {
+    text-align: right;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.gainer-loser-row .coin-price span {
+    font-size: 0.9rem;
+    display: block;
+}
+
+/* --- Stili Pagina Convertitore --- */
+.converter-ui {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+.converter-group {
+    width: 100%;
+}
+.converter-group label {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+.converter-group input, .converter-group select {
+    background: var(--primary-bg);
+    border: 1px solid var(--text-dark);
+    border-radius: var(--border-radius);
+    color: var(--text-light);
+    padding: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    width: 100%;
+}
+.converter-group input#convert-result {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--profit);
+}
+.converter-swap .btn-outline {
+    padding: 0.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1rem;
+}
+#convert-btn {
+    width: 100%;
+}
+
+
+/* --- Navigazione in Basso --- */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: var(--nav-height);
-    background-color: var(--secondary-bg);
-    border-top: 2px solid var(--accent-color);
+    height: 65px;
+    background: var(--secondary-bg);
     display: flex;
     justify-content: space-around;
-    align-items: flex-start;
-    padding-top: 8px;
-    z-index: 1000;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+    align-items: center;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+    border-top: 1px solid var(--text-dark);
+    z-index: 100;
 }
-.nav-item {
+.nav-link {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     color: var(--text-dark);
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 0.75rem;
-    border: none;
-    background: none;
-    cursor: pointer;
-    transition: color 0.2s ease;
-    flex: 1; 
-    height: 100%;
-    padding-top: 8px;
-    margin-top: -8px;
+    font-size: 0.7rem; /* Riduci per 6 elementi */
+    text-align: center;
+    transition: color 0.3s ease;
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 0 0.1rem;
 }
-.nav-item i {
-    font-size: 1.5rem;
+.nav-link i {
+    font-size: 1.2rem; /* Riduci per 6 elementi */
     margin-bottom: 4px;
 }
-.nav-item:hover {
-    color: var(--text-light);
-}
-.nav-item.active {
+.nav-link:hover,
+.nav-link.active {
     color: var(--accent-color);
 }
 
-
-/* ============================================== */
-/* STILI COMPONENTI (Pulsanti, Input, Card)      */
-/* ============================================== */
-.btn {
-    display: block; 
+/* --- Stili Pagina Impostazioni --- */
+.install-prompt p {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+.install-prompt ol {
+    color: var(--text-dark);
+    margin-left: 1.5rem;
+}
+.install-prompt li {
+    margin-bottom: 0.5rem;
+}
+.install-prompt li i {
+    color: var(--accent-color);
+}
+#import-area {
     width: 100%;
-    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+    background: var(--primary-bg);
+    border: 1px solid var(--text-dark);
+    border-radius: var(--border-radius);
+    color: var(--text-light);
+    padding: 0.75rem;
+    font-family: monospace;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+.spacer {
+    border: none;
+    height: 1px;
+    background-color: var(--primary-bg);
+    margin: 2rem 0;
+}
+
+/* --- Pulsanti --- */
+.btn {
+    display: inline-block;
+    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end), var(--gradient-start));
     background-size: 200% auto;
     color: var(--primary-bg);
-    padding: 1rem;
+    padding: 0.8rem 1.5rem;
     border-radius: var(--border-radius);
     text-transform: uppercase;
     font-weight: 700;
@@ -155,476 +608,273 @@ a {
     box-shadow: var(--shadow);
     font-family: var(--font-heading);
     text-align: center;
-    font-size: 1rem;
+    animation: gradient-animation 4s ease infinite;
 }
 .btn:hover {
-    background-position: right center;
     transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 255, 194, 0.4);
+    background-position: right center;
 }
-.btn:disabled {
-    background: var(--text-dark) !important;
-    cursor: not-allowed !important;
-    transform: none !important;
-}
-.btn.btn-danger {
-    background: #c13a3a;
-}
-.btn.btn-danger:hover {
-    background: #ff5252;
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 .btn-outline {
     background: transparent;
     border: 2px solid var(--accent-color);
     color: var(--accent-color);
+    box-shadow: none;
     animation: none;
+    background-size: auto;
     background-image: none;
 }
 .btn-outline:hover {
     background: var(--accent-color);
     color: var(--primary-bg);
+    background-position: initial;
 }
-
-.fab {
-    position: fixed;
-    bottom: calc(var(--nav-height) + 20px);
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
-    border-radius: 50%;
-    border: none;
+.btn-buy {
+    background: linear-gradient(45deg, var(--gradient-end), #00c99a);
     color: var(--primary-bg);
-    font-size: 1.8rem;
-    font-weight: 700;
-    box-shadow: 0 8px 20px rgba(0, 255, 194, 0.4);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1001;
-    transition: all 0.3s ease;
+    animation: none;
 }
-.fab:hover {
-    transform: scale(1.1) rotate(90deg);
-}
-
-/* --- Card --- */
-.card {
-    background-color: var(--secondary-bg);
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    margin-bottom: 1.5rem;
-}
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-}
-.card-header h3 {
-    margin-bottom: 0;
-}
-
-/* --- Form e Input --- */
-.form-group {
-    margin-bottom: 1.5rem;
-    position: relative; /* Per i suggerimenti */
-}
-.form-group label {
-    display: block;
+.btn-sell {
+    background: linear-gradient(45deg, var(--loss), #e04040);
     color: var(--text-light);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+    animation: none;
 }
-.form-group input,
-.form-group select,
-.form-group textarea {
+
+
+/* --- Stili Calcolatore Semplice --- */
+.calc-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.calc-summary .summary-box {
+    background: var(--secondary-bg);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+.calc-summary .summary-box:nth-child(1) {
+    grid-column: 1 / -1;
+    border-top: 4px solid var(--accent-color);
+}
+.calc-summary .summary-box:nth-child(1) h2 {
+    color: var(--accent-color);
+}
+.calc-summary .summary-box span {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+.calc-summary .summary-box h2 {
+    font-size: 1.6rem;
+    margin: 0;
+}
+.calc-summary .summary-box h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+.calc-input-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.calc-input-group label {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.calc-input-group input {
     background: var(--primary-bg);
     border: 1px solid var(--text-dark);
     border-radius: var(--border-radius);
     color: var(--text-light);
-    padding: 0.9rem;
+    padding: 0.75rem;
     font-family: var(--font-body);
     font-size: 1rem;
     width: 100%;
 }
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: var(--accent-color);
-    outline: none;
-    box-shadow: 0 0 10px rgba(0, 168, 255, 0.3);
+.staking-calculator .btn {
+    width: 100%;
 }
-.input-help-text {
-    font-size: 0.85rem;
-    color: var(--text-dark);
-    margin-top: 0.5rem;
-}
-
-/* Stili Suggerimenti Ricerca */
-.search-results {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: var(--secondary-bg);
-    border: 1px solid var(--text-dark);
-    border-top: none;
-    border-radius: 0 0 var(--border-radius) var(--border-radius);
-    z-index: 3000;
-    max-height: 200px;
-    overflow-y: auto;
-}
-.search-item {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-.search-item:hover {
-    background-color: var(--primary-bg);
-}
-.search-item img {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-    border-radius: 50%;
-}
-.search-item span {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    color: var(--text-light);
-}
-.search-item small {
-    margin-left: 0.5rem;
-    color: var(--text-dark);
-    text-transform: uppercase;
-}
-
-
-/* ============================================== */
-/* STILI SPECIFICI SCHEDE APP                    */
-/* ============================================== */
-
-/* --- Scheda 1: Cruscotto Portfolio --- */
-.portfolio-summary {
-    text-align: center;
-    padding: 1rem 0;
-}
-.portfolio-summary p {
-    font-size: 1rem;
-    color: var(--text-dark);
-    margin-bottom: 0.5rem;
-}
-.portfolio-summary h1 {
-    font-size: 3rem;
-    font-weight: 900;
-    margin-bottom: 0.5rem;
-    color: var(--text-light);
-}
-.pl-good { color: var(--color-profit) !important; }
-.pl-bad { color: var(--color-loss) !important; }
-
-/* Lista Posizioni Aperte */
-.portfolio-list .list-item {
-    display: grid; 
-    grid-template-columns: 40px 1fr 1fr; /* Icona, Info, Costo */
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--primary-bg);
-}
-.portfolio-list .list-item:last-child {
-    border-bottom: none;
-}
-.list-item-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--primary-bg);
-}
-.list-item-info { flex-grow: 1; }
-.list-item-info h3 {
-    margin-bottom: 0;
-    color: var(--text-light);
-    font-size: 1.1rem;
-    text-transform: capitalize;
-}
-.list-item-info p { /* Quantità */
-    color: var(--text-dark);
-    font-size: 0.9rem;
-    margin-bottom: 0;
-}
-.list-item-value { text-align: right; }
-.list-item-value h3 { /* Costo Totale */
-    margin-bottom: 0;
-    color: var(--text-light);
-    font-size: 1.1rem;
-}
-.list-item-value p { /* Prezzo per unità */
-    color: var(--text-dark);
-    font-size: 0.9rem;
-    margin-bottom: 0;
-}
-.list-item .btn-sell {
-    grid-column: 1 / -1; /* Si estende su tutte le colonne */
-    margin-top: 1rem;
-    background: var(--accent-color);
-    font-size: 0.9rem;
-    padding: 0.8rem;
-}
-.list-item .btn-sell:hover {
-    background: var(--gradient-end);
-}
-
-/* Lista Storico Vendite */
-.history-list .history-item {
-    display: grid;
-    grid-template-columns: 40px 1fr;
-    gap: 1rem;
-    padding: 1rem;
-    background-color: var(--primary-bg);
-    border-radius: var(--border-radius);
-    margin-bottom: 1rem;
-}
-.history-item-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--secondary-bg);
-}
-.history-item-info h3 {
-    margin-bottom: 0.25rem;
-    color: var(--text-light);
-    font-size: 1rem;
-    text-transform: capitalize;
-}
-.history-item-info p {
-    font-size: 0.9rem;
-    color: var(--text-dark);
-    margin: 0;
-    line-height: 1.4;
-}
-.history-item-info p strong {
-    font-family: var(--font-heading);
-    color: var(--text-light);
-}
-
-.empty-message {
-    text-align: center;
-    padding: 2rem 0;
-    color: var(--text-dark);
-    font-style: italic;
-}
-
-/* --- Scheda 2: Calcolatori --- */
-/* [MODIFICATO] Layout Staking Avanzato */
-.staking-inputs-advanced {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 Colonne */
-    gap: 1.5rem;
-}
-/* Su mobile (sotto 768px), impila */
-@media (max-width: 768px) {
-    .staking-inputs-advanced {
+@media (max-width: 480px) {
+    .calc-input-group {
         grid-template-columns: 1fr;
     }
 }
-.staking-result-table {
-    overflow-x: auto;
-    margin-top: 1.5rem;
+
+/* Stili Riepilogo Anno per Anno */
+#staking-summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
 }
-.staking-result-table table {
-    width: 100%;
-    border-collapse: collapse;
+.year-summary-card {
+    background: var(--secondary-bg);
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--accent-color);
+    overflow: hidden;
+}
+.year-summary-header {
+    background: var(--primary-bg);
+    padding: 0.75rem 1.5rem;
+    font-size: 1.3rem;
+    font-family: var(--font-heading);
+}
+.year-summary-body {
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+.year-summary-metric {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+.year-summary-metric strong {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    display: block;
+    font-family: var(--font-body);
+}
+.year-summary-metric.total {
+    grid-column: 1 / -1;
+    background: var(--primary-bg);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+.year-summary-metric.total strong {
+    color: var(--profit);
+    font-size: 1.4rem;
+    font-family: var(--font-heading);
+}
+
+/* --- Stili Pagina Piattaforme --- */
+.platforms-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+.platform-card {
+    background-color: var(--secondary-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid transparent;
+    overflow: hidden;
     text-align: left;
 }
-.staking-result-table th, .staking-result-table td {
-    padding: 0.75rem;
-    border-bottom: 1px solid var(--primary-bg);
-}
-.staking-result-table th {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-}
-.staking-result-table td {
-    color: var(--text-dark);
-    font-size: 1rem;
-}
-.staking-result-table td:last-child {
-    font-weight: 700;
-    color: var(--gradient-end);
-}
-
-/* --- Scheda 3: Piattaforme/Partner --- */
-.platform-list .platform-item {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    background-color: var(--secondary-bg);
-    border-radius: var(--border-radius);
-    margin-bottom: 1rem;
-    transition: all 0.3s ease;
-    text-decoration: none; 
-}
-.platform-list .platform-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 255, 194, 0.3);
-}
-.platform-item .platform-logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--primary-bg);
-    margin-right: 1rem;
-    flex-shrink: 0;
-}
-.platform-item .platform-info {
-    flex-grow: 1;
-}
-.platform-item .platform-info h3 {
-    margin-bottom: 0.25rem;
-    color: var(--text-light);
-}
-.platform-item .platform-info p {
-    font-size: 0.9rem;
-    color: var(--text-dark);
-    margin-bottom: 0;
-}
-.platform-item .btn {
-    width: auto; 
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    flex-shrink: 0;
-}
-
-/* ============================================== */
-/* POP-UP "INSTALLA APP" (PWA)      */
-/* ============================================== */
-#install-prompt-container {
-    display: none; 
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    background-color: var(--secondary-bg);
-    border: 2px solid var(--accent-color);
-    border-radius: var(--border-radius);
-    padding: 1rem;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    z-index: 2000;
-    animation: slideDown 0.5s ease;
-}
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-50px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-#install-prompt-container p {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-.install-buttons {
-    display: flex;
-    gap: 10px;
-}
-.install-buttons .btn {
+.platform-logo {
     width: 100%;
-    font-size: 0.9rem;
-    padding: 0.8rem;
+    height: 100px;
+    object-fit: contain;
+    background-color: #FFFFFF;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+.platform-card h3 {
+    font-size: 1.5rem;
+    padding: 0 1.5rem;
+    margin-top: 0;
+}
+.platform-card p {
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    padding: 0 1.5rem;
+    font-size: 0.95rem;
+}
+.platform-card .btn {
+    width: calc(100% - 3rem);
+    margin: 0 1.5rem 1.5rem 1.5rem;
+}
+@media (min-width: 768px) {
+    .platforms-grid:not(.settings-platforms) {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
-/* ============================================== */
-/* STILI MODAL (TUTTI I POP-UP)   */
-/* ============================================== */
+
+/* --- Stili Modal (Pop-up) --- */
 .modal-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
-    z-index: 2001;
-    animation: fadeIn 0.3s ease;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .modal-content {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background: var(--secondary-bg);
     border-radius: var(--border-radius);
-    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1002;
     width: 90%;
     max-width: 400px;
-    z-index: 2002;
-    border-top: 4px solid var(--accent-color);
-    animation: slideUp 0.3s ease;
+    padding: 1.5rem;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
 }
-@keyframes slideUp {
-    from { opacity: 0; transform: translate(-50%, -40%); }
-    to { opacity: 1; transform: translate(-50%, -50%); }
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
-
+.modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+.modal-close:hover {
+    color: var(--text-light);
+}
 .modal-content h3 {
     margin-top: 0;
     margin-bottom: 1.5rem;
-    text-align: center;
+    font-size: 1.5rem;
 }
-.modal-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
+.form-group {
+    margin-bottom: 1.5rem;
 }
-
-/* [NUOVO] Stili per Modal Vendita e Spinner */
-.spinner-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 0;
-}
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid var(--text-dark);
-    border-top-color: var(--accent-color);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-.spinner-container p {
-    margin-top: 1rem;
-    margin-bottom: 0;
+.form-group label {
+    font-size: 0.9rem;
     color: var(--text-dark);
+    display: block;
+    margin-bottom: 0.5rem;
 }
-
-#sell-confirmation-details p {
-    color: var(--text-dark);
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
-}
-#sell-confirmation-details p strong {
+.form-group input {
+    background: var(--primary-bg);
+    border: 1px solid var(--text-dark);
+    border-radius: var(--border-radius);
     color: var(--text-light);
-    font-family: var(--font-heading);
-    font-weight: 700;
+    padding: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    width: 100%;
 }
-#sell-confirmation-details h2 {
-    font-size: 2rem;
-    font-weight: 900;
+.form-group small {
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+.modal-content .btn-sell {
+    width: 100%;
+    animation: none;
 }

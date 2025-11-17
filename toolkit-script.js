@@ -1,666 +1,840 @@
-// Esegui tutto quando il DOM è pronto
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. SELEZIONE ELEMENTI DOM ---
-    
-    // Navigazione
-    const navItems = document.querySelectorAll('.nav-item');
-    const appPages = document.querySelectorAll('.app-page');
-    const fabAddButton = document.getElementById('fab-add-tx');
-
-    // PWA Install
-    const installContainer = document.getElementById('install-prompt-container');
-    const installButton = document.getElementById('install-btn');
-    const dismissButton = document.getElementById('dismiss-btn');
-    // [NUOVO] Pulsante nelle Impostazioni
-    const manualInstallCard = document.getElementById('manual-install-card');
-    const manualInstallBtn = document.getElementById('manual-install-btn');
-
-    // Portfolio
-    const portfolioList = document.getElementById('portfolio-list');
-    const historyList = document.getElementById('history-list');
-    const totalInvestedEl = document.getElementById('total-invested');
-    const livePlEl = document.getElementById('live-pl');
-    const lastUpdatedEl = document.getElementById('last-updated');
-    const emptyPortfolioMessage = document.getElementById('empty-portfolio-message');
-    const emptyHistoryMessage = document.getElementById('empty-history-message');
-
-    // Modal "Aggiungi Transazione"
-    const addTxModal = document.getElementById('add-tx-modal');
-    const addTxModalOverlay = document.getElementById('add-tx-modal-overlay');
-    const addTxForm = document.getElementById('add-tx-form');
-    const modalCancelBtn = document.getElementById('modal-cancel-btn');
-    const txCoinSearchInput = document.getElementById('tx-coin-search');
-    const txCoinIdInput = document.getElementById('tx-coin-id');
-    const txCoinIconInput = document.getElementById('tx-coin-icon');
-    const txCoinPriceInput = document.getElementById('tx-coin-price-live');
-    const txEurosInvestedInput = document.getElementById('tx-euros-invested');
-    const searchResults = document.getElementById('search-results');
-    const livePriceDisplay = document.getElementById('live-price-display');
-    const livePriceText = document.getElementById('live-price-text');
-    
-    // Modal "Vendi Transazione"
-    const sellTxModal = document.getElementById('sell-tx-modal');
-    const sellTxModalOverlay = document.getElementById('sell-tx-modal-overlay');
-    const modalSellCancelBtn = document.getElementById('modal-sell-cancel-btn');
-    const modalSellConfirmBtn = document.getElementById('modal-sell-confirm-btn');
-    const sellModalTitle = document.getElementById('sell-modal-title');
-    const sellPriceSpinner = document.getElementById('sell-price-spinner');
-    const sellConfirmationDetails = document.getElementById('sell-confirmation-details');
-    const sellCostEl = document.getElementById('sell-cost');
-    const sellValueEl = document.getElementById('sell-value');
-    const sellProfitEl = document.getElementById('sell-profit');
-    let currentSellingTx = null;
-    let currentSellPrice = 0;
-    
-    // Calcolatore Staking
-    const stakingForm = document.getElementById('staking-calculator-form');
-    const stakingResultTable = document.getElementById('staking-result-table');
-    const stakingInputs = {
-        initial: document.getElementById('staking-initial'),
-        apy: document.getElementById('staking-apy'),
-        years: document.getElementById('staking-years'),
-        frequency: document.getElementById('staking-frequency'),
-        monthly: document.getElementById('staking-monthly')
-    };
-
-    // Impostazioni (Importa/Esporta)
-    const exportBtn = document.getElementById('export-btn');
-    const importBtn = document.getElementById('import-btn');
-    const importDataEl = document.getElementById('import-data');
-    const resetAppBtn = document.getElementById('reset-app-btn');
-
-    // --- 2. STATO DELL'APPLICAZIONE (IL "DATABASE JS") ---
-    let transactions = []; 
-    let calculatorSettings = {}; 
-    const LEDGER_STORAGE_KEY = 'cryptoLedger_V2';
-    const CALC_STORAGE_KEY = 'stakingCalculator_V1';
-    let searchTimer;
-    let deferredPrompt; // [MODIFICATO] Spostato qui per essere globale
-
-    // --- 3. LOGICA DI NAVIGAZIONE ---
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const targetPageId = item.dataset.page; 
-            navItems.forEach(nav => nav.classList.remove('active'));
-            appPages.forEach(page => page.classList.remove('active'));
-            item.classList.add('active');
-            const targetPage = document.getElementById(targetPageId);
-            if (targetPage) targetPage.classList.add('active');
-            fabAddButton.style.display = (targetPageId === 'page-portfolio') ? 'flex' : 'none';
-        });
-    });
-
-    // --- 4. LOGICA PWA (SERVICE WORKER E INSTALLA) --- [MODIFICATA]
+    // --- REGISTRAZIONE SERVICE WORKER (CON NOTIFICA AGGIORNAMENTO) ---
+    let newWorker;
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js').catch(err => console.error(err));
+        navigator.serviceWorker.register('sw.js').then(reg => {
+            console.log('Service Worker Registrato');
+            reg.addEventListener('updatefound', () => {
+                newWorker = reg.installing;
+                newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        showUpdateBanner();
+                    }
+                });
+            });
+        }).catch(err => console.log('Errore registrazione Service Worker:', err));
+        
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            window.location.reload();
         });
     }
+    
+    function showUpdateBanner() {
+        const banner = document.getElementById('app-update-banner');
+        const reloadBtn = document.getElementById('app-reload-btn');
+        if (banner) {
+            banner.style.display = 'block';
+            document.body.classList.add('update-available');
+        }
+        if (reloadBtn) {
+            reloadBtn.addEventListener('click', () => {
+                newWorker.postMessage({ action: 'skipWaiting' });
+            });
+        }
+    }
 
-    // Controlla se l'app è già installata (modalità standalone)
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        console.log('App già installata (modalità standalone).');
-    } else {
-        console.log('App non installata, attendo il prompt.');
-        
-        window.addEventListener('beforeinstallprompt', (e) => {
+    // --- COSTANTI E VARIABILI DI STATO ---
+    
+    // Elementi Header
+    const totalValueEl = document.getElementById('total-value');
+    const totalInvestedEl = document.getElementById('total-invested'); // [MODIFICA] Ora mostrerà il totale storico
+    const totalUnrealizedPlEl = document.getElementById('total-unrealized-pl');
+    const totalRealizedPlEl = document.getElementById('total-realized-pl');
+    
+    // Elementi Portfolio
+    const addTransactionForm = document.getElementById('add-transaction-form');
+    const holdingsListEl = document.getElementById('holdings-list');
+    const transactionListEl = document.getElementById('transaction-list');
+    const assetNameInput = document.getElementById('asset-name');
+    const searchResultsEl = document.getElementById('search-results');
+    const txTotalCostEl = document.getElementById('tx-total-cost');
+    const txPriceEl = document.getElementById('tx-price');
+    const txBuyBtn = document.getElementById('tx-buy-btn');
+    const txLoader = document.getElementById('tx-loader');
+    const getPriceBtn = document.getElementById('get-price-btn');
+    
+    // Elementi Mercato
+    const marketLoader = document.getElementById('market-loader');
+    const marketPillBtns = document.querySelectorAll('.pill-btn');
+    const marketViewNews = document.getElementById('market-view-news');
+    const marketViewGainers = document.getElementById('market-view-gainers');
+    const marketViewLosers = document.getElementById('market-view-losers');
+    let currentMarketView = 'news';
+    let marketRefreshInterval = null;
+
+    // Elementi Convertitore
+    const convertAmountInput = document.getElementById('convert-amount');
+    const convertFromSelect = document.getElementById('convert-from');
+    const convertToSelect = document.getElementById('convert-to');
+    const convertResultInput = document.getElementById('convert-result');
+    const convertSwapBtn = document.getElementById('convert-swap-btn');
+    const convertBtn = document.getElementById('convert-btn');
+
+    // Elementi Calcolatore
+    const stakingInitialEl = document.getElementById('stakingInitial');
+    const stakingMonthlyEl = document.getElementById('stakingMonthly');
+    const stakingAPYEl = document.getElementById('stakingAPY');
+    const stakingYearsEl = document.getElementById('stakingYears');
+    const calcStakingBtn = document.getElementById('calculate-staking-btn');
+    const calcTotalValueEl = document.getElementById('calc-total-value');
+    const calcTotalInterestEl = document.getElementById('calc-total-interest');
+    const calcTotalInvestedEl = document.getElementById('calc-total-invested');
+    const stakingSummaryListEl = document.getElementById('staking-summary-list');
+    const stakingSummaryTitle = document.getElementById('staking-summary-title');
+    
+    // Elementi Impostazioni (Installazione)
+    const installDesktop = document.getElementById('install-prompt-desktop');
+    const installIos = document.getElementById('install-prompt-ios');
+    const installInstalled = document.getElementById('install-prompt-installed');
+    const installAppBtn = document.getElementById('install-app-btn');
+    
+    // Elementi Modal Vendita
+    const sellModalOverlay = document.getElementById('sell-modal-overlay');
+    const sellModalForm = document.getElementById('sell-modal-form');
+    const sellModalCloseBtn = document.getElementById('sell-modal-close');
+    const sellModalTitle = document.getElementById('sell-modal-title');
+    const sellModalText = document.getElementById('sell-modal-text');
+    const sellPriceInput = document.getElementById('sell-price');
+
+    // Database Locale
+    let transactions = []; 
+    let coinListCache = []; 
+    let fuse; 
+    let portfolioSearch = { id: null, name: null, image: null };
+    let sellModalState = { id: null, name: null, image: null, maxUnits: 0 };
+    let portfolioRefreshInterval = null;
+    let deferredPrompt; 
+    let marketDataCache = { news: null, gainers: null, losers: null };
+    let fiatCurrencies = [
+        { id: 'eur', name: 'Euro', symbol: 'eur', image: 'https://i.imgur.com/v1012iM.png' },
+        { id: 'usd', name: 'US Dollar', symbol: 'usd', image: 'https://i.imgur.com/2Y01zAm.png' },
+        { id: 'gbp', name: 'Pound Sterling', symbol: 'gbp', image: 'https://i.imgur.com/N3Crg1D.png' }
+    ];
+
+    const API_BASE_URL = 'https://api.coingecko.com/api/v3';
+    const NEWS_API_URL = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN&categories=BTC,ETH,Trading,Market';
+    const VS_CURRENCY = 'eur';
+
+    // --- LOGICA DI NAVIGAZIONE ---
+    const navLinks = document.querySelectorAll('.nav-link');
+    const views = document.querySelectorAll('.view');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            deferredPrompt = e;
-            // Mostra il pop-up IN ALTO
-            if (installContainer) installContainer.style.display = 'block';
+            const viewId = link.getAttribute('data-view');
             
-            // [NUOVO] Mostra anche il pulsante nelle IMPOSTAZIONI
-            if (manualInstallCard) manualInstallCard.style.display = 'block';
+            if (portfolioRefreshInterval) clearInterval(portfolioRefreshInterval);
+            if (marketRefreshInterval) clearInterval(marketRefreshInterval);
+            
+            views.forEach(view => view.classList.remove('active'));
+            navLinks.forEach(navLink => navLink.classList.remove('active'));
+            
+            document.getElementById(`view-${viewId}`).classList.add('active');
+            link.classList.add('active');
+            
+            if (viewId === 'portfolio') {
+                updateFullPortfolio();
+                portfolioRefreshInterval = setInterval(fetchPortfolioPrices, 60000); 
+            } else if (viewId === 'mercato') {
+                loadMarketData(currentMarketView, true); 
+                marketRefreshInterval = setInterval(() => loadMarketData(currentMarketView, true), 300000); 
+            } else if (viewId === 'convertitore') {
+                setupConverter();
+            } else if (viewId === 'settings') {
+                setupInstallButton();
+            }
         });
-    }
-
-    // Funzione helper per gestire il clic su "Installa"
-    async function handleInstallPrompt() {
-        if (!deferredPrompt) {
-            alert('L\'app è già installata o il browser non supporta l\'installazione in questo modo.');
-            return;
-        }
-        
-        // Nascondi tutti i prompt
-        if (installContainer) installContainer.style.display = 'none';
-        
-        // Mostra il prompt del browser
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        
-        if (outcome === 'accepted') {
-            console.log('Utente ha accettato l\'installazione');
-            // L'utente ha installato, nascondi il pulsante nelle impostazioni
-             if (manualInstallCard) manualInstallCard.style.display = 'none';
-        } else {
-            console.log('Utente ha rifiutato l\'installazione');
-        }
-        deferredPrompt = null;
-    }
-
-    // Pulsante "Installa" (nel pop-up in alto)
-    if (installButton) {
-        installButton.addEventListener('click', handleInstallPrompt);
-    }
-    
-    // [NUOVO] Pulsante "Installa" (nella pagina Impostazioni)
-    if (manualInstallBtn) {
-        manualInstallBtn.addEventListener('click', handleInstallPrompt);
-    }
-
-    // Pulsante "Più tardi" (nel pop-up in alto)
-    if (dismissButton) {
-        dismissButton.addEventListener('click', () => {
-            // Nasconde solo il pop-up in alto, ma lascia quello nelle impostazioni
-            if (installContainer) installContainer.style.display = 'none';
-        });
-    }
-    
-    // [NUOVO] Nasconde i pulsanti se l'app viene installata con successo
-    window.addEventListener('appinstalled', () => {
-        console.log('App installata con successo!');
-        if (manualInstallCard) manualInstallCard.style.display = 'none';
-        if (installContainer) installContainer.style.display = 'none';
-        deferredPrompt = null;
     });
 
-
-    // --- 5. LOGICA MODAL (APRI/CHIUDI) ---
-    
-    // Modal Aggiungi
-    function openAddModal() {
-        addTxForm.reset();
-        searchResults.innerHTML = '';
-        livePriceDisplay.style.display = 'none';
-        addTxModalOverlay.style.display = 'block';
-        addTxModal.style.display = 'block';
-        txCoinSearchInput.focus();
+    // --- GESTIONE DATI (Storage) ---
+    function loadData() {
+        const savedTransactions = localStorage.getItem('cryptoToolkitTransactions');
+        if (savedTransactions) { transactions = JSON.parse(savedTransactions); }
+        updateFullPortfolio(); 
     }
-    function closeAddModal() {
-        addTxModalOverlay.style.display = 'none';
-        addTxModal.style.display = 'none';
-    }
-    fabAddButton.addEventListener('click', openAddModal);
-    modalCancelBtn.addEventListener('click', closeAddModal);
-    addTxModalOverlay.addEventListener('click', closeAddModal);
-
-    // Modal Vendi
-    async function openSellModal(tx) {
-        currentSellingTx = tx;
-        sellModalTitle.textContent = `${tx.amount.toFixed(6)} ${tx.name}`;
-        
-        sellTxModalOverlay.style.display = 'block';
-        sellTxModal.style.display = 'block';
-        sellConfirmationDetails.style.display = 'none';
-        sellPriceSpinner.style.display = 'flex';
-        modalSellConfirmBtn.disabled = true;
-
-        const price = await fetchLivePrice(tx.id, false);
-        
-        if (price === null) {
-            alert('Impossibile caricare il prezzo live. Controlla la connessione.');
-            closeSellModal();
-            return;
-        }
-
-        currentSellPrice = price;
-        const sellValue = tx.amount * currentSellPrice;
-        const profit = sellValue - tx.cost;
-
-        sellCostEl.textContent = `€${tx.cost.toLocaleString('it-IT', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-        sellValueEl.textContent = `€${sellValue.toLocaleString('it-IT', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-        sellProfitEl.textContent = `${profit >= 0 ? '+' : ''}€${profit.toFixed(2)}`;
-        sellProfitEl.className = profit >= 0 ? 'pl-good' : 'pl-bad';
-
-        sellPriceSpinner.style.display = 'none';
-        sellConfirmationDetails.style.display = 'block';
-        modalSellConfirmBtn.disabled = false;
-    }
-    function closeSellModal() {
-        sellTxModalOverlay.style.display = 'none';
-        sellTxModal.style.display = 'none';
-        currentSellingTx = null;
-        currentSellPrice = 0;
-    }
-    modalSellCancelBtn.addEventListener('click', closeSellModal);
-    sellTxModalOverlay.addEventListener('click', closeSellModal);
-
-
-    // --- 6. LOGICA PORTFOLIO (CUORE DELL'APP) ---
 
     function saveTransactions() {
-        localStorage.setItem(LEDGER_STORAGE_KEY, JSON.stringify(transactions));
-    }
-
-    function loadTransactions() {
-        const savedData = localStorage.getItem(LEDGER_STORAGE_KEY);
-        if (savedData) {
-            transactions = JSON.parse(savedData);
-        }
+        localStorage.setItem('cryptoToolkitTransactions', JSON.stringify(transactions));
     }
     
-    // Funzione API per Molti ID (per il refresh)
-    async function fetchCoinPrices(coinIds) {
-        if (coinIds.length === 0) return {};
+    // --- LOGICA DI RICERCA ASSET (FUSE.JS) ---
+    async function loadCoinList() {
+        if (coinListCache.length > 0) return;
         try {
-            const ids = coinIds.join(',');
-            const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=eur`);
-            if (!response.ok) { throw new Error('Errore di rete CoinGecko'); }
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error("Impossibile caricare i prezzi:", error);
-            lastUpdatedEl.textContent = `Errore caricamento prezzi. Sei online?`;
-            return null;
+            const response = await fetch(`${API_BASE_URL}/coins/markets?vs_currency=${VS_CURRENCY}&order=market_cap_desc&per_page=500&page=1&sparkline=false`);
+            coinListCache = await response.json();
+            fuse = new Fuse(coinListCache, { keys: ['name', 'symbol'], threshold: 0.3 });
+            console.log("Lista Top 500 e Fuse.js caricati.");
+            populateConverterSelects();
+        } catch (error) { 
+            console.error('Errore caricamento lista monete:', error); 
         }
     }
 
-    // Funzione API per Ricerca
-    async function searchCoin(query) {
-        if (query.length < 3) {
-            searchResults.innerHTML = '';
-            livePriceDisplay.style.display = 'none';
-            return;
-        }
-        try {
-            const response = await fetch(`https://api.coingecko.com/api/v3/search?query=${query}`);
-            const data = await response.json();
-            searchResults.innerHTML = '';
-            
-            data.coins.slice(0, 5).forEach(coin => {
+    assetNameInput.addEventListener('input', () => {
+        handleSearch(assetNameInput.value, searchResultsEl, (coin) => {
+            assetNameInput.value = coin.name;
+            portfolioSearch = { id: coin.id, name: coin.name, image: coin.image };
+            searchResultsEl.style.display = 'none';
+        });
+    });
+
+    function handleSearch(query, resultsEl, onSelect) {
+        if (!fuse) { 
+            console.warn("Fuse.js non ancora pronto.");
+            return; 
+        } 
+        query = query.toLowerCase();
+        if (query.length < 2) { resultsEl.style.display = 'none'; return; }
+        const results = fuse.search(query).slice(0, 5); 
+        resultsEl.innerHTML = '';
+        if (results.length > 0) {
+            resultsEl.style.display = 'block';
+            results.forEach(result => {
+                const coin = result.item; 
                 const item = document.createElement('div');
                 item.className = 'search-item';
-                item.innerHTML = `<img src="${coin.thumb}" alt="${coin.name}"><span>${coin.name}</span><small>(${coin.symbol})</small>`;
-                
-                item.addEventListener('click', () => {
-                    txCoinSearchInput.value = coin.name;
-                    txCoinIdInput.value = coin.id;
-                    txCoinIconInput.value = coin.thumb;
-                    searchResults.innerHTML = '';
-                    fetchLivePrice(coin.id, true);
-                });
-                searchResults.appendChild(item);
+                item.innerHTML = `<img src="${coin.image}" alt=""> ${coin.name} (${coin.symbol.toUpperCase()})`;
+                item.addEventListener('click', () => onSelect(coin));
+                resultsEl.appendChild(item);
             });
-        } catch (error) { console.error("Errore ricerca:", error); }
+        } else { resultsEl.style.display = 'none'; }
     }
     
-    // Funzione API per Prezzo Singolo (nel modal)
-    async function fetchLivePrice(coinId, updateModalDisplay) {
-        try {
-            const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=eur`);
-            const data = await response.json();
-            if (data[coinId] && data[coinId].eur) {
-                const price = data[coinId].eur;
-                if (updateModalDisplay) {
-                    txCoinPriceInput.value = price;
-                    livePriceText.textContent = `€${price.toLocaleString('it-IT')}`;
-                    livePriceDisplay.style.display = 'block';
-                }
-                return price;
-            }
-            return null;
-        } catch (error) { 
-            console.error("Errore prezzo:", error); 
-            return null;
-        }
-    }
-    
-    txCoinSearchInput.addEventListener('input', () => {
-        clearTimeout(searchTimer);
-        livePriceDisplay.style.display = 'none';
-        txCoinPriceInput.value = ''; 
-        searchTimer = setTimeout(() => searchCoin(txCoinSearchInput.value), 300);
-    });
-
-    // Aggiunge una transazione di ACQUISTO
-    function handleAddTransaction(event) {
-        event.preventDefault();
-        
-        const coinId = txCoinIdInput.value;
-        const coinName = txCoinSearchInput.value;
-        const coinIcon = txCoinIconInput.value;
-        const livePrice = parseFloat(txCoinPriceInput.value);
-        const eurosInvested = parseFloat(txEurosInvestedInput.value);
-
-        if (!coinId || !livePrice || livePrice <= 0 || !eurosInvested || eurosInvested <= 0) {
-            alert('Errore: Cerca una crypto e inserisci un importo valido.');
+    // --- VISTA PORTFOLIO ---
+    getPriceBtn.addEventListener('click', async () => {
+        if (!portfolioSearch.id) {
+            alert('Per favore, seleziona prima una valuta dal menu a tendina.');
             return;
         }
+        getPriceBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        getPriceBtn.disabled = true;
+        try {
+            const response = await fetch(`${API_BASE_URL}/simple/price?ids=${portfolioSearch.id}&vs_currencies=${VS_CURRENCY}`);
+            const data = await response.json();
+            if (data[portfolioSearch.id] && data[portfolioSearch.id][VS_CURRENCY]) {
+                txPriceEl.value = data[portfolioSearch.id][VS_CURRENCY];
+            } else { alert('Impossibile recuperare il prezzo corrente.'); }
+        } catch (error) { alert('Errore di rete nel recuperare il prezzo.'); }
+        finally {
+            getPriceBtn.innerHTML = '<i class="fas fa-search-dollar"></i> Usa Prezzo Corrente';
+            getPriceBtn.disabled = false;
+        }
+    });
+
+    addTransactionForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleAddTransaction('buy');
+    });
+
+    function handleAddTransaction(type) {
+        let units, pricePerUnit, name, id, image;
         
-        const amountBought = eurosInvested / livePrice;
+        if (type === 'buy') {
+            const totalCost = parseFloat(txTotalCostEl.value);
+            pricePerUnit = parseFloat(txPriceEl.value);
+            if (!portfolioSearch.id || !totalCost || !pricePerUnit) {
+                alert('Per favore, compila tutti i campi: seleziona una valuta, costo totale e prezzo.');
+                return;
+            }
+            if (pricePerUnit <= 0) { alert('Il prezzo per unità non può essere zero.'); return; }
+            units = totalCost / pricePerUnit;
+            name = portfolioSearch.name;
+            id = portfolioSearch.id;
+            image = portfolioSearch.image;
+        } else if (type === 'sell') {
+            units = sellModalState.maxUnits; // Vende tutto
+            pricePerUnit = parseFloat(sellPriceInput.value);
+            if (!units || !pricePerUnit) {
+                alert('Inserisci un prezzo di vendita.');
+                return;
+            }
+            name = sellModalState.name;
+            id = sellModalState.id;
+            image = sellModalState.image;
+        }
 
         const newTransaction = {
-            tx_id: Date.now(),
-            id: coinId,
-            name: coinName,
-            icon: coinIcon,
-            status: 'open',
-            amount: amountBought,
-            cost: eurosInvested,
-            pricePerCoin: livePrice,
-            date_bought: new Date().toISOString(),
-            soldFor: 0,
-            date_sold: null,
-            profit: 0
+            id: Date.now(), type: type, apiId: id, name: name,
+            image: image, units: units, pricePerUnit: pricePerUnit
         };
-        
-        transactions.push(newTransaction);
+
+        toggleFormLoading(true);
+        transactions.unshift(newTransaction); 
         saveTransactions();
-        renderLedger();
-        closeAddModal();
-    }
-    addTxForm.addEventListener('submit', handleAddTransaction);
-
-    // Gestisce la VENDITA
-    function handleSellTransaction() {
-        const tx = currentSellingTx;
-        if (!tx || currentSellPrice <= 0) {
-            alert('Errore: Prezzo di vendita non valido.');
-            return;
-        }
-
-        const sellValue = tx.amount * currentSellPrice;
-        const profit = sellValue - tx.cost;
-
-        tx.status = 'closed';
-        tx.soldFor = sellValue;
-        tx.date_sold = new Date().toISOString();
-        tx.profit = profit;
-
-        saveTransactions();
-        renderLedger();
+        updateFullPortfolio();
+        addTransactionForm.reset();
+        portfolioSearch = { id: null, name: null, image: null };
+        toggleFormLoading(false);
         closeSellModal();
     }
-    modalSellConfirmBtn.addEventListener('click', handleSellTransaction);
-
-    // Funzione "intelligente" per aggiornare il cruscotto
-    async function renderLedger(isAutoRefresh = false) {
-        
-        const openPositions = transactions.filter(tx => tx.status === 'open');
-        const closedPositions = transactions.filter(tx => tx.status === 'closed');
-
-        let totalInvested = 0;
-        
-        if (!isAutoRefresh) {
-            portfolioList.innerHTML = '';
-            historyList.innerHTML = '';
-        }
-        
-        // 1. Popola Storico Vendite
-        if (closedPositions.length === 0) {
-            emptyHistoryMessage.style.display = 'block';
-        } else {
-            emptyHistoryMessage.style.display = 'none';
-            if (!isAutoRefresh) { // Ricostruisci lo storico solo se non è un refresh
-                closedPositions.sort((a, b) => new Date(b.date_sold) - new Date(a.date_sold));
-                closedPositions.forEach(tx => {
-                    const txEl = document.createElement('div');
-                    txEl.className = 'history-item';
-                    const profitClass = tx.profit >= 0 ? 'pl-good' : 'pl-bad';
-                    txEl.innerHTML = `
-                        <img class="history-item-icon" src="${tx.icon}" alt="${tx.name}">
-                        <div class="history-item-info">
-                            <h3>${tx.name} (${(tx.amount).toFixed(4)})</h3>
-                            <p>Acquistato per <strong>€${tx.cost.toFixed(2)}</strong></p>
-                            <p>Venduto per <strong>€${tx.soldFor.toFixed(2)}</strong></p>
-                            <p>Profitto: <strong class="${profitClass}">${tx.profit >= 0 ? '+' : ''}€${tx.profit.toFixed(2)}</strong></p>
-                        </div>
-                    `;
-                    historyList.appendChild(txEl);
-                });
-            }
-        }
-        
-        // 2. Popola Posizioni Aperte
-        if (openPositions.length === 0) {
-            emptyPortfolioMessage.style.display = 'block';
-            totalInvestedEl.textContent = '€0.00';
-            livePlEl.textContent = 'P/L Live: €0.00 (0%)';
-            livePlEl.className = '';
-            lastUpdatedEl.textContent = '';
-            return;
-        }
-        
-        emptyPortfolioMessage.style.display = 'none';
-        if (isAutoRefresh) {
-            lastUpdatedEl.textContent = 'Aggiornamento prezzi...';
-        } else {
-            portfolioList.innerHTML = '<div class="empty-message"><p>Caricamento...</p></div>';
-        }
-
-        // 3. Raggruppa le posizioni per ID (per P/L live)
-        const coinIds = [...new Set(openPositions.map(tx => tx.id))];
-        const prices = await fetchCoinPrices(coinIds);
-
-        if (!prices) {
-             if (!isAutoRefresh) portfolioList.innerHTML = '<div class="empty-message"><p>Errore nel caricare i prezzi.</p></div>';
-             lastUpdatedEl.textContent = 'Errore caricamento prezzi.';
-             return;
-        }
-
-        let totalLiveValue = 0;
-        let totalCostOfOpenPositions = 0;
-        
-        if (!isAutoRefresh) portfolioList.innerHTML = ''; // Pulisci
-
-        openPositions.forEach((tx) => {
-            totalInvested += tx.cost;
-            const currentPrice = prices[tx.id] ? prices[tx.id].eur : tx.pricePerCoin; 
-            const currentValue = tx.amount * currentPrice;
-            const plValue = currentValue - tx.cost;
-            const plPercent = (plValue / tx.cost) * 100;
-            
-            totalLiveValue += currentValue;
-            totalCostOfOpenPositions += tx.cost;
-            
-            let txEl = document.getElementById(`tx-item-${tx.tx_id}`);
-            if (!txEl) {
-                txEl = document.createElement('div');
-                txEl.className = 'list-item';
-                txEl.id = `tx-item-${tx.tx_id}`;
-                txEl.innerHTML = `
-                    <img class="list-item-icon" src="${tx.icon}" alt="${tx.name}">
-                    <div class="list-item-info">
-                        <h3>${tx.name}</h3>
-                        <p>${tx.amount.toFixed(6)} unità</p>
-                    </div>
-                    <div class="list-item-value" id="value-${tx.tx_id}">
-                        <h3>€${tx.cost.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
-                        <p>@ €${tx.pricePerCoin.toLocaleString('it-IT')}</p>
-                    </div>
-                    <button class="btn btn-sell" data-tx-id="${tx.tx_id}">Vendi</button>
-                `;
-                portfolioList.appendChild(txEl);
-                txEl.querySelector('.btn-sell').addEventListener('click', () => openSellModal(tx));
-            }
-            
-            const valueEl = txEl.querySelector(`#value-${tx.tx_id}`);
-            valueEl.innerHTML = `
-                <h3>€${currentValue.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
-                <p class="${plValue >= 0 ? 'pl-good' : 'pl-bad'}">
-                    ${plValue >= 0 ? '+' : ''}€${plValue.toFixed(2)} (${plPercent.toFixed(1)}%)
-                </p>
-            `;
-        });
-
-        // 4. Aggiorna i totali
-        const totalPL = totalLiveValue - totalCostOfOpenPositions;
-        const totalPLPercent = (totalCostOfOpenPositions === 0) ? 0 : (totalPL / totalCostOfOpenPositions) * 100;
-        
-        totalInvestedEl.textContent = `€${totalCostOfOpenPositions.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-        livePlEl.textContent = `P/L Live: ${totalPL >= 0 ? '+' : ''}€${totalPL.toFixed(2)} (${totalPLPercent.toFixed(1)}%)`;
-        livePlEl.className = totalPL >= 0 ? 'pl-good' : 'pl-bad';
-        lastUpdatedEl.textContent = `Prezzi aggiornati: ${new Date().toLocaleTimeString('it-IT')}`;
+    
+    function toggleFormLoading(isLoading) {
+        txLoader.style.display = isLoading ? 'block' : 'none';
+        txBuyBtn.disabled = isLoading;
     }
 
-    // --- 7. LOGICA CALCOLATORI ---
-    
-    // Calcolatore Staking (Avanzato)
-    function calculateStaking() {
-        const settings = loadCalculatorSettings(); 
-        const initial = parseFloat(settings.initial) || 0;
-        const apy = parseFloat(settings.apy) || 0;
-        const years = parseInt(settings.years) || 0;
-        const frequency = parseInt(settings.frequency) || 12;
-        const monthly = parseFloat(settings.monthly) || 0;
-        
-        const periodsPerYear = frequency;
-        const ratePerPeriod = (apy / 100) / periodsPerYear;
-        const contributionPerPeriod = (monthly * 12) / periodsPerYear;
+    function deleteTransaction(id) {
+        if (confirm('Sei sicuro di voler eliminare questa transazione?')) {
+            transactions = transactions.filter(tx => tx.id !== id);
+            saveTransactions();
+            updateFullPortfolio();
+        }
+    }
 
-        let currentBalance = initial;
-        let totalContributed = initial;
-        let totalInterest = 0;
+    // [MODIFICATO] Calcola anche il totale investito storico
+    function calculateHoldings() {
+        let holdings = {}; 
+        let realizedPnl = 0;
+        let currentInvestedCost = 0; // Costo degli asset correnti
+        let historicalTotalInvested = 0; // Costo di tutti gli acquisti
         
-        let tableHTML = `
-            <table>
-                <thead><tr><th>Anno</th><th>Contribuito</th><th>Interessi</th><th>Bilancio</th></tr></thead>
-                <tbody>
-        `;
+        const sortedTxs = [...transactions].sort((a, b) => a.id - b.id);
         
-        // Loop per ogni anno
-        for (let y = 1; y <= years; y++) {
-            let yearInterest = 0;
-            // Loop per ogni periodo di reinvestimento nell'anno
-            for (let p = 1; p <= periodsPerYear; p++) {
-                let interestThisPeriod = currentBalance * ratePerPeriod;
-                currentBalance += contributionPerPeriod; 
-                
-                // Il contributo iniziale è già contato
-                if (y > 1 || p > 1) {
-                     totalContributed += contributionPerPeriod;
+        for (const tx of sortedTxs) {
+            const id = tx.apiId;
+            if (!holdings[id]) {
+                holdings[id] = { units: 0, totalCost: 0, name: tx.name, image: tx.image };
+            }
+            let h = holdings[id];
+            if (tx.type === 'buy') {
+                const cost = tx.units * tx.pricePerUnit;
+                h.units += tx.units;
+                h.totalCost += cost;
+                historicalTotalInvested += cost; // [MODIFICA] Aggiungi al totale storico
+            } else if (tx.type === 'sell') {
+                if (h.units > 0) {
+                    const avgCostPerUnit = h.totalCost > 0 ? h.totalCost / h.units : 0;
+                    const unitsToSell = Math.min(tx.units, h.units); 
+                    const costOfSoldUnits = unitsToSell * avgCostPerUnit;
+                    const revenue = unitsToSell * tx.pricePerUnit;
+                    realizedPnl += (revenue - costOfSoldUnits);
+                    h.units -= unitsToSell;
+                    h.totalCost -= costOfSoldUnits;
+                    if (h.units < 0.0000001) { h.units = 0; h.totalCost = 0; }
                 }
-                
-                yearInterest += interestThisPeriod;
-                currentBalance += interestThisPeriod; 
             }
-            totalInterest += yearInterest;
-            
-            tableHTML += `
-                <tr>
-                    <td>${y}</td>
-                    <td>€${Math.round(totalContributed)}</td>
-                    <td>€${Math.round(totalInterest)}</td>
-                    <td>€${Math.round(currentBalance)}</td>
-                </tr>
-            `;
         }
         
-        tableHTML += '</tbody></table>';
-        stakingResultTable.innerHTML = tableHTML;
-    }
-    
-    function saveCalculatorSettings() {
-        calculatorSettings = {
-            initial: stakingInputs.initial.value || "",
-            apy: stakingInputs.apy.value || "",
-            years: stakingInputs.years.value || "",
-            frequency: stakingInputs.frequency.value || 12,
-            monthly: stakingInputs.monthly.value || "",
-        };
-        localStorage.setItem(CALC_STORAGE_KEY, JSON.stringify(calculatorSettings));
-    }
-    
-    function loadCalculatorSettings() {
-        const savedData = localStorage.getItem(CALC_STORAGE_KEY);
-        let data = savedData ? JSON.parse(savedData) : {};
-        
-        stakingInputs.initial.value = data.initial || "";
-        stakingInputs.apy.value = data.apy || "";
-        stakingInputs.years.value = data.years || "";
-        stakingInputs.frequency.value = data.frequency || 12;
-        stakingInputs.monthly.value = data.monthly || "";
-        
-        if (savedData) {
-            calculatorSettings = data;
-        } else {
-             saveCalculatorSettings(); // Salva i default se non c'è nulla
+        for (const id in holdings) {
+            if (holdings[id].units > 0) {
+                currentInvestedCost += holdings[id].totalCost;
+            }
         }
-        return calculatorSettings;
+        
+        // [MODIFICA] Ritorna entrambi i valori
+        return { holdings, realizedPnl, currentInvestedCost, historicalTotalInvested };
+    }
+
+    // [MODIFICATO] Accetta e passa il totale storico
+    async function fetchPortfolioPrices() {
+        console.log("Aggiornamento prezzi portfolio...");
+        const { holdings, realizedPnl, currentInvestedCost, historicalTotalInvested } = calculateHoldings(); 
+        const apiIds = Object.keys(holdings).filter(id => holdings[id].units > 0);
+        
+        if (apiIds.length === 0) { 
+            renderHoldingsList(holdings, {});
+            // [MODIFICA] Passa il totale storico anche se il portfolio è vuoto
+            updateHeader(0, 0, realizedPnl, historicalTotalInvested);
+            return; 
+        }
+        try {
+            const response = await fetch(`${API_BASE_URL}/simple/price?ids=${apiIds.join(',')}&vs_currencies=${VS_CURRENCY}`);
+            const prices = await response.json();
+            let totalValue = 0;
+            let totalUnrealizedPnl = 0;
+            for (const id in holdings) {
+                const h = holdings[id];
+                if (h.units > 0) {
+                    const currentPrice = prices[id] ? prices[id][VS_CURRENCY] : (h.currentValue / h.units); 
+                    if (currentPrice) {
+                        const currentValue = h.units * currentPrice;
+                        h.currentValue = currentValue;
+                        h.unrealizedPnl = h.totalCost > 0 ? (currentValue - h.totalCost) : currentValue;
+                        totalValue += currentValue;
+                        totalUnrealizedPnl += h.unrealizedPnl;
+                    }
+                }
+            }
+            renderHoldingsList(holdings, prices);
+            // [MODIFICA] Passa il totale storico
+            updateHeader(totalValue, totalUnrealizedPnl, realizedPnl, historicalTotalInvested);
+        } catch (error) { console.error("Errore aggiornamento prezzi:", error); }
     }
     
-    stakingForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        saveCalculatorSettings(); 
-        calculateStaking(); 
-    });
-    Object.values(stakingInputs).forEach(input => {
-        input.addEventListener('change', saveCalculatorSettings); // 'change' è meglio di 'input' per select/number
-    });
+    function updateFullPortfolio() {
+        renderTransactionList();
+        fetchPortfolioPrices();
+    }
 
-
-    // --- 8. LOGICA IMPOSTAZIONI (IMPORTA/ESPORTA/RESET) ---
-    
-    exportBtn.addEventListener('click', () => {
-        // [MODIFICATO] Ora salva TUTTI i dati
-        const appData = {
-            ledgerData: transactions,
-            calculatorData: calculatorSettings
-        };
-        
-        if (appData.ledgerData.length === 0 && !appData.calculatorData.initial) {
-            alert('Nessun dato da esportare.');
+    function renderHoldingsList(holdings, prices) {
+        holdingsListEl.innerHTML = '';
+        const holdingIds = Object.keys(holdings);
+        if (holdingIds.filter(id => holdings[id].units > 0).length === 0) {
+            holdingsListEl.innerHTML = '<p class="text-center" style="color: var(--text-dark);">Nessun asset posseduto. Registra un acquisto!</p>';
             return;
         }
-        
-        const dataStr = JSON.stringify(appData);
-        const exportData = btoa(dataStr);
-        importDataEl.value = exportData;
-        importDataEl.select();
-        alert('Codice di backup generato. Copialo e salvalo!');
+        for (const id of holdingIds) {
+            const h = holdings[id];
+            if (h.units <= 0) continue; 
+            const el = document.createElement('div');
+            el.className = 'holding-card';
+            const plClass = h.unrealizedPnl > 0 ? 'text-profit' : (h.unrealizedPnl < 0 ? 'text-loss' : 'text-neutral');
+            const avgCost = h.totalCost > 0 ? (h.totalCost / h.units) : 0;
+            el.innerHTML = `
+                <div class="holding-header">
+                    <div>
+                        <h3>${h.name}</h3>
+                        <span class="asset-id">${h.units.toLocaleString()} unità</span>
+                    </div>
+                    <button class="btn btn-sell open-sell-modal" 
+                            data-id="${id}" 
+                            data-name="${h.name}" 
+                            data-image="${h.image || ''}" 
+                            data-max="${h.units}">
+                        Vendi
+                    </button>
+                </div>
+                <div class="holding-details">
+                    <div class="holding-metric">
+                        <span>Valore Corrente</span>
+                        <strong>${(h.currentValue || 0).toFixed(2)} €</strong>
+                    </div>
+                    <div class="holding-metric pl">
+                        <span>P/L Non Realizzato</span>
+                        <strong class="${plClass}">${(h.unrealizedPnl || 0).toFixed(2)} €</strong>
+                    </div>
+                    <div class="holding-metric">
+                        <span>Costo Medio</span>
+                        <strong>${avgCost.toFixed(2)} €</strong>
+                    </div>
+                    <div class="holding-metric value">
+                        <span>Costo Totale Attuale</span>
+                        <strong>${h.totalCost.toFixed(2)} €</strong>
+                    </div>
+                </div>
+            `;
+            holdingsListEl.appendChild(el);
+        }
+        document.querySelectorAll('.open-sell-modal').forEach(btn => {
+            btn.addEventListener('click', () => openSellModal(btn.dataset));
+        });
+    }
+
+    function renderTransactionList() {
+        transactionListEl.innerHTML = '';
+        if (transactions.length === 0) {
+            transactionListEl.innerHTML = '<p class="text-center" style="color: var(--text-dark);">Nessuna transazione registrata.</p>';
+            return;
+        }
+        for (const tx of transactions) {
+            const el = document.createElement('div');
+            el.className = 'transaction-item';
+            const isBuy = tx.type === 'buy';
+            const txClass = isBuy ? 'buy' : 'sell';
+            const txSign = isBuy ? '+' : '-';
+            const totalCost = (tx.units * tx.pricePerUnit);
+            el.innerHTML = `
+                <div class="tx-details">
+                    <strong class="tx-name ${txClass}">${isBuy ? 'ACQUISTO' : 'VENDITA'} ${tx.name}</strong>
+                    <div>${tx.units.toLocaleString()} unità @ ${tx.pricePerUnit.toFixed(2)} €</div>
+                    <div class="tx-meta">${new Date(tx.id).toLocaleString()}</div>
+                </div>
+                <div class="tx-amount ${txClass}">
+                    ${txSign}${totalCost.toFixed(2)} €
+                    <button class="delete-tx-btn" data-id="${tx.id}"><i class="fas fa-trash"></i></button>
+                </div>
+            `;
+            transactionListEl.appendChild(el);
+        }
+        document.querySelectorAll('.delete-tx-btn').forEach(btn => {
+            btn.addEventListener('click', () => deleteTransaction(Number(btn.dataset.id)));
+        });
+    }
+
+    // [MODIFICATO] Accetta il totale storico
+    function updateHeader(totalValue, unrealizedPnl, realizedPnl, historicalTotalInvested) {
+        totalValueEl.textContent = `${totalValue.toFixed(2)} €`;
+        totalInvestedEl.textContent = `${historicalTotalInvested.toFixed(2)} €`; // <-- MODIFICA CHIAVE
+        totalUnrealizedPlEl.textContent = `${unrealizedPnl.toFixed(2)} €`;
+        totalUnrealizedPlEl.className = unrealizedPnl > 0 ? 'text-profit' : (unrealizedPnl < 0 ? 'text-loss' : 'text-neutral');
+        totalRealizedPlEl.textContent = `${realizedPnl.toFixed(2)} €`;
+        totalRealizedPlEl.className = realizedPnl > 0 ? 'text-profit' : (realizedPnl < 0 ? 'text-loss' : 'text-neutral');
+    }
+    
+    // --- Logica Modal "Vendi" (Modificata) ---
+    function openSellModal(data) {
+        sellModalState = { id: data.id, name: data.name, image: data.image, maxUnits: parseFloat(data.max) };
+        sellModalTitle.textContent = `Vendi ${data.name}`;
+        sellModalText.innerHTML = `Stai vendendo <strong>tutte</strong> le tue <strong>${parseFloat(data.max).toLocaleString()}</strong> unità.`;
+        sellPriceInput.value = '';
+        sellModalOverlay.style.display = 'flex';
+    }
+    
+    function closeSellModal() {
+        sellModalOverlay.style.display = 'none';
+    }
+    
+    sellModalCloseBtn.addEventListener('click', closeSellModal);
+    sellModalOverlay.addEventListener('click', (e) => {
+        if (e.target === sellModalOverlay) { closeSellModal(); }
+    });
+    sellModalForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleAddTransaction('sell');
     });
 
-    importBtn.addEventListener('click', () => {
-        const importData = importDataEl.value.trim();
-        if (!importData) return alert('Incolla il tuo codice di backup.');
+    // --- VISTA MERCATO ---
+    
+    marketPillBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            marketPillBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentMarketView = btn.dataset.marketView;
+            loadMarketData(currentMarketView, true);
+        });
+    });
+
+    async function loadMarketData(view, forceRefresh = false) {
+        marketLoader.style.display = 'block';
+        marketViewNews.style.display = 'none';
+        marketViewGainers.style.display = 'none';
+        marketViewLosers.style.display = 'none';
+        
+        if (forceRefresh) { marketDataCache[view] = null; }
+
+        try {
+            if (view === 'news') {
+                if (!marketDataCache.news) {
+                    const response = await fetch(NEWS_API_URL);
+                    const data = await response.json();
+                    marketDataCache.news = data.Data;
+                }
+                renderNews(marketDataCache.news);
+            } else if (view === 'gainers' || view === 'losers') {
+                const order = (view === 'gainers') ? 'price_change_percentage_24h_desc' : 'price_change_percentage_24h_asc';
+                if (!marketDataCache[view]) {
+                    const response = await fetch(`${API_BASE_URL}/coins/markets?vs_currency=${VS_CURRENCY}&order=${order}&per_page=10&page=1&sparkline=false`);
+                    marketDataCache[view] = await response.json();
+                }
+                renderGainersLosers(marketDataCache[view], (view === 'gainers') ? marketViewGainers : marketViewLosers);
+            }
+        } catch (error) {
+            console.error(`Errore caricamento ${view}:`, error);
+            const viewEl = document.getElementById(`market-view-${view}`);
+            viewEl.innerHTML = '<p class="text-center text-loss">Errore nel caricamento dati.</p>';
+            viewEl.style.display = 'block';
+        } finally {
+            marketLoader.style.display = 'none';
+        }
+    }
+    
+    function renderNews(newsData) {
+        marketViewNews.innerHTML = '';
+        if (!newsData || newsData.length === 0) {
+            marketViewNews.innerHTML = '<p class="text-center text-dark">Nessuna notizia trovata.</p>';
+            marketViewNews.style.display = 'block';
+            return;
+        }
+        newsData.slice(0, 10).forEach(item => {
+            const el = document.createElement('a');
+            el.className = 'news-item';
+            el.href = item.url;
+            el.target = '_blank';
+            el.innerHTML = `
+                <img src="${item.imageurl}" alt="News" class="news-item-img">
+                <div class="news-item-content">
+                    <h4>${item.title}</h4>
+                    <p>${item.body.substring(0, 100)}...</p>
+                    <small>${item.source}</small>
+                </div>
+            `;
+            marketViewNews.appendChild(el);
+        });
+        marketViewNews.style.display = 'block';
+    }
+    
+    function renderGainersLosers(data, element) {
+        element.innerHTML = '';
+        if (!data || data.length === 0) {
+            element.innerHTML = '<p class="text-center text-dark">Dati non disponibili.</p>';
+            element.style.display = 'block';
+            return;
+        }
+        data.forEach(coin => {
+            const el = document.createElement('div');
+            el.className = 'gainer-loser-row';
+            const change24h = coin.price_change_percentage_24h;
+            const changeClass = change24h > 0 ? 'text-profit' : 'text-loss';
+            el.innerHTML = `
+                <img src="${coin.image}" alt="${coin.name}">
+                <div class="coin-name">
+                    ${coin.name}
+                    <span>${coin.symbol.toUpperCase()}</span>
+                </div>
+                <div class="coin-price">
+                    ${coin.current_price.toLocaleString()} €
+                    <span class="${changeClass}">${change24h.toFixed(2)}%</span>
+                </div>
+            `;
+            element.appendChild(el);
+        });
+        element.style.display = 'block';
+    }
+
+    // --- VISTA STRUMENTI (Rimossa, la logica è nel file vecchio) ---
+    // Abbiamo rimosso la pagina, ma se vuoi riaggiungerla
+    // la logica per F&G e Halving è nel file precedente.
+
+    // --- VISTA CONVERTITORE ---
+    
+    function populateConverterSelects() {
+        convertFromSelect.innerHTML = '';
+        convertToSelect.innerHTML = '';
+        const allOptions = [...fiatCurrencies, ...coinListCache];
+        
+        allOptions.forEach(coin => {
+            const optionFrom = document.createElement('option');
+            optionFrom.value = coin.id;
+            optionFrom.textContent = coin.name;
+            convertFromSelect.appendChild(optionFrom);
+            
+            const optionTo = document.createElement('option');
+            optionTo.value = coin.id;
+            optionTo.textContent = coin.name;
+            convertToSelect.appendChild(optionTo);
+        });
+        convertFromSelect.value = 'bitcoin';
+        convertToSelect.value = 'eur';
+    }
+    
+    convertSwapBtn.addEventListener('click', () => {
+        const fromVal = convertFromSelect.value;
+        const toVal = convertToSelect.value;
+        convertFromSelect.value = toVal;
+        convertToSelect.value = fromVal;
+        calculateConversion();
+    });
+    
+    convertBtn.addEventListener('click', calculateConversion);
+    convertAmountInput.addEventListener('input', calculateConversion);
+    
+    async function calculateConversion() {
+        const fromId = convertFromSelect.value;
+        const toId = convertToSelect.value;
+        const amount = parseFloat(convertAmountInput.value) || 0;
+        
+        if (amount === 0) { convertResultInput.value = '0'; return; }
+        convertResultInput.value = 'Calcolo...';
         
         try {
-            const decodedStr = atob(importData);
-            const appData = JSON.parse(decodedStr);
+            const isFromFiat = fiatCurrencies.some(f => f.id === fromId);
+            const isToFiat = fiatCurrencies.some(f => f.id === toId);
+            
+            let rate;
 
-            if (appData.ledgerData && appData.calculatorData) {
-                if (confirm('Questo sovrascriverà tutti i dati dell\'app. Sei sicuro?')) {
-                    transactions = appData.ledgerData;
-                    calculatorSettings = appData.calculatorData;
-                    
-                    saveTransactions();
-                    localStorage.setItem(CALC_STORAGE_KEY, JSON.stringify(calculatorSettings));
-                    
-                    initializeApp(); // Ricarica tutta l'app
-                    alert('Dati importati con successo!');
-                    importDataEl.value = '';
-                    document.querySelector('.nav-item[data-page="page-portfolio"]').click();
+            if (isFromFiat && isToFiat) {
+                // Fiat -> Fiat (es. USD -> EUR)
+                const response = await fetch(`${API_BASE_URL}/simple/price?ids=${fromId}&vs_currencies=${toId}`);
+                const data = await response.json();
+                rate = data[fromId][toId];
+            } else if (!isFromFiat && isToFiat) { 
+                // Crypto -> Fiat (es. BTC -> EUR)
+                const coin = coinListCache.find(c => c.id === fromId);
+                if (toId === 'eur') {
+                    rate = coin.current_price; // Usa la cache!
+                } else {
+                    const response = await fetch(`${API_BASE_URL}/simple/price?ids=${fromId}&vs_currencies=${toId}`);
+                    const data = await response.json();
+                    rate = data[fromId][toId];
                 }
-            } else { throw new Error('Dati non validi.'); }
-        } catch (error) { alert('Errore: Il codice di backup non è valido.'); }
-    });
+            } else if (isFromFiat && !isToFiat) { 
+                // Fiat -> Crypto (es. EUR -> BTC)
+                const coin = coinListCache.find(c => c.id === toId);
+                if (fromId === 'eur') {
+                    rate = 1 / coin.current_price; // Usa la cache!
+                } else {
+                    const response = await fetch(`${API_BASE_URL}/simple/price?ids=${toId}&vs_currencies=${fromId}`);
+                    const data = await response.json();
+                    rate = 1 / data[toId][fromId];
+                }
+            } else { 
+                // Crypto -> Crypto (es. BTC -> ETH)
+                const fromCoin = coinListCache.find(c => c.id === fromId);
+                const toCoin = coinListCache.find(c => c.id === toId);
+                rate = fromCoin.current_price / toCoin.current_price; // Usa la cache!
+            }
+            
+            if (!rate) throw new Error('Tasso non trovato');
+            const result = amount * rate;
+            convertResultInput.value = result.toLocaleString();
+            
+        } catch (error) {
+            console.error("Errore conversione:", error);
+            convertResultInput.value = 'Errore';
+        }
+    }
 
-    resetAppBtn.addEventListener('click', () => {
-        if (confirm('ATTENZIONE!\nSei sicuro di voler cancellare TUTTI i dati (transazioni e calcolatore)?\n\nQuesta azione è irreversibile.')) {
-            transactions = [];
-            calculatorSettings = {};
-            saveTransactions();
-            localStorage.removeItem(CALC_STORAGE_KEY);
-            initializeApp();
-            alert('Dati azzerati.');
+    // --- VISTA CALCOLATORE (Semplice) ---
+    calcStakingBtn.addEventListener('click', calculateAndRenderSummary);
+    function calculateAndRenderSummary() {
+        try {
+            const initial = parseFloat(stakingInitialEl.value) || 0;
+            const monthly = parseFloat(stakingMonthlyEl.value) || 0;
+            const apyPercent = parseFloat(stakingAPYEl.value) || 0;
+            const years = parseInt(stakingYearsEl.value) || 0;
+            if (years > 100) { alert("Per favore, inserisci un numero di anni inferiore a 100."); return; }
+
+            const monthlyRate = apyPercent / 100 / 12;
+            let currentBalance = initial;
+            let totalContributed = initial;
+            let cumulativeInterest = 0;
+            let summaryHtml = ""; 
+
+            for (let y = 1; y <= years; y++) {
+                let interestThisYear = 0;
+                let contributedThisYear = (y === 1) ? initial : 0; 
+                for (let m = 1; m <= 12; m++) {
+                    if (m > 1 || y > 1) { 
+                        currentBalance += monthly;
+                        totalContributed += monthly;
+                        contributedThisYear += monthly;
+                    }
+                    let interestThisMonth = currentBalance * monthlyRate;
+                    interestThisYear += interestThisMonth;
+                    currentBalance += interestThisMonth;
+                }
+                cumulativeInterest += interestThisYear;
+                summaryHtml += `
+                    <div class="year-summary-card">
+                        <div class="year-summary-header">Anno ${y}</div>
+                        <div class="year-summary-body">
+                            <div class="year-summary-metric">
+                                Capitale Investito
+                                <strong>${contributedThisYear.toFixed(2)} €</strong>
+                            </div>
+                            <div class="year-summary-metric">
+                                Interessi Maturati
+                                <strong class="text-profit">+${interestThisYear.toFixed(2)} €</strong>
+                            </div>
+                            <div class="year-summary-metric total">
+                                Bilancio a Fine Anno
+                                <strong>${currentBalance.toFixed(2)} €</strong>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            calcTotalValueEl.textContent = `${currentBalance.toFixed(2)} €`;
+            calcTotalInterestEl.textContent = `${cumulativeInterest.toFixed(2)} €`;
+            calcTotalInvestedEl.textContent = `${totalContributed.toFixed(2)} €`;
+            stakingSummaryListEl.innerHTML = summaryHtml;
+            stakingSummaryTitle.style.display = 'block';
+        } catch (e) { console.error("Errore Staking:", e); }
+    }
+
+    // --- VISTA IMPOSTAZIONI (Installazione e Backup) ---
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        setupInstallButton(); 
+    });
+    
+    installAppBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+            deferredPrompt = null;
+            setupInstallButton(); 
         }
     });
 
-    // --- 9. INIZIALIZZAZIONE APP ---
-    function initializeApp() {
-        loadTransactions();
-        loadCalculatorSettings();
-        renderLedger(); 
-        calculateStaking(); 
-        fabAddButton.style.display = 'flex';
-        
-        // Avvia l'aggiornamento automatico dei prezzi ogni 60 secondi
-        setInterval(() => {
-            console.log("Aggiornamento automatico prezzi...");
-            renderLedger(true); // true = è un auto-refresh
-        }, 60000); 
+    function setupInstallButton() {
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+            installDesktop.style.display = 'none';
+            installIos.style.display = 'none';
+            installInstalled.style.display = 'block';
+        } else {
+            const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            if (isIos) {
+                installDesktop.style.display = 'none';
+                installIos.style.display = 'block';
+                installInstalled.style.display = 'none';
+            } else if (deferredPrompt) {
+                installDesktop.style.display = 'block';
+                installIos.style.display = 'none';
+                installInstalled.style.display = 'none';
+            } else {
+                installDesktop.style.display = 'none';
+                installIos.style.display = 'none';
+                installInstalled.style.display = 'block';
+            }
+        }
     }
     
-    initializeApp();
+    // Gestione Import/Export
+    const exportBtn = document.getElementById('export-btn');
+    const importBtn = document.getElementById('import-btn');
+    const importArea = document.getElementById('import-area');
+
+    function exportData() {
+        const dataToExport = { transactions: transactions };
+        const data = JSON.stringify(dataToExport, null, 2);
+        if (transactions.length === 0) {
+            alert('Non ci sono transazioni da esportare.');
+            return;
+        }
+        const blob = new Blob([data], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'cryptotoolkit-backup.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    function importData() {
+        const data = importArea.value;
+        if (!data) { alert('Incolla i dati di backup nell\'area di testo.'); return; }
+        try {
+            const parsedData = JSON.parse(data);
+            if (Array.isArray(parsedData)) { // Supporta formato vecchio
+                transactions = parsedData;
+            } else if (parsedData.transactions) { // Supporta formato nuovo
+                transactions = parsedData.transactions || [];
+            } else {
+                throw new Error('Formato dati non riconosciuto.');
+            }
+            if (confirm('Questo sovrascriverà i tuoi dati attuali. Continuare?')) {
+                saveTransactions();
+                loadData(); 
+                alert('Dati importati con successo!');
+                importArea.value = '';
+                document.querySelector('.nav-link.active').classList.remove('active');
+                document.querySelector('.view.active').classList.remove('active');
+                document.querySelector('.nav-link[data-view="portfolio"]').classList.add('active');
+                document.getElementById('view-portfolio').classList.add('active');
+            }
+        } catch (error) {
+            alert('Errore: I dati incollati non sono un JSON valido o il formato è errato.');
+            console.error(error);
+        }
+    }
+
+    exportBtn.addEventListener('click', exportData);
+    importBtn.addEventListener('click', importData);
+
+    // --- AVVIO INIZIALE ---
+    loadData();
+    loadCoinList(); 
+    calculateAndRenderSummary(); 
+    setupInstallButton(); 
+    
+    if (document.getElementById('view-portfolio').classList.contains('active')) {
+        portfolioRefreshInterval = setInterval(fetchPortfolioPrices, 60000);
+    }
 });
