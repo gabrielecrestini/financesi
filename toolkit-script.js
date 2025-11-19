@@ -1,116 +1,180 @@
 /**
- * CRYPTOTOOLKIT ELITE - ENGINE V5 (AUTO-SYNC)
- * API Primary: CoinLore (Public & Fast)
- * API Rates: Frankfurter (Fiat)
- * Features: Real-time Converter, Auto-Update 60s
+ * CRYPTOTOOLKIT ELITE - ENGINE V8 (FULLY AUTOMATED)
+ * - Acquisto: Inserisci Euro -> Calcola Qtà in base al prezzo LIVE
+ * - Vendita: Inserisci Qtà -> Calcola Incasso in base al prezzo LIVE
  */
 
-// --- CONFIGURAZIONE API ---
-const API_PRIMARY = "https://api.coinlore.net/api/tickers/"; // Top 100 Coins
+const API_PRIMARY = "https://api.coinlore.net/api/tickers/";
 const API_RATES = "https://api.frankfurter.app/latest?from=USD&to=EUR";
 const API_NEWS = "https://min-api.cryptocompare.com/data/v2/news/?lang=EN";
 
-// Dati di emergenza (Fallback)
 const FALLBACK_DATA = [
-    { symbol: "BTC", name: "Bitcoin", price_usd: "92000.00", percent_change_24h: "0.0" },
-    { symbol: "ETH", name: "Ethereum", price_usd: "3200.00", percent_change_24h: "0.0" },
-    { symbol: "SOL", name: "Solana", price_usd: "145.00", percent_change_24h: "0.0" },
-    { symbol: "BNB", name: "Binance Coin", price_usd: "605.00", percent_change_24h: "0.0" },
-    { symbol: "XRP", name: "XRP", price_usd: "0.62", percent_change_24h: "0.0" }
+    { symbol: "BTC", name: "Bitcoin", price_usd: "92000.00", percent_change_24h: "0" },
+    { symbol: "ETH", name: "Ethereum", price_usd: "3200.00", percent_change_24h: "0" }
 ];
 
-// --- STATO APP ---
 let portfolio = [];
 let history = [];
 let liquidity = 0;
-let marketData = []; // Array Live sempre aggiornato
-let usdToEur = 0.95; // Tasso cambio default
+let marketData = [];
+let usdToEur = 0.95;
 
-// --- INIZIALIZZAZIONE ---
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Toolkit V5 Auto-Sync Avviato");
-
+    console.log("Toolkit V8 Auto Avviato");
     loadLocalData();
     initNav();
     
-    // Setup componenti
-    setupSearch();
+    setupSearch(); // Questa è la funzione chiave per l'acquisto
     setupCalculator();
     setupSettings();
-    setupForm();
+    setupFormSubmit();
 
-    // Primo caricamento
     renderPortfolio();
     loadHistory();
 
-    // Fetch Iniziale + Loop 60 Secondi
     fetchMarketData();
-    setInterval(() => {
-        console.log("Auto-aggiornamento prezzi (60s)...");
-        fetchMarketData();
-    }, 60000); 
+    setInterval(fetchMarketData, 60000); // 60s refresh
 });
 
-// --- DATA MANAGER ---
+// --- DATA ---
 function loadLocalData() {
     try {
         const p = localStorage.getItem('crypto_portfolio');
         const h = localStorage.getItem('crypto_history');
         const l = localStorage.getItem('crypto_liquidity');
-
         portfolio = p ? JSON.parse(p) : [];
         history = h ? JSON.parse(h) : [];
         liquidity = l ? parseFloat(l) : 0;
-
-        // Sanificazione dati
-        portfolio = portfolio.filter(item => item && item.amount !== null);
-        portfolio.forEach(asset => {
-            if(!asset.symbol) asset.symbol = asset.name.substring(0,3).toUpperCase();
-            asset.amount = parseFloat(asset.amount) || 0;
-            asset.buyPrice = parseFloat(asset.buyPrice) || 0;
+        // Sanity check
+        portfolio = portfolio.filter(x => x && x.name);
+        portfolio.forEach(a => {
+            if(!a.symbol) a.symbol = a.name.substring(0,3).toUpperCase();
+            a.amount = parseFloat(a.amount) || 0;
+            a.buyPrice = parseFloat(a.buyPrice) || 0;
         });
-    } catch (e) {
-        console.error("Reset dati locali per corruzione.");
-        localStorage.clear();
-        portfolio = []; history = []; liquidity = 0;
-    }
+    } catch (e) { localStorage.clear(); portfolio=[]; }
 }
 
-// --- ENGINE API (COINLORE) ---
+// --- API ENGINE ---
 async function fetchMarketData() {
     try {
-        // 1. Aggiorna cambio Fiat
         try {
-            const rateRes = await fetch(API_RATES);
-            const rateData = await rateRes.json();
-            if(rateData.rates && rateData.rates.EUR) usdToEur = rateData.rates.EUR;
-        } catch(err) { /* keep old rate */ }
+            const r = await fetch(API_RATES);
+            const d = await r.json();
+            if(d.rates && d.rates.EUR) usdToEur = d.rates.EUR;
+        } catch(e){}
 
-        // 2. Aggiorna Crypto
         const res = await fetch(API_PRIMARY);
-        if(!res.ok) throw new Error("API Error");
-        
         const json = await res.json();
-        marketData = json.data; // Aggiorna l'array globale
-
+        marketData = json.data;
         updateStatus("Live");
-        
     } catch (e) {
-        console.warn("Offline Mode attivata");
         updateStatus("Offline");
-        if(marketData.length === 0) marketData = FALLBACK_DATA;
+        if(marketData.length===0) marketData=FALLBACK_DATA;
     } finally {
-        // AGGIORNAMENTO GLOBALE UI
-        renderPortfolio();     // Ricalcola valori portfolio
-        renderMarketList();    // Aggiorna lista mercato
-        populateConverter();   // Aggiorna lista convertitore (se vuota)
-        // Non ricalcoliamo il convertitore automaticamente per non disturbare l'utente mentre scrive
+        renderPortfolio();
+        renderMarketList();
+        populateConverter();
     }
 }
-
 function updateStatus(msg) {
     const el = document.getElementById('last-update');
     if(el) el.innerText = `${msg}: ${new Date().toLocaleTimeString()}`;
+}
+
+// --- ACQUISTO AUTOMATICO (LOGICA MIGLIORATA) ---
+function setupSearch() {
+    const inp = document.getElementById('asset-search');
+    const box = document.getElementById('search-results');
+    if(!inp) return;
+
+    // 1. Ricerca Coin
+    inp.addEventListener('input', (e) => {
+        const v = e.target.value.toLowerCase();
+        if(v.length<2) { box.style.display='none'; return; }
+        const res = marketData.filter(c => c.name.toLowerCase().includes(v) || c.symbol.toLowerCase().includes(v)).slice(0,5);
+        
+        box.innerHTML = '';
+        if(res.length>0) {
+            box.style.display='block';
+            res.forEach(c => {
+                const d = document.createElement('div');
+                d.className = 'search-item';
+                d.innerHTML = `<b>${c.name}</b> (${c.symbol})`;
+                
+                // CLICK SU RISULTATO
+                d.onclick = () => {
+                    selectCoinForPurchase(c); // Funzione che popola tutto
+                    box.style.display='none';
+                };
+                box.appendChild(d);
+            });
+        } else box.style.display='none';
+    });
+    
+    document.addEventListener('click', (e)=>{ if(e.target!==inp && e.target!==box) box.style.display='none'; });
+
+    // Calcolo automatico quando inserisci gli euro
+    document.getElementById('tx-invested').addEventListener('input', updatePurchasePreview);
+}
+
+function selectCoinForPurchase(coin) {
+    // 1. Riempi nome e simbolo
+    document.getElementById('asset-search').value = coin.name;
+    document.getElementById('asset-symbol').value = coin.symbol;
+    
+    // 2. Salva prezzo LIVE nascosto
+    const priceEur = parseFloat(coin.price_usd) * usdToEur;
+    document.getElementById('live-price-hidden').value = priceEur;
+    
+    // 3. Mostra prezzo UI
+    document.getElementById('preview-price').innerText = "€ " + priceEur.toFixed(2);
+    document.getElementById('calc-preview-box').style.display = 'block';
+    
+    updatePurchasePreview();
+}
+
+function updatePurchasePreview() {
+    const invested = parseFloat(document.getElementById('tx-invested').value) || 0;
+    const price = parseFloat(document.getElementById('live-price-hidden').value) || 0;
+    
+    if(invested > 0 && price > 0) {
+        const amount = invested / price;
+        document.getElementById('preview-amount').innerText = amount.toFixed(6) + " " + document.getElementById('asset-symbol').value;
+    } else {
+        document.getElementById('preview-amount').innerText = "...";
+    }
+}
+
+function setupFormSubmit() {
+    const form = document.getElementById('add-transaction-form');
+    if(!form) return;
+    
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('asset-search').value;
+        const sym = document.getElementById('asset-symbol').value;
+        const invested = parseFloat(document.getElementById('tx-invested').value);
+        const price = parseFloat(document.getElementById('live-price-hidden').value);
+        
+        if(!name || !invested || !price) return alert("Seleziona una crypto e inserisci importo.");
+        
+        const amount = invested / price;
+
+        portfolio.push({
+            id: Date.now(),
+            name: name,
+            symbol: sym,
+            amount: amount,
+            buyPrice: price // Salviamo il prezzo originale per calcolare P/L storico
+        });
+
+        localStorage.setItem('crypto_portfolio', JSON.stringify(portfolio));
+        renderPortfolio();
+        form.reset();
+        document.getElementById('calc-preview-box').style.display='none';
+        toggleAddForm();
+    });
 }
 
 // --- PORTFOLIO RENDER ---
@@ -119,7 +183,7 @@ function renderPortfolio() {
     if(!list) return;
 
     if(portfolio.length === 0) {
-        list.innerHTML = '<div style="text-align:center; padding:40px; opacity:0.6;">Portfolio Vuoto.</div>';
+        list.innerHTML = '<div style="text-align:center; padding:30px; opacity:0.5;">Nessun asset.</div>';
         updateTotals(0);
         return;
     }
@@ -128,206 +192,97 @@ function renderPortfolio() {
     let totalValue = 0;
 
     portfolio.forEach((asset, idx) => {
-        // Lookup Prezzo Dinamico
-        let livePrice = asset.buyPrice; 
-        
-        // Cerca nel marketData appena aggiornato
-        const coin = marketData.find(c => 
-            c.symbol === asset.symbol || 
-            c.name.toLowerCase() === asset.name.toLowerCase()
-        );
+        // Prezzo attuale LIVE
+        let livePrice = asset.buyPrice;
+        const coin = marketData.find(c => c.symbol===asset.symbol || c.name.toLowerCase()===asset.name.toLowerCase());
+        if(coin) livePrice = parseFloat(coin.price_usd) * usdToEur;
 
-        if(coin) {
-            livePrice = parseFloat(coin.price_usd) * usdToEur;
-        }
-
-        const val = asset.amount * livePrice;
-        const gain = val - (asset.amount * asset.buyPrice);
+        const val = asset.amount * livePrice; // Valore Oggi
+        const cost = asset.amount * asset.buyPrice; // Costo Iniziale
+        const gain = val - cost; 
         totalValue += val;
 
         list.innerHTML += `
             <div class="asset-item">
                 <div class="asset-left">
-                    <div class="coin-avatar">${(asset.symbol || "?").substring(0,3)}</div>
+                    <div class="coin-avatar">${(asset.symbol||"?").substring(0,3)}</div>
                     <div>
                         <h4 style="margin:0;">${asset.name}</h4>
-                        <small>${asset.amount} • €${livePrice.toFixed(2)}</small>
+                        <small>${asset.amount.toFixed(5)} • €${livePrice.toFixed(2)}</small>
                     </div>
                 </div>
                 <div style="text-align:right;">
                     <div style="font-weight:bold;">€${val.toFixed(2)}</div>
-                    <div class="${gain >= 0 ? 'text-profit' : 'text-loss'}" style="font-size:0.8rem;">
-                        ${gain >= 0 ? '+' : ''}€${gain.toFixed(2)}
+                    <div class="${gain>=0?'text-profit':'text-loss'}" style="font-size:0.8rem;">
+                        ${gain>=0?'+':''}€${gain.toFixed(2)}
                     </div>
                     <div class="asset-actions">
                         <button onclick="prepSell(${idx})" class="btn-action" style="color:#e0aaff;"><i class="fas fa-coins"></i></button>
                         <button onclick="delAsset(${idx})" class="btn-action" style="color:#666;"><i class="fas fa-trash"></i></button>
                     </div>
                 </div>
-            </div>
-        `;
+            </div>`;
     });
-    
     updateTotals(totalValue);
 }
 
-function updateTotals(assetVal) {
-    const liq = liquidity || 0;
-    const tot = assetVal + liq;
-    
-    const elTot = document.getElementById('total-balance');
-    const elLiq = document.getElementById('liquidity-val');
-    const elAss = document.getElementById('assets-val');
-
-    if(elTot) elTot.innerText = "€ " + tot.toLocaleString('it-IT', {minimumFractionDigits: 2});
-    if(elLiq) elLiq.innerText = "€ " + liq.toLocaleString('it-IT', {minimumFractionDigits: 2});
-    if(elAss) elAss.innerText = "€ " + assetVal.toLocaleString('it-IT', {minimumFractionDigits: 2});
+function updateTotals(val) {
+    const t = document.getElementById('total-balance');
+    const l = document.getElementById('liquidity-val');
+    const a = document.getElementById('assets-val');
+    if(t) t.innerText = "€ " + (val+liquidity).toLocaleString('it-IT', {minimumFractionDigits:2});
+    if(l) l.innerText = "€ " + liquidity.toLocaleString('it-IT', {minimumFractionDigits:2});
+    if(a) a.innerText = "€ " + val.toLocaleString('it-IT', {minimumFractionDigits:2});
 }
 
-// --- CONVERTITORE REAL-TIME ---
-function populateConverter() {
-    const sel = document.getElementById('conv-from-crypto');
-    // Popola SOLO se è vuoto per non resettare la selezione dell'utente
-    if(!sel || sel.children.length > 0) return; 
-
-    let opts = '';
-    // Ordiniamo per Rank (CoinLore lo fa di default, ma siamo sicuri)
-    marketData.slice(0,60).forEach(c => {
-        // NOTA: Usiamo il SIMBOLO come value, non il prezzo statico!
-        opts += `<option value="${c.symbol}">${c.name} (${c.symbol})</option>`;
-    });
-    
-    document.getElementById('conv-from-crypto').innerHTML = opts;
-    document.getElementById('conv-to-crypto').innerHTML = opts;
-
-    // Listener click
-    const btn = document.getElementById('btn-convert');
-    if(btn) btn.onclick = calculateConversion;
-}
-
-function calculateConversion() {
-    const amt = parseFloat(document.getElementById('conv-amount').value) || 0;
-    const fromKey = document.getElementById('conv-from').value; // Es: "BTC", "EUR"
-    const toKey = document.getElementById('conv-to').value;     // Es: "ETH", "USD"
-
-    // Funzione helper per ottenere prezzo in EUR di una chiave
-    const getPriceInEur = (key) => {
-        if (key === 'EUR') return 1;
-        if (key === 'USD') return usdToEur;
-        
-        // Cerca nel marketData aggiornato
-        const coin = marketData.find(c => c.symbol === key);
-        if (coin) return parseFloat(coin.price_usd) * usdToEur;
-        
-        return 0; // Errore o coin non trovata
-    };
-
-    const priceFrom = getPriceInEur(fromKey);
-    const priceTo = getPriceInEur(toKey);
-
-    if (priceFrom === 0 || priceTo === 0) {
-        document.getElementById('conv-result').value = "Err";
-        return;
-    }
-
-    // Logica: (Quantità * PrezzoSorgente) / PrezzoDestinazione
-    const result = (amt * priceFrom) / priceTo;
-    document.getElementById('conv-result').value = result.toFixed(6);
-}
-
-// --- MERCATO LISTA ---
-function renderMarketList() {
-    const div = document.getElementById('market-content-trending');
-    if(!div) return;
-
-    let html = '';
-    // Mostriamo top 25
-    marketData.slice(0, 25).forEach((c, i) => {
-        const p = parseFloat(c.price_usd) * usdToEur;
-        const ch = parseFloat(c.percent_change_24h);
-        
-        html += `
-        <div style="display:flex; justify-content:space-between; padding:12px; border-bottom:1px solid rgba(255,255,255,0.05);">
-            <div style="display:flex; gap:10px;">
-                <span style="color:#666; width:20px;">${i+1}</span>
-                <b>${c.symbol}</b>
-            </div>
-            <div style="text-align:right;">
-                <div>€${p.toFixed(2)}</div>
-                <div class="${ch>=0?'text-profit':'text-loss'}">${ch}%</div>
-            </div>
-        </div>`;
-    });
-    div.innerHTML = html;
-}
-
-// --- GESTIONE ASSET & FORM ---
-function setupForm() {
-    const form = document.getElementById('add-transaction-form');
-    if(!form) return;
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('asset-search').value;
-        const sym = document.getElementById('asset-symbol').value;
-        const amt = parseFloat(document.getElementById('tx-amount').value);
-        const prc = parseFloat(document.getElementById('tx-price').value);
-
-        if(!name || isNaN(amt) || isNaN(prc)) return alert("Dati invalidi");
-
-        portfolio.push({
-            id: Date.now(),
-            name: name,
-            symbol: sym || name.substring(0,3).toUpperCase(),
-            amount: amt,
-            buyPrice: prc
-        });
-
-        localStorage.setItem('crypto_portfolio', JSON.stringify(portfolio));
-        renderPortfolio();
-        form.reset();
-        toggleAddForm();
-    });
-}
-
-window.toggleAddForm = function() {
-    const el = document.getElementById('add-form-container');
-    if(el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
-}
-
-window.delAsset = function(idx) {
-    if(confirm("Eliminare asset?")) {
-        portfolio.splice(idx, 1);
-        localStorage.setItem('crypto_portfolio', JSON.stringify(portfolio));
-        renderPortfolio();
-    }
-}
-
-// --- VENDITA ---
+// --- VENDITA INTELLIGENTE (AUTO-CALCOLO INCASSO) ---
 let sellIdx = null;
+let sellLivePrice = 0;
+
 window.prepSell = function(idx) {
     sellIdx = idx;
     const item = portfolio[idx];
+    
+    // Cerca prezzo live
+    const coin = marketData.find(c => c.symbol===item.symbol || c.name.toLowerCase()===item.name.toLowerCase());
+    sellLivePrice = coin ? (parseFloat(coin.price_usd) * usdToEur) : item.buyPrice;
+
     document.getElementById('sell-asset-name').innerText = "Vendi " + item.name;
-    document.getElementById('sell-amount').value = item.amount;
+    document.getElementById('sell-live-price').innerText = "€ " + sellLivePrice.toFixed(2);
+    document.getElementById('sell-amount').value = item.amount; // Default: vendi tutto
+    updateSellTotal(); // Calcola subito
+
     document.getElementById('sell-modal').style.display = 'flex';
 }
-window.closeSellModal = function() {
-    document.getElementById('sell-modal').style.display = 'none';
-    sellIdx = null;
+
+// Listener per calcolo mentre scrivi la quantità da vendere
+document.getElementById('sell-amount').addEventListener('input', updateSellTotal);
+
+function updateSellTotal() {
+    const amt = parseFloat(document.getElementById('sell-amount').value) || 0;
+    const total = amt * sellLivePrice;
+    document.getElementById('sell-estimated-total').innerText = "€ " + total.toFixed(2);
 }
+
+window.closeSellModal = function() { document.getElementById('sell-modal').style.display='none'; sellIdx=null; }
+
 window.confirmSell = function() {
     if(sellIdx === null) return;
-    const amount = parseFloat(document.getElementById('sell-amount').value);
-    const cash = parseFloat(document.getElementById('sell-total-cash').value);
+    const amt = parseFloat(document.getElementById('sell-amount').value);
+    // Calcola il cash basandosi sul prezzo LIVE visualizzato, non input manuale
+    const cash = amt * sellLivePrice; 
 
-    if(!amount || !cash) return alert("Inserisci i valori");
+    if(!amt) return alert("Inserisci quantità");
     const asset = portfolio[sellIdx];
-    if(amount > asset.amount) return alert("Quantità eccessiva");
+    if(amt > asset.amount) return alert("Non hai abbastanza crypto");
 
-    const profit = cash - (amount * asset.buyPrice);
+    // Profitto = Incasso Reale - (Quantità * Prezzo Medio Acquisto)
+    const costBasis = amt * asset.buyPrice;
+    const profit = cash - costBasis;
+
     liquidity += cash;
-    asset.amount -= amount;
-    if(asset.amount <= 0) portfolio.splice(sellIdx, 1);
+    asset.amount -= amt;
+    if(asset.amount <= 0.0000001) portfolio.splice(sellIdx,1);
 
     history.unshift({
         name: asset.name,
@@ -345,140 +300,132 @@ window.confirmSell = function() {
     loadHistory();
 }
 
-function loadHistory() {
-    const div = document.getElementById('history-list');
-    if(!div) return;
-    div.innerHTML = '';
-    history.forEach(h => {
-        div.innerHTML += `
-            <div style="padding:10px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between;">
-                <div><b>${h.name}</b> <small>${h.date}</small></div>
-                <div class="${h.profit >= 0 ? 'text-profit' : 'text-loss'}">
-                    ${h.profit >= 0 ? '+' : ''}€${h.profit.toFixed(2)}
-                </div>
-            </div>`;
-    });
+// --- UTILS ---
+window.toggleAddForm = function() {
+    const el = document.getElementById('add-form-container');
+    if(el) el.style.display = el.style.display==='none'?'block':'none';
 }
-
-// --- SEARCH ---
-function setupSearch() {
-    const inp = document.getElementById('asset-search');
-    const box = document.getElementById('search-results');
-    if(!inp) return;
-
-    inp.addEventListener('input', (e) => {
-        const val = e.target.value.toLowerCase();
-        if(val.length < 2) { box.style.display = 'none'; return; }
-
-        const results = marketData.filter(c => 
-            c.name.toLowerCase().includes(val) || 
-            c.symbol.toLowerCase().includes(val)
-        ).slice(0, 5);
-
-        box.innerHTML = '';
-        if(results.length > 0) {
-            box.style.display = 'block';
-            results.forEach(c => {
-                const div = document.createElement('div');
-                div.className = 'search-item';
-                div.innerHTML = `<b>${c.name}</b> (${c.symbol})`;
-                div.onclick = () => {
-                    inp.value = c.name;
-                    document.getElementById('asset-symbol').value = c.symbol;
-                    box.style.display = 'none';
-                };
-                box.appendChild(div);
-            });
-        } else { box.style.display = 'none'; }
-    });
-    document.addEventListener('click', (e) => {
-        if(e.target !== inp && e.target !== box) box.style.display='none';
-    });
-}
-
-// --- CALCOLATORE PAC ---
-function setupCalculator() {
-    const btn = document.getElementById('btn-calc-interest');
-    if(!btn) return;
-    btn.onclick = () => {
-        const init = parseFloat(document.getElementById('calc-initial').value) || 0;
-        const month = parseFloat(document.getElementById('calc-monthly').value) || 0;
-        const apy = parseFloat(document.getElementById('calc-apy').value) || 0;
-        const years = parseFloat(document.getElementById('calc-years').value) || 0;
-
-        let bal = init; let inv = init;
-        const rate = (apy / 100) / 12;
-        const tbody = document.getElementById('year-list-body');
-        if(tbody) tbody.innerHTML = '';
-
-        for(let i=1; i <= years*12; i++) {
-            bal = (bal + month) * (1 + rate);
-            inv += month;
-            if(i % 12 === 0 && tbody) {
-                tbody.innerHTML += `<tr><td>${i/12}</td><td>€${inv.toFixed(0)}</td><td class="text-profit">€${(bal-inv).toFixed(0)}</td><td><b>€${bal.toFixed(0)}</b></td></tr>`;
-            }
-        }
-        document.getElementById('calc-results').style.display = 'block';
-        document.getElementById('res-total').innerText = "€ " + bal.toFixed(2);
+window.delAsset = function(idx) {
+    if(confirm("Eliminare asset?")) {
+        portfolio.splice(idx,1);
+        localStorage.setItem('crypto_portfolio', JSON.stringify(portfolio));
+        renderPortfolio();
     }
 }
+function loadHistory() {
+    const d = document.getElementById('history-list');
+    if(!d) return;
+    d.innerHTML = '';
+    history.forEach(h => {
+        d.innerHTML += `<div style="padding:10px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between;">
+            <div><b>${h.name}</b> <small>${h.date}</small></div>
+            <div style="text-align:right;">
+                <div>Incasso: €${h.sellTotal.toFixed(2)}</div>
+                <div class="${h.profit>=0?'text-profit':'text-loss'}">P/L: ${h.profit>=0?'+':''}€${h.profit.toFixed(2)}</div>
+            </div>
+        </div>`;
+    });
+}
 
-// --- SETTINGS ---
+// --- OTHER FEATURES (Converter, etc same as before) ---
+function populateConverter() {
+    const sel = document.getElementById('conv-from-crypto');
+    if(!sel || sel.children.length>0) return;
+    let o = '';
+    marketData.slice(0,50).forEach(c => o+=`<option value="${c.symbol}">${c.name}</option>`);
+    document.getElementById('conv-from-crypto').innerHTML=o;
+    document.getElementById('conv-to-crypto').innerHTML=o;
+    const btn = document.getElementById('btn-convert');
+    if(btn) btn.onclick = () => {
+        const amt = parseFloat(document.getElementById('conv-amount').value)||0;
+        const f = document.getElementById('conv-from').value;
+        const t = document.getElementById('conv-to').value;
+        const getP = (k) => {
+            if(k==='EUR') return 1; if(k==='USD') return usdToEur;
+            const c = marketData.find(x=>x.symbol===k); return c?parseFloat(c.price_usd)*usdToEur:0;
+        };
+        const p1=getP(f); const p2=getP(t);
+        if(p1&&p2) document.getElementById('conv-result').value = ((amt*p1)/p2).toFixed(6);
+    };
+}
+function renderMarketList() {
+    const d = document.getElementById('market-content-trending');
+    if(!d) return;
+    let h = '';
+    marketData.slice(0,20).forEach((c,i) => {
+        const p = parseFloat(c.price_usd)*usdToEur;
+        const ch = parseFloat(c.percent_change_24h);
+        h += `<div style="display:flex; justify-content:space-between; padding:12px; border-bottom:1px solid rgba(255,255,255,0.05);">
+            <div style="display:flex; gap:10px;"><span style="color:#666;">${i+1}</span><b>${c.symbol}</b></div>
+            <div style="text-align:right;"><div>€${p.toFixed(2)}</div><div class="${ch>=0?'text-profit':'text-loss'}">${ch}%</div></div>
+        </div>`;
+    });
+    d.innerHTML = h;
+}
+function setupCalculator() {
+    const btn = document.getElementById('btn-calc-interest');
+    if(btn) btn.onclick = () => {
+        const init = parseFloat(document.getElementById('calc-initial').value)||0;
+        const mo = parseFloat(document.getElementById('calc-monthly').value)||0;
+        const r = (parseFloat(document.getElementById('calc-apy').value)||0)/100/12;
+        const y = parseFloat(document.getElementById('calc-years').value)||0;
+        let b = init, inv = init;
+        const tb = document.getElementById('year-list-body');
+        if(tb) tb.innerHTML='';
+        for(let i=1; i<=y*12; i++){
+            b = (b+mo)*(1+r); inv+=mo;
+            if(i%12===0 && tb) tb.innerHTML += `<tr><td>${i/12}</td><td>€${inv.toFixed(0)}</td><td class="text-profit">€${(b-inv).toFixed(0)}</td><td><b>€${b.toFixed(0)}</b></td></tr>`;
+        }
+        document.getElementById('calc-results').style.display='block';
+        document.getElementById('res-total').innerText = "€ "+b.toFixed(2);
+    };
+}
 function setupSettings() {
-    const btnExp = document.getElementById('btn-export');
-    const btnImp = document.getElementById('btn-import');
-    const btnClr = document.getElementById('btn-clear-data');
-
-    if(btnExp) btnExp.onclick = () => {
-        const d = { p: portfolio, h: history, l: liquidity };
-        document.getElementById('export-area').style.display = 'block';
+    const exp = document.getElementById('btn-export');
+    if(exp) exp.onclick = () => {
+        const d = {p:portfolio, h:history, l:liquidity};
+        document.getElementById('export-area').style.display='block';
         document.getElementById('export-area').value = btoa(JSON.stringify(d));
     };
-    if(btnImp) btnImp.onclick = () => {
+    const imp = document.getElementById('btn-import');
+    if(imp) imp.onclick = () => {
         try {
             const d = JSON.parse(atob(document.getElementById('import-area').value));
-            localStorage.setItem('crypto_portfolio', JSON.stringify(d.p));
-            localStorage.setItem('crypto_history', JSON.stringify(d.h));
-            localStorage.setItem('crypto_liquidity', d.l);
+            localStorage.setItem('crypto_portfolio',JSON.stringify(d.p));
+            localStorage.setItem('crypto_history',JSON.stringify(d.h));
+            localStorage.setItem('crypto_liquidity',d.l);
             location.reload();
-        } catch(e) { alert("Backup invalido"); }
+        } catch(e){alert("Err");}
     };
-    if(btnClr) btnClr.onclick = () => {
-        if(confirm("Reset Totale?")) { localStorage.clear(); location.reload(); }
-    };
+    const clr = document.getElementById('btn-clear-data');
+    if(clr) clr.onclick=()=>{if(confirm("Reset?")){localStorage.clear();location.reload();}};
 }
-
-// --- NEWS & NAV ---
 function initNav() {
-    const links = document.querySelectorAll('.nav-link');
-    const head = document.getElementById('app-header');
-    links.forEach(l => {
-        l.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.querySelectorAll('.nav-link').forEach(x => x.classList.remove('active'));
-            document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
-            l.classList.add('active');
-            const t = l.getAttribute('data-target');
-            document.getElementById(t).classList.add('active');
-            if(head) head.classList.toggle('visible', t === 'view-portfolio');
-            if(t === 'view-mercato') fetchNews();
-        });
-    });
-    if(head) head.classList.add('visible');
+    const lnk = document.querySelectorAll('.nav-link');
+    const hdr = document.getElementById('app-header');
+    lnk.forEach(l => l.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.nav-link').forEach(x=>x.classList.remove('active'));
+        document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+        l.classList.add('active');
+        const t = l.getAttribute('data-target');
+        document.getElementById(t).classList.add('active');
+        if(hdr) hdr.classList.toggle('visible', t==='view-portfolio');
+        if(t==='view-mercato') fetchNews();
+    }));
+    if(hdr) hdr.classList.add('visible');
 }
 window.switchMarketTab = function(t) {
-    document.getElementById('market-content-trending').style.display = t === 'trending' ? 'block' : 'none';
-    document.getElementById('market-content-news').style.display = t === 'news' ? 'block' : 'none';
-    if(t === 'news') fetchNews();
+    document.getElementById('market-content-trending').style.display = t==='trending'?'block':'none';
+    document.getElementById('market-content-news').style.display = t==='news'?'block':'none';
+    if(t==='news') fetchNews();
 }
 async function fetchNews() {
-    const div = document.getElementById('market-content-news');
-    if(!div || div.children.length > 0) return;
-    try {
-        const r = await fetch(API_NEWS); const d = await r.json();
-        div.innerHTML = '';
-        d.Data.slice(0,10).forEach(n => {
-            div.innerHTML += `<a href="${n.url}" target="_blank" class="card" style="display:flex; gap:10px; padding:10px; text-decoration:none; color:white;"><img src="${n.imageurl}" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"><div><h4 style="font-size:0.9rem; margin:0;">${n.title}</h4><small style="color:var(--accent)">${n.source}</small></div></a>`;
-        });
-    } catch(e) { div.innerHTML = "News offline."; }
+    const d = document.getElementById('market-content-news');
+    if(!d || d.children.length>0) return;
+    try{
+        const r = await fetch(API_NEWS); const j = await r.json();
+        d.innerHTML='';
+        j.Data.slice(0,10).forEach(n => d.innerHTML+=`<a href="${n.url}" target="_blank" class="card" style="display:flex; gap:10px; padding:10px; color:white; text-decoration:none;"><img src="${n.imageurl}" style="width:60px; height:60px; object-fit:cover; border-radius:8px;"><div><h4 style="font-size:0.9rem; margin:0;">${n.title}</h4><small style="color:var(--accent)">${n.source}</small></div></a>`);
+    }catch(e){d.innerHTML="No News";}
 }
