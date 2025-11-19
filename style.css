@@ -389,7 +389,8 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
 .guide-card-footer a:hover i { transform: translateX(5px); }
 
 /* Blockchain "Viva" */
-.blockchain-visualizer { display: flex; flex-wrap: wrap; align-items: center; margin-top: 1.5rem; gap: 1.5rem; padding: 1rem; background: var(--secondary-bg); border-radius: var(--border-radius); }
+/* --- [CORREZIONE] Aggiunto justify-content --- */
+.blockchain-visualizer { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; margin-top: 1.5rem; gap: 1.5rem; padding: 1rem; background: var(--secondary-bg); border-radius: var(--border-radius); }
 .block, .arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
 .block { border: 2px solid var(--gradient-end); background-color: var(--primary-bg); padding: 1rem; border-radius: var(--border-radius); box-shadow: 0 0 15px rgba(0, 255, 194, 0.3); min-width: 150px; height: 100px; transition: all 0.5s ease-out; animation: fadeIn 0.5s ease; }
 .block.verified { border-color: var(--accent-color); box-shadow: 0 0 15px rgba(0, 168, 255, 0.5); }
@@ -630,11 +631,13 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
         border-radius: var(--border-radius);
         padding: 1rem;
     }
+    
+    /* --- [CORREZIONE] Padding modificato per evitare sovrapposizioni --- */
     .staking-calculator .result-table td {
-        padding: 0.75rem 0.5rem;
+        padding: 0.75rem 1rem; /* Aumentato padding orizzontale */
         border-bottom: 1px dotted var(--primary-bg);
         position: relative;
-        padding-left: 50%;
+        padding-left: 55%; /* Aumentato per dare spazio all'etichetta */
         text-align: right;
         min-height: 1.5rem;
     }
@@ -642,13 +645,15 @@ section h2 { font-family: var(--font-heading); text-align: center; margin-bottom
         border-bottom: none;
     }
     
+    /* --- [CORREZIONE] Rimossa la regola 'nowrap' e aggiustata la larghezza --- */
     .staking-calculator .result-table td::before {
         content: attr(data-label);
         position: absolute;
-        left: 0.5rem;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
+        left: 1rem; /* Allineato al padding della TR */
+        width: 50%; /* Aumentata la larghezza per l'etichetta */
+        padding-right: 0.5rem; /* Spaziatura coerente */
+        white-space: normal; /* <-- QUESTA È LA CORREZIONE CHIAVE */
+        word-break: break-word; /* Aggiunto per sicurezza */
         text-align: left;
         font-weight: 700;
         color: var(--text-light);
