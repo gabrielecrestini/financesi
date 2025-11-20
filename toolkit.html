@@ -19,20 +19,20 @@
             <header class="portfolio-header-block">
                 <div class="header-top">
                     <h1>CryptoToolkit <span class="live-dot"></span></h1>
-                    <span class="badge">ELITE V15</span>
+                    <span class="badge">MANUAL + NEWS</span>
                 </div>
                 <div class="portfolio-summary">
                     <div class="summary-box main-box">
-                        <span>Patrimonio Totale</span>
+                        <span>Capitale Totale (Investito + Cassa)</span>
                         <h2 id="total-balance">0.00 €</h2>
                     </div>
                     <div class="summary-grid">
                         <div class="mini-box">
-                            <span>Liquidità</span>
+                            <span>Liquidità (Cassa)</span>
                             <strong id="liquidity-val" class="text-main">0.00 €</strong>
                         </div>
                         <div class="mini-box">
-                            <span>Valore Asset</span>
+                            <span>Investito in Crypto</span>
                             <strong id="assets-val" class="text-profit">0.00 €</strong>
                         </div>
                     </div>
@@ -40,89 +40,51 @@
             </header>
 
             <button class="btn-toggle-form" onclick="toggleAddForm()">
-                <i class="fas fa-plus"></i> Aggiungi Investimento
+                <i class="fas fa-plus"></i> Registra Acquisto
             </button>
 
             <div id="add-form-container" class="card add-form-card" style="display:none;">
                 <form id="add-transaction-form" class="card-content">
                     <div class="input-group">
-                        <label>1. Seleziona Crypto</label>
-                        <div style="position: relative;">
-                            <input type="text" id="asset-search" placeholder="Es. Bitcoin..." autocomplete="off">
-                            <input type="hidden" id="asset-symbol">
-                            <input type="hidden" id="live-price-hidden">
-                            <div id="search-results"></div>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label style="color:var(--profit);">2. Quanto hai investito (€)?</label>
-                        <input type="number" step="any" id="tx-invested" placeholder="Es. 100" required>
+                        <label>Nome Crypto</label>
+                        <input type="text" id="asset-name" placeholder="Es. Bitcoin" autocomplete="off" required>
                     </div>
                     
-                    <div id="calc-preview-box" style="background:rgba(255,255,255,0.05); padding:15px; border-radius:8px; margin-bottom:15px; display:none;">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                            <span style="color:#aaa; font-size:0.8rem;">Prezzo Rilevato:</span>
-                            <span id="preview-price" style="font-weight:bold;">...</span>
+                    <div class="row-2">
+                        <div class="input-group">
+                            <label style="color:var(--profit);">Soldi Investiti (€)</label>
+                            <input type="number" step="any" id="tx-invested" placeholder="Es. 100" required>
                         </div>
-                        <div style="display:flex; justify-content:space-between;">
-                            <span style="color:#aaa; font-size:0.8rem;">Quantità:</span>
-                            <span id="preview-amount" style="color:var(--accent); font-weight:bold;">...</span>
+                        <div class="input-group">
+                            <label>Prezzo Crypto all'acquisto (€)</label>
+                            <input type="number" step="any" id="tx-price" placeholder="Es. 90000" required>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-buy">Conferma Acquisto</button>
+                    <div style="text-align:center; margin-bottom:15px; font-size:0.9rem; color:#888;">
+                        Quantità Calcolata: <strong id="calc-qty" style="color:white;">0</strong>
+                    </div>
+
+                    <button type="submit" class="btn btn-buy">Salva nel Registro</button>
                 </form>
             </div>
 
             <div class="section-header">
-                <span>I TUOI ASSET</span>
-                <small id="last-update" style="color:var(--accent); cursor:pointer;" onclick="forceUpdate()">
-                    <i class="fas fa-sync"></i> Aggiorna
-                </small>
+                <span>POSIZIONI APERTE</span>
             </div>
             <div id="holdings-list"></div>
 
             <div class="section-header" style="margin-top:30px;">
-                <span>STORICO VENDITE</span>
+                <span>STORICO PROFITTI</span>
             </div>
             <div id="history-list" class="history-container"></div>
         </div>
 
-        <div id="view-mercato" class="view">
-            <h2>Mercato Live</h2>
-            <div class="pill-nav">
-                <button class="pill-btn active" onclick="switchMarketTab('trending')">Top 50</button>
-                <button class="pill-btn" onclick="switchMarketTab('news')">News</button>
-            </div>
-            <div id="market-content-trending">
-                <div class="loader"><i class="fas fa-circle-notch fa-spin"></i> Connessione CoinLore...</div>
-            </div>
-            <div id="market-content-news" style="display:none;"></div>
-        </div>
-
-        <div id="view-convertitore" class="view">
-            <h2>Convertitore</h2>
-            <div class="card">
-                <div class="card-content">
-                    <div class="converter-box">
-                        <div class="conv-row">
-                            <input type="number" id="conv-amount" value="1" placeholder="Qtà">
-                            <select id="conv-from">
-                                <optgroup label="Fiat"><option value="EUR">EUR</option><option value="USD">USD</option></optgroup>
-                                <optgroup label="Crypto" id="conv-from-crypto"></optgroup>
-                            </select>
-                        </div>
-                        <div class="swap-container"><button id="btn-swap" class="btn-circle"><i class="fas fa-arrow-down"></i></button></div>
-                        <div class="conv-row">
-                            <input type="text" id="conv-result" readonly style="color:var(--profit);">
-                            <select id="conv-to">
-                                <optgroup label="Fiat"><option value="USD">USD</option><option value="EUR">EUR</option></optgroup>
-                                <optgroup label="Crypto" id="conv-to-crypto"></optgroup>
-                            </select>
-                        </div>
-                    </div>
-                    <button id="btn-convert" class="btn mt-2">Calcola</button>
-                </div>
+        <div id="view-news" class="view">
+            <h2>News in Tempo Reale</h2>
+            <p style="color:#888; font-size:0.9rem; margin-bottom:15px;">Le ultime notizie dai mercati globali.</p>
+            <div id="news-container">
+                <div class="loader"><i class="fas fa-circle-notch fa-spin"></i> Caricamento News...</div>
             </div>
         </div>
 
@@ -131,14 +93,14 @@
             <div class="card">
                 <div class="card-content">
                     <div class="row-2">
-                        <div class="input-group"><label>Capitale (€)</label><input type="number" id="calc-initial" value="1000"></div>
-                        <div class="input-group"><label>Mensile (€)</label><input type="number" id="calc-monthly" value="100"></div>
+                        <div class="input-group"><label>Capitale Iniziale (€)</label><input type="number" id="calc-initial" value="1000"></div>
+                        <div class="input-group"><label>Versamento Mensile (€)</label><input type="number" id="calc-monthly" value="100"></div>
                     </div>
                     <div class="row-2">
-                        <div class="input-group"><label>APY (%)</label><input type="number" id="calc-apy" value="8"></div>
-                        <div class="input-group"><label>Anni</label><input type="number" id="calc-years" value="5"></div>
+                        <div class="input-group"><label>Interesse Annuo (%)</label><input type="number" id="calc-apy" value="8"></div>
+                        <div class="input-group"><label>Durata (Anni)</label><input type="number" id="calc-years" value="5"></div>
                     </div>
-                    <button id="btn-calc-interest" class="btn mt-2">Calcola</button>
+                    <button id="btn-calc-interest" class="btn mt-2">Calcola Previsione</button>
                 </div>
             </div>
             <div id="calc-results" class="card" style="display:none;">
@@ -155,8 +117,8 @@
         </div>
 
         <div id="view-piattaforme" class="view">
-            <h2>Partner Selezionati</h2>
-            <p style="color:#888; margin-bottom:15px; font-size:0.9rem;">Le migliori piattaforme verificate per operare.</p>
+            <h2>Partner Ufficiali</h2>
+            <p style="color:#888; margin-bottom:15px; font-size:0.9rem;">Piattaforme sicure e verificate.</p>
             <div class="platforms-grid">
                 
                 <div class="card platform-card">
@@ -187,113 +149,51 @@
                     <img src="https://www.financeads.net/tb.php?t=78725V5508129482T" width="1" height="1" style="border:0; position:absolute; opacity:0;">
                 </div>
             </div>
-
-            <h3 style="margin-top:30px; border-top:1px solid #333; padding-top:20px; color:#888; font-size:1rem;">ALTRE RISORSE</h3>
-            <div class="platforms-grid">
-                <div class="card platform-card" style="border-color:#333;">
-                    <div style="font-size:2rem; margin-bottom:10px; color:#f0b90b;"><i class="fas fa-coins"></i></div>
-                    <h3>Binance</h3><p>Exchange Globale.</p>
-                    <a href="https://www.binance.com/" target="_blank" class="btn-aff" style="border-color:#444; color:#aaa;">Visita</a>
-                </div>
-                <div class="card platform-card" style="border-color:#333;">
-                    <div style="font-size:2rem; margin-bottom:10px; color:#0052ff;"><i class="fas fa-cube"></i></div>
-                    <h3>Coinbase</h3><p>Exchange USA.</p>
-                    <a href="https://www.coinbase.com/" target="_blank" class="btn-aff" style="border-color:#444; color:#aaa;">Visita</a>
-                </div>
-                <div class="card platform-card" style="border-color:#333;">
-                    <div style="font-size:2rem; margin-bottom:10px; color:#f6851b;"><i class="fab fa-firefox-browser"></i></div>
-                    <h3>MetaMask</h3><p>Web3 Wallet.</p>
-                    <a href="https://metamask.io/" target="_blank" class="btn-aff" style="border-color:#444; color:#aaa;">Scarica</a>
-                </div>
-                <div class="card platform-card" style="border-color:#333;">
-                    <div style="font-size:2rem; margin-bottom:10px; color:#aaa;"><i class="fas fa-hdd"></i></div>
-                    <h3>Ledger</h3><p>Cold Wallet.</p>
-                    <a href="https://www.ledger.com/" target="_blank" class="btn-aff" style="border-color:#444; color:#aaa;">Sito</a>
-                </div>
-            </div>
         </div>
         
         <div id="view-risorse" class="view">
-            <h2>Biblioteca Elite</h2>
-            <p style="color:#888; margin-bottom:20px; font-size:0.9rem;">Risorse, guide e dizionario completo.</p>
+            <h2>Biblioteca Master</h2>
+            <p style="color:#888; margin-bottom:20px; font-size:0.9rem;">La risorsa definitiva per la tua formazione.</p>
 
             <div class="topic-section">
-                <h3 style="color:#fff;"><i class="fas fa-book"></i> Dizionario Crypto (Tocca per leggere)</h3>
+                <h3 style="color:#fff;"><i class="fas fa-book"></i> Dizionario Rapido</h3>
                 <div class="card">
                     <div class="card-content">
-                        <details><summary>FOMO</summary><p>"Fear Of Missing Out". La paura di perdere un'occasione che ti spinge a comprare quando i prezzi sono già alti.</p></details>
-                        <details><summary>HODL</summary><p>Storpiatura di "Hold". Significa mantenere le crypto a lungo termine senza vendere mai, anche se il mercato crolla.</p></details>
-                        <details><summary>ATH (All Time High)</summary><p>Il prezzo più alto mai raggiunto da una moneta nella sua storia.</p></details>
-                        <details><summary>Bear Market</summary><p>Mercato "Orso". Fase prolungata di discesa dei prezzi e pessimismo.</p></details>
-                        <details><summary>Bull Market</summary><p>Mercato "Toro". Fase di salita dei prezzi ed euforia.</p></details>
-                        <details><summary>DeFi</summary><p>Finanza Decentralizzata. Servizi bancari (prestiti, scambi) senza banche, gestiti da codice.</p></details>
-                        <details><summary>Whale (Balena)</summary><p>Un investitore che possiede enormi quantità di crypto e può influenzare il mercato muovendo fondi.</p></details>
-                        <details><summary>Gas Fee</summary><p>La commissione che paghi per effettuare una transazione sulla rete (es. Ethereum).</p></details>
-                        <details><summary>Seed Phrase</summary><p>La sequenza di 12-24 parole che serve a recuperare il tuo wallet. Non darla MAI a nessuno.</p></details>
-                        <details><summary>Altcoin</summary><p>Qualsiasi criptovaluta che non sia Bitcoin.</p></details>
+                        <details><summary>Blockchain</summary><p>Registro digitale immutabile. La base di tutte le crypto.</p></details>
+                        <details><summary>HODL</summary><p>Mantenere le crypto a lungo termine senza vendere.</p></details>
+                        <details><summary>FOMO</summary><p>"Fear Of Missing Out". Paura di perdere l'occasione.</p></details>
+                        <details><summary>DeFi</summary><p>Finanza senza banche, gestita da codice.</p></details>
+                        <details><summary>Cold Wallet</summary><p>Portafoglio offline (es. chiavetta USB) per massima sicurezza.</p></details>
+                        <details><summary>Bull/Bear Market</summary><p>Bull = Mercato in salita. Bear = Mercato in discesa.</p></details>
                     </div>
                 </div>
             </div>
 
             <div class="topic-section">
-                <h3 style="color:var(--profit);"><i class="fas fa-graduation-cap"></i> Impara le Basi</h3>
+                <h3 style="color:var(--profit);"><i class="fas fa-graduation-cap"></i> Corsi & Teoria</h3>
                 <div class="resource-grid">
-                    <a href="https://www.coinbase.com/it/learn/crypto-basics" target="_blank" class="res-card">
-                        <div class="res-icon" style="color:#0052ff"><i class="fas fa-cube"></i></div>
-                        <div class="res-text"><h4>Coinbase Learn</h4><p>Guide per principianti.</p></div>
-                    </a>
-                    <a href="https://academy.binance.com/it/start-here" target="_blank" class="res-card">
-                        <div class="res-icon" style="color:#f0b90b"><i class="fas fa-university"></i></div>
-                        <div class="res-text"><h4>Binance Academy</h4><p>Corsi completi.</p></div>
-                    </a>
-                    <a href="https://bitcoin.org/it/come-funziona" target="_blank" class="res-card">
-                        <div class="res-icon btc"><i class="fab fa-bitcoin"></i></div>
-                        <div class="res-text"><h4>Bitcoin.org</h4><p>La guida originale.</p></div>
-                    </a>
-                    <a href="https://ethereum.org/it/learn/" target="_blank" class="res-card">
-                        <div class="res-icon eth"><i class="fab fa-ethereum"></i></div>
-                        <div class="res-text"><h4>Ethereum.org</h4><p>Smart Contracts.</p></div>
-                    </a>
+                    <a href="https://bitcoin.org/it/come-funziona" target="_blank" class="res-card"><div class="res-icon btc"><i class="fab fa-bitcoin"></i></div><div class="res-text"><h4>Bitcoin.org</h4><p>La guida originale.</p></div></a>
+                    <a href="https://academy.binance.com/it" target="_blank" class="res-card"><div class="res-icon" style="color:#f0b90b"><i class="fas fa-university"></i></div><div class="res-text"><h4>Binance Academy</h4><p>Corsi completi.</p></div></a>
+                    <a href="https://ocw.mit.edu/courses/15-s12-blockchain-and-money-fall-2018/" target="_blank" class="res-card"><div class="res-icon" style="color:#a31f34"><i class="fas fa-building-columns"></i></div><div class="res-text"><h4>MIT University</h4><p>Corso Blockchain.</p></div></a>
+                    <a href="https://www.lopp.net/bitcoin-information.html" target="_blank" class="res-card"><div class="res-icon" style="color:#fff"><i class="fas fa-code"></i></div><div class="res-text"><h4>Lopp.net</h4><p>Risorse Tecniche.</p></div></a>
                 </div>
             </div>
 
             <div class="topic-section">
-                <h3 style="color:var(--accent);"><i class="fas fa-chart-line"></i> Dati & Grafici</h3>
+                <h3 style="color:var(--loss);"><i class="fas fa-shield-alt"></i> Sicurezza Massima</h3>
                 <div class="resource-grid">
-                    <a href="https://coinmarketcap.com/" target="_blank" class="res-card">
-                        <div class="res-icon cmc"><i class="fas fa-list-ol"></i></div>
-                        <div class="res-text"><h4>CoinMarketCap</h4><p>Prezzi e Classifiche.</p></div>
-                    </a>
-                    <a href="https://it.tradingview.com/" target="_blank" class="res-card">
-                        <div class="res-icon cmc"><i class="fas fa-chart-area"></i></div>
-                        <div class="res-text"><h4>TradingView</h4><p>Grafici Professionali.</p></div>
-                    </a>
-                    <a href="https://defillama.com/" target="_blank" class="res-card">
-                        <div class="res-icon" style="color:#fff"><i class="fas fa-horse-head"></i></div>
-                        <div class="res-text"><h4>DefiLlama</h4><p>Analisi DeFi TVL.</p></div>
-                    </a>
-                     <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank" class="res-card">
-                        <div class="res-icon" style="color:#ff5555"><i class="fas fa-thermometer-half"></i></div>
-                        <div class="res-text"><h4>Fear & Greed</h4><p>Sentiment Mercato.</p></div>
-                    </a>
+                    <a href="https://www.ledger.com/academy" target="_blank" class="res-card"><div class="res-icon" style="color:white"><i class="fas fa-key"></i></div><div class="res-text"><h4>Ledger Academy</h4><p>Sicurezza Hardware.</p></div></a>
+                    <a href="https://haveibeenpwned.com/" target="_blank" class="res-card"><div class="res-icon" style="color:#ff1744"><i class="fas fa-user-lock"></i></div><div class="res-text"><h4>Data Breach</h4><p>Email sicura?</p></div></a>
+                    <a href="https://revoke.cash/" target="_blank" class="res-card"><div class="res-icon" style="color:#f5a623"><i class="fas fa-ban"></i></div><div class="res-text"><h4>Revoke.cash</h4><p>Revoca permessi.</p></div></a>
                 </div>
             </div>
 
             <div class="topic-section">
-                <h3 style="color:var(--loss);"><i class="fas fa-shield-alt"></i> Sicurezza & Tasse</h3>
+                <h3 style="color:var(--accent);"><i class="fas fa-chart-line"></i> Dati & Analisi</h3>
                 <div class="resource-grid">
-                    <a href="https://www.ledger.com/it/academy" target="_blank" class="res-card">
-                        <div class="res-icon" style="color:white"><i class="fas fa-key"></i></div>
-                        <div class="res-text"><h4>Ledger Academy</h4><p>Sicurezza Hardware.</p></div>
-                    </a>
-                    <a href="https://haveibeenpwned.com/" target="_blank" class="res-card">
-                        <div class="res-icon" style="color:#ff1744"><i class="fas fa-user-lock"></i></div>
-                        <div class="res-text"><h4>Data Breach</h4><p>Email compromessa?</p></div>
-                    </a>
-                    <a href="https://koinly.io/guides/crypto-tax-italy/" target="_blank" class="res-card">
-                        <div class="res-icon" style="color:#00b894"><i class="fas fa-calculator"></i></div>
-                        <div class="res-text"><h4>Tasse Italia</h4><p>Guida Koinly.</p></div>
-                    </a>
+                    <a href="https://glassnode.com/" target="_blank" class="res-card"><div class="res-icon" style="color:#00bcd4"><i class="fas fa-project-diagram"></i></div><div class="res-text"><h4>Glassnode</h4><p>Dati On-Chain.</p></div></a>
+                    <a href="https://messari.io/" target="_blank" class="res-card"><div class="res-icon" style="color:#fff"><i class="fas fa-search"></i></div><div class="res-text"><h4>Messari</h4><p>Report professionali.</p></div></a>
+                    <a href="https://dune.com/browse/dashboards" target="_blank" class="res-card"><div class="res-icon" style="color:#fc782b"><i class="fas fa-chart-pie"></i></div><div class="res-text"><h4>Dune</h4><p>Analytics DeFi.</p></div></a>
                 </div>
             </div>
         </div>
@@ -302,7 +202,7 @@
             <h2>Impostazioni</h2>
             <div class="card">
                 <div class="card-content">
-                    <h3>Backup</h3>
+                    <h3>Backup Dati</h3>
                     <button id="btn-export" class="btn btn-outline mt-2">Copia Codice</button>
                     <textarea id="export-area" readonly style="display:none; margin-top:10px;"></textarea>
                     <div style="margin-top:15px;"><input type="text" id="import-area" placeholder="Incolla codice"><button id="btn-import" class="btn mt-2">Importa</button></div>
@@ -316,32 +216,29 @@
     <div id="sell-modal" class="modal-overlay" style="display:none;">
         <div class="modal-content">
             <h3>Vendi Asset</h3>
-            <p id="sell-asset-name" style="color:var(--accent); margin-bottom:10px;"></p>
+            <p id="sell-asset-name" style="color:var(--accent); margin-bottom:15px; font-weight:bold;"></p>
             
             <div style="background:rgba(255,255,255,0.05); padding:10px; border-radius:8px; margin-bottom:15px;">
-                <span style="color:#aaa; font-size:0.8rem;">Prezzo Attuale:</span>
-                <strong id="sell-live-price">Loading...</strong>
+                <span style="color:#aaa; font-size:0.8rem;">Costo Originale di questi pezzi:</span>
+                <strong id="sell-cost-basis">0.00 €</strong>
             </div>
 
-            <label>Quantità da vendere</label>
+            <label>1. Quantità che stai vendendo</label>
             <input type="number" id="sell-amount" placeholder="Es. 0.5">
             
-            <div style="text-align:center; margin-top:10px;">
-                <small>Incasso Stimato</small>
-                <h3 id="sell-estimated-total" style="color:var(--profit);">0.00 €</h3>
-            </div>
+            <label style="color:var(--profit); margin-top:10px;">2. Quanto hai INCASSATO (€)?</label>
+            <input type="number" id="sell-total-cash" placeholder="Es. 500">
 
             <div class="btn-row" style="margin-top:20px;">
                 <button onclick="closeSellModal()" class="btn btn-outline">Annulla</button>
-                <button onclick="confirmSell()" class="btn btn-sell">Conferma Vendita</button>
+                <button onclick="confirmSell()" class="btn btn-sell">Registra Vendita</button>
             </div>
         </div>
     </div>
 
     <nav class="bottom-nav">
         <a href="#" class="nav-link active" data-target="view-portfolio"><i class="fas fa-wallet"></i><span>Port</span></a>
-        <a href="#" class="nav-link" data-target="view-mercato"><i class="fas fa-chart-line"></i><span>Mkt</span></a>
-        <a href="#" class="nav-link" data-target="view-convertitore"><i class="fas fa-exchange-alt"></i><span>Conv</span></a>
+        <a href="#" class="nav-link" data-target="view-news"><i class="fas fa-newspaper"></i><span>News</span></a>
         <a href="#" class="nav-link" data-target="view-calcolatore"><i class="fas fa-calculator"></i><span>Calc</span></a>
         <a href="#" class="nav-link" data-target="view-piattaforme"><i class="fas fa-rocket"></i><span>Top</span></a>
         <a href="#" class="nav-link" data-target="view-risorse"><i class="fas fa-book"></i><span>Edu</span></a>
